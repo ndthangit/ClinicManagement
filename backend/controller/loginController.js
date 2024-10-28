@@ -16,6 +16,7 @@ let getLoginInformation = async (req, res) => {
     });
 }
 
+
 module.exports = {
     getLoginInformation: getLoginInformation
 }
