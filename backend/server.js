@@ -34,13 +34,13 @@ server.use(function(req, res, next) {
   next(createError(404));
 });
 
-connection.query(
-    'SELECT * FROM dataIT3170.Patients',
-    function (err, results, fields) {
-      console.log(results); // results contains rows returned by server
-      // console.log(fields); // fields contains extra meta data about results, if available
-    }
-);
+// connection.query(
+//     'SELECT * FROM dataIT3170.Patients',
+//     function (err, results, fields) {
+//       console.log(results); // results contains rows returned by server
+//       // console.log(fields); // fields contains extra meta data about results, if available
+//     }
+// );
 
 server.use(function(err, req, res, next) {
   // set locals, only providing error in development

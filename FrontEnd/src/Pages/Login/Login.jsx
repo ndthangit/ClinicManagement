@@ -19,7 +19,7 @@ const Login = () => {
 
     const loginUser = (e) => {
         e.preventDefault();
-        Axios.get('http://localhost:3005/login', {
+        Axios.get('http://localhost:3005/users/login', {
             email: loginEmail,
             password: loginPassword
         }).then((response) => {
