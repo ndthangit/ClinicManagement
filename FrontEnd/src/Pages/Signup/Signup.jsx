@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './Signup.css';
-import '../../App.css'
+// import '../../App.css'
 import { Link, useNavigate} from 'react-router-dom';
 import Axios from 'axios'
 import video from '../Assets/video.mp4'
