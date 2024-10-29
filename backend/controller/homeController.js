@@ -53,7 +53,7 @@ let getLoginInformation = async (req, res) => {
                 return res.status(500).send('Database query error');
             }
             // res.json(results);
-            return res.status(500)
+            return res.status(200).json(results);
 
         });
     } catch (e) {

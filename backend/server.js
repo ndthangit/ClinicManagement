@@ -6,8 +6,11 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+
+
+let indexRouter = require('./routes/index');
+let usersRouter = require('./routes/users');
+let doctorRouter = require('./routes/Doctor');
 
 
 var server = express();
@@ -25,8 +28,17 @@ server.use(express.urlencoded({ extended: false }));
 server.use(cookieParser());
 server.use(express.static(path.join(__dirname, 'public')));
 
+
+
+
+
 server.use('/', indexRouter);
 server.use('/users', usersRouter);
+server.use('/doctor', doctorRouter);
+
+
+
+
 
 
 // catch 404 and forward to error handler
@@ -34,13 +46,6 @@ server.use(function(req, res, next) {
   next(createError(404));
 });
 
-connection.query(
-    'SELECT * FROM dataIT3170.Patients',
-    function (err, results, fields) {
-      console.log(results); // results contains rows returned by server
-      // console.log(fields); // fields contains extra meta data about results, if available
-    }
-);
 
 server.use(function(err, req, res, next) {
   // set locals, only providing error in development

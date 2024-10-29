@@ -1,0 +1,9 @@
+.dashboard {
+  display: grid;
+  grid-template-rows: repeat(12, 1fr);
+  height: 100vh;
+}
+
+.dashboard .header {
+  grid-row: 1;
+}

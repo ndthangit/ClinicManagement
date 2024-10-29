@@ -2,6 +2,8 @@
 import './App.css';
 import Login from "./Pages/Login/Login";
 import Signup from "./Pages/Signup/Signup";
+import Dashboard from './Pages/Dashboard/Dashboard';
+import Appointment from './Pages/Appointment/Appointment';
 import {
     createBrowserRouter,
     RouterProvider
@@ -10,7 +12,7 @@ import {
 const router = createBrowserRouter([
     {
         path: '/',
-        element: <div><Login /></div>
+        element: <div><Dashboard /></div>
     },
     {
         path: '/login',
@@ -20,10 +22,10 @@ const router = createBrowserRouter([
         path: '/signup',
         element: <div><Signup /></div>
     },
-    // {
-    //     path: '/dashboard',
-    //     element: <div><Dashboard /></div>
-    // }
+    {
+        path: '/appointment',
+        element: <div><Appointment /></div>
+    }
 ])
 
 function App() {

@@ -1,0 +1,16 @@
+.Leftbar {
+  background-color: hsl(94, 55%, 56%);
+  /* height: 100%; */
+}
+
+.Leftbar .font {
+  color: white;
+}
+.Leftbar .button {
+  padding: 10px 5px 10px 5px;
+  border-bottom: 1px solid white;
+}
+
+.Leftbar .button:hover {
+  background-color: hsl(94, 55%, 30%);
+}

@@ -57,7 +57,7 @@ const Login = () => {
         <div className="loginPage flex">
             <div className="container flex">
 
-                <div className="videoDiv">
+                {/* <div className="videoDiv">
                     <video src={video} autoPlay muted loop></video>
 
                     <div className="textDiv">
@@ -71,13 +71,13 @@ const Login = () => {
                             <button className="btn">Sign Up</button>
                         </Link>
                     </div>
-                </div>
+                </div> */}
 
                 <div className="formDiv flex">
-                    <div className="headerDiv">
+                    {/* <div className="headerDiv">
                         <img src={logo} alt="Logo Image"/>
                         <h3>Welcome Back!</h3>
-                    </div>
+                    </div> */}
 
                     <form action="" className="form grid" onSubmit={onSubmit}>
                         <span className={statusHolder}>{loginStatus}</span>
