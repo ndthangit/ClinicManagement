@@ -135,40 +135,146 @@ video {
   color: var(--primaryColor);
   background: var(--paleGreen);
 }
+.loginPage,
+.signupPage {
+  height: 100vh;
+  width: 100%;
+  margin: auto;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 7px 50px rgb(214, 223, 213);
+}
+.loginPage .container,
+.signupPage .container {
+  height: 86vh;
+  width: 75%;
+  margin: auto;
+  justify-content: space-between;
+  border-radius: 10px;
+  background: hsl(0, 0%, 91%);
+}
+.loginPage .container .videoDiv,
+.signupPage .container .videoDiv {
+  position: relative;
+  display: flex;
+  flex-basis: 50%;
+  width: 70%;
+  height: 100%;
+  padding: 0 1.5rem;
+  text-align: center;
+  justify-content: center;
+  flex-direction: column;
+  margin: auto;
+  border-radius: 10px;
+  overflow: hidden;
+}
 
-/*.loginPage,*/
-/*.signupPage {*/
-/*  height: 100vh;*/
-/*  width: 100%;*/
-/*  margin: auto;*/
-/*  border-radius: 10px;*/
-/*  overflow: hidden;*/
-/*  box-shadow: 0 7px 50px rgb(214, 223, 213);*/
-/*}*/
-/*.loginPage .container,*/
-/*.signupPage .container {*/
-/*  height: 75vh;*/
-/*  width: 60%;*/
-/*  margin: auto;*/
-/*  justify-content: space-between;*/
-/*  border-radius: 10px;*/
-/*  background: hsl(0, 0%, 91%);*/
-/*}*/
-/*.loginPage .container .videoDiv,*/
-/*.signupPage .container .videoDiv {*/
-/*  position: relative;*/
-/*  display: flex;*/
-/*  flex-basis: 50%;*/
-/*  width: 70%;*/
-/*  height: 100%;*/
-/*  padding: 0 1.5rem;*/
-/*  text-align: center;*/
-/*  justify-content: center;*/
-/*  flex-direction: column;*/
-/*  margin: auto;*/
-/*  border-radius: 10px;*/
-/*  overflow: hidden;*/
-/*}*/
+.loginPage .container .videoDiv video,
+.loginPage .container .videoDiv .footerDiv,
+.signupPage .container .videoDiv video,
+.signupPage .container .videoDiv .footerDiv {
+  position: absolute;
+}
+.loginPage .container .videoDiv video,
+.signupPage .container .videoDiv video {
+  height: 100%;
+  width: 100%;
+  -o-object-fit: cover;
+  object-fit: cover;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+
+.loginPage .container .videoDiv .footerDiv,
+.signupPage .container .videoDiv .footerDiv {
+  bottom: 10px;
+  padding: 0 1rem;
+  height: 60px;
+  background: rgba(255, 255, 255, 0.248);
+  left: 10px;
+  right: 10px;
+  justify-content: space-between;
+  -webkit-backdrop-filter: blur(1px);
+  backdrop-filter: blur(1px);
+  border-radius: 10px;
+}
+.loginPage .container .videoDiv .footerDiv .text,
+.signupPage .container .videoDiv .footerDiv .text {
+  color: var(--whiteColor);
+}
+.loginPage .container .videoDiv .footerDiv .btn,
+.signupPage .container .videoDiv .footerDiv .btn {
+  background: var(--whiteColor);
+  color: var(--primaryColor);
+  padding: 0.8rem 1.5rem;
+  border-radius: 10px;
+  font-weight: 400;
+  transition: 0.3s ease;
+}
+.loginPage .container .videoDiv .footerDiv .btn:hover,
+.signupPage .container .videoDiv .footerDiv .btn:hover {
+  background: var(--hoverColor);
+  color: var(--blackColor);
+}
+
+.loginPage .container .formDiv,
+.signupPage .container .formDiv {
+  flex-basis:80%;
+  margin: auto;
+  flex-direction: column;
+  gap: 1.5rem;
+  transform: translateY(-1rem);
+}
+
+.loginPage .container .formDiv .headerDiv,
+.signupPage .container .formDiv .headerDiv {
+  text-align: center;
+  padding: 1.5rem 0;
+}
+.loginPage .container .formDiv .headerDiv img,
+.signupPage .container .formDiv .headerDiv img {
+  width: 60px;
+  padding-bottom: 0.5rem;
+}
+
+.loginPage .container .formDiv .headerDiv h3,
+.signupPage .container .formDiv .headerDiv h3 {
+  font-size: 25px;
+  color: var(--blackColor);
+  font-weight: 600;
+}
+.loginPage .container .formDiv .form,
+.signupPage .container .formDiv .form {
+  gap: 1rem;
+}
+.loginPage .container .formDiv .form .inputDiv .icon,
+.signupPage .container .formDiv .form .inputDiv .icon {
+  color: var(--greyText);
+}
+.loginPage .container .formDiv .form .inputDiv input,
+.signupPage .container .formDiv .form .inputDiv input {
+  background: none;
+  outline: none;
+  border: none;
+  width: 200px;
+}
+.loginPage .container .formDiv .form .inputDiv label,
+.signupPage .container .formDiv .form .inputDiv label {
+  color: var(--blackColor);
+  font-weight: 400;
+  font-size: 14px;
+  padding: 0.5rem 0;
+  display: block;
+}
+.loginPage .container .formDiv .form .inputDiv .input,
+.signupPage .container .formDiv .form .inputDiv .input {
+  gap: 0.5rem;
+  padding: 1rem;
+  background: var(--inputColor);
+  border-radius: 10px;
+}
 /*.loginPage .container .videoDiv video,*/
 /*.loginPage .container .videoDiv .footerDiv,*/
 /*.signupPage .container .videoDiv video,*/

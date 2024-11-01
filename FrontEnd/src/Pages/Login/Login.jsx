@@ -4,7 +4,7 @@ import '../../App.css'
 import {Link, useNavigate} from 'react-router-dom';
 import Axios from 'axios'
 import video from '../Assets/video.mp4'
-import logo from '../Assets/logo.png'
+import logo from '../Assets/pngtree-hospital-icon-design-illustration-png-image_5339806.jpg'
 import {FaUserShield} from 'react-icons/fa'
 import {BsFillShieldLockFill} from 'react-icons/bs'
 import {AiOutlineSwapRight} from 'react-icons/ai'
@@ -60,10 +60,10 @@ const Login = () => {
                 <div className="videoDiv">
                     <video src={video} autoPlay muted loop></video>
 
-                    <div className="textDiv">
-                        <h2 className="title">Create And Sell Extraordinary Products</h2>
-                        <p>Adopt the peace of nature!</p>
-                    </div>
+                    {/*<div className="textDiv">*/}
+                    {/*    <h2 className="title"></h2>*/}
+                    {/*    <p>Adopt the peace of nature!</p>*/}
+                    {/*</div>*/}
 
                     <div className="footerDiv flex">
                         <span className="text">Don't have an account?</span>

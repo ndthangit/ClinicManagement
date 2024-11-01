@@ -20,12 +20,12 @@ const Signup = () => {
 
     const createUser = (e) => {
         e.preventDefault()
-        Axios.post('http://localhost:3002/login', {
+        Axios.post('http://localhost:3005/users/signup', {
             Email: email,
             UserName: userName,
-            Password: password
+            Password: password,
         }).then(() => {
-            navigateTo('/');
+            navigateTo('/login');
             setEmail('');
             setUserName('');
             setPassword('');
@@ -39,10 +39,10 @@ const Signup = () => {
                 <div className="videoDiv">
                     <video src={video} autoPlay muted loop></video>
 
-                    <div className="textDiv">
-                        <h2 className="title">Create And Sell Extraordinary Products</h2>
-                        <p>Adopt the peace of nature!</p>
-                    </div>
+                    {/*<div className="textDiv">*/}
+                    {/*    <h2 className="title">Create And Sell Extraordinary Products</h2>*/}
+                    {/*    <p>Adopt the peace of nature!</p>*/}
+                    {/*</div>*/}
 
                     <div className="footerDiv flex">
                         <span className="text">Have an account?</span>
