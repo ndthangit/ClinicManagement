@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import './Signup.css';
-// import '../../App.css'
+import '../../App.css'
 import { Link, useNavigate} from 'react-router-dom';
 import Axios from 'axios'
 import video from '../Assets/video.mp4'
@@ -64,7 +63,7 @@ const Signup = () => {
                             <label htmlFor="email">Email</label>
                             <div className="input flex">
                                 <MdMarkEmailRead className="icon" />
-                                <input type="email" id='email' placeholder='Enter Email'
+                                <input type="email" id='email' placeholder='Enter CCCD'
                                        onChange={(event) => setEmail(event.target.value)} />
                             </div>
                         </div>
@@ -73,7 +72,7 @@ const Signup = () => {
                             <label htmlFor="username">Username</label>
                             <div className="input flex">
                                 <FaUserShield className="icon" />
-                                <input type="text" id='username' placeholder='Enter Username'
+                                <input type="text" id='username' placeholder='Enter Password'
                                        onChange={(event) => setUserName(event.target.value)} />
                             </div>
                         </div>
@@ -82,7 +81,7 @@ const Signup = () => {
                             <label htmlFor="password">Password</label>
                             <div className="input flex">
                                 <BsFillShieldLockFill className="icon" />
-                                <input type="password" id='password' placeholder='Enter Password'
+                                <input type="password" id='password' placeholder='Rewrite password'
                                        onChange={(event) => setPassword(event.target.value)} />
                             </div>
                         </div>

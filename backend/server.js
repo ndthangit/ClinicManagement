@@ -12,8 +12,6 @@ var usersRouter = require('./routes/users');
 
 var server = express();
 var cors = require('cors')
-var connection= require('./DB/database')
-// var initWebRoutes =require('./routes/login');
 
 // view engine setup
 server.set('views', path.join(__dirname, 'views'));
@@ -25,22 +23,14 @@ server.use(express.urlencoded({ extended: false }));
 server.use(cookieParser());
 server.use(express.static(path.join(__dirname, 'public')));
 
-server.use('/', indexRouter);
-server.use('/users', usersRouter);
+server.use('/', indexRouter)
+server.use('/users', usersRouter)
 
 
 // catch 404 and forward to error handler
 server.use(function(req, res, next) {
   next(createError(404));
 });
-
-// connection.query(
-//     'SELECT * FROM dataIT3170.Patients',
-//     function (err, results, fields) {
-//       console.log(results); // results contains rows returned by server
-//       // console.log(fields); // fields contains extra meta data about results, if available
-//     }
-// );
 
 server.use(function(err, req, res, next) {
   // set locals, only providing error in development

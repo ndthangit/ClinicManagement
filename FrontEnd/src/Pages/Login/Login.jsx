@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import './Login.css';
 import '../../App.css'
 import {Link, useNavigate} from 'react-router-dom';
 import Axios from 'axios'
@@ -25,8 +24,7 @@ const Login = () => {
         }).then((response) => {
             const user = response.data.find(user => user.email === loginEmail && user.password === loginPassword);
             if (user) {
-                // replace by('/dashboard') after creating dashboard
-                navigateTo('/signup');
+                navigateTo('/');
             } else {
                 setLoginStatus(`Patient doesn't exist!`);
             }
@@ -43,11 +41,7 @@ const Login = () => {
             }, 2000);
         }
     }, [loginStatus]);
-    // useEffect(() => {
-    //         Axios.get('http://localhost:3005/login').then((response)=>{
-    //             console.log(response);
-    //         })
-    //     }, [])
+
     const onSubmit = () => {
         setLoginUserName('')
         setLoginPassword('')
@@ -86,7 +80,7 @@ const Login = () => {
                             <label htmlFor="username">Username</label>
                             <div className="input flex">
                                 <FaUserShield className="icon"/>
-                                <input type="text" id='username' placeholder='Enter Username'
+                                <input type="text" id='username' placeholder='Enter CCCD'
                                        onChange={(event) => setLoginUserName(event.target.value)}/>
                             </div>
                         </div>
