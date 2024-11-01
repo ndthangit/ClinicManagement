@@ -13,6 +13,6 @@
     border-bottom: 1px solid white;
 }
 
-.Leftbar .button:hover {
+.L .button:hover {
     background-color: hsl(94, 55%, 30%);
 }

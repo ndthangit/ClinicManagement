@@ -24,5 +24,5 @@ const getDataFromDB = async function(req, res) {
     }
 }
 module.exports = {
-    getDataFromDB: getDataFromDB,
+    executeQuery: executeQuery,
 };

@@ -7,7 +7,7 @@ var signupController = require('../controller/signupController')
 router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
-router.get('/:table', homeController.getDataFromDB);
+// router.get('/:table', homeController.getDataFromDB);
 
 router.post('/signup', signupController.addNewUser);
 
