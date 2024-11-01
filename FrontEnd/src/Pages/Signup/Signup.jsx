@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import './Signup.css';
 import '../../App.css'
 import { Link, useNavigate} from 'react-router-dom';
 import Axios from 'axios'
@@ -20,12 +19,12 @@ const Signup = () => {
 
     const createUser = (e) => {
         e.preventDefault()
-        Axios.post('http://localhost:3002/login', {
+        Axios.post('http://localhost:3005/users/signup', {
             Email: email,
             UserName: userName,
-            Password: password
+            Password: password,
         }).then(() => {
-            navigateTo('/');
+            navigateTo('/login');
             setEmail('');
             setUserName('');
             setPassword('');
@@ -39,10 +38,10 @@ const Signup = () => {
                 <div className="videoDiv">
                     <video src={video} autoPlay muted loop></video>
 
-                    <div className="textDiv">
-                        <h2 className="title">Create And Sell Extraordinary Products</h2>
-                        <p>Adopt the peace of nature!</p>
-                    </div>
+                    {/*<div className="textDiv">*/}
+                    {/*    <h2 className="title">Create And Sell Extraordinary Products</h2>*/}
+                    {/*    <p>Adopt the peace of nature!</p>*/}
+                    {/*</div>*/}
 
                     <div className="footerDiv flex">
                         <span className="text">Have an account?</span>
@@ -64,7 +63,7 @@ const Signup = () => {
                             <label htmlFor="email">Email</label>
                             <div className="input flex">
                                 <MdMarkEmailRead className="icon" />
-                                <input type="email" id='email' placeholder='Enter Email'
+                                <input type="email" id='email' placeholder='Enter CCCD'
                                        onChange={(event) => setEmail(event.target.value)} />
                             </div>
                         </div>
@@ -73,7 +72,7 @@ const Signup = () => {
                             <label htmlFor="username">Username</label>
                             <div className="input flex">
                                 <FaUserShield className="icon" />
-                                <input type="text" id='username' placeholder='Enter Username'
+                                <input type="text" id='username' placeholder='Enter Password'
                                        onChange={(event) => setUserName(event.target.value)} />
                             </div>
                         </div>
@@ -82,7 +81,7 @@ const Signup = () => {
                             <label htmlFor="password">Password</label>
                             <div className="input flex">
                                 <BsFillShieldLockFill className="icon" />
-                                <input type="password" id='password' placeholder='Enter Password'
+                                <input type="password" id='password' placeholder='Rewrite password'
                                        onChange={(event) => setPassword(event.target.value)} />
                             </div>
                         </div>

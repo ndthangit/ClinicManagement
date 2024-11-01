@@ -33,15 +33,6 @@ function DoctorInfo() {
     setDaySelected(index);
   }
 
-  const setTime = () => {
-    if (Object.keys(schedule).length != 0) {
-      Object.entries(schedule)[daySelected].map((time, index) => {
-        return (<button key={index} className='cell' onClick= {() => {selectDay(time)}}> {time} </button>);
-      })
-    }
-    return <div></div>
-  }
-
   useEffect( () => {
      axios.get(`http://localhost:3005/doctor/${id}`).then((respone) => {
       setDoctorInfo(respone.data);
@@ -75,7 +66,7 @@ function DoctorInfo() {
             <div className='date'>
               <button onClick={()=>{nextIndex(false)}}>{'<'}</button>
               {
-                Object.keys(schedule).slice(indexDay, indexDay+10).map((key, index) => {
+                Object.keys(schedule).slice(indexDay, indexDay+dayShow).map((key, index) => {
                   return (<button key={index} className='cell' onClick= {() => {selectDay(index)}}> {key.slice(8,10) + '-' + key.slice(5, 7) + ` (${schedule[key].length})`} </button>);
                 })
               }
@@ -84,8 +75,8 @@ function DoctorInfo() {
             <div className='tableTime'>
               <div className='time'>
                 {
-                  Object.entries(schedule).slice(daySelected, daySelected+1).map((day, time) => {
-                    return (<button key={daySelected} className='cell'> {day} </button>);
+                  Object.values(schedule).slice(daySelected, daySelected+1).flat().map((time, index) => {
+                    return (<button key={index} className='cell'> {time} </button>);
                   })
                 }
               </div>

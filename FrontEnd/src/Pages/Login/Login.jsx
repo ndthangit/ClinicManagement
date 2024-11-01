@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import './Login.css';
 import '../../App.css'
 import {Link, useNavigate} from 'react-router-dom';
 import Axios from 'axios'
@@ -19,14 +18,13 @@ const Login = () => {
 
     const loginUser = (e) => {
         e.preventDefault();
-        Axios.get('http://localhost:3005/login', {
+        Axios.get('http://localhost:3005/users/patients', {
             email: loginEmail,
             password: loginPassword
         }).then((response) => {
             const user = response.data.find(user => user.email === loginEmail && user.password === loginPassword);
             if (user) {
-                // replace by('/dashboard') after creating dashboard
-                navigateTo('/signup');
+                navigateTo('/');
             } else {
                 setLoginStatus(`Patient doesn't exist!`);
             }
@@ -43,11 +41,7 @@ const Login = () => {
             }, 2000);
         }
     }, [loginStatus]);
-    // useEffect(() => {
-    //         Axios.get('http://localhost:3005/login').then((response)=>{
-    //             console.log(response);
-    //         })
-    //     }, [])
+
     const onSubmit = () => {
         setLoginUserName('')
         setLoginPassword('')
@@ -57,13 +51,13 @@ const Login = () => {
         <div className="loginPage flex">
             <div className="container flex">
 
-                {/* <div className="videoDiv">
+                <div className="videoDiv">
                     <video src={video} autoPlay muted loop></video>
 
-                    <div className="textDiv">
-                        <h2 className="title">Create And Sell Extraordinary Products</h2>
-                        <p>Adopt the peace of nature!</p>
-                    </div>
+                    {/*<div className="textDiv">*/}
+                    {/*    <h2 className="title"></h2>*/}
+                    {/*    <p>Adopt the peace of nature!</p>*/}
+                    {/*</div>*/}
 
                     <div className="footerDiv flex">
                         <span className="text">Don't have an account?</span>
@@ -71,13 +65,13 @@ const Login = () => {
                             <button className="btn">Sign Up</button>
                         </Link>
                     </div>
-                </div> */}
+                </div>
 
                 <div className="formDiv flex">
-                    {/* <div className="headerDiv">
+                    <div className="headerDiv">
                         <img src={logo} alt="Logo Image"/>
                         <h3>Welcome Back!</h3>
-                    </div> */}
+                    </div>
 
                     <form action="" className="form grid" onSubmit={onSubmit}>
                         <span className={statusHolder}>{loginStatus}</span>
@@ -86,7 +80,7 @@ const Login = () => {
                             <label htmlFor="username">Username</label>
                             <div className="input flex">
                                 <FaUserShield className="icon"/>
-                                <input type="text" id='username' placeholder='Enter Username'
+                                <input type="text" id='username' placeholder='Enter CCCD'
                                        onChange={(event) => setLoginUserName(event.target.value)}/>
                             </div>
                         </div>
