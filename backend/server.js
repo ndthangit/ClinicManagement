@@ -8,13 +8,13 @@ var logger = require('morgan');
 
 
 
-let indexRouter = require('./routes/index');
-let usersRouter = require('./routes/users');
-let doctorRouter = require('./routes/Doctor');
+const doctorRouter = require('./routes/Doctor');
+const appointmentRouter = require('./routes/Appointment'); 
 
 
 var server = express();
 var cors = require('cors')
+
 var connection= require('./DB/database')
 // var initWebRoutes =require('./routes/login');
 
@@ -30,11 +30,8 @@ server.use(express.static(path.join(__dirname, 'public')));
 
 
 
-
-
-server.use('/', indexRouter);
-server.use('/users', usersRouter);
 server.use('/doctor', doctorRouter);
+server.use('/appointment', appointmentRouter);
 
 
 

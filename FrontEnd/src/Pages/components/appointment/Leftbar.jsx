@@ -1,11 +1,12 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Leftbar.css';
 
 function Leftbar() {
   return (
     <div className='Leftbar'>
-        <p className='button font'>Đặt lịch khám</p>
-        <p className='button font'>Xem lịch khám</p>
+        <Link className='button font' to='/appointment'>Đặt lịch khám</Link>
+        <Link className='button font'>Xem lịch khám</Link>
     </div>
   )
 }

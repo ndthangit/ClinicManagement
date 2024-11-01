@@ -4,6 +4,7 @@ import Login from "./Pages/Login/Login";
 import Signup from "./Pages/Signup/Signup";
 import Dashboard from './Pages/Dashboard/Dashboard';
 import Appointment from './Pages/Appointment/Appointment';
+import DoctorInfo from './Pages/DoctorInfo/DoctorInfo';
 import {
     createBrowserRouter,
     RouterProvider
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
     {
         path: '/appointment',
         element: <div><Appointment /></div>
+    },
+    {
+        path: '/appointment/:id',
+        element: <div><DoctorInfo /></div>
     }
 ])
 

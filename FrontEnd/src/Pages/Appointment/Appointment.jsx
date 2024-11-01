@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Navbar from '../components/navbar/Navbar';
 import Leftbar from '../components/appointment/Leftbar';
 import exampleImage from '../Assets/person.png';
+import { useNavigate } from 'react-router-dom';
 import './Appointment.css';
 
 import axios from 'axios';
@@ -14,9 +15,19 @@ function Appointment() {
   const [listOfDoctors, setListOfDoctors] = useState([]);
   const [startIndex, setStartIndex] = useState(0);
   const [numsElements, setNumsElements] = useState(20);
-  const nextElements = () => {
-    if (startIndex + numsElements < listOfDoctors.length) {
-      setStartIndex(startIndex+numsElements);
+
+  let history = useNavigate();
+
+  const nextElements = (next) => {
+    if  (next == true) {
+      if (startIndex + numsElements < listOfDoctors.length) {
+        setStartIndex(startIndex+numsElements);
+      }
+    }
+    else {
+      if (startIndex - numsElements >= 0) {
+        setStartIndex(startIndex-numsElements);
+      }
     }
   }
 
@@ -26,7 +37,7 @@ function Appointment() {
     });
   }, []);
   return (
-    <div className='appointment'>
+    <div className='appointment dashboard'>
       <Navbar className="header"/>
       <div className='body'>
         <Leftbar className='leftBar'/>
@@ -40,7 +51,7 @@ function Appointment() {
           <div className='table'>
             {listOfDoctors.slice(startIndex, startIndex+numsElements).map((value, key) => {
               return (
-                <div key={key} className='element'>
+                <div key={key} className='element' onClick={() => {history(`/appointment/${value.doctor_id}`)}}>
                   <div className='header'> 
                     <img src={exampleImage} alt="Example" className="image" ></img>
                   </div>
@@ -54,7 +65,10 @@ function Appointment() {
             })}
           </div>
           <div className='bottom'>
-            <button onClick={()=> {nextElements()}}>tiếp</button> 
+            <div className='pageSetting'>
+              <button onClick={()=> {nextElements(false)}}>trước</button> 
+              <button onClick={()=> {nextElements(true)}}>tiếp</button> 
+            </div>
           </div>
         </div>
       </div>
@@ -62,4 +76,4 @@ function Appointment() {
   )
 }
 
-export default Appointment
+export default Appointment;
