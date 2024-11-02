@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import Navbar from '../components/navbar/Navbar';
-import Leftbar from '../components/appointment/Leftbar';
+import Navbar from '../Components/navbar/Navbar';
+import Leftbar from '../Components/Appointment/Leftbar';
 import exampleImage from '../Assets/person.png';
 import { useNavigate } from 'react-router-dom';
 import './Appointment.css';
 
 import axios from 'axios';
-
-
 
 function Appointment() {
 
@@ -19,7 +17,7 @@ function Appointment() {
   let history = useNavigate();
 
   const nextElements = (next) => {
-    if  (next == true) {
+    if  (next === true) {
       if (startIndex + numsElements < listOfDoctors.length) {
         setStartIndex(startIndex+numsElements);
       }
