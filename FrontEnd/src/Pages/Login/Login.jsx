@@ -10,7 +10,7 @@ import {AiOutlineSwapRight} from 'react-icons/ai'
 
 const Login = () => {
     const state = {content: null}
-    const [loginEmail, setLoginUserName] = useState('');
+    const [accountID, setAccountID] = useState('');
     const [loginPassword, setLoginPassword] = useState('');
     const navigateTo = useNavigate();
     const [loginStatus, setLoginStatus] = useState('');
@@ -18,11 +18,11 @@ const Login = () => {
 
     const loginUser = (e) => {
         e.preventDefault();
-        Axios.get('http://localhost:3005/users/patients', {
-            email: loginEmail,
+        Axios.get('http://localhost:3005/users/account', {
+            account_id: accountID,
             password: loginPassword
         }).then((response) => {
-            const user = response.data.find(user => user.email === loginEmail && user.password === loginPassword);
+            const user = response.data.find(user => user.account_id === accountID && user.password === loginPassword);
             if (user) {
                 navigateTo('/');
             } else {
@@ -43,7 +43,7 @@ const Login = () => {
     }, [loginStatus]);
 
     const onSubmit = () => {
-        setLoginUserName('')
+        setAccountID('')
         setLoginPassword('')
     }
 
@@ -77,11 +77,11 @@ const Login = () => {
                         <span className={statusHolder}>{loginStatus}</span>
 
                         <div className="inputDiv">
-                            <label htmlFor="username">Username</label>
+                            <label htmlFor="CCCD">CCCD</label>
                             <div className="input flex">
                                 <FaUserShield className="icon"/>
                                 <input type="text" id='username' placeholder='Enter CCCD'
-                                       onChange={(event) => setLoginUserName(event.target.value)}/>
+                                       onChange={(event) => setAccountID(event.target.value)}/>
                             </div>
                         </div>
 

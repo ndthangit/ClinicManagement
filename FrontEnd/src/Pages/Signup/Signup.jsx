@@ -78,7 +78,7 @@ const Signup = () => {
                             <label htmlFor="password">Password</label>
                             <div className="input flex">
                                 <FaUserShield className="icon" />
-                                <input type="text" id='password' placeholder='Enter Password'
+                                <input type="password" id='password' placeholder='Enter Password'
                                        onChange={(event) => setPassword(event.target.value)} />
                             </div>
                         </div>
@@ -87,7 +87,7 @@ const Signup = () => {
                             <label htmlFor="rewrite_password">Rewrite password</label>
                             <div className="input flex">
                                 <FaUserShield className="icon" />
-                                <input type="rewrite_password" id='rewrite_password' placeholder='Rewrite password'
+                                <input type="password" id='rewrite_password' placeholder='Rewrite password'
                                        onChange={(event) => setRewritePassword(event.target.value)} />
                             </div>
                         </div>
