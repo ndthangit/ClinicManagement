@@ -1,22 +1,24 @@
 import React from 'react';
-import './Dashboard.css';
-import NavBar from '../Components/NavBar/NavBar'
-import Appointment from "../Apopointment/Appointment";
+import './Dashboard.css'; 
 import {
-    Link,
-    useNavigate,
-    createBrowserRouter,
-    RouterProvider,
-    BrowserRouter as Router, Route, Routes,
+  Link,
+  useNavigate,
+  createBrowserRouter,
+  RouterProvider,
+  BrowserRouter as Router, Route, Routes,
 } from 'react-router-dom';
+
+import Appointment from '../Appointment/Appointment';
+import Navbar from '../components/navbar/Navbar';
+
 
 function Dashboard() {
 
-    return (
-        <div className='dashboard'>
-            <NavBar className='header'/>
-        </div>
-    )
+  return (
+    <div className='dashboard'>
+      <Navbar className='header'/>
+    </div>
+  )
 }
 
 export default Dashboard

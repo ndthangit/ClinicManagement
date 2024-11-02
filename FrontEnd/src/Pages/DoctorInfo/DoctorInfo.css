@@ -1,0 +1,58 @@
+
+.doctorInfo .body .content {
+  padding: 20px;
+}
+
+.doctorInfo .body .content .head {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+}
+
+.doctorInfo .body .content .head .imageDoctor {
+  width: 200px;
+  height: 200px;
+  border-radius: 100%;
+  border: 1px solid black;
+}
+
+.doctorInfo .body .content .head .infoDetail {
+  height: 40%;
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  grid-template-rows: repeat(3, 1fr);
+  padding-left: 50px;
+}
+
+.doctorInfo .body .content .head .infoDetail .importantInfo {
+  font-size: 18px;
+}
+
+.doctorInfo .body .content .table {
+  height: 100%;
+}
+
+.doctorInfo .body .content .table .date {
+  padding: 10px;
+  display: flex;
+}
+.doctorInfo .body .content .table .date .cell {
+  padding: 10px 20px 10px 20px;
+}
+
+.doctorInfo .body .content .table .tableTime {
+  border: 1px solid gray;
+  overflow:scroll;
+  height: 30vh;
+  padding: 20px;
+}
+
+.doctorInfo .body .content .table .tableTime .time {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+
+}
+
+.doctorInfo .body .content .table .tableTime .time .cell {
+  padding: 10px 20px 10px 20px;
+}

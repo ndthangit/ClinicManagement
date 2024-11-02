@@ -6,14 +6,18 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var doctorRouter = require('./routes/doctor');
-var appointmentRouter = require('./routes/appointment');
+
+
+const doctorRouter = require('./routes/Doctor');
+const appointmentRouter = require('./routes/Appointment'); 
+const userRouter = require('./routes/User');
 
 
 var server = express();
 var cors = require('cors')
+
+var connection= require('./DB/database')
+// var initWebRoutes =require('./routes/login');
 
 // view engine setup
 server.set('views', path.join(__dirname, 'views'));
@@ -25,16 +29,21 @@ server.use(express.urlencoded({ extended: false }));
 server.use(cookieParser());
 server.use(express.static(path.join(__dirname, 'public')));
 
-server.use('/', indexRouter)
-server.use('/users', usersRouter)
-server.use('/doctor',doctorRouter)
-server.use('/appointment', appointmentRouter)
+
+
+server.use('/doctor', doctorRouter);
+server.use('/appointment', appointmentRouter);
+server.use('/users', userRouter);
+
+
+
 
 
 // catch 404 and forward to error handler
 server.use(function(req, res, next) {
   next(createError(404));
 });
+
 
 server.use(function(err, req, res, next) {
   // set locals, only providing error in development
