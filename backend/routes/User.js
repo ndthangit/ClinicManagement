@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
+const signup = require('../controller/Signup')
 const  homeController = require('../controller/Home')
-const signupController = require('../controller/Signup')
+
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -9,6 +10,6 @@ router.get('/', function(req, res, next) {
 });
 router.get('/:table', homeController.getDataFromDB);
 
-router.post('/signup', signupController.addNewUser);
+router.post('/signup', signup.addNewUser);
 
 module.exports = router;
