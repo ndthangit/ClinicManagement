@@ -13,20 +13,37 @@ function executeQuery(sql, params = []) {
 
 
 let getDoctors = async(req, res) => {
-  const sql = 'SELECT * FROM dataIT3170.Doctors';
+  const sql = 'SELECT * FROM datait3170.Doctors';
   const result = await executeQuery(sql); // Chờ kết quả truy vấn
   res.json(result);
 };
 
 let getDoctorById = async(req, res) => {
   const doctorId = req.params.id;
-  const sql = `SELECT * FROM dataIT3170.Doctors D WHERE doctor_id = ? `;
+  const sql = `SELECT * FROM datait3170.Doctors D WHERE doctor_id = ? `;
   const result = await executeQuery(sql, [doctorId]);
   res.json(result[0]);
 };
 
+let checkDoctorAvailability = async (req, res) => {
+  const { doctor_id, appointment_date } = req.body;
+
+  const sql = `
+      SELECT COUNT(*) as count 
+      FROM datait3170.Appointments 
+      WHERE doctor_id = ? AND appointment_date = ?`;
+
+  try {
+      const result = await executeQuery(sql, [doctor_id, appointment_date]);
+      res.json({ available: result[0].count === 0 });
+  } catch (error) {
+      res.status(500).json({ error: error.message });
+  }
+};
+
 module.exports = {
   getDoctors: getDoctors,
-  getDoctorById: getDoctorById
+  getDoctorById: getDoctorById,
+  checkDoctorAvailability: checkDoctorAvailability
 }
 
