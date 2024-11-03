@@ -9,7 +9,7 @@ import {
 } from 'react-router-dom';
 
 import Appointment from '../Appointment/Appointment';
-import Navbar from '../components/navbar/Navbar';
+import Navbar from '../Components/navbar/Navbar';
 
 
 function Dashboard() {

@@ -10,6 +10,9 @@ router.get('/:id', async (req, res) => {
   await Doctor.getDoctorById(req, res);
 });
 
+router.post('/check-availability', async (req, res) => {
+  await Doctor.checkDoctorAvailability(req, res);
+});
 
 
 module.exports = router
