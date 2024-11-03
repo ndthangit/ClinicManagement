@@ -8,7 +8,7 @@ import {
   BrowserRouter as Router, Route, Routes,
 } from 'react-router-dom';
 
-import Navbar from '../Components/navbar/Navbar';
+import Navbar from '../Components/NavBar/Navbar';
 
 
 function Dashboard() {

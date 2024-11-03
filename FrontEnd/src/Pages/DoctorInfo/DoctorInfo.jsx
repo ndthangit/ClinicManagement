@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import Navbar from '../Components/navbar/Navbar';
+import Navbar from '../Components/NavBar/Navbar';
 import Leftbar from '../Components/Appointment/Leftbar';
 import exampleImage from '../Assets/person.png';
 import './DoctorInfo.css'
