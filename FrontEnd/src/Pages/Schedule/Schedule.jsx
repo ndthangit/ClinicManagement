@@ -4,6 +4,10 @@ import Navbar from '../components/navbar/Navbar';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import './Schedule.css';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import Tooltip from '@mui/material/Tooltip';
+import Swal from 'sweetalert2';
 
 function Schedule() {
     const { patientId } = useParams(); // lấy id từ URL
@@ -51,18 +55,37 @@ function Schedule() {
 
     // Xóa lịch khám
     const handleDelete = async (scheduleId) => {
-        try {
-            await axios.delete(`http://localhost:3005/schedule/${scheduleId}`);
-            
-            //tạo bản sao của `scheduleList` và xóa lịch khám đã chọn
-            const updatedScheduleList = { ...scheduleList };
-            delete updatedScheduleList[scheduleId];
-            setScheduleList(updatedScheduleList);
+        const result = await Swal.fire({
+            title: "Bạn có chắc chắn muốn xóa lịch khám này?",
+            text: "Hành động này sẽ không thể hoàn tác!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#86cc51",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Xóa",
+            cancelButtonText: "Hủy"
+          });
+        
+        if (result.isConfirmed) {
 
-            alert("Xóa thành công!");
-            window.location.reload();
-        } catch (error) {
-            console.error('Lỗi khi xóa lịch khám:', error);
+            try {
+
+                await axios.delete(`http://localhost:3005/schedule/${scheduleId}`);
+
+                Swal.fire({
+                    title: "Deleted!",
+                    text: "Xóa lịch khám thành công",
+                    icon: "success",
+                    confirmButtonColor: "#86cc51"
+                  });
+                
+                //tạo bản sao của `scheduleList` và xóa lịch khám đã chọn
+                const updatedScheduleList = { ...scheduleList };
+                delete updatedScheduleList[scheduleId];
+                setScheduleList(updatedScheduleList);
+            } catch (error) {
+                console.error('Lỗi khi xóa lịch khám:', error);
+            }
         }
     };
 
@@ -90,13 +113,25 @@ function Schedule() {
             });
     
             if (!availabilityResponse.data.available) {
-                alert('Bác sĩ đã bận vào thời gian này. Không thể đặt lịch.');
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "Bác sĩ đã bận vào thời gian này mất rồi!",
+                    confirmButtonText: "Xác nhận"
+                  });
                 return;
             }
-    
+            
+            
+
             //nếu không bận thì thêm lịch khám
             const response = await axios.post('http://localhost:3005/schedule', newSchedule);
-            alert(response.data.message);
+            Swal.fire({
+                title: "Completed!",
+                text: "Thêm lịch khám thành công",
+                icon: "success",
+                confirmButtonColor: "#86cc51"
+              });
             //thêm vào list
             setScheduleList(prev => ({
                 ...prev,
@@ -190,8 +225,12 @@ function Schedule() {
                                             <p>Bác sĩ: {schedule.doctor_name}</p>
                                             <p>Nguyên nhân: {schedule.reason}</p>
                                             <p>Trạng thái: {schedule.status}</p>
-                                            <button onClick={() => handleEdit(schedule.appointment_id)}>Chỉnh sửa</button>
-                                            <button onClick={() => handleDelete(schedule.appointment_id)}>Xóa</button>
+                                            <Tooltip title="Chỉnh sửa" arrow>
+                                                <button onClick={() => handleEdit(schedule.appointment_id)} className='iconButton'><EditIcon /></button>
+                                            </Tooltip>
+                                            <Tooltip title="Xóa" arrow>
+                                                <button onClick={() => handleDelete(schedule.appointment_id)} className='iconButton'><DeleteIcon /></button>
+                                            </Tooltip>
                                         </div>
                                     )}
                                 </div>

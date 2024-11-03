@@ -17,9 +17,9 @@
     background-color:  #86cc51; 
     color: white; 
     border-radius: 5px; 
-    padding: 5px 10px; 
+    padding: 10px 10px; 
     display: inline-block; 
-    font-size: 18px; 
+    font-size: 17px;
     margin: 0; 
     margin-bottom: 15px; 
     font-weight: normal;
@@ -98,16 +98,25 @@
     margin: 5px 0; 
 }
 
-.scheduleDetails button {
-    margin-right: 10px; 
-    padding: 5px 10px;
-    background-color: #007bff; 
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+
+.iconButton {
+    background: none; 
+    border: none; 
+    cursor: pointer; 
+    margin: 0 5px; 
+    color: #86cc51; 
+    font-size: 20px; 
+    transition: background 0.3s, color 0.3s; 
+    border-radius: 50%; 
+    padding: 9px; 
+    width: 40px;
+    height: 40px;
+    justify-content: center;
+    align-items: center;
 }
 
-.scheduleDetails button:hover {
-    background-color: #0056b3; 
+.iconButton:hover {
+    background: rgba(134, 204, 81, 0.2); 
+    color: #5a9e3a;
 }
+
