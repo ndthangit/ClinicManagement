@@ -3,34 +3,51 @@ import '../../App.css'
 import {Link, useNavigate} from 'react-router-dom';
 import Axios from 'axios'
 import video from '../Assets/video.mp4'
-import logo from '../Assets/logo.png'
+import logo from '../Assets/pngtree-hospital-icon-design-illustration-png-image_5339806.jpg'
 import {FaUserShield} from 'react-icons/fa'
 import {BsFillShieldLockFill} from 'react-icons/bs'
 import {AiOutlineSwapRight} from 'react-icons/ai'
+import {useDispatch} from "react-redux";
+import {loginFailed, loginStarted, loginSuccess} from "../Features/UserSlice";
+import {fetchDoctors} from "../Features/DoctorSlice";
+import {fetchMedicines} from "../Features/MedicineSlice";
 
 const Login = () => {
     const state = {content: null}
-    const [loginEmail, setLoginUserName] = useState('');
+    const [accountID, setAccountID] = useState('');
     const [loginPassword, setLoginPassword] = useState('');
     const navigateTo = useNavigate();
     const [loginStatus, setLoginStatus] = useState('');
     const [statusHolder, setStatusHolder] = useState('message');
 
+    const dispatch = useDispatch();
+
     const loginUser = (e) => {
         e.preventDefault();
-        Axios.get('http://localhost:3005/users/patients', {
-            email: loginEmail,
+
+        const accountInfo ={
+            account_id: accountID,
             password: loginPassword
-        }).then((response) => {
-            const user = response.data.find(user => user.email === loginEmail && user.password === loginPassword);
-            if (user) {
-                navigateTo('/', {state: {userId: user.patient_id}});
-            } else {
-                setLoginStatus(`Patient doesn't exist!`);
+        }
+        dispatch(loginStarted());
+        Axios.post('http://localhost:3005/users/login', accountInfo).then((res)=>{
+            // console.log("rss from backend",res.data.message);
+            if( res.data.message === 'connection success'){
+                dispatch(loginSuccess(res.data.account_id));
+                dispatch(fetchDoctors());
+                dispatch(fetchMedicines())
+                navigateTo('/');
+            }
+            else {
+                dispatch(loginFailed());
+                console.log("res from backend",res.data);
             }
         }).catch((error) => {
             console.error('Error during login request:', error);
-        });
+        })
+        // Axios.get(`http://localhost:3005/users/account/${accountID}`).then((res) => {
+        //     console.log("res",res.data.message);
+        // });
     };
 
     useEffect(() => {
@@ -43,7 +60,7 @@ const Login = () => {
     }, [loginStatus]);
 
     const onSubmit = () => {
-        setLoginUserName('')
+        setAccountID('')
         setLoginPassword('')
     }
 
@@ -77,11 +94,11 @@ const Login = () => {
                         <span className={statusHolder}>{loginStatus}</span>
 
                         <div className="inputDiv">
-                            <label htmlFor="username">Username</label>
+                            <label htmlFor="CCCD">CCCD</label>
                             <div className="input flex">
                                 <FaUserShield className="icon"/>
                                 <input type="text" id='username' placeholder='Enter CCCD'
-                                       onChange={(event) => setLoginUserName(event.target.value)}/>
+                                       onChange={(event) => setAccountID(event.target.value)}/>
                             </div>
                         </div>
 

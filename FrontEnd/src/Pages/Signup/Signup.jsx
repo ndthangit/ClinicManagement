@@ -12,22 +12,30 @@ import { MdMarkEmailRead } from 'react-icons/md'
 
 
 const Signup = () => {
-    const [email, setEmail] = useState('')
-    const [userName, setUserName] = useState('')
+    const [CCCD, setCCCD] = useState('')
     const [password, setPassword] = useState('')
+    const [rewritePassword, setRewritePassword] = useState('')
+    const [errorMessage, setErrorMessage] = useState('')
     const navigateTo = useNavigate();
 
     const createUser = (e) => {
         e.preventDefault()
+        if (password !== rewritePassword) {
+            setErrorMessage('Password and rewrite password are not the same!')
+            return
+
+        }
         Axios.post('http://localhost:3005/users/signup', {
-            Email: email,
-            UserName: userName,
+            CCCD: CCCD,
             Password: password,
         }).then(() => {
             navigateTo('/login');
-            setEmail('');
-            setUserName('');
+            setCCCD('');
             setPassword('');
+            setRewritePassword('');
+            setErrorMessage('')
+        }).catch((error) => {
+            console.error('Error during signup request:', error);
         })
     }
 
@@ -60,29 +68,29 @@ const Signup = () => {
                     <form action="" className="form grid">
 
                         <div className="inputDiv">
-                            <label htmlFor="email">Email</label>
+                            <label htmlFor="CCCD">CCCD</label>
                             <div className="input flex">
                                 <MdMarkEmailRead className="icon" />
-                                <input type="email" id='email' placeholder='Enter CCCD'
-                                       onChange={(event) => setEmail(event.target.value)} />
-                            </div>
-                        </div>
-
-                        <div className="inputDiv">
-                            <label htmlFor="username">Username</label>
-                            <div className="input flex">
-                                <FaUserShield className="icon" />
-                                <input type="text" id='username' placeholder='Enter Password'
-                                       onChange={(event) => setUserName(event.target.value)} />
+                                <input type="CCCD" id='CCCD' placeholder='Enter CCCD'
+                                       onChange={(event) => setCCCD(event.target.value)} />
                             </div>
                         </div>
 
                         <div className="inputDiv">
                             <label htmlFor="password">Password</label>
                             <div className="input flex">
-                                <BsFillShieldLockFill className="icon" />
-                                <input type="password" id='password' placeholder='Rewrite password'
+                                <FaUserShield className="icon" />
+                                <input type="password" id='password' placeholder='Enter Password'
                                        onChange={(event) => setPassword(event.target.value)} />
+                            </div>
+                        </div>
+
+                        <div className="inputDiv">
+                            <label htmlFor="rewrite_password">Rewrite password</label>
+                            <div className="input flex">
+                                <FaUserShield className="icon" />
+                                <input type="password" id='rewrite_password' placeholder='Rewrite password'
+                                       onChange={(event) => setRewritePassword(event.target.value)} />
                             </div>
                         </div>
 

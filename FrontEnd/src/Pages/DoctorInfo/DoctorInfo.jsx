@@ -125,7 +125,7 @@ function DoctorInfo() {
     }
   }
   useEffect( () => {
-     axios.get(`http://localhost:3005/doctor/${id}`).then((respone) => {
+     axios.get(`http://localhost:3005/users/doctor/${id}`).then((respone) => {
       setDoctorInfo(respone.data);
     });
 

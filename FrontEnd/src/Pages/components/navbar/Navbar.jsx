@@ -1,40 +1,52 @@
-import React, {useState, useEffect} from 'react';
-import axios from 'axios';
+import React, {useEffect, useState} from 'react';
 import './Navbar.css'
 import {
-  useNavigate
+    Link,
+    useNavigate,
 } from 'react-router-dom';
-import { Button } from '@mui/material';
+import {useSelector,useDispatch} from "react-redux";
+import {logout} from "../../Features/UserSlice";
 
-function Navbar(state) {
-  const navigate = useNavigate();
 
-  const hasLogin = (user) => {
-    if (Object.keys(user).length > 0) {
-      return (<div className="right">
-                <Button className='button font' onClick={() => {navigate('/signup', {state:{userId:user.patient_id}})}}> {user.patient_name}</Button>
-              </div>)
+function Navbar() {
+
+    const {user} = useSelector((state) => state.user.user);
+    const navigateTo = useNavigate();
+    const dispatch = useDispatch();
+
+    const handleLogout = () => {
+        dispatch(logout());
+        navigateTo('/');
     }
-    else {
-      return (<div className="right">
-                <Button className='button font' onClick={() => {navigate('/signup')}}> Signup</Button>
-                <Button className='button font' onClick={() => {navigate('/login')}}> Login</Button>
-              </div>)
+
+    const handleLogin = () => {
+        navigateTo('/login');
     }
-  }
-  return (
-      <div className="navbar">
-        <div className="left">
-          <Button className='button font' onClick={() => {navigate('/', {state:{userId:state.user.patient_id}})}}>Trang chủ</Button>
-          <Button className='button font' onClick={() => {navigate('/appointment', {state:{userId:state.user.patient_id}})}}>Lịch khám</Button>
-          <p className='button font'>Lịch sử khám</p>
-          <p className='button font'>Thanh toán</p>
+
+    return (
+        <div className="navbar">
+            <div className="left">
+                <Link className='button font' to={'/'}>Trang chủ</Link>
+                <Link className='button font' to={'/appointment'}>Lịch khám</Link>
+                <p className='button font'>Lịch sử khám</p>
+                <p className='button font'>Thanh toán</p>
+            </div>
+            <div className="right">
+                {user ? (
+                    // Show "Logout" button when logged in
+                    <button className="button font" onClick={handleLogout} >Logout</button>
+
+                ) : (
+                    // Show "Login" and "Signup" links when not logged in
+                    <>
+                        <Link className="button font" to={'/signup'}>Signup</Link>
+                        <button className="button font" onClick={handleLogin}>Login</button>
+                    </>
+                )}
+
+            </div>
         </div>
-        {
-          hasLogin(state.user)
-        }
-      </div>
-  )
+    )
 }
 
 export default Navbar
