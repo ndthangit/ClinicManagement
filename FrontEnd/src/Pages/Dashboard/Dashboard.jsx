@@ -19,7 +19,7 @@ function Dashboard() {
     if (data === null) {
       data = {userId: undefined};
     }
-    axios.get(`http://localhost:3005/users/byId/${data.userId}`).then((respone) => {
+    axios.get(`http://localhost:3005/users/byId/${undefined}`).then((respone) => {
       setUserInfo(respone.data);
     });
   }, [])
