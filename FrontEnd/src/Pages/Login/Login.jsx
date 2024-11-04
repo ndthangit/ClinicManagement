@@ -7,6 +7,8 @@ import logo from '../Assets/pngtree-hospital-icon-design-illustration-png-image_
 import {FaUserShield} from 'react-icons/fa'
 import {BsFillShieldLockFill} from 'react-icons/bs'
 import {AiOutlineSwapRight} from 'react-icons/ai'
+import {useDispatch} from "react-redux";
+import {loginFailed, loginStarted, loginSuccess} from "../Features/UserSlice";
 
 const Login = () => {
     const state = {content: null}
@@ -16,21 +18,32 @@ const Login = () => {
     const [loginStatus, setLoginStatus] = useState('');
     const [statusHolder, setStatusHolder] = useState('message');
 
+    const dispatch = useDispatch();
+
     const loginUser = (e) => {
         e.preventDefault();
-        Axios.get('http://localhost:3005/users/account', {
+
+        const accountInfo ={
             account_id: accountID,
             password: loginPassword
-        }).then((response) => {
-            const user = response.data.find(user => user.account_id === accountID && user.password === loginPassword);
-            if (user) {
+        }
+        dispatch(loginStarted());
+        Axios.post('http://localhost:3005/users/login', accountInfo).then((res)=>{
+            // console.log("rss from backend",res.data.message);
+            if( res.data.message === 'connection success'){
+                dispatch(loginSuccess(res.data.account_id));
                 navigateTo('/');
-            } else {
-                setLoginStatus(`Patient doesn't exist!`);
+            }
+            else {
+                dispatch(loginFailed());
+                console.log("res from backend",res.data);
             }
         }).catch((error) => {
             console.error('Error during login request:', error);
-        });
+        })
+        // Axios.get(`http://localhost:3005/users/account/${accountID}`).then((res) => {
+        //     console.log("res",res.data.message);
+        // });
     };
 
     useEffect(() => {

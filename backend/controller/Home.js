@@ -13,6 +13,18 @@ let executeQuery = (sql, res) => {
         });
     });
 };
+
+function executeQueryID(sql, params = []) {
+    return new Promise((resolve, reject) => {
+        connection.query(sql, params, (err, results) => {
+            if (err) {
+                return reject(err); // Từ chối Promise nếu có lỗi
+            }
+            resolve(results); // Hoàn thành Promise với kết quả truy vấn
+        });
+    });
+}
+
 const getDataFromDB = async function(req, res) {
     const {table} = req.params;
     const sql = `SELECT * FROM dataIT3170.${table}`;
@@ -25,5 +37,6 @@ const getDataFromDB = async function(req, res) {
 }
 module.exports = {
     executeQuery: executeQuery,
+    executeQueryID: executeQueryID,
     getDataFromDB: getDataFromDB
 };

@@ -34,6 +34,8 @@ const Signup = () => {
             setPassword('');
             setRewritePassword('');
             setErrorMessage('')
+        }).catch((error) => {
+            console.error('Error during signup request:', error);
         })
     }
 
