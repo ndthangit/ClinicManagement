@@ -29,7 +29,7 @@
 .scheduleForm input, 
 #doctor_id {
     padding: 10px 15px;
-    margin-bottom: 10px; /* Khoảng cách đồng đều giữa các trường */
+    margin-bottom: 10px;
     border: 1px solid #ccc; 
     border-radius: 4px;
     font-size: 16px; 
@@ -38,10 +38,8 @@
     background-color: white;
 }
 
-/* Custom styling for the doctor dropdown */
 #doctor_id {
     appearance: none; 
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="5" viewBox="0 0 10 5"><polygon points="0,0 5,5 10,0" fill="%2366cc51"/></svg>'); 
     background-repeat: no-repeat; 
     background-position: right 10px center; 
 }
@@ -120,3 +118,41 @@
     color: #5a9e3a;
 }
 
+.editScheduleForm {
+    margin-top: 10px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.editScheduleForm h3 {
+    margin: 0 0 10px 0;
+    font-size: 18px;
+    color: #333;
+}
+
+.editScheduleForm input[type="datetime-local"],
+.editScheduleForm input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.editScheduleForm button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.editScheduleForm button:hover {
+    background-color: #45a049;
+}

@@ -14,16 +14,24 @@ function Schedule() {
     const [scheduleList, setScheduleList] = useState({}); // danh sách lịch khám là object
     const [selectedSchedule, setSelectedSchedule] = useState(null); // lịch khám đang chọn
     const [showScheduleDetails, setShowScheduleDetails] = useState(false); // hiển thị chi tiết
+    const [showEditForm, setShowEditForms] = useState(false);
     const [newSchedule, setNewSchedule] = useState({
         patient_id: patientId, //mặc định từ url
+        appointment_id: '',
         doctor_id: '',
         appointment_date: '',
         reason: ''
     });
+    const [editSchedule, setEditSchedule] = useState({
+        appointment_id: '',
+        appointment_date: '',
+        reason: ''
+    });
+    
     const [doctors, setDoctors] = useState([]); //danh sách bác sĩ
 
     
-    // Lấy danh sách lịch khám dựa trên patientId và danh sách bác sĩ theo id
+    //lấy danh sách lịch khám dựa trên patientId và danh sách bác sĩ theo id
     useEffect(() => {
         if (!patientId) return;
 
@@ -53,7 +61,7 @@ function Schedule() {
         fetchDoctors();
     }, []);
 
-    // Xóa lịch khám
+    //xóa lịch khám
     const handleDelete = async (scheduleId) => {
         const result = await Swal.fire({
             title: "Bạn có chắc chắn muốn xóa lịch khám này?",
@@ -67,11 +75,9 @@ function Schedule() {
           });
         
         if (result.isConfirmed) {
-
             try {
 
                 await axios.delete(`http://localhost:3005/schedule/${scheduleId}`);
-
                 Swal.fire({
                     title: "Deleted!",
                     text: "Xóa lịch khám thành công",
@@ -89,11 +95,74 @@ function Schedule() {
         }
     };
 
-    const handleEdit = (scheduleId) => {
-        // chuyển hướng đến trang chỉnh sửa
-        
-
+    const handleEdit = async (scheduleId) => {
+        const scheduleToEdit = scheduleList.find(schedule => schedule.appointment_id === scheduleId);
+        console.log(scheduleToEdit); //kiểm tra xem có lấy được dữ liệu không
+    
+        if (scheduleToEdit) {
+            setEditSchedule({
+                appointment_id: scheduleId,
+                appointment_date: scheduleToEdit.appointment_date,
+                reason: scheduleToEdit.reason
+            });
+        }
     };
+    const handleSaveEdit = async () => {
+        if (!editSchedule.appointment_id) {
+            Swal.fire({
+                icon: "error",
+                title: "Lỗi",
+                text: "ID lịch khám không hợp lệ.",
+                confirmButtonText: "Xác nhận",
+                confirmButtonColor: "#86cc51"
+            });
+            return;
+        }
+    
+        try {
+            await axios.put(`http://localhost:3005/schedule/patient-sche/${editSchedule.appointment_id}`, {
+                appointment_date: editSchedule.appointment_date,
+                reason: editSchedule.reason
+            });
+    
+            // Hiển thị thông báo thành công
+            Swal.fire({
+                icon: "success",
+                title: "Thành công",
+                text: "Đã cập nhật lịch khám thành công",
+                confirmButtonColor: "#86cc51"
+            });
+    
+            // Cập nhật lại lịch khám trong state
+            setScheduleList((prev) =>
+                prev.map((schedule) =>
+                    schedule.appointment_id === editSchedule.appointment_id
+                        ? { ...schedule, appointment_date: editSchedule.appointment_date, reason: editSchedule.reason }
+                        : schedule
+                )
+            );
+    
+            //reset form sau khi lưu xong
+            setEditSchedule({
+                appointment_id: '',
+                appointment_date: '',
+                reason: ''
+            });
+            setShowEditForms(false); //ẩn form chỉnh sửa
+        } catch (error) {
+            if (error.response && error.response.status === 400) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: error.response.data.message,
+                    confirmButtonText: "Xác nhận"
+                });
+            } else {
+                console.error("Lỗi khi cập nhật lịch khám:", error);
+            }
+        }
+    };
+
 
     const toggleScheduleDetails = (scheduleId) => {
         if (selectedSchedule === scheduleId) {
@@ -101,6 +170,14 @@ function Schedule() {
         } else {
             setSelectedSchedule(scheduleId);
             setShowScheduleDetails(true);
+        }
+    };
+    const toggleEditForm = (appointmentId) => {
+        if (selectedSchedule === appointmentId) {
+            setShowEditForms(!showEditForm);
+        } else {
+            setSelectedSchedule(appointmentId);
+            setShowEditForms(true);
         }
     };
 
@@ -122,8 +199,6 @@ function Schedule() {
                 return;
             }
             
-            
-
             //nếu không bận thì thêm lịch khám
             const response = await axios.post('http://localhost:3005/schedule', newSchedule);
             Swal.fire({
@@ -132,6 +207,8 @@ function Schedule() {
                 icon: "success",
                 confirmButtonColor: "#86cc51"
               });
+
+              
             //thêm vào list
             setScheduleList(prev => ({
                 ...prev,
@@ -143,7 +220,7 @@ function Schedule() {
                 }
             }));
     
-            // Reset form
+            //reset form
             setNewSchedule({
                 patient_id: patientId,
                 doctor_id: '',
@@ -172,6 +249,10 @@ function Schedule() {
         return new Date(date.getTime() + vnOffset).toISOString().slice(0, 16);
     };
 
+
+    
+
+
     return (
         <div className='schedule dashboard'>
             <Navbar className='header' />
@@ -179,6 +260,7 @@ function Schedule() {
                 <Leftbar className='leftBar' />
                 <div className='content'>
                     <h2>Lịch khám</h2>
+                    {/* form thêm lịch khám */}
                     <div className='scheduleForm'>
                         <select 
                             id="doctor_id" 
@@ -210,6 +292,8 @@ function Schedule() {
                         />
                         <button className='addScheduleButton' onClick={handleAdd}>Thêm lịch khám</button>
                     </div>
+
+                    {/* danh sách lịch khám */}
                     <div className='scheduleList'>
                         {Object.keys(scheduleList).map((scheduleId) => {
                             const schedule = scheduleList[scheduleId];
@@ -225,12 +309,45 @@ function Schedule() {
                                             <p>Bác sĩ: {schedule.doctor_name}</p>
                                             <p>Nguyên nhân: {schedule.reason}</p>
                                             <p>Trạng thái: {schedule.status}</p>
-                                            <Tooltip title="Chỉnh sửa" arrow>
-                                                <button onClick={() => handleEdit(schedule.appointment_id)} className='iconButton'><EditIcon /></button>
-                                            </Tooltip>
-                                            <Tooltip title="Xóa" arrow>
-                                                <button onClick={() => handleDelete(schedule.appointment_id)} className='iconButton'><DeleteIcon /></button>
-                                            </Tooltip>
+
+                                            <div className='actionButtons'>
+                                                <Tooltip title="Chỉnh sửa" arrow>
+                                                    <button 
+                                                        onClick={() => { 
+                                                            handleEdit(schedule.appointment_id); //gọi hàm chỉnh sửa
+                                                            setShowEditForms(true); // Hiện form chỉnh sửa
+                                                        }} 
+                                                        className='iconButton'><EditIcon /></button>
+                                                </Tooltip>
+                                                <Tooltip title="Xóa" arrow>
+                                                    <button onClick={() => handleDelete(schedule.appointment_id)} className='iconButton'><DeleteIcon /></button>
+                                                </Tooltip>
+                                            </div>
+
+                                            {/* Form chỉnh sử khi ấn vào "Chỉnh sửa" */}
+                                            {showEditForm && selectedSchedule === schedule.appointment_id && (
+                                                <div className='editScheduleForm'>
+                                                    <h3>Chỉnh sửa lịch khám</h3>
+                                                    <input
+                                                        type="datetime-local"
+                                                        value={editSchedule.appointment_date}
+                                                        onChange={(e) => setEditSchedule({
+                                                            ...editSchedule,
+                                                            appointment_date: roundMinutesOnly(e.target.value)
+                                                        })}
+                                                        step="600"
+                                                        min={getCurrentDateTimeInVietnam()}
+                                                    />
+                                                    <input
+                                                        type='text'
+                                                        placeholder='Nguyên nhân'
+                                                        value={editSchedule.reason}
+                                                        onChange={(e) => setEditSchedule({ ...editSchedule, reason: e.target.value })}
+                                                    />
+                                                    <button onClick={handleSaveEdit}>Lưu thay đổi</button>
+                                                    <button onClick={() => toggleEditForm(null)}>Hủy</button>
+                                                </div>
+                                            )}
                                         </div>
                                     )}
                                 </div>

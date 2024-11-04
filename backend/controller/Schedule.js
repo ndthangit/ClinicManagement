@@ -82,31 +82,39 @@ const deleteSchedule = async (req, res) => {
     }
 };
 
-// Chỉnh sửa lịch khám
+//chỉnh sửa lịch khám
 const updateSchedule = async (req, res) => {
-    const { appointment_id, patient_id, doctor_id, appointment_date, reason } = req.body;
+    const { appointment_id } = req.params;
+    const { appointment_date, reason } = req.body;
 
-    // Kiểm tra lịch khám có trùng không? (trừ lịch khám hiện tại)
+    if (!appointment_date || !reason) {
+        return res.status(400).json({ message: 'Ngày và lý do không được để trống.' });
+    }
+
+    //kiểm tra lịch khám có trùng không? (trừ lịch khám hiện tại)
     const checkSql = `
         SELECT COUNT(*) as count 
         FROM datait3170.Appointments 
-        WHERE patient_id = ? AND doctor_id = ? AND appointment_date = ? AND appointment_id != ?`;
+        WHERE doctor_id = (SELECT doctor_id FROM datait3170.Appointments WHERE appointment_id = ?)
+        AND appointment_date = ?
+        AND appointment_id != ?`;
     try {
-        const checkResult = await executeQuery(checkSql, [patient_id, doctor_id, appointment_date, appointment_id]);
+        const checkResult = await executeQuery(checkSql, [appointment_id, appointment_date, appointment_id]);
 
         if (checkResult[0].count > 0) {
             return res.status(400).json({ message: 'Lịch khám đã tồn tại cho bác sĩ và ngày giờ này.' });
         }
 
-        // Nếu không trùng, cập nhật lịch khám
+        //nếu không trùng, cập nhật lịch khám
         const sql = `
             UPDATE datait3170.Appointments 
-            SET patient_id = ?, doctor_id = ?, appointment_date = ?, reason = ? 
+            SET appointment_date = ?, reason = ? 
             WHERE appointment_id = ?`;
-        await executeQuery(sql, [patient_id, doctor_id, appointment_date, reason, appointment_id]);
+        await executeQuery(sql, [appointment_date, reason, appointment_id]);
 
-        res.json({ message: 'Đã cập nhật lịch khám thành công' });
+        res.status(200).json({ message: 'Đã cập nhật lịch khám thành công' });
     } catch (error) {
+        console.error("Lỗi khi cập nhật lịch khám:", error);
         res.status(500).json({ error: error.message });
     }
 };

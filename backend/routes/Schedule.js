@@ -18,8 +18,8 @@ router.delete('/:id', async (req, res) => {
 });
   
 // Chỉnh sửa lịch khám
-router.put('/', async (req, res) => {
-    await Schedule.updateSchedule(req, res);
+router.put('/patient-sche/:appointment_id', (req, res) => {
+    Schedule.updateSchedule(req, res);
 });
-  
+
 module.exports = router;
