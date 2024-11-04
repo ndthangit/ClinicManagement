@@ -9,6 +9,8 @@ import {BsFillShieldLockFill} from 'react-icons/bs'
 import {AiOutlineSwapRight} from 'react-icons/ai'
 import {useDispatch} from "react-redux";
 import {loginFailed, loginStarted, loginSuccess} from "../Features/UserSlice";
+import {fetchDoctors} from "../Features/DoctorSlice";
+import {fetchMedicines} from "../Features/MedicineSlice";
 
 const Login = () => {
     const state = {content: null}
@@ -32,6 +34,8 @@ const Login = () => {
             // console.log("rss from backend",res.data.message);
             if( res.data.message === 'connection success'){
                 dispatch(loginSuccess(res.data.account_id));
+                dispatch(fetchDoctors());
+                dispatch(fetchMedicines())
                 navigateTo('/');
             }
             else {

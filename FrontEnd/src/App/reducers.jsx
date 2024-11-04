@@ -4,5 +4,7 @@ import {userSlice} from "../Pages/Features/UserSlice";
 const rootReducer = combineReducers({
     user: userSlice.reducer,
 });
-export default rootReducer;
+
+export default rootReducer
+
 

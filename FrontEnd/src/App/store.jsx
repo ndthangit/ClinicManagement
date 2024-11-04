@@ -1,15 +1,13 @@
 import {configureStore, createActionCreatorInvariantMiddleware, Tuple} from '@reduxjs/toolkit';
 import rootReducer from "./reducers";
-
-const isActionCreator = (action) =>
-    typeof action === 'function' && 'type' in action
-
-const actionCreatorMiddleware = createActionCreatorInvariantMiddleware({
-    isActionCreator,
-})
-
+import doctorReducer from '../Pages/Features/DoctorSlice'
+import medicineReducer from '../Pages/Features/MedicineSlice'
 const store = configureStore({
-    reducer: { user: rootReducer },
+    reducer: {
+        user: rootReducer,
+        doctor: doctorReducer,
+        medicine : medicineReducer,
+    },
     // middleware: () => new Tuple(actionCreatorMiddleware),
 });
 export default store;
