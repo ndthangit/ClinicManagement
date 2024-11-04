@@ -24,7 +24,7 @@ const Login = () => {
         }).then((response) => {
             const user = response.data.find(user => user.email === loginEmail && user.password === loginPassword);
             if (user) {
-                navigateTo('/');
+                navigateTo('/', {state: {userId: user.patient_id}});
             } else {
                 setLoginStatus(`Patient doesn't exist!`);
             }

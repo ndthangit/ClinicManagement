@@ -14,4 +14,9 @@ router.get('/', async (req, res) => {
   await Appointment.getSchedule(req, res);
 });
 
+router.post('/', async (req, res) => {
+  await Appointment.postSchedule(req, res);
+  
+});
+
 module.exports = router

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Navbar from '../components/navbar/Navbar';
 import Leftbar from '../components/appointment/Leftbar';
 import exampleImage from '../Assets/person.png';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import './Appointment.css';
 
 import axios from 'axios';
@@ -15,8 +15,11 @@ function Appointment() {
   const [listOfDoctors, setListOfDoctors] = useState([]);
   const [startIndex, setStartIndex] = useState(0);
   const [numsElements, setNumsElements] = useState(20);
+  const [userInfo, setUserInfo] = useState({});
 
-  let history = useNavigate();
+  const history = useNavigate();
+  const location = useLocation();
+  const data = location.state;
 
   const nextElements = (next) => {
     if  (next == true) {
@@ -35,12 +38,15 @@ function Appointment() {
     axios.get('http://localhost:3005/doctor').then((res) => {
       setListOfDoctors(res.data);
     });
+      axios.get(`http://localhost:3005/users/byId/${data.userId}`).then((res) => {
+        setUserInfo(res.data)
+      });
   }, []);
   return (
     <div className='appointment dashboard'>
-      <Navbar className="header"/>
+      <Navbar className="header" user={userInfo}/>
       <div className='body'>
-        <Leftbar className='leftBar'/>
+        <Leftbar className='leftBar' user={userInfo}/>
         <div className='content'>
           <div className='top'>
             <div className='search'>
@@ -51,7 +57,7 @@ function Appointment() {
           <div className='table'>
             {listOfDoctors.slice(startIndex, startIndex+numsElements).map((value, key) => {
               return (
-                <div key={key} className='element' onClick={() => {history(`/appointment/${value.doctor_id}`)}}>
+                <div key={key} className='element' onClick={() => {history(`/appointment/${value.doctor_id}`, {state:{userId:data.userId}})}}>
                   <div className='header'> 
                     <img src={exampleImage} alt="Example" className="image" ></img>
                   </div>

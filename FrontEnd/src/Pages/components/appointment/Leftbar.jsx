@@ -1,12 +1,14 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import './Leftbar.css';
+import { Button } from '@mui/material';
 
-function Leftbar() {
+function Leftbar(state) {
+  const navigate = useNavigate()
   return (
     <div className='Leftbar'>
-        <Link className='button font' to='/appointment'>Đặt lịch khám</Link>
-        <Link className='button font'>Xem lịch khám</Link>
+        <Button className='button font' onClick={()=> {navigate('/appointment', {state:{userId:state.user.patient_id}})}}>Đặt lịch khám</Button>
+        <Button className='button font'>Xem lịch khám</Button>
     </div>
   )
 }

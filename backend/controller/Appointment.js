@@ -24,7 +24,6 @@ const convertFormat = async(dateTimes) => {
   dateTimes.forEach(dateTime => {
     const date = dateTime.toISOString().split('T')[0];
     const time = dateTime.toISOString().split('T')[1].split('.')[0];
-
     if (!dateMap[date]) {
       dateMap[date] = [];
     }
@@ -98,8 +97,18 @@ const getScheduleForPatientByIdDoctor = async(req, res) => {
   res.json(schedule);
 }
 
+const postSchedule = async (req, res) => {
+  const info = req.body;
+  console.log(info);
+  const sql = `INSERT INTO dataIT3170.appointments (patient_id, doctor_id, appointment_date, reason, status)
+               VALUES (?, ?, ?, ?, 'pending')`;
+  await executeQuery(sql, [info.patient_id, info.doctor_id, info.appointment_date, info.reason])
+  res.json(info);
+}
+
 module.exports = {
   getSchedule: getSchedule,
   getScheduleForDocterByIdDoctor: getScheduleForDocterByIdDoctor,
-  getScheduleForPatientByIdDoctor: getScheduleForPatientByIdDoctor
+  getScheduleForPatientByIdDoctor: getScheduleForPatientByIdDoctor,
+  postSchedule: postSchedule
 }

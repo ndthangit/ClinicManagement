@@ -1,58 +1,145 @@
 
 .doctorInfo .body .content {
   padding: 20px;
+  display: grid;
+  width: 100%;
+  grid-template-columns: 5fr 2fr;
+  grid-template-rows: 1fr;
 }
 
 .doctorInfo .body .content .head {
+  grid-column: 2;
+  grid-row: 1;
   display: flex;
   align-items: center;
+  flex-direction: column;
   padding: 20px;
+  width: 100%;
 }
 
 .doctorInfo .body .content .head .imageDoctor {
   width: 200px;
   height: 200px;
   border-radius: 100%;
+
   border: 1px solid black;
 }
 
 .doctorInfo .body .content .head .infoDetail {
-  height: 40%;
+  width: 90%;
   display: grid;
-  grid-template-columns: 200px 1fr;
+  grid-template-columns: 1fr 1fr;
   grid-template-rows: repeat(3, 1fr);
-  padding-left: 50px;
+  padding-top: 20px;
 }
 
 .doctorInfo .body .content .head .infoDetail .importantInfo {
+  
   font-size: 18px;
-}
-
-.doctorInfo .body .content .table {
-  height: 100%;
-}
-
-.doctorInfo .body .content .table .date {
-  padding: 10px;
   display: flex;
+  justify-content: end;
 }
-.doctorInfo .body .content .table .date .cell {
+
+.doctorInfo .body .content .head .changeDoctor {
+  padding: 20px;
+}
+
+.doctorInfo .body .content .head .changeDoctor .changeButton {
   padding: 10px 20px 10px 20px;
 }
 
-.doctorInfo .body .content .table .tableTime {
+.doctorInfo .body .content .work {
+  padding: 20px;
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.doctorInfo .body .content .work .table {
+  height: 100%;
+}
+
+.doctorInfo .body .content .work .table .date {
+  padding: 10px;
+  display: flex;
+}
+.doctorInfo .body .content .work .table .date .cell {
+  padding: 10px 20px 10px 20px;
+}
+
+.doctorInfo .body .content .work .table .tableTime {
   border: 1px solid gray;
   overflow:scroll;
   height: 30vh;
   padding: 20px;
 }
 
-.doctorInfo .body .content .table .tableTime .time {
+.doctorInfo .body .content .work .table .tableTime .time {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
 
 }
 
-.doctorInfo .body .content .table .tableTime .time .cell {
+.doctorInfo .body .content .work .table .tableTime .time .cell {
   padding: 10px 20px 10px 20px;
+}
+
+.doctorInfo .body .content .work .info {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+
+.doctorInfo .body .content .work .info .timeInfo .detailTime{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr) 3fr;
+  grid-template-rows: repeat(2, 1fr);
+  padding: 20px;
+}
+
+.doctorInfo .body .content .work .info .timeInfo .detailTime .changeTime {
+  grid-column: 3;
+  grid-row: 1 /span 2;
+  margin: 0px 10px 0px 10px;
+}
+
+.doctorInfo .body .content .work .info .patientInfo .detailInfo{
+  padding: 20px;
+  display: grid;
+  width: 60%;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+}
+
+.doctorInfo .body .content .work .info .field {
+  display: flex;
+  padding: 10px 0px 0px 30px;
+}
+
+.doctorInfo .body .content .work .info .infoValue {
+  padding: 10px 0px 0px 00px;
+  font-weight: normal;
+  font-size: 18px;
+}
+
+.doctorInfo .body .content .work .info .optionalInfo {
+  display: flex;
+  flex-direction: column;
+
+}
+
+.doctorInfo .body .content .work .info .optionalInfo .input {
+  margin: 20px;
+  height: 100px;
+  font-size: 16px;
+}
+
+.doctorInfo .body .content .work .footer {
+  display: flex;
+  justify-content: center;
+  padding-top: 50px;
+}
+
+.doctorInfo .body .content .work .footer .submit {
+  padding: 15px 20px 15px 20px;
 }

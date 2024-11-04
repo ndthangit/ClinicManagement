@@ -30,7 +30,7 @@ const router = createBrowserRouter([
     {
         path: '/appointment/:id',
         element: <div><DoctorInfo /></div>
-    }
+    },
 ])
 
 function App() {
