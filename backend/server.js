@@ -41,8 +41,6 @@ server.use('/schedule', scheduleRouter);
 
 
 
-
-
 // catch 404 and forward to error handler
 server.use(function(req, res, next) {
   next(createError(404));
