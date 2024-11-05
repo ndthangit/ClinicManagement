@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Navbar from '../components/navbar/Navbar';
 import Leftbar from '../components/appointment/Leftbar';
 import exampleImage from '../Assets/person.png';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import './Appointment.css';
 
 import axios from 'axios';

@@ -8,6 +8,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Tooltip from '@mui/material/Tooltip';
 import Swal from 'sweetalert2';
+import { modifileSuccess } from '../components/schedule/Alert';
 
 function Schedule() {
     const { patientId } = useParams(); // lấy id từ URL
@@ -39,6 +40,7 @@ function Schedule() {
             try {
                 const response = await axios.get(`http://localhost:3005/schedule/${patientId}`);
                 setScheduleList(response.data);
+                console.log(response.data);
             } catch (error) {
                 console.error('Lỗi khi lấy dữ liệu lịch khám:', error);
             }
@@ -126,12 +128,7 @@ function Schedule() {
             });
     
             // Hiển thị thông báo thành công
-            Swal.fire({
-                icon: "success",
-                title: "Thành công",
-                text: "Đã cập nhật lịch khám thành công",
-                confirmButtonColor: "#86cc51"
-            });
+            modifileSuccess();
     
             // Cập nhật lại lịch khám trong state
             setScheduleList((prev) =>
@@ -261,7 +258,7 @@ function Schedule() {
                 <div className='content'>
                     <h2>Lịch khám</h2>
                     {/* form thêm lịch khám */}
-                    <div className='scheduleForm'>
+                    {/* <div className='scheduleForm'>
                         <select 
                             id="doctor_id" 
                             value={newSchedule.doctor_id} 
@@ -291,7 +288,7 @@ function Schedule() {
                             onChange={(e) => setNewSchedule({ ...newSchedule, reason: e.target.value })}
                         />
                         <button className='addScheduleButton' onClick={handleAdd}>Thêm lịch khám</button>
-                    </div>
+                    </div> */}
 
                     {/* danh sách lịch khám */}
                     <div className='scheduleList'>

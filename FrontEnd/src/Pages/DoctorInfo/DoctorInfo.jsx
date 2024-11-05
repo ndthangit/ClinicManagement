@@ -6,7 +6,7 @@ import Leftbar from '../components/appointment/Leftbar';
 import exampleImage from '../Assets/person.png';
 import './DoctorInfo.css'
 import { useSelector } from 'react-redux';
-import { Button } from '@mui/material';
+import { modifileSuccess } from '../components/schedule/Alert';
 
 
 function DoctorInfo() {
@@ -57,8 +57,8 @@ function DoctorInfo() {
       appointment_date: date,
       reason: reason,
     });
-    alert('Đặt lịch thành công!');
-    navigate('/');
+    modifileSuccess();
+    navigate(`/schedule/${patient_id}`);
   }
 
   const chooseTime = () => {
