@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import Navbar from '../Components/navbar/Navbar';
-import Leftbar from '../Components/Appointment/Leftbar';
+import Navbar from '../components/navbar/Navbar';
+import Leftbar from '../components/appointment/Leftbar';
 import exampleImage from '../Assets/person.png';
 import { useNavigate, useLocation } from 'react-router-dom';
 import './Appointment.css';
@@ -13,11 +13,8 @@ function Appointment() {
   const [listOfDoctors, setListOfDoctors] = useState([]);
   const [startIndex, setStartIndex] = useState(0);
   const [numsElements, setNumsElements] = useState(20);
-  const [userInfo, setUserInfo] = useState({});
 
   const history = useNavigate();
-  const location = useLocation();
-  const data = location.state;
 
   const nextElements = (next) => {
     if  (next === true) {
@@ -35,16 +32,14 @@ function Appointment() {
   useEffect(()=> {
     axios.get('http://localhost:3005/doctor').then((res) => {
       setListOfDoctors(res.data);
+      console.log(res.data);
     });
-      axios.get(`http://localhost:3005/users/byId/${data.userId}`).then((res) => {
-        setUserInfo(res.data)
-      });
   }, []);
   return (
     <div className='appointment dashboard'>
-      <Navbar className="header" user={userInfo}/>
+      <Navbar className="header"/>
       <div className='body'>
-        <Leftbar className='leftBar' user={userInfo}/>
+        <Leftbar className='leftBar'/>
         <div className='content'>
           <div className='top'>
             <div className='search'>
@@ -55,13 +50,14 @@ function Appointment() {
           <div className='table'>
             {listOfDoctors.slice(startIndex, startIndex+numsElements).map((value, key) => {
               return (
-                <div key={key} className='element' onClick={() => {history(`/appointment/${value.doctor_id}`, {state:{userId:data.userId}})}}>
+                <div key={key} className='element' onClick={() => {history(`/appointment/${value.doctor_id}`)}}>
                   <div className='header'> 
                     <img src={exampleImage} alt="Example" className="image" ></img>
                   </div>
                   <div className='body'>  
                     <p>{value.doctor_name}</p>
-                    <p>{value.specialty}</p>
+                    <p className='department'>{value.department_name}</p>
+                    <p className='type'>{value.type_name}</p>
                   </div>
                   <div className='footer'>Đặt lịch</div>
                 </div>

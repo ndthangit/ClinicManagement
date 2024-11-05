@@ -3,21 +3,21 @@ import Axios from 'axios'
 
 export const fetchAccountID = createAsyncThunk(
     'users/fetchByAccountID',
-    async ( AccountID) => {
-        const response = await Axios.get(`http://localhost:3005/users/account`)
+    async (AccountID) => {
+        const response = await Axios.get(`http://localhost:3005/users/account/${AccountID}`)
         return response.data
     },
 )
 
 const initialState = {
-    user: null,
+    user: JSON.parse(localStorage.getItem('user')) || null,
     isLoading: false,
     isError: false,
 };
 
 export const userSlice = createSlice({
     name: "user",
-    initialState,
+    initialState: initialState, // phần này cần kiểm tra
     reducers: {
         loginStarted: (state) => {
             state.isLoading = true;
@@ -26,6 +26,7 @@ export const userSlice = createSlice({
             state.isLoading = false;
             state.user = action.payload;
             state.isError = false;
+            localStorage.setItem('user', JSON.stringify(action.payload)); // Lưu vào localStorage
         },
         loginFailed: (state) => {
             state.isLoading = false;
@@ -33,6 +34,7 @@ export const userSlice = createSlice({
         },
         logout: (state) => {
             state.user = null;
+            localStorage.removeItem('user');
         },
 
 

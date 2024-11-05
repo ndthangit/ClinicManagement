@@ -5,12 +5,14 @@ import {
     useNavigate,
 } from 'react-router-dom';
 import {useSelector,useDispatch} from "react-redux";
+import { Button } from '@mui/material';
 import {logout} from "../../Features/UserSlice";
 
 
 function Navbar() {
 
     const {user} = useSelector((state) => state.user.user);
+    console.log(user);
     const navigateTo = useNavigate();
     const dispatch = useDispatch();
 
@@ -34,13 +36,13 @@ function Navbar() {
             <div className="right">
                 {user ? (
                     // Show "Logout" button when logged in
-                    <button className="button font" onClick={handleLogout} >Logout</button>
+                    <Button className="button font" onClick={handleLogout} >Logout</Button>
 
                 ) : (
                     // Show "Login" and "Signup" links when not logged in
                     <>
                         <Link className="button font" to={'/signup'}>Signup</Link>
-                        <button className="button font" onClick={handleLogin}>Login</button>
+                        <Button className="button font" onClick={handleLogin}>Login</Button>
                     </>
                 )}
 

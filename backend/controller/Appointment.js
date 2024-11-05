@@ -22,6 +22,7 @@ const getSchedule = async(req, res) => {
 const convertFormat = async(dateTimes) => {
   const dateMap = {};
   dateTimes.forEach(dateTime => {
+    dateTime.setMinutes(dateTime.getMinutes() + 7 * 60);
     const date = dateTime.toISOString().split('T')[0];
     const time = dateTime.toISOString().split('T')[1].split('.')[0];
     if (!dateMap[date]) {

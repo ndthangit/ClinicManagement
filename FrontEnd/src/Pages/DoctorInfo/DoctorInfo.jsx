@@ -1,42 +1,41 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
-import { useParams, useNavigate, useLocation } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import Navbar from '../components/navbar/Navbar';
 import Leftbar from '../components/appointment/Leftbar';
 import exampleImage from '../Assets/person.png';
 import './DoctorInfo.css'
+import { useSelector } from 'react-redux';
 import { Button } from '@mui/material';
 
 
 function DoctorInfo() {
   let {id} = useParams();
-
+  const {user} = useSelector((state) => state.user.user);
   const navigate = useNavigate();
-  const location = useLocation();
-  const data = location.state;
 
   const [doctorInfo, setDoctorInfo] = useState({});
   const [daySelected, setDaySelected] = useState(0);
   const [indexDay, setIndexDay] = useState(0);
   const [schedule, setSchedule] = useState({});
+  const [patientInfo, setPatientInfo] = useState({});
   const [dayShow, setDayShow] = useState(10);
   const [reason, setReason] = useState('');
   const [isChooseTime, setIsChooseTime] = useState(false);
   const [timeSelected, setTimeSelected] = useState('');
-  const [patientInfo, setPatientInfo] = useState({});
 
 
   // lấy thông tin từ phần chỉnh sửa lịch
 
   const nextIndex = (next) => {
     if (next === true) {
-      if (indexDay + 10 < Object.keys(schedule).length) {
-        setIndexDay(indexDay + 10);
+      if (indexDay + dayShow < Object.keys(schedule).length) {
+        setIndexDay(indexDay + dayShow);
       }
     }
     else {
-      if (indexDay - 10 >= 0) {
-        setIndexDay(indexDay - 10);
+      if (indexDay - dayShow >= 0) {
+        setIndexDay(indexDay - dayShow);
       }
     }
   };
@@ -46,7 +45,7 @@ function DoctorInfo() {
   }
 
   const checkCondition = () => {
-    if (data.userId === undefined) {
+    if (user === undefined) {
       navigate('/login');
     }
   }
@@ -59,6 +58,7 @@ function DoctorInfo() {
       reason: reason,
     });
     alert('Đặt lịch thành công!');
+    navigate('/');
   }
 
   const chooseTime = () => {
@@ -75,7 +75,6 @@ function DoctorInfo() {
 
               <button className='changeTime' onClick={() => {setIsChooseTime(false)}}>Đặt lại giời gian</button>
             </div>
-            
           </div>
           <div className='patientInfo'>
             <p>Thông tin bệnh nhân: </p>
@@ -93,7 +92,7 @@ function DoctorInfo() {
             <textarea className='input' placeholder='Triệu chứng, thuốc đang dùng, tiền sử' onChange={(event)=>{setReason(event.target.value)}}></textarea>
           </div>
           <div className='footer'>
-            <button className='submit' onClick={() => {submit(data.userId, id, Object.keys(schedule).at(daySelected)+' '+timeSelected, reason)}}>Đặt lịch</button>
+            <button className='submit' onClick={() => {submit(patientInfo.patient_id, id, Object.keys(schedule).at(daySelected)+' '+timeSelected, reason)}}>Đặt lịch</button>
           </div>
         </div>
       )
@@ -125,15 +124,17 @@ function DoctorInfo() {
     }
   }
   useEffect( () => {
-     axios.get(`http://localhost:3005/users/doctor/${id}`).then((respone) => {
+     axios.get(`http://localhost:3005/doctor/${id}`).then((respone) => {
       setDoctorInfo(respone.data);
     });
+
+    console.log(doctorInfo);
 
     axios.get(`http://localhost:3005/appointment/schedule/idDoctor/${id}`).then((respone) => {
       setSchedule(respone.data);
     });
-    
-    axios.get(`http://localhost:3005/users/byId/${data.userId}`).then((respone) => {
+
+    axios.get(`http://localhost:3005/patient/byCCCD/${user}`).then((respone) => {
       setPatientInfo(respone.data);
     });
 
@@ -147,18 +148,24 @@ function DoctorInfo() {
           <div className='head'>
             <img src={exampleImage} className='imageDoctor' ></img>
             <div className='infoDetail'>
-              <p>Bác sĩ</p>
-              <p className='importantInfo'>{doctorInfo.doctor_name}</p>
-              <p>Chuyên khoa</p>
-              <p className='importantInfo'>{doctorInfo.specialty}</p>
-              <p>Địa chỉ</p>
-              <p className='importantInfo'>{doctorInfo.address}</p>
+              <div className='field'>
+                <p>Bác sĩ:</p>
+                <p className='importantInfo'>{doctorInfo.doctor_name}</p>
+              </div>
+              <div className='field'>
+                <p>Khoa:</p>
+                <p className='importantInfo'>{doctorInfo.department_name}</p>
+              </div>
+              <div className='field'>
+                <p>Loại:</p>
+                <p className='importantInfo'>{doctorInfo.type_name}</p>
+              </div>
             </div>
             <div className='changeDoctor'>
-              <button className='changeButton' onClick={() => {navigate('/appointment', {state:{userId:data.userId}})}}>Đổi bác sĩ</button>
+              <button className='changeButton' onClick={() => {navigate('/appointment')}}>Đổi bác sĩ</button>
             </div>
           </div>
-          <div class='work'>
+          <div className='work'>
             {
               chooseTime()
             }

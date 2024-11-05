@@ -45,6 +45,16 @@
   border-bottom: 1px solid black;
 }
 
+.appointment .body .table .element .body .department {
+  font-size: 14px;
+  padding: 2px;
+  padding-top: 5px;
+}
+
+.appointment .body .table .element .body .type {
+  font-size: 14px;
+}
+
 .appointment .body .table .element .footer {
   display: flex;
   flex-direction: column;

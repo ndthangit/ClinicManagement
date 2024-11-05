@@ -14,7 +14,7 @@ import {fetchMedicines} from "../Features/MedicineSlice";
 
 const Login = () => {
     const state = {content: null}
-    const [accountID, setAccountID] = useState('');
+    const [username, setUsername] = useState('');
     const [loginPassword, setLoginPassword] = useState('');
     const navigateTo = useNavigate();
     const [loginStatus, setLoginStatus] = useState('');
@@ -26,16 +26,17 @@ const Login = () => {
         e.preventDefault();
 
         const accountInfo ={
-            account_id: accountID,
+            user_name: username,
             password: loginPassword
-        }
+        };
+        console.log(accountInfo);
         dispatch(loginStarted());
         Axios.post('http://localhost:3005/users/login', accountInfo).then((res)=>{
-            // console.log("rss from backend",res.data.message);
+            console.log("rss from backend",res.data.message);
             if( res.data.message === 'connection success'){
-                dispatch(loginSuccess(res.data.account_id));
+                dispatch(loginSuccess(res.data.user_name));
                 dispatch(fetchDoctors());
-                dispatch(fetchMedicines())
+                dispatch(fetchMedicines());
                 navigateTo('/');
             }
             else {
@@ -60,7 +61,7 @@ const Login = () => {
     }, [loginStatus]);
 
     const onSubmit = () => {
-        setAccountID('')
+        setUsername('')
         setLoginPassword('')
     }
 
@@ -90,7 +91,7 @@ const Login = () => {
                         <h3>Welcome Back!</h3>
                     </div>
 
-                    <form action="" className="form grid" onSubmit={onSubmit}>
+                    <form action="" className="form grid" onSubmit={() => {onSubmit()}}>
                         <span className={statusHolder}>{loginStatus}</span>
 
                         <div className="inputDiv">
@@ -98,7 +99,7 @@ const Login = () => {
                             <div className="input flex">
                                 <FaUserShield className="icon"/>
                                 <input type="text" id='username' placeholder='Enter CCCD'
-                                       onChange={(event) => setAccountID(event.target.value)}/>
+                                       onChange={(event) => setUsername(event.target.value)}/>
                             </div>
                         </div>
 
@@ -111,7 +112,7 @@ const Login = () => {
                             </div>
                         </div>
 
-                        <button type='submit' className='btn flex' onClick={loginUser}>
+                        <button type='submit' className='btn flex' onClick={(event) => {loginUser(event)}}>
                             <span>Login</span>
                             <AiOutlineSwapRight className="icon"/>
                         </button>

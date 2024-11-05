@@ -27,15 +27,18 @@
 
 .doctorInfo .body .content .head .infoDetail {
   width: 90%;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: repeat(3, 1fr);
+  display: flex;
   padding-top: 20px;
+  flex-direction: column;
+}
+
+.doctorInfo .body .content .head .infoDetail .field {
+  display:flex;
+  justify-content: space-between;
+  padding-bottom: 10px;
 }
 
 .doctorInfo .body .content .head .infoDetail .importantInfo {
-  
-  font-size: 18px;
   display: flex;
   justify-content: end;
 }

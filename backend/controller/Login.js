@@ -2,10 +2,8 @@ const { executeQueryID } = require('./Home');
 const connection = require('../DB/database');
 
 let loginUser = async (req, res) => {
-    console.log(req.body);
-    const sql = `SELECT account_id,password FROM dataIT3170.account where account_id = ? and password = ?`;
-    const values = [req.body.account_id, req.body.password];
-    console.log(values);
+    const sql = `SELECT user_name,password FROM dataIT3170.patient_account where user_name = ? and password = ?`;
+    const values = [req.body.user_name, req.body.password];
     try {
         connection.query(sql,values, (err, results) => {
             if (err) {
@@ -14,7 +12,7 @@ let loginUser = async (req, res) => {
             } else if (results.length === 0) {
                 return res.status(404).json({message: 'connection failed'});
             } else {
-                return res.status(200).json({message: 'connection success',account_id: req.body.account_id});
+                return res.status(200).json({message: 'connection success',user_name: req.body.user_name});
             }
         });
     }
@@ -24,9 +22,9 @@ let loginUser = async (req, res) => {
 };
 
 let getAccountInfo = async (req, res) => {
-    const account_id = req.params.id;
-    const sql = `SELECT * FROM dataIT3170.account WHERE account_id = ? `;
-    const result = await executeQueryID(sql, [account_id]);
+    const username = req.params.id;
+    const sql = `SELECT * FROM dataIT3170.patient_account WHERE user_name = ? `;
+    const result = await executeQueryID(sql, [username]);
     res.json(result[0]);
 }
 
