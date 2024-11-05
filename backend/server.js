@@ -12,6 +12,7 @@ const doctorRouter = require('./routes/Doctor');
 const appointmentRouter = require('./routes/Appointment'); 
 const userRouter = require('./routes/User');
 const patientRouter = require('./routes/Patient');
+const scheduleRouter = require('./routes/Schedule');
 
 
 var server = express();
@@ -36,6 +37,7 @@ server.use('/doctor', doctorRouter);
 server.use('/appointment', appointmentRouter);
 server.use('/users', userRouter);
 server.use('/patient', patientRouter);
+server.use('/schedule', scheduleRouter);
 
 
 

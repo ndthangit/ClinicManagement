@@ -27,7 +27,7 @@ function executeQueryID(sql, params = []) {
 
 const getDataFromDB = async function(req, res) {
     const {table} = req.params;
-    const sql = `SELECT * FROM dataIT3170.${table}`;
+    const sql = `SELECT * FROM datait3170.${table}`;
     try {
         const data = await executeQuery(sql, res);
         res.send(data);

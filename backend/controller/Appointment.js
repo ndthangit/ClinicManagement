@@ -14,7 +14,7 @@ function executeQuery(sql, params = []) {
 
 const getSchedule = async(req, res) => {
   const doctorId = req.params.id;
-  const sql = 'SELECT * FROM dataIT3170.Appointments';
+  const sql = 'SELECT * FROM datait3170.Appointments';
   const result = await executeQuery(sql);
   res.json(result);
 }
@@ -42,7 +42,7 @@ const getScheduleByIdDoctor = async (req, res) => {
     day: '2-digit',
   }).format(new Date());
   const time = formattedTime.slice(6, 10) + '-' + formattedTime.slice(3, 5) + '-' + formattedTime.slice(0, 2)+ 'T00:00:00.000Z';
-  const sql = 'SELECT * FROM dataIT3170.Appointments WHERE doctor_id = ? AND appointment_date >= ?';
+  const sql = 'SELECT * FROM datait3170.Appointments WHERE doctor_id = ? AND appointment_date >= ?';
   const info = await executeQuery(sql, [doctorId, time]);
   const dateTime = info.map(appointment => appointment.appointment_date);
   const result = await convertFormat(dateTime);

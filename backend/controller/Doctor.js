@@ -25,8 +25,25 @@ let getDoctorById = async(req, res) => {
   res.json(result[0]);
 };
 
+let checkDoctorAvailability = async (req, res) => {
+  const { doctor_id, appointment_date } = req.body;
+
+  const sql = `
+      SELECT COUNT(*) as count 
+      FROM datait3170.Appointments 
+      WHERE doctor_id = ? AND appointment_date = ?`;
+
+  try {
+      const result = await executeQuery(sql, [doctor_id, appointment_date]);
+      res.json({ available: result[0].count === 0 });
+  } catch (error) {
+      res.status(500).json({ error: error.message });
+  }
+};
+
 module.exports = {
   getDoctors: getDoctors,
-  getDoctorById: getDoctorById
+  getDoctorById: getDoctorById,
+  checkDoctorAvailability: checkDoctorAvailability
 }
 

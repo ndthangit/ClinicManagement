@@ -12,7 +12,6 @@ import {logout} from "../../Features/UserSlice";
 function Navbar() {
 
     const {user} = useSelector((state) => state.user.user);
-    console.log(user);
     const navigateTo = useNavigate();
     const dispatch = useDispatch();
 

@@ -1,0 +1,158 @@
+/* Schedule.css */
+
+.body {
+    display: flex;
+    flex: 1;
+}
+
+.content {
+    flex: 1;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.schedule h2 {
+    background-color:  #86cc51; 
+    color: white; 
+    border-radius: 5px; 
+    padding: 10px 10px; 
+    display: inline-block; 
+    font-size: 17px;
+    margin: 0; 
+    margin-bottom: 15px; 
+    font-weight: normal;
+    text-align: center;
+}
+
+.scheduleForm input, 
+#doctor_id {
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc; 
+    border-radius: 4px;
+    font-size: 16px; 
+    width: 100%; 
+    box-sizing: border-box; 
+    background-color: white;
+}
+
+#doctor_id {
+    appearance: none; 
+    background-repeat: no-repeat; 
+    background-position: right 10px center; 
+}
+
+.scheduleForm input:focus, 
+#doctor_id:focus {
+    border-color: #86cc51; 
+    outline: none; 
+    box-shadow: 0 0 5px rgba(134, 204, 81, 0.5); 
+}
+
+.addScheduleButton {
+    padding: 10px 20px;
+    margin-bottom: 20px;
+    background-color:  #86cc51; 
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.addScheduleButton:hover {
+    background-color: #78b841;
+}
+.scheduleList {
+    max-height: 400px; 
+    overflow-y: auto; 
+}
+
+.scheduleItem {
+    border: 1px solid #ddd; 
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 4px;
+    background-color: #fafafa; 
+    transition: background-color 0.3s; 
+}
+
+.scheduleItem:hover {
+    background-color: #f0f0f0; 
+    cursor: pointer;
+}
+
+.scheduleDetails {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #e9ecef; 
+    border-radius: 4px;
+}
+
+.scheduleDetails p {
+    margin: 5px 0; 
+}
+
+
+.iconButton {
+    background: none; 
+    border: none; 
+    cursor: pointer; 
+    margin: 0 5px; 
+    color: #86cc51; 
+    font-size: 20px; 
+    transition: background 0.3s, color 0.3s; 
+    border-radius: 50%; 
+    padding: 9px; 
+    width: 40px;
+    height: 40px;
+    justify-content: center;
+    align-items: center;
+}
+
+.iconButton:hover {
+    background: rgba(134, 204, 81, 0.2); 
+    color: #5a9e3a;
+}
+
+.editScheduleForm {
+    margin-top: 10px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.editScheduleForm h3 {
+    margin: 0 0 10px 0;
+    font-size: 18px;
+    color: #333;
+}
+
+.editScheduleForm input[type="datetime-local"],
+.editScheduleForm input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.editScheduleForm button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.editScheduleForm button:hover {
+    background-color: #45a049;
+}
