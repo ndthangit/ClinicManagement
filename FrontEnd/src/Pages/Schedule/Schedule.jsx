@@ -28,7 +28,8 @@ function Schedule() {
         appointment_date: '',
         reason: ''
     });
-    
+    const [selectDate, setSelectDate] = useState('');
+    const [selectTime, setSelectTime] = useState('');
     const [doctors, setDoctors] = useState([]); //danh sách bác sĩ
 
     
@@ -91,6 +92,7 @@ function Schedule() {
                 const updatedScheduleList = { ...scheduleList };
                 delete updatedScheduleList[scheduleId];
                 setScheduleList(updatedScheduleList);
+                // window.location.reload();
             } catch (error) {
                 console.error('Lỗi khi xóa lịch khám:', error);
             }
@@ -102,11 +104,14 @@ function Schedule() {
         console.log(scheduleToEdit); //kiểm tra xem có lấy được dữ liệu không
     
         if (scheduleToEdit) {
+            const [datePart, timePart] = scheduleToEdit.appointment_date.split('T');
             setEditSchedule({
                 appointment_id: scheduleId,
                 appointment_date: scheduleToEdit.appointment_date,
                 reason: scheduleToEdit.reason
             });
+            setSelectDate(datePart);
+            setSelectTime(timePart ? timePart.slice(0, 5) : '');
         }
     };
     const handleSaveEdit = async () => {
@@ -120,10 +125,22 @@ function Schedule() {
             });
             return;
         }
+
+        if (!selectDate || !selectTime) {
+            Swal.fire({
+                icon: "error",
+                title: "Lỗi",
+                text: "Vui lòng chọn cả ngày và giờ.",
+                confirmButtonText: "Xác nhận"
+            });
+            return;
+        }
+
+        const combinedDateTime = `${selectDate}T${selectTime}:00`;
     
         try {
             await axios.put(`http://localhost:3005/schedule/patient-sche/${editSchedule.appointment_id}`, {
-                appointment_date: editSchedule.appointment_date,
+                appointment_date: combinedDateTime,
                 reason: editSchedule.reason
             });
     
@@ -134,7 +151,7 @@ function Schedule() {
             setScheduleList((prev) =>
                 prev.map((schedule) =>
                     schedule.appointment_id === editSchedule.appointment_id
-                        ? { ...schedule, appointment_date: editSchedule.appointment_date, reason: editSchedule.reason }
+                        ? { ...schedule, appointment_date: combinedDateTime, reason: editSchedule.reason }
                         : schedule
                 )
             );
@@ -146,6 +163,7 @@ function Schedule() {
                 reason: ''
             });
             setShowEditForms(false); //ẩn form chỉnh sửa
+            // window.location.reload();
         } catch (error) {
             if (error.response && error.response.status === 400) {
                 Swal.fire({
@@ -246,9 +264,22 @@ function Schedule() {
         return new Date(date.getTime() + vnOffset).toISOString().slice(0, 16);
     };
 
+    const generalTimeOptions = () => {
+        const times = []; 
+        let startHour = 17;
+        const endHour = 20;
+        const interval = 10;
 
-    
-
+        while (startHour < endHour) {
+            for (let minute = 0; minute < 60; minute +=interval) {
+                const hourString = startHour.toString().padStart(2, '0');
+                const minuteString = minute.toString().padStart(2, '0');
+                times.push(`${hourString}:${minuteString}`);
+            }
+            startHour++
+        }
+        return times;
+    };
 
     return (
         <div className='schedule dashboard'>
@@ -326,15 +357,23 @@ function Schedule() {
                                                 <div className='editScheduleForm'>
                                                     <h3>Chỉnh sửa lịch khám</h3>
                                                     <input
-                                                        type="datetime-local"
-                                                        value={editSchedule.appointment_date}
-                                                        onChange={(e) => setEditSchedule({
-                                                            ...editSchedule,
-                                                            appointment_date: roundMinutesOnly(e.target.value)
-                                                        })}
-                                                        step="600"
-                                                        min={getCurrentDateTimeInVietnam()}
+                                                        type="date"
+                                                        value={selectDate}
+                                                        onChange={(e) => setSelectDate(e.target.value)}
+                                                        min={new Date().toISOString().split('T')[0]}
+                                                        max={new Date(Date.now() + 60*24*60*60*1000).toISOString().split('T')[0]}
                                                     />
+                                                    <select 
+                                                        value={selectTime}
+                                                        onChange={(e) => setSelectTime(e.target.value)} 
+                                                    >
+                                                        <option
+                                                            value="">Chọn giờ</option>
+                                                            {generalTimeOptions().map((time) => (
+                                                                <option key={time} value={time}>{time}</option>
+                                                            ))}
+                                                    </select>
+
                                                     <input
                                                         type='text'
                                                         placeholder='Nguyên nhân'
