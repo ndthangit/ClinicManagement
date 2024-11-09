@@ -5,6 +5,7 @@ import Signup from "./Pages/Signup/Signup";
 import Dashboard from './Pages/Dashboard/Dashboard';
 import Appointment from './Pages/Appointment/Appointment';
 import DoctorInfo from './Pages/DoctorInfo/DoctorInfo';
+import MedicalHistory from './Pages/MedicalHistory/MedicalHistory';
 import {
     createBrowserRouter,
     RouterProvider
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
     {
         path: '/appointment/:id',
         element: <div><DoctorInfo /></div>
+    },
+    {
+        path: '/medicalhistory',
+        element: <div><MedicalHistory /></div>
     }
 ])
 

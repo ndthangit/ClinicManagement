@@ -11,6 +11,7 @@ var logger = require('morgan');
 const doctorRouter = require('./routes/Doctor');
 const appointmentRouter = require('./routes/Appointment'); 
 const userRouter = require('./routes/User');
+const medicalExam = require('./routes/MedExamination');
 
 
 var server = express();
@@ -34,6 +35,9 @@ server.use(express.static(path.join(__dirname, 'public')));
 server.use('/doctor', doctorRouter);
 server.use('/appointment', appointmentRouter);
 server.use('/users', userRouter);
+server.use('/medExam', medicalExam);
+
+
 
 
 
