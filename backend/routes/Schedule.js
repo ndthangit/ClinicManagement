@@ -22,4 +22,9 @@ router.put('/patient-sche/:appointment_id', (req, res) => {
     Schedule.updateSchedule(req, res);
 });
 
+router.get('/doctor/:doctorId/busy-times', async (req, res) => {
+    const date = req.query.date;
+    await Schedule.getAvailableTimeSlotsByDoctor(req, res, date);
+});
+
 module.exports = router;

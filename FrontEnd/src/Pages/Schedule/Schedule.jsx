@@ -30,6 +30,8 @@ function Schedule() {
     });
     const [selectDate, setSelectDate] = useState('');
     const [selectTime, setSelectTime] = useState('');
+    const [selectTimeOptions, setSelectTimeOptions] = useState([]);
+    const [doctorId, setDoctorId] = useState(null);
     const [doctors, setDoctors] = useState([]); //danh sách bác sĩ
 
     
@@ -63,6 +65,33 @@ function Schedule() {
 
         fetchDoctors();
     }, []);
+
+    useEffect(() => {
+        if (selectDate && doctorId) {
+            axios.get(`http://localhost:3005/schedule/doctor/${doctorId}/busy-times?date=${selectDate}`)
+                .then(response => {
+                    const busyTimes = response.data.busyTimes;
+                    console.log(busyTimes);
+                    setSelectTimeOptions(generalTimeOptions(busyTimes));
+                    console.log(selectTimeOptions);
+                })
+                .catch(error => {
+                    console.error("Lỗi lấy giờ bận", error);
+                });
+        }
+    }, [selectDate, doctorId]); 
+
+    useEffect(() => {
+        if (selectedSchedule && Array.isArray(scheduleList)) {
+            const selectedScheduleData = scheduleList.find(item => item.appointment_id === selectedSchedule);
+            
+            if (selectedScheduleData && selectedScheduleData.appointment_date) {
+                const date = selectedScheduleData.appointment_date;
+                setSelectDate(date.slice(0, 10));
+            }
+        }
+    }, [selectedSchedule, scheduleList]);
+    
 
     //xóa lịch khám
     const handleDelete = async (scheduleId) => {
@@ -248,23 +277,12 @@ function Schedule() {
     };
 
     const getCurrentDateTimeInVietnam = () => {
-        const now = new Date();
-        const vnOffset = 7 * 60 * 60 * 1000;
-        return new Date(now.getTime() + vnOffset).toISOString().slice(0, 16);
     };
     
     const roundMinutesOnly = (datetime) => {
-        const date = new Date(datetime);
-        const minutes = date.getMinutes();
-        const roundedMinutes = Math.round(minutes / 10) * 10;
-        date.setMinutes(roundedMinutes === 60 ? 0 : roundedMinutes);
-        if (roundedMinutes === 60) date.setHours(date.getHours() + 1);
-        
-        const vnOffset = 7 * 60 * 60 * 1000;
-        return new Date(date.getTime() + vnOffset).toISOString().slice(0, 16);
     };
 
-    const generalTimeOptions = () => {
+    const generalTimeOptions = (busyTimes = []) => {
         const times = []; 
         let startHour = 17;
         const endHour = 20;
@@ -274,9 +292,13 @@ function Schedule() {
             for (let minute = 0; minute < 60; minute +=interval) {
                 const hourString = startHour.toString().padStart(2, '0');
                 const minuteString = minute.toString().padStart(2, '0');
-                times.push(`${hourString}:${minuteString}`);
+                const time = `${hourString}:${minuteString}`;
+                
+                if (!busyTimes.includes(time)) {
+                    times.push(time);
+                }
             }
-            startHour++
+            startHour++;
         }
         return times;
     };
@@ -344,6 +366,7 @@ function Schedule() {
                                                         onClick={() => { 
                                                             handleEdit(schedule.appointment_id); //gọi hàm chỉnh sửa
                                                             setShowEditForms(true); // Hiện form chỉnh sửa
+                                                            setDoctorId(schedule.doctor_id);
                                                         }} 
                                                         className='iconButton'><EditIcon /></button>
                                                 </Tooltip>
@@ -363,15 +386,20 @@ function Schedule() {
                                                         min={new Date().toISOString().split('T')[0]}
                                                         max={new Date(Date.now() + 60*24*60*60*1000).toISOString().split('T')[0]}
                                                     />
-                                                    <select 
+                                                    <select
                                                         value={selectTime}
-                                                        onChange={(e) => setSelectTime(e.target.value)} 
+                                                        onChange={(e) => setSelectTime(e.target.value)}
                                                     >
-                                                        <option
-                                                            value="">Chọn giờ</option>
-                                                            {generalTimeOptions().map((time) => (
-                                                                <option key={time} value={time}>{time}</option>
-                                                            ))}
+                                                        <option value="">Chọn giờ</option>
+                                                        {selectTimeOptions.length > 0 ? (
+                                                            selectTimeOptions.map((time) => (
+                                                                <option key={time} value={time}>
+                                                                    {time}
+                                                                </option>
+                                                            ))
+                                                        ) : (
+                                                            <option disabled>Không có giờ rảnh</option>
+                                                        )}
                                                     </select>
 
                                                     <input

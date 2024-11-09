@@ -16,7 +16,7 @@ const getScheduleByPatientId = async (req, res) => {
     const patientId = req.params.patientId;  // Sử dụng patientId để đồng nhất với frontend
     const sql = `
         SELECT a.appointment_id, a.reason, a.appointment_date, a.status,
-               d.doctor_name AS doctor_name, p.patient_name AS patient_name
+               a.doctor_id, d.doctor_name AS doctor_name, p.patient_name AS patient_name
         FROM datait3170.Appointments AS a
         JOIN datait3170.Doctors AS d ON a.doctor_id = d.doctor_id
         JOIN datait3170.Patients AS p ON a.patient_id = p.patient_id
@@ -84,7 +84,7 @@ const deleteSchedule = async (req, res) => {
         if (appointment.status === 'pending') {
             await executeQuery(deleteSql, [appointmentId]);
             res.json({ message: 'Đã xóa lịch khám thành công' });
-        } else if (appointment.status === 'comfirmed') {
+        } else if (appointment.status === 'confirmed') {
             await executeQuery(updateSql, ['canceled', appointmentId]);
             res.json({ message: 'Đã hủy lịch khám thành công' });
         } else {
@@ -132,9 +132,36 @@ const updateSchedule = async (req, res) => {
     }
 };
 
+const getAvailableTimeSlotsByDoctor = async (req, res) => {
+    const doctorId = req.params.doctorId;
+    const selectedDate = req.query.date;
+
+    const sql = `
+        SELECT a.appointment_date 
+        FROM datait3170.Appointments AS a
+        WHERE a.doctor_id = ? AND a.status NOT IN ('canceled', 'completed')
+        AND DATE(a.appointment_date) = ?
+    `;
+
+    try {
+        const result = await executeQuery(sql, [doctorId, selectedDate]);
+
+        const busyTimes = result.map(appointment => {
+            const date = new Date(appointment.appointment_date);
+            date.setHours(date.getHours() + 7);
+            return date.toISOString().slice(11, 16); 
+        });
+
+        res.json({ busyTimes });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+
 module.exports = {
     getScheduleByPatientId: getScheduleByPatientId,
     createSchedule: createSchedule,
     deleteSchedule: deleteSchedule,
-    updateSchedule: updateSchedule
+    updateSchedule: updateSchedule,
+    getAvailableTimeSlotsByDoctor: getAvailableTimeSlotsByDoctor
 };
