@@ -10,7 +10,8 @@ export const fetchAccountID = createAsyncThunk(
 )
 
 const initialState = {
-    user: JSON.parse(localStorage.getItem('user')) || null,
+    user: null,
+    userName: null,
     isLoading: false,
     isError: false,
 };
@@ -24,9 +25,9 @@ export const userSlice = createSlice({
         },
         loginSuccess: (state, action) => {
             state.isLoading = false;
-            state.user = action.payload;
+            state.user = action.payload.patient_id;
+            state.userName = action.payload.patient_name;
             state.isError = false;
-            localStorage.setItem('user', JSON.stringify(action.payload)); // Lưu vào localStorage
         },
         loginFailed: (state) => {
             state.isLoading = false;
@@ -34,7 +35,7 @@ export const userSlice = createSlice({
         },
         logout: (state) => {
             state.user = null;
-            localStorage.removeItem('user');
+            state.userName = null;
         },
 
 

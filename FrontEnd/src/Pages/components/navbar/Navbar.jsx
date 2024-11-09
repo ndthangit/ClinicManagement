@@ -11,7 +11,7 @@ import {logout} from "../../Features/UserSlice";
 
 function Navbar() {
 
-    const {user} = useSelector((state) => state.user.user);
+    const {user} = useSelector((state) => state.user);
     const navigateTo = useNavigate();
     const dispatch = useDispatch();
 
@@ -23,6 +23,9 @@ function Navbar() {
     const handleLogin = () => {
         navigateTo('/login');
     }
+    const handleSetting =() =>{
+        navigateTo('/settingInfo');
+    }
 
     return (
         <div className="navbar">
@@ -33,10 +36,18 @@ function Navbar() {
                 <p className='button font'>Thanh toán</p>
             </div>
             <div className="right">
-                {user ? (
+                {user.user ? (
                     // Show "Logout" button when logged in
-                    <Button className="button font" onClick={handleLogout} >Logout</Button>
+                    <div className="dropdown">
+                        <Button className="button font" >
+                            {user.userName} <i className="fa fa-caret-down"></i>
+                        </Button>
+                        <div className="dropdown-content">
 
+                            <a href="#" onClick={handleSetting}>Setting</a>
+                            <a href="#" onClick={handleLogout}>Logout</a>
+                        </div>
+                    </div>
                 ) : (
                     // Show "Login" and "Signup" links when not logged in
                     <>

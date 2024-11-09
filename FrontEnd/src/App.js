@@ -6,6 +6,8 @@ import Dashboard from './Pages/Dashboard/Dashboard';
 import Appointment from './Pages/Appointment/Appointment';
 import DoctorInfo from './Pages/DoctorInfo/DoctorInfo';
 import Schedule from './Pages/Schedule/Schedule';
+import SettingInfo from './Pages/Setting/SettingInfo';
+
 
 import {
     createBrowserRouter,
@@ -36,7 +38,12 @@ const router = createBrowserRouter([
     {
         path: '/schedule/:patientId',
         element: <Schedule />
+    },
+    {
+        path: '/settingInfo',
+        element: <SettingInfo />
     }
+
     
 ])
 

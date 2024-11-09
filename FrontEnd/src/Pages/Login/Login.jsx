@@ -32,9 +32,9 @@ const Login = () => {
         console.log(accountInfo);
         dispatch(loginStarted());
         Axios.post('http://localhost:3005/users/login', accountInfo).then((res)=>{
-            console.log("rss from backend",res.data.message);
+            console.log("res from backend",res.data);
             if( res.data.message === 'connection success'){
-                dispatch(loginSuccess(res.data.user_name));
+                dispatch(loginSuccess(res.data));
                 dispatch(fetchDoctors());
                 dispatch(fetchMedicines());
                 navigateTo('/');
