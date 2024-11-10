@@ -1,11 +1,16 @@
 // import logo from './logo.svg';
 import './App.css';
-import Login from "./Pages/Login/Login";
+import PatientLogin from "./Pages/Login/PatientLogin";
 import Signup from "./Pages/Signup/Signup";
 import Dashboard from './Pages/Dashboard/Dashboard';
 import Appointment from './Pages/Appointment/Appointment';
 import DoctorInfo from './Pages/DoctorInfo/DoctorInfo';
 import Schedule from './Pages/Schedule/Schedule';
+
+// for doctor
+import DoctorLogin from './Pages/Doctor/Login/DoctorLogin';
+import DoctorAppointment from './Pages/Doctor/Appointment/DoctorAppointment';
+import Medical from './Pages/Doctor/Medical/Medical';
 
 import {
     createBrowserRouter,
@@ -19,7 +24,7 @@ const router = createBrowserRouter([
     },
     {
         path: '/login',
-        element: <div><Login /></div>
+        element: <div><PatientLogin /></div>
     },
     {
         path: '/signup',
@@ -36,6 +41,21 @@ const router = createBrowserRouter([
     {
         path: '/schedule/:patientId',
         element: <Schedule />
+    },
+
+
+    // for doctor
+    {
+        path: 'doctor/login',
+        element: <DoctorLogin />
+    },
+    {
+        path: 'doctor/appointment',
+        element: <DoctorAppointment />
+    },
+    {
+        path: 'doctor/medical',
+        element: <Medical />
     }
     
 ])

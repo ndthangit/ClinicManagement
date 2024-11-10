@@ -10,8 +10,7 @@ import {logout} from "../../Features/UserSlice";
 
 
 function Navbar() {
-
-    const {user} = useSelector((state) => state.user.user);
+    const {user} = useSelector((state) => state.user.patient);
     const navigateTo = useNavigate();
     const dispatch = useDispatch();
 

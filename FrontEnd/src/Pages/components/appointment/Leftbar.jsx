@@ -7,7 +7,8 @@ import axios from 'axios';
 
 function Leftbar() {
 
-  const {user} = useSelector((state) => state.user.user);
+  const {user} = useSelector((state) => state.user.patient);
+  console.log(user);
   const navigate = useNavigate();
 
   const showSchedule = () => {

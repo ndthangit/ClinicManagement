@@ -8,6 +8,7 @@ function Dashboard() {
   return (
     <div className='dashboard'>
       <Navbar className='header'/>
+      
     </div>
   )
 }

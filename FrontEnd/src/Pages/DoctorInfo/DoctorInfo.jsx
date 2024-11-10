@@ -11,7 +11,7 @@ import { modifileSuccess } from '../components/schedule/Alert';
 
 function DoctorInfo() {
   let {id} = useParams();
-  const {user} = useSelector((state) => state.user.user);
+  const {user} = useSelector((state) => state.user.patient);
   const navigate = useNavigate();
 
   const [doctorInfo, setDoctorInfo] = useState({});

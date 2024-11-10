@@ -100,7 +100,6 @@ const getScheduleForPatientByIdDoctor = async(req, res) => {
 
 const postSchedule = async (req, res) => {
   const info = req.body;
-  console.log(info);
   const sql = `INSERT INTO dataIT3170.appointments (patient_id, doctor_id, appointment_date, reason, status)
                VALUES (?, ?, ?, ?, 'pending')`;
   await executeQuery(sql, [info.patient_id, info.doctor_id, info.appointment_date, info.reason])

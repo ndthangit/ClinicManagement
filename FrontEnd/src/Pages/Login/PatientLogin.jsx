@@ -35,8 +35,6 @@ const Login = () => {
             console.log("rss from backend",res.data.message);
             if( res.data.message === 'connection success'){
                 dispatch(loginSuccess(res.data.user_name));
-                dispatch(fetchDoctors());
-                dispatch(fetchMedicines());
                 navigateTo('/');
             }
             else {
@@ -118,9 +116,12 @@ const Login = () => {
                         </button>
 
                         <span className="forgotPassword">
-                            Forgot your password? <a href="">Click Here</a>
+                            Forgot your password? <Link to="/login">Click Here</Link>
                         </span>
-
+                        <span className="forgotPassword">
+                            Are you a doctor? <Link to="/doctor/login">Click Here</Link>
+                        </span>
+                            
                     </form>
                 </div>
 

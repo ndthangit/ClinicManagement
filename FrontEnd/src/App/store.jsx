@@ -5,8 +5,6 @@ import medicineReducer from '../Pages/Features/MedicineSlice'
 const store = configureStore({
     reducer: {
         user: rootReducer,
-        doctor: doctorReducer,
-        medicine : medicineReducer,
     },
     // middleware: () => new Tuple(actionCreatorMiddleware),
 });

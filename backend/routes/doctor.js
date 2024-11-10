@@ -14,5 +14,13 @@ router.post('/check-availability', async (req, res) => {
   await Doctor.checkDoctorAvailability(req, res);
 });
 
+router.post('/login', async (req, res) => {
+  await Doctor.loginUser(req, res);
+});
+
+router.post('/signup', async (req, res) => {
+  await Doctor.createUser(req, res);
+});
+
 
 module.exports = router

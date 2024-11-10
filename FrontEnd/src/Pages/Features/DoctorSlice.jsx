@@ -3,14 +3,14 @@ import Axios from 'axios'
 
 export const fetchDoctors = createAsyncThunk(
     'users/fetchByDoctors',
-    async ( ) => {
-        const response = await Axios.get(`http://localhost:3005/users/doctors`)
+    async (AccDoctorID) => {
+        const response = await Axios.get(`http://localhost:3005/doctors/account/${AccDoctorID}`)
         return response.data
     },
 )
 
 const initialState = {
-    doctor: [],
+    user: null,
     isLoading: false,
     isError: false,
 };
@@ -19,6 +19,23 @@ export const doctorSlice = createSlice({
     name: "doctors",
     initialState,
     reducers: {
+        loginDoctorStarted: (state) => {
+            state.isLoading = true;
+        },
+        loginDoctorSuccess: (state, action) => {
+            state.isLoading = false;
+            state.doctor = action.payload;
+            state.isError = false;
+            localStorage.setItem('doctor', JSON.stringify(action.payload)); // Lưu vào localStorage
+        },
+        loginDoctorFailed: (state) => {
+            state.isLoading = false;
+            state.isError = true;
+        },
+        logoutDoctor: (state) => {
+            state.user = null;
+            localStorage.removeItem('doctor');
+        },
     },
     extraReducers: (builder) => {
         // Add reducers for additional action types here, and handle loading state as needed
@@ -28,7 +45,7 @@ export const doctorSlice = createSlice({
         });
 
         builder.addCase(fetchDoctors.fulfilled, (state, action) => {
-            state.doctor = action.payload;
+            state.user = action.payload;
             state.isLoading = false;
             state.isError = false;
         });
@@ -40,5 +57,8 @@ export const doctorSlice = createSlice({
         });
     },
 });
+
+
+export const { loginDoctorStarted, loginDoctorSuccess, loginDoctorFailed, logoutDoctor  } = doctorSlice.actions;
 
 export default doctorSlice.reducer;

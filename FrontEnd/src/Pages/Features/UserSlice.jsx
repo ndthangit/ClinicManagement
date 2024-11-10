@@ -10,13 +10,13 @@ export const fetchAccountID = createAsyncThunk(
 )
 
 const initialState = {
-    user: JSON.parse(localStorage.getItem('user')) || null,
+    user: JSON.parse(localStorage.getItem('patient')) || null,
     isLoading: false,
     isError: false,
 };
 
 export const userSlice = createSlice({
-    name: "user",
+    name: "patient",
     initialState: initialState, // phần này cần kiểm tra
     reducers: {
         loginStarted: (state) => {
@@ -26,7 +26,7 @@ export const userSlice = createSlice({
             state.isLoading = false;
             state.user = action.payload;
             state.isError = false;
-            localStorage.setItem('user', JSON.stringify(action.payload)); // Lưu vào localStorage
+            localStorage.setItem('patient', JSON.stringify(action.payload)); // Lưu vào localStorage
         },
         loginFailed: (state) => {
             state.isLoading = false;
@@ -34,7 +34,7 @@ export const userSlice = createSlice({
         },
         logout: (state) => {
             state.user = null;
-            localStorage.removeItem('user');
+            localStorage.removeItem('patient');
         },
 
 
