@@ -24,7 +24,9 @@ export const userSlice = createSlice({
         },
         loginSuccess: (state, action) => {
             state.isLoading = false;
+            delete action.payload.message;
             state.user = action.payload;
+
             state.isError = false;
             localStorage.setItem('patient', JSON.stringify(action.payload)); // Lưu vào localStorage
         },

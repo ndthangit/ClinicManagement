@@ -5,7 +5,6 @@ import Axios from 'axios'
 import video from '../Assets/video.mp4'
 import logo from '../Assets/logo.png'
 import { FaUserShield } from 'react-icons/fa'
-import { BsFillShieldLockFill } from 'react-icons/bs'
 import { AiOutlineSwapRight } from 'react-icons/ai'
 import { MdMarkEmailRead } from 'react-icons/md'
 
@@ -37,6 +36,7 @@ const Signup = () => {
         }).catch((error) => {
             console.error('Error during signup request:', error);
         })
+
     }
 
     return (
@@ -99,9 +99,9 @@ const Signup = () => {
                             <AiOutlineSwapRight className="icon" />
                         </button>
 
-                        <span className="forgotPassword">
-                            Forgot your password? <a href="">Click Here</a>
-                        </span>
+                        {/*<span className="forgotPassword">*/}
+                        {/*    Forgot your password? <a href="">Click Here</a>*/}
+                        {/*</span>*/}
 
                     </form>
                 </div>

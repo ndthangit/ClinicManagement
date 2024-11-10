@@ -17,7 +17,7 @@ function Leftbar() {
     }
     else {
       
-      axios.get(`http://localhost:3005/patient/byCCCD/${user}`).then((response) => {
+      axios.get(`http://localhost:3005/patient/byCCCD/${user.patient_id}`).then((response) => {
         navigate(`/schedule/${response.data.patient_id}`);
       });
       

@@ -29,12 +29,10 @@ const Login = () => {
             user_name: username,
             password: loginPassword
         };
-        console.log(accountInfo);
         dispatch(loginStarted());
         Axios.post('http://localhost:3005/users/login', accountInfo).then((res)=>{
-            console.log("rss from backend",res.data.message);
             if( res.data.message === 'connection success'){
-                dispatch(loginSuccess(res.data.user_name));
+                dispatch(loginSuccess(res.data));
                 navigateTo('/');
             }
             else {

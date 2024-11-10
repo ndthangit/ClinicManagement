@@ -4,7 +4,6 @@ import Navbar from '../components/navbar/Navbar';
 
 
 function Dashboard() {
-
   return (
     <div className='dashboard'>
       <Navbar className='header'/>

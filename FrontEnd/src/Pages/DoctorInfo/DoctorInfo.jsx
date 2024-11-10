@@ -134,7 +134,7 @@ function DoctorInfo() {
       setSchedule(respone.data);
     });
 
-    axios.get(`http://localhost:3005/patient/byCCCD/${user}`).then((respone) => {
+    axios.get(`http://localhost:3005/patient/byCCCD/${user.patient_id}`).then((respone) => {
       setPatientInfo(respone.data);
     });
 

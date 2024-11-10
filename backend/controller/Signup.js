@@ -5,6 +5,7 @@ let addNewUser = async (req, res) => {
     // add new user to database
     const sql = `INSERT INTO dataIT3170.patient_account (user_name, password) VALUES (?, ?);`;
     const values = [req.body.CCCD, req.body.Password];
+    // console.log(sql);
     try {
         connection.query(sql,values, (err, results) => {
             if (err) {
