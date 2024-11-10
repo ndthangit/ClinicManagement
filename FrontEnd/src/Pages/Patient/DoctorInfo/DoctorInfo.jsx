@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
-import Navbar from '../components/navbar/Navbar';
-import Leftbar from '../components/appointment/Leftbar';
-import exampleImage from '../Assets/person.png';
+import Navbar from '../../components/navbar/Navbar';
+import Leftbar from '../../components/appointment/Leftbar';
+import exampleImage from '../../Assets/person.png';
 import './DoctorInfo.css'
 import { useSelector } from 'react-redux';
-import { modifileSuccess } from '../components/schedule/Alert';
+import { modifileSuccess } from '../../components/schedule/Alert';
 
 
 function DoctorInfo() {

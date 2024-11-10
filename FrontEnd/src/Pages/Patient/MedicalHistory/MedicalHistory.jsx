@@ -1,7 +1,7 @@
 import axios from "axios";
 import './MedicalHistory.css';
-import Navbar from "../components/navbar/Navbar";
-import Leftbar from "../components/appointment/Leftbar";
+import Navbar from "../../components/navbar/Navbar";
+import Leftbar from "../../components/appointment/Leftbar";
 import MedicalHistoryCell from "./MedicalHistoryCell";
 import { useEffect, useState } from "react";
 import SpecificInfo from './SpecificInfo';

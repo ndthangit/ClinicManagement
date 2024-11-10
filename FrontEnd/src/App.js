@@ -1,13 +1,13 @@
 // import logo from './logo.svg';
 import './App.css';
-import PatientLogin from "./Pages/Login/PatientLogin";
-import Signup from "./Pages/Signup/Signup";
-import Dashboard from './Pages/Dashboard/Dashboard';
-import Appointment from './Pages/Appointment/Appointment';
-import DoctorInfo from './Pages/DoctorInfo/DoctorInfo';
-import Schedule from './Pages/Schedule/Schedule';
-import SettingInfo from './Pages/Setting/SettingInfo';
-import MedicalHistory from './Pages/MedicalHistory/MedicalHistory';
+import PatientLogin from "./Pages/Patient/Login/PatientLogin";
+import Signup from "./Pages/Patient/Signup/Signup";
+import Dashboard from './Pages/Patient/Dashboard/Dashboard';
+import Appointment from './Pages/Patient/Appointment/Appointment';
+import DoctorInfo from './Pages/Patient/DoctorInfo/DoctorInfo';
+import Schedule from './Pages/Patient/Schedule/Schedule';
+import SettingInfo from './Pages/Patient/Setting/SettingInfo';
+import MedicalHistory from './Pages/Patient/MedicalHistory/MedicalHistory';
 
 // for doctor
 import DoctorLogin from './Pages/Doctor/Login/DoctorLogin';

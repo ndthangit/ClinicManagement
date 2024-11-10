@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import Leftbar from '../components/appointment/Leftbar';
-import Navbar from '../components/navbar/Navbar';
+import Leftbar from '../../components/appointment/Leftbar';
+import Navbar from '../../components/navbar/Navbar';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import './Schedule.css';
@@ -8,7 +8,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Tooltip from '@mui/material/Tooltip';
 import Swal from 'sweetalert2';
-import { modifileSuccess } from '../components/schedule/Alert';
+import { modifileSuccess } from '../../components/schedule/Alert';
 
 function Schedule() {
     const { patientId } = useParams(); // lấy id từ URL

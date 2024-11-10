@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import '../../App.css'
 import { Link, useNavigate} from 'react-router-dom';
 import Axios from 'axios'
-import video from '../Assets/video.mp4'
-import logo from '../Assets/logo.png'
+import video from '../../Assets/video.mp4'
+import logo from '../../Assets/logo.png'
 import { FaUserShield } from 'react-icons/fa'
 import { AiOutlineSwapRight } from 'react-icons/ai'
 import { MdMarkEmailRead } from 'react-icons/md'

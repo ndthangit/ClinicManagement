@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import './SpecificInfo.css'
-import '../Assets/fonts/themify-icons-font/themify-icons/themify-icons.css'
+import '../../Assets/fonts/themify-icons-font/themify-icons/themify-icons.css'
 function SpecificInfo({props}) {
     const handleClickEvent = () => {
         const modal = document.querySelector('.modal');
