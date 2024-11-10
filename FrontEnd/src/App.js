@@ -7,12 +7,13 @@ import Appointment from './Pages/Appointment/Appointment';
 import DoctorInfo from './Pages/DoctorInfo/DoctorInfo';
 import Schedule from './Pages/Schedule/Schedule';
 import SettingInfo from './Pages/Setting/SettingInfo';
-
+import MedicalHistory from './Pages/MedicalHistory/MedicalHistory';
 
 // for doctor
 import DoctorLogin from './Pages/Doctor/Login/DoctorLogin';
 import DoctorAppointment from './Pages/Doctor/Appointment/DoctorAppointment';
 import Medical from './Pages/Doctor/Medical/Medical';
+
 
 import {
     createBrowserRouter,
@@ -48,6 +49,10 @@ const router = createBrowserRouter([
         path: '/settingInfo',
         element: <SettingInfo />
     },
+    {
+        path: '/medicalhistory',
+        element: <div><MedicalHistory /></div>
+    },
 
 
     // for doctor
@@ -62,7 +67,7 @@ const router = createBrowserRouter([
     {
         path: 'doctor/medical',
         element: <Medical />
-    },
+    }
     
 ])
 

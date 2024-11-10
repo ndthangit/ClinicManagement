@@ -1,0 +1,161 @@
+.modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    align-items: center;
+    justify-content: center;
+    display: none;
+}
+
+.modal.open {
+    display: flex;
+}
+
+.modal-container {
+    background: #fff;
+    width: 900px;
+    min-height: 200px;
+    height: 650px;
+    position: relative;
+    animation: modalFadeIn ease 0.7s;
+    border-radius: 10px;
+}
+
+.modal-close:hover {
+    opacity: 1;
+}
+
+.modal-close {
+    position: absolute;
+    right: 0;
+    top: 0;
+    color: #fff;
+    padding: 12px;
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+.modal-header {
+    background: #87cd51;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    color: #fff;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.modal-body {
+    border-top: 3px solid rgba(23, 21, 21, 0.4);
+    box-shadow: 0 15px -15px -5px rgba(0, 0, 0, 0.3);
+    padding: 16px;
+    height: 520px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: scroll;
+}
+
+.content-table-hist {
+    background-color: orange;
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    width: 700px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(139, 149, 122, 0.3);
+    border-bottom: 2px solid gray;
+    border-left: 2px solid gray;
+    border-right: 2px solid gray;
+}
+
+.body-table-hist {
+    min-height: 400px;
+    margin-top: 300px;
+}
+
+.content-table-hist thead tr {
+    background-color: #009879;
+    color: #fff;
+    text-align: left;
+    font-weight: bold;
+}
+
+.content-table-hist th,
+.content-table-hist td {
+    padding: 12px 15px;
+}
+
+.content-table-hist tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+
+.content-table-hist tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+}
+
+
+.caption-table-hist {
+    border-bottom: 4px solid #dddddd;
+    background-color: #87cd51;
+    justify-content: center;
+    align-content: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: #fff;
+    width: 100%;
+    height: 60px;
+    margin-top: 30px;
+    border-radius: 5px 5px 0 0;
+}
+
+
+.doctor-info-hist ,
+.service-info-hist,
+.exam-info-hist {
+    align-content:first baseline;
+    border-right: 3px solid gray;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.bottom-doctor-hist,
+.bottom-service-hist,
+.bottom-exam-hist {
+    border-bottom: 3px solid gray;
+}
+
+.prop-hist {
+    width: 350px;
+    max-width: 350px;
+    word-wrap: break-word;
+    white-space: normal;
+    vertical-align: top;
+    color: rgb(76, 74, 74);
+}
+
+.title-hist {
+    border-right: 3px solid gray;
+    font-size: 16px;
+    font-weight: normal;
+}
+
+
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-140px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

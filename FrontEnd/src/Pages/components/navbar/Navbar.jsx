@@ -2,11 +2,11 @@ import React, {useEffect, useState} from 'react';
 import './Navbar.css'
 import {
     Link,
-    useNavigate,
 } from 'react-router-dom';
 import {useSelector,useDispatch} from "react-redux";
 import { Button } from '@mui/material';
 import {logout} from "../../Features/UserSlice";
+import { useNavigate } from 'react-router-dom';
 
 
 function Navbar() {
@@ -33,7 +33,7 @@ function Navbar() {
             <div className="left">
                 <Link className='button font' to={'/'}>Trang chủ</Link>
                 <Link className='button font' to={'/appointment'}>Lịch khám</Link>
-                <p className='button font'>Lịch sử khám</p>
+                <Link className='button font' to={'/medicalhistory'}>Lịch sử khám</Link>
                 <p className='button font'>Thanh toán</p>
             </div>
             <div className="right">
