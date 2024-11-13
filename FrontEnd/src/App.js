@@ -5,6 +5,8 @@ import Signup from "./Pages/Signup/Signup";
 import Dashboard from './Pages/Dashboard/Dashboard';
 import Appointment from './Pages/Appointment/Appointment';
 import DoctorInfo from './Pages/DoctorInfo/DoctorInfo';
+import ServicePrice from './Pages/ServicePrice/ServicePrice';
+import Medicine from './Pages/Medicine/Medicine'
 import {
     createBrowserRouter,
     RouterProvider
@@ -30,6 +32,14 @@ const router = createBrowserRouter([
     {
         path: '/appointment/:id',
         element: <div><DoctorInfo /></div>
+    },
+    {
+        path: '/service_price',
+        element: <div><ServicePrice/></div>
+    },
+    {
+        path:'/medicine',
+        element:<div><Medicine/></div>
     }
 ])
 

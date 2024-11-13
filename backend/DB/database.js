@@ -1,14 +1,14 @@
+const mysql=require('mysql2/promise')
 require('dotenv').config();
-
-const mysql = require('mysql2');
-
-// Create the connection to database
-const connection = mysql.createConnection({
+const connection = mysql.createPool({
     host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    port: process.env.DB_PORT,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME,
-});
-
-module.exports=connection;
+    user:  process.env.DB_USER,
+    database:  process.env.DB_NAME,
+    port:  process.env.DB_PORT,
+    password:  process.env.DB_PASSWORD,
+    waitForConnections: true,
+    connectionLimit:10,
+    queueLimit:0
+  }); 
+console.log("ket noi database thanh cong")
+module.exports=connection; 

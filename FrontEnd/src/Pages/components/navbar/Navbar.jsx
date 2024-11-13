@@ -11,7 +11,8 @@ function Navbar() {
           <Link className='button font' to={'/'}>Trang chủ</Link>
           <Link className='button font' to={'/appointment'}>Lịch khám</Link>
           <p className='button font'>Lịch sử khám</p>
-          <p className='button font'>Thanh toán</p>
+          <Link className='button font' to={'/service_price'}>Giá dịch vụ</Link>
+          <Link className='button font' to={'/medicine'}>Giá thuốc</Link>
         </div>
         <div className="right">
           <Link className='button font' to={'/signup'}> Signup</Link>

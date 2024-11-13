@@ -11,9 +11,8 @@ var logger = require('morgan');
 const doctorRouter = require('./routes/Doctor');
 const appointmentRouter = require('./routes/Appointment'); 
 const userRouter = require('./routes/User');
-const paymentRoutes = require('./routes/Payment');
-
-
+const ServicePriceRouter=require('./routes/ServicePrice')
+const MedicineRouter=require('./routes/Medicine')
 var server = express();
 var cors = require('cors')
 
@@ -35,9 +34,8 @@ server.use(express.static(path.join(__dirname, 'public')));
 server.use('/doctor', doctorRouter);
 server.use('/appointment', appointmentRouter);
 server.use('/users', userRouter);
-server.use('/payment', paymentRoutes);
-
-
+server.use('/service_price',ServicePriceRouter)
+server.use('/medicine',MedicineRouter)
 
 
 // catch 404 and forward to error handler
@@ -56,4 +54,4 @@ server.use(function(err, req, res, next) {
   res.render('error');
 });
 
-module.exports = server;
+module.exports = server; 

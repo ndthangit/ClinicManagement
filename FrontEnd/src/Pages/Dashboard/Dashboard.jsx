@@ -12,7 +12,7 @@ import Appointment from '../Appointment/Appointment';
 import Navbar from '../Components/navbar/Navbar';
 
 
-function Dashboard() {
+function Dashboard() { 
 
   return (
     <div className='dashboard'>
