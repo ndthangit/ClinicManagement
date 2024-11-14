@@ -1,5 +1,5 @@
 import React from 'react'
-import DoctorNavbar from '../../components/navbar/DoctorNavbar'
+import DoctorNavbar from '../../Components/navbar/DoctorNavbar'
 // import '../../../App.css'
 
 function DoctorAppointment() {

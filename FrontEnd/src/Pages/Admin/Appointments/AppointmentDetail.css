@@ -1,0 +1,48 @@
+/* `AppointmentDetail.css` */
+.appointmentDetail .content {
+    padding: 20px;
+}
+
+.appointmentDetail table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.appointmentDetail th, .appointmentDetail td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.appointmentDetail th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+.appointmentDetail tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.appointmentDetail tr:hover {
+    background-color: #f1f1f1;
+}
+
+.appointmentDetail select {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.appointmentDetail button {
+    padding: 5px 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.appointmentDetail button:hover {
+    background-color: #45a049;
+}

@@ -14,6 +14,7 @@ import DoctorLogin from './Pages/Doctor/Login/DoctorLogin';
 import DoctorAppointment from './Pages/Doctor/Appointment/DoctorAppointment';
 import Medical from './Pages/Doctor/Medical/Medical';
 
+import adminRouter from "./Pages/Admin/AdminRouter";
 
 import {
     createBrowserRouter,
@@ -67,7 +68,9 @@ const router = createBrowserRouter([
     {
         path: 'doctor/medical',
         element: <Medical />
-    }
+    },
+    // for admin
+    ...adminRouter
     
 ])
 

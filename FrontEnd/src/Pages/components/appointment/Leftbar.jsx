@@ -8,6 +8,7 @@ import axios from 'axios';
 function Leftbar() {
 
   const {user} = useSelector((state) => state.user.patient);
+  const {admin} = useSelector((state) => state.user.admin);
   console.log(user);
   const navigate = useNavigate();
 
@@ -26,11 +27,27 @@ function Leftbar() {
 
   
   return (
-    <div className='Leftbar'>
-        <Button className='button font' onClick={()=> {navigate('/appointment')}}>Đặt lịch khám</Button>
-        <Button className='button font' onClick={()=> {showSchedule()}}>Xem lịch khám</Button>
-    </div>
-  )
+    admin ? (
+      <div className='Leftbar'>
+        <Button className='button font' onClick={() => {
+          navigate('/admin/payments')
+        }}>xác nhận thanh toán </Button>
+
+        <Button className='button font' onClick={() => {
+          navigate('/admin/appointment')
+        }}>Quản lý lịch khám</Button>
+      </div>
+    ) : (
+      <div className='Leftbar'>
+        <Button className='button font' onClick={() => {
+          navigate('/appointment')
+        }}>Đặt lịch khám</Button>
+        <Button className='button font' onClick={() => {
+          showSchedule()
+        }}>Xem lịch khám</Button>
+      </div>
+    )
+)
 }
 
 export default Leftbar

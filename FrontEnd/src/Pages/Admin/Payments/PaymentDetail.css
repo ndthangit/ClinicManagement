@@ -1,0 +1,18 @@
+.payment .content {
+    padding: 20px;
+}
+
+.payment table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.payment th, .payment td {
+    border: 1px solid black;
+    padding: 10px;
+    text-align: left;
+}
+
+.payment th {
+    background-color: #f2f2f2;
+}

@@ -9,7 +9,7 @@ import {AiOutlineSwapRight} from 'react-icons/ai'
 import {useDispatch} from "react-redux";
 import {loginFailed, loginStarted, loginSuccess} from "../../Features/UserSlice";
 import {fetchDoctors} from "../../Features/DoctorSlice";
-import {fetchMedicines} from "../../Features/MedicineSlice";
+import {fetchMedicines} from "../../Features/AdminSlice";
 
 const Login = () => {
     const state = {content: null}
@@ -86,7 +86,9 @@ const Login = () => {
                         <h3>Welcome Back!</h3>
                     </div>
 
-                    <form action="" className="form grid" onSubmit={() => {onSubmit()}}>
+                    <form action="" className="form grid" onSubmit={() => {
+                        onSubmit()
+                    }}>
                         <span className={statusHolder}>{loginStatus}</span>
 
                         <div className="inputDiv">
@@ -107,7 +109,9 @@ const Login = () => {
                             </div>
                         </div>
 
-                        <button type='submit' className='btn flex' onClick={(event) => {loginUser(event)}}>
+                        <button type='submit' className='btn flex' onClick={(event) => {
+                            loginUser(event)
+                        }}>
                             <span>Login</span>
                             <AiOutlineSwapRight className="icon"/>
                         </button>
@@ -118,7 +122,10 @@ const Login = () => {
                         <span className="forgotPassword">
                             Are you a doctor? <Link to="/doctor/login">Click Here</Link>
                         </span>
-                            
+                        <span className="forgotPassword">
+                            Are you an admin? <Link to="/admin/login">Click Here</Link>
+                        </span>
+
                     </form>
                 </div>
 

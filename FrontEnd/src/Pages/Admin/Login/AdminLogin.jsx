@@ -8,11 +8,12 @@ import {FaUserShield} from 'react-icons/fa'
 import {BsFillShieldLockFill} from 'react-icons/bs'
 import {AiOutlineSwapRight} from 'react-icons/ai'
 import {useDispatch} from "react-redux";
-import { loginDoctorFailed, loginDoctorStarted, loginDoctorSuccess } from '../../Features/DoctorSlice';
-import {fetchDoctors} from "../../Features/DoctorSlice";
-import {fetchMedicines} from "../../Features/AdminSlice";
+import {loginAdminFailed, loginAdminSuccess} from "../../Features/AdminSlice";
+import {fetchPayments} from "../../Features/PaymentSclice";
+import {fetchAppointments} from "../../Features/AppointmentSlice";
 
-const DoctorLogin = () => {
+
+const AdminLogin = () => {
     const state = {content: null}
     const [username, setUsername] = useState('');
     const [loginPassword, setLoginPassword] = useState('');
@@ -29,15 +30,16 @@ const DoctorLogin = () => {
             user_name: username,
             password: loginPassword
         };
-        dispatch(loginDoctorStarted());
-        Axios.post('http://localhost:3005/doctor/login', accountInfo).then((res)=>{
+        Axios.post('http://localhost:3005/admin/login', accountInfo).then((res)=>{
             console.log("rss from backend",res.data.message);
             if( res.data.message === 'connection success'){
-                dispatch(loginDoctorSuccess(res.data.user_name));
-                navigateTo('/doctor/appointment');
+                dispatch(loginAdminSuccess(res.data.user_name))
+                dispatch(fetchPayments())
+                dispatch(fetchAppointments())
+                navigateTo('/admin');
             }
             else {
-                dispatch(loginDoctorFailed());
+                dispatch(loginAdminFailed())
                 console.log("res from backend",res.data);
             }
         }).catch((error) => {
@@ -117,7 +119,7 @@ const DoctorLogin = () => {
                         <span className="forgotPassword">
                             Are you not a doctor? <Link to="/login">Click Here</Link>
                         </span>
-                            
+
                     </form>
                 </div>
 
@@ -126,4 +128,4 @@ const DoctorLogin = () => {
     )
 }
 
-export default DoctorLogin
+export default AdminLogin
