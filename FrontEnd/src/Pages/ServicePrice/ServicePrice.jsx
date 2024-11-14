@@ -1,7 +1,7 @@
 // ServicePricePage.js
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import Navbar from '../Components/navbar/Navbar';
+import Navbar from '../components/navbar/Navbar';
 import './ServicePrice.css'
 function ServicePrice() {
   const [departments, setDepartments] = useState([]);
