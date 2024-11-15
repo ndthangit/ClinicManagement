@@ -42,7 +42,7 @@ let checkDoctorAvailability = async (req, res) => {
 };
 
 const loginUser = async (req, res) => {
-  const sql = `SELECT user_name,password FROM dataIT3170.doctor_account where user_name = ? and password = ?`;
+  const sql = `SELECT DA.user_name, DA.password, D.doctor_name, D.doctor_id FROM dataIT3170.doctor_account DA JOIN dataIT3170.doctors D ON D.user_name = DA.user_name where DA.user_name = ? and DA.password = ? `;
     const values = [req.body.user_name, req.body.password];
     try {
         connection.query(sql,values, (err, results) => {
@@ -52,7 +52,7 @@ const loginUser = async (req, res) => {
             } else if (results.length === 0) {
                 return res.status(404).json({message: 'connection failed'});
             } else {
-                return res.status(200).json({message: 'connection success',user_name: req.body.user_name});
+                return res.status(200).json({message: 'connection success',user_name: results[0].user_name, doctor_name: results[0].doctor_name, doctor_id: results[0].doctor_id});
             }
         });
     }
@@ -61,6 +61,15 @@ const loginUser = async (req, res) => {
     }
 };
 
+const getDoctorByUsername = async (req, res) => {
+
+  const sql = 'SELECT doctor_id FROM dataIT3170.doctors WHERE user_name = ?';
+  const result = await executeQuery(sql, [req.params.user]);
+  if (result.length !== 0) {
+    res.status(200).send(result[0]);
+  }
+}
+
 const createUser = async (req, res) => {
   const info = req.body
   const sql = 'INSERT INTO dataIT3170.doctor_account (user_name, password) VALUES (?, ?)';
@@ -68,11 +77,13 @@ const createUser = async (req, res) => {
   res.json(info);
 };
 
+
 module.exports = {
   getDoctors: getDoctors,
   getDoctorById: getDoctorById,
   checkDoctorAvailability: checkDoctorAvailability,
   loginUser: loginUser,
-  createUser: createUser
+  createUser: createUser,
+  getDoctorByUsername: getDoctorByUsername
 }
 

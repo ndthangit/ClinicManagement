@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Navbar from '../../components/navbar/Navbar';
-import Leftbar from '../../components/appointment/Leftbar';
+import Leftbar from '../../components/leftbar/Leftbar';
 import exampleImage from '../../Assets/person.png';
 import { useNavigate } from 'react-router-dom';
 import './Appointment.css';

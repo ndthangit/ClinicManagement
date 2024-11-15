@@ -1,0 +1,94 @@
+
+.medicalExam .body .content .title {
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  margin: 5px;
+  background-color: hsl(125, 35%, 55%);
+  color: white;
+  border-radius: 10px;
+}
+
+.medicalExam .body .content .table {
+  overflow: scroll;
+  display: flex;
+  border: 1px solid black;
+  margin: 10px;
+  border-radius: 10px;
+  
+}
+
+.medicalExam .body .content .table .cell {
+  margin: 20px;
+  border: 1px solid black;
+  padding: 20px;
+}
+
+.medicalExam .body .content .table .cell:hover {
+  background-color: rgb(197, 197, 197);
+}
+
+.medicalExam .body .content .table .cell:active {
+  background-color: rgb(153, 153, 153);
+}
+
+.medicalExam .body .content .borderTable {
+  border: 1px solid rgb(37, 37, 37);
+  margin: 5px;
+  border-radius: 10px;
+}
+
+.medicalExam .body .content .tableTime {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  overflow: scroll;
+  max-height: 60vh;
+  overflow-y: auto;
+   /* Chỉ cuộn theo chiều dọc */
+}
+
+.medicalExam .body .content .tableTime .cell {
+  padding: 10px;
+  margin: 5px;
+  border-radius: 10px;
+  border: 1px solid white;
+  color: white;
+  background-color: #2087d1;
+}
+
+.medicalExam .body .content .tableTime .cell .info {
+  display: flex;
+  height: 100%;
+
+}
+
+.medicalExam .body .content .tableTime .cell .info .time{
+  width: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 20px 10px 20px;
+}
+
+.medicalExam .body .content .tableTime .cell .detail {
+  display: flex;
+  height: 100%;
+  border-left: 2px solid white;
+  flex-direction: column;
+  
+}
+
+.medicalExam .body .content .tableTime .cell .detail .line {
+  padding: 5px 10px 5px 30px;
+  display: flex;
+
+}
+
+.medicalExam .body .content .tableTime .cell .detail .line .value {
+  padding-left: 20px;
+}
+
+
+

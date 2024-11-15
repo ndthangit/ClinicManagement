@@ -33,7 +33,8 @@ const DoctorLogin = () => {
         Axios.post('http://localhost:3005/doctor/login', accountInfo).then((res)=>{
             console.log("rss from backend",res.data.message);
             if( res.data.message === 'connection success'){
-                dispatch(loginDoctorSuccess(res.data.user_name));
+                console.log(res.data);
+                dispatch(loginDoctorSuccess(res.data));
                 navigateTo('/doctor/appointment');
             }
             else {

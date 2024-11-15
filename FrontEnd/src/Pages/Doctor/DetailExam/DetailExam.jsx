@@ -1,14 +1,15 @@
 import React from 'react'
 import DoctorNavbar from '../../components/navbar/DoctorNavbar'
-// import '../../../App.css'
 
-function DoctorAppointment() {
+function DetailExam() {
   return (
-    <div className='doctor dashboard'>
+    <div className='doctor dashboard detailExam'>
       <DoctorNavbar className='header'/>
-      
+      <div className='body'>
+        
+      </div>
     </div>
   )
 }
 
-export default DoctorAppointment
+export default DetailExam

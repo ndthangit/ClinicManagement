@@ -22,5 +22,9 @@ router.post('/signup', async (req, res) => {
   await Doctor.createUser(req, res);
 });
 
+router.get('/getIDbyUser/:user', async (req, res) => {
+  await Doctor.getDoctorByUsername(req, res);
+});
+
 
 module.exports = router

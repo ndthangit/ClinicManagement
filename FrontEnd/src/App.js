@@ -1,5 +1,7 @@
 // import logo from './logo.svg';
 import './App.css';
+
+// for patient
 import PatientLogin from "./Pages/Patient/Login/PatientLogin";
 import Signup from "./Pages/Patient/Signup/Signup";
 import Dashboard from './Pages/Patient/Dashboard/Dashboard';
@@ -12,13 +14,14 @@ import MedicalHistory from './Pages/Patient/MedicalHistory/MedicalHistory';
 // for doctor
 import DoctorLogin from './Pages/Doctor/Login/DoctorLogin';
 import DoctorAppointment from './Pages/Doctor/Appointment/DoctorAppointment';
-import Medical from './Pages/Doctor/Medical/Medical';
+import MedicalExam from './Pages/Doctor/Medical/MedicalExam';
 
 
 import {
     createBrowserRouter,
     RouterProvider
 } from 'react-router-dom';
+import DetailExam from './Pages/Doctor/DetailExam/DetailExam';
 
 const router = createBrowserRouter([
     {
@@ -66,7 +69,11 @@ const router = createBrowserRouter([
     },
     {
         path: 'doctor/medical',
-        element: <Medical />
+        element: <MedicalExam />
+    },
+    {
+        path: 'doctor/medical/:examId',
+        element: <DetailExam />
     }
     
 ])
