@@ -4,7 +4,8 @@ const Login = require('../controller/Login')
 const Admin = require('../controller/Admin');
 
 router.post('/login', Login.loginAdmin);
-router.patch('/updateStatusPayment/:id', Admin.confiUpdateStatusPayment);
+router.patch('/updateStatusPayment', Admin.confiUpdateStatusPayment);
+router.patch('/updateStatusAppointment', Admin.confiUpdateStatusAppointment);
 router.get('/checkAppointment', Admin.getInfoAppointment)
 
 module.exports = router;

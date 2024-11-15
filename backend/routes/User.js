@@ -8,6 +8,7 @@ const Login = require('../controller/Login')
 router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
+
 router.get('/:table', homeController.getDataFromDB);
 
 router.post('/signup', signup.addNewUser);

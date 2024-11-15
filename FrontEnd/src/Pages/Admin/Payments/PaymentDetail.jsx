@@ -3,10 +3,14 @@ import AdminNavbar from "../../Components/navbar/AdminNavbar";
 import Leftbar from "../../Components/Appointment/Leftbar";
 import { useDispatch, useSelector } from "react-redux";
 import './PaymentDetail.css';
-import { fetchPayments, updatePaymentStatus } from "../../Features/PaymentSclice";
+import {
+    fetchPayments,
+    updatePaymentStatus,
+    updateUIPaymentStatus
+} from "../../Features/PaymentSclice";
 
 let PaymentDetail = () => {
-    const { payments } = useSelector((state) => state.payment);
+    const { payments , isLoading, isError } = useSelector((state) => state.payment);
     const [updatedStatus, setUpdatedStatus] = useState({});
     const [searchQueries, setSearchQueries] = useState({
         payment_id: '',
@@ -24,6 +28,9 @@ let PaymentDetail = () => {
     }, [dispatch]);
 
     const handleStatusChange = (paymentId, status) => {
+        // dispatch(updatePaymentStatusBeforeSave({ paymentId, status}));
+        dispatch(updateUIPaymentStatus({ paymentId, status: updatedStatus[paymentId] }));
+
         setUpdatedStatus((prevState) => ({
             ...prevState,
             [paymentId]: status,
@@ -56,6 +63,14 @@ let PaymentDetail = () => {
             (searchQueries.status === '' || payment.status === searchQueries.status) &&
             payment.updated_at.includes(searchQueries.updated_at);
     });
+
+    if (isLoading) {
+        return <div>Loading...</div>;
+    }
+
+    if (isError) {
+        return <div>Error loading appointments</div>;
+    }
 
     return (
         <div className='payment dashboard'>
@@ -124,6 +139,7 @@ let PaymentDetail = () => {
                                     onChange={(e) => handleSearchChange(e, 'updated_at')}
                                 />
                             </th>
+                            <th>Actions</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -145,7 +161,7 @@ let PaymentDetail = () => {
                                     </td>
                                     <td>{payment.updated_at}</td>
                                     <td>
-                                        <button onClick={() => handleSave(payment.payment_id)}>Update</button>
+                                        <button className="saveButton" onClick={() => handleSave(payment.payment_id)}>Save</button>
                                     </td>
                                 </tr>
                             ))}

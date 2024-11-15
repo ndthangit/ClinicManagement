@@ -1,5 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import Axios from 'axios';
+import {loginAdminFailed, loginAdminSuccess} from "./AdminSlice";
+import {fetchAppointments} from "./AppointmentSlice";
 
 export const fetchPayments = createAsyncThunk(
     'payments/fetchPayments',
@@ -19,13 +21,30 @@ export const paymentSlice = createSlice({
     name: "payments",
     initialState,
     reducers: {
+        updateUIPaymentStatus: (state, action) => {
+            state.payments = state.payments.map((payment) => {
+                if (payment.payment_id === action.payload.paymentId) {
+                    payment.status = action.payload.status;
+                }
+                return payment;
+            });
+        },
         updatePaymentStatus: (state, action) => {
-            const { payment_id, status } = action.payload;
-            const payment = state.payments.find((payment) => payment.payment_id === payment_id);
-            if (payment) {
-                payment.status = status;
-            }
-        }
+
+            Axios.patch('http://localhost:3005/admin/updateStatusPayment', action.payload)
+                .then((res) => {
+                    if (res.data.message === 'updated successfully') {
+                        console.log("Response from backend:", res.data.message);
+                    } else {
+                        console.log("Response from backend:", res.data);
+                    }
+                    console.log("Update successful");
+                })
+                .catch((error) => {
+                    console.error('Error during the update request:', error);
+                });
+        },
+
 
     },
     extraReducers: (builder) => {
@@ -47,5 +66,5 @@ export const paymentSlice = createSlice({
 
     },
 });
-export const { updatePaymentStatus } = paymentSlice.actions;
+export const { updatePaymentStatus,updateUIPaymentStatus } = paymentSlice.actions;
 export default paymentSlice.reducer;

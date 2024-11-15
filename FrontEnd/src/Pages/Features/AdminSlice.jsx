@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import {userSlice} from "./UserSlice";
 
 const initialState = {
     admin: null,

@@ -1,23 +1,15 @@
 const {executeQueryID, executeQuery} = require("./Home");
 
 let confiUpdateStatusPayment = async (req, res) => {
-    const { payment_id } = req.params;
-    const { status } = req.body;
-
-    if (!status) {
-        return res.status(400).json({ message: 'Trạng thái không được để trống.' });
+    console.log(req.body);
+    const sql = `update dataIT3170.payments set status = ? where payment_id = ?;`;
+    const values = [req.body.status, req.body.paymentId];
+    try {
+        await executeQueryID(sql, values);
+        res.send({message: 'updated successfully'});
     }
-    try
-    {
-        const sql = `
-            UPDATE datait3170.Payments 
-            SET status = ? 
-            WHERE payment_id = ?`;
-        await executeQueryID(sql, [status, payment_id]);
-        res.json({ message: 'Cập nhật trạng thái thanh toán thành công' });
-    }
-    catch (error) {
-        res.status(500).json({ error: error.message });
+    catch (err) {
+        console.error('Failed to add new user:', err);
     }
 };
 let getInfoAppointment = async (req, res) => {
@@ -29,8 +21,22 @@ let getInfoAppointment = async (req, res) => {
         console.error('Failed to retrieve data:', err);
     }
 }
+let confiUpdateStatusAppointment = async (req, res) => {
+    console.log(req.body);
+    const sql = `update dataIT3170.appointments set status = ? where appointment_id = ?;`;
+    const values = [req.body.status, req.body.appointmentId];
+    try {
+        await executeQueryID(sql, values);
+        res.send({message: 'updated successfully'});
+    }
+    catch (err) {
+        console.error('Failed to add new user:', err);
+    }
+};
+
 
 module.exports = {
     confiUpdateStatusPayment: confiUpdateStatusPayment,
-    getInfoAppointment: getInfoAppointment
+    getInfoAppointment: getInfoAppointment,
+    confiUpdateStatusAppointment: confiUpdateStatusAppointment
 }

@@ -2,20 +2,27 @@ import React, { useEffect, useState } from 'react';
 import AdminNavbar from "../../Components/navbar/AdminNavbar";
 import Leftbar from "../../Components/Appointment/Leftbar";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchAppointments } from "../../Features/AppointmentSlice";
+import { fetchAppointments, updateAppointmentStatus, updateUIAppointmentStatus } from "../../Features/AppointmentSlice";
 import './AppointmentDetail.css';
-import Axios from "axios";
 
 const AppointmentDetail = () => {
     const dispatch = useDispatch();
     const { appointments, isLoading, isError } = useSelector((state) => state.appointment);
     const [updatedStatus, setUpdatedStatus] = useState({});
+    const [searchQueries, setSearchQueries] = useState({
+        appointment_id: '',
+        patient_name: '',
+        doctor_name: '',
+        appointment_date: '',
+        status: ''
+    });
 
     useEffect(() => {
         dispatch(fetchAppointments());
     }, [dispatch]);
 
     const handleStatusChange = (appointmentId, status) => {
+        dispatch(updateUIAppointmentStatus({ appointmentId, status }));
         setUpdatedStatus((prevState) => ({
             ...prevState,
             [appointmentId]: status,
@@ -24,14 +31,24 @@ const AppointmentDetail = () => {
 
     const handleSave = async (appointmentId) => {
         if (updatedStatus[appointmentId]) {
-            try {
-                await Axios.patch(`/api/appointments/${appointmentId}`, { status: updatedStatus[appointmentId] });
-                // dispatch(updateAppointmentStatus({ appointmentId, status: updatedStatus[appointmentId] }));
-            } catch (error) {
-                console.error('Failed to update appointment status', error);
-            }
+            dispatch(updateAppointmentStatus({ appointmentId, status: updatedStatus[appointmentId] }));
         }
     };
+
+    const handleSearchChange = (e, column) => {
+        setSearchQueries({
+            ...searchQueries,
+            [column]: e.target.value
+        });
+    };
+
+    const filteredAppointments = appointments.filter(appointment => {
+        return appointment.appointment_id.toString().includes(searchQueries.appointment_id) &&
+            (appointment.patient_name ? appointment.patient_name.toLowerCase().includes(searchQueries.patient_name.toLowerCase()) : true) &&
+            (appointment.doctor_name ? appointment.doctor_name.toLowerCase().includes(searchQueries.doctor_name.toLowerCase()) : true) &&
+            appointment.appointment_date.includes(searchQueries.appointment_date) &&
+            (appointment.status ? appointment.status.toLowerCase().includes(searchQueries.status.toLowerCase()) : true);
+    });
 
     if (isLoading) {
         return <div>Loading...</div>;
@@ -51,16 +68,51 @@ const AppointmentDetail = () => {
                     <table>
                         <thead>
                             <tr>
-                                <th>Appointment ID</th>
-                                <th>Patient Name</th>
-                                <th>Doctor Name</th>
-                                <th>Appointment Date</th>
-                                <th>Status</th>
+                                <th>
+                                    Appointment ID
+                                    <input
+                                        type="text"
+                                        value={searchQueries.appointment_id}
+                                        onChange={(e) => handleSearchChange(e, 'appointment_id')}
+                                    />
+                                </th>
+                                <th>
+                                    Patient Name
+                                    <input
+                                        type="text"
+                                        value={searchQueries.patient_name}
+                                        onChange={(e) => handleSearchChange(e, 'patient_name')}
+                                    />
+                                </th>
+                                <th>
+                                    Doctor Name
+                                    <input
+                                        type="text"
+                                        value={searchQueries.doctor_name}
+                                        onChange={(e) => handleSearchChange(e, 'doctor_name')}
+                                    />
+                                </th>
+                                <th>
+                                    Appointment Date
+                                    <input
+                                        type="text"
+                                        value={searchQueries.appointment_date}
+                                        onChange={(e) => handleSearchChange(e, 'appointment_date')}
+                                    />
+                                </th>
+                                <th>
+                                    Status
+                                    <input
+                                        type="text"
+                                        value={searchQueries.status}
+                                        onChange={(e) => handleSearchChange(e, 'status')}
+                                    />
+                                </th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {appointments.map((appointment) => (
+                            {filteredAppointments.map((appointment) => (
                                 <tr key={appointment.appointment_id}>
                                     <td>{appointment.appointment_id}</td>
                                     <td>{appointment.patient_name || 'N/A'}</td>
@@ -68,7 +120,7 @@ const AppointmentDetail = () => {
                                     <td>{new Date(appointment.appointment_date).toLocaleDateString()}</td>
                                     <td>
                                         <select
-                                            value={updatedStatus[appointment.appointment_id] || appointment.status}
+                                            value={appointment.status}
                                             onChange={(e) => handleStatusChange(appointment.appointment_id, e.target.value)}
                                         >
                                             <option value="pending">Pending</option>
@@ -78,7 +130,7 @@ const AppointmentDetail = () => {
                                         </select>
                                     </td>
                                     <td>
-                                        <button onClick={() => handleSave(appointment.appointment_id)}>
+                                        <button className="saveButton" onClick={() => handleSave(appointment.appointment_id)}>
                                             Save
                                         </button>
                                     </td>
