@@ -3,6 +3,7 @@
 .body {
     display: flex;
     flex: 1;
+    overflow: hidden;
 }
 
 .content {
@@ -11,6 +12,8 @@
     background-color: #ffffff;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    flex-direction: column;
+    overflow: hidden;
 }
 
 .schedule h2 {
@@ -67,8 +70,10 @@
     background-color: #78b841;
 }
 .scheduleList {
-    max-height: 400px; 
+    flex-grow: 1;
+    margin-bottom: 20px;
     overflow-y: auto; 
+    max-height: 650px;
 }
 
 .scheduleItem {
