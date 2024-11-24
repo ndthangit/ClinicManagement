@@ -25,7 +25,7 @@ export const doctorSlice = createSlice({
         loginDoctorSuccess: (state, action) => {
             state.isLoading = false;
             delete action.payload.message;
-            state.doctor = action.payload;
+            state.user = action.payload;
             state.isError = false;
             localStorage.setItem('doctor', JSON.stringify(action.payload)); // Lưu vào localStorage
         },

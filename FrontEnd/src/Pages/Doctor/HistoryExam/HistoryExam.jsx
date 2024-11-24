@@ -1,15 +1,12 @@
 import React from 'react'
-import { useState, useEffect } from 'react'
-import axios from 'axios'
 import DoctorNavbar from '../../components/navbar/DoctorNavbar'
-import MedicalExamLeftbar from '../../components/leftbar/MedicalExamLeftbar' 
-import { useSelector } from 'react-redux'
-import './MedicalExam.css'
-import { Button } from '@mui/material'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { useState, useEffect } from 'react';
+import MedicalExamLeftbar from '../../components/leftbar/MedicalExamLeftbar';
+import { useSelector } from 'react-redux';
 
-function MedicalExam() {
-
+function HistoryExam() {
   const navigate = useNavigate();
   const {user} = useSelector((state) => state.user.doctor);
   const [medicalExam, setMedicalExam] = useState([]);
@@ -17,7 +14,7 @@ function MedicalExam() {
   const [selected, setSelected] = useState(false);
   useEffect(() => {
     if (user) {
-      axios.get(`http://localhost:3005/medExam/medicalExam/byDoctor/${user.doctor_id}`).then((response) => {
+      axios.get(`http://localhost:3005/medExam/historyExam/byId/${user.doctor_id}`).then((response) => {
         setMedicalExam(response.data);
       })
     }
@@ -35,12 +32,13 @@ function MedicalExam() {
   }
 
   const selectExam = (id) => {
-    navigate(`/doctor/medical/${id}`);
+    navigate(`/doctor/medical/history/${id}`);
   }
 
   const showSchedule = () => {
     if (medicalExam.length > 0) {
-      medicalExam.map(([key, value], index) => {
+      console.log(medicalExam.length);
+      return  medicalExam.map(([key, value], index) => {
         return (
           <button className='cell' key={index} onClick={() => selectDate(value)}> 
             {key}
@@ -66,7 +64,6 @@ function MedicalExam() {
           </div>
           <div className='table'>
           {
-            
             showSchedule()
           }
           </div>
@@ -107,4 +104,4 @@ function MedicalExam() {
   )
 }
 
-export default MedicalExam
+export default HistoryExam

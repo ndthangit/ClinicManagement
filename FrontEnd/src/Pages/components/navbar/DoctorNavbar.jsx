@@ -8,8 +8,8 @@ import './Navbar.css'
 function DoctorNavbar() {
   const navigateTo = useNavigate();
   const dispatch = useDispatch()
-  const doctor_name = useSelector((state)=>state.user.doctor);
-
+  const doctor = useSelector((state)=>state.user.doctor);
+  console.log(doctor);
   const handleLogout = () => {
     dispatch(logoutDoctor());
     navigateTo('/doctor/login');

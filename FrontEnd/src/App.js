@@ -15,13 +15,15 @@ import MedicalHistory from './Pages/Patient/MedicalHistory/MedicalHistory';
 import DoctorLogin from './Pages/Doctor/Login/DoctorLogin';
 import DoctorAppointment from './Pages/Doctor/Appointment/DoctorAppointment';
 import MedicalExam from './Pages/Doctor/Medical/MedicalExam';
-
+import DetailExam from './Pages/Doctor/DetailExam/DetailExam';
+import HistoryExam from './Pages/Doctor/HistoryExam/HistoryExam';
 
 import {
     createBrowserRouter,
     RouterProvider
 } from 'react-router-dom';
-import DetailExam from './Pages/Doctor/DetailExam/DetailExam';
+import DetailHistory from './Pages/Doctor/DetailHistory/DetailHistory';
+
 
 const router = createBrowserRouter([
     {
@@ -74,6 +76,14 @@ const router = createBrowserRouter([
     {
         path: 'doctor/medical/:examId',
         element: <DetailExam />
+    },
+    {
+        path: 'doctor/medical/history',
+        element: <HistoryExam/>
+    },
+    {
+        path: 'doctor/medical/history/:examId',
+        element: <DetailHistory/>
     }
     
 ])

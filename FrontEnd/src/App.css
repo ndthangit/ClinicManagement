@@ -342,6 +342,7 @@ video {
   grid-row: 2 /span 11;
   display: grid;
   grid-template-columns: repeat(6, 1fr);
+  
 }
 .dashboard .body .leftBar {
   grid-column: 1;
@@ -353,7 +354,8 @@ video {
   display: flex;
   flex-direction: column;
   height: 100%;
-  width: 100%;
+  width: 100%; 
+  overflow: scroll;
 }
 
 .dashboard .body .fullycontent {

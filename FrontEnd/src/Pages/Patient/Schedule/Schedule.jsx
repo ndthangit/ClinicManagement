@@ -310,39 +310,6 @@ function Schedule() {
                 <Leftbar className='leftBar' />
                 <div className='content'>
                     <h2>Lịch khám</h2>
-                    {/* form thêm lịch khám */}
-                    {/* <div className='scheduleForm'>
-                        <select 
-                            id="doctor_id" 
-                            value={newSchedule.doctor_id} 
-                            onChange={(e) => setNewSchedule({ ...newSchedule, doctor_id: e.target.value })}
-                        >
-                            <option value="">Chọn bác sĩ</option>
-                            {doctors.map((doctor) => (
-                                <option key={doctor.doctor_id} value={doctor.doctor_id}>
-                                    {doctor.doctor_name}
-                                </option>
-                            ))}
-                        </select>
-                        <input
-                            type="datetime-local"
-                            value={newSchedule.appointment_date}
-                            onChange={(e) => setNewSchedule({
-                                ...newSchedule,
-                                appointment_date: roundMinutesOnly(e.target.value)
-                            })}
-                            step="600"
-                            min={getCurrentDateTimeInVietnam()}
-                        />
-                        <input
-                            type='text'
-                            placeholder='Nguyên nhân'
-                            value={newSchedule.reason}
-                            onChange={(e) => setNewSchedule({ ...newSchedule, reason: e.target.value })}
-                        />
-                        <button className='addScheduleButton' onClick={handleAdd}>Thêm lịch khám</button>
-                    </div> */}
-
                     {/* danh sách lịch khám */}
                     <div className='scheduleList'>
                         {Object.keys(scheduleList).map((scheduleId) => {

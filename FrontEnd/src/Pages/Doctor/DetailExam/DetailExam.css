@@ -1,0 +1,275 @@
+
+.dashboard .body .content {
+  grid-column: 2 /span 5;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%; 
+}
+
+.detailExam .body .content .top {
+  display: grid;
+  grid-template-columns: 2fr 3fr;
+}
+
+.detailExam .body .content .top .patientInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  grid-column: 1;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.detailExam .body .content .top .patientInfo .title {
+  font-size: 18px;
+  padding-bottom: 5px;
+  padding-top: 5px;
+  color: #fff;
+  background-color: hsl(94, 74%, 63%);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.detailExam .body .content .top .patientInfo .info {
+  display:flex;
+  width: 100%;
+  padding: 10px;
+  justify-content: space-between;
+}
+
+.detailExam .body .content .top .optionalInfo {
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.detailExam .body .content .top .optionalInfo .info {
+  display: flex;
+  flex-direction: column;
+  
+}
+
+.detailExam .body .content .top .optionalInfo .info .title {
+  display: flex;
+  justify-content: center;
+  background-color: hsl(94, 74%, 63%);
+  font-size: 18px;
+  padding-bottom: 5px;
+  padding-top: 5px;
+  color: #fff;
+}
+
+.detailExam .body .content .top .optionalInfo .info .reason {
+  padding-top: 20px;
+  border-bottom: 1px solid #ccc;
+  height: 100px;
+  overflow-y: scroll;
+}
+
+.detailExam .body .content .top .optionalInfo .patch {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 20px 0px 40px;
+}
+
+.detailExam .body .content .top .optionalInfo .patch .value {
+  display: flex;
+}
+
+.detailExam .body .content .top .optionalInfo .patch .value .sub {
+  padding: 5px 20px 5px 0px;
+}
+
+.detailExam .body .content .top .optionalInfo .patch .value .button {
+  padding: 5px 10px 5px 10px;
+}
+
+.detailExam .body .content .services {
+  margin-top: 10px;;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.detailExam .body .content .services .examService .titleService {
+  display: flex;
+  padding: 10px;
+  background-color: hsl(94, 74%, 63%);
+  border-radius: 20px 20px 0px 0px;
+  color: #fff;
+  justify-content: center;
+}
+
+.detailExam .body .content .services .examService .addNameService{
+  position: relative;
+}
+
+.detailExam .body .content .services .examService .addNameService .listService {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  border: 1px solid #ccc;
+  background: white;
+  z-index: 10;
+  overflow-y: auto;
+  max-height: 100px;
+}
+
+.detailExam .body .content .services .examService .addNameService .listService .cellService {
+  cursor: pointer;
+  background-color: #fff;
+}
+
+.detailExam .body .content .services .examService .addNameService .listService .selected {
+  background-color: #f0f0f0
+}
+
+.detailExam .body .content .services .examService .addService  {
+  padding: 20px;
+  display: flex;
+}
+
+.detailExam .body .content .services .examService .addService .batch {
+  display: flex;
+  padding-right: 100px;
+  align-items: center;
+}
+
+.detailExam .body .content .services .examService .addService .batch .title {
+  padding-right: 10px;
+}
+
+.detailExam .body .content .services .examService .addService .batch .inputValue {
+  padding: 5px;
+  width: 300px;
+}
+
+.detailExam .body .content .table .listCell{
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  padding: 5px;
+  max-height: 200px;
+  overflow-y: scroll;
+  margin: 5px;
+}
+
+
+.detailExam .body .content .expandIcon {
+  position: relative;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  border-radius: 100%;
+}
+
+.detailExam .body .content .expandIcon:hover {
+  background-color: rgba(200, 200, 200, 0.5);
+}
+
+.detailExam .body .content .expandIcon:active {
+  background-color: rgba(175, 175, 175, 0.5);
+}
+
+
+
+.detailExam .body .content .table .cell {
+  display: flex;
+  border: 1px solid #ccc;
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  justify-content: space-between;
+}
+
+.detailExam .body .content .medicine {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  /* align-items: center; */
+  border: 1px solid #ccc;
+  border-radius: 20px;
+}
+
+.detailExam .body .content .medicine .titleMedicine {
+  display: flex;
+  padding: 10px;
+  color: #fff;
+  width: 100%;
+  justify-content: center;
+  background-color: hsl(94, 74%, 63%);
+  border-radius: 20px 20px 0px 0px;
+}
+
+.detailExam .body .content .medicine .addMedicine {
+  padding: 20px;
+  width: 100%;
+  display: flex;
+  border-radius: 0px 0px 20px 20px;
+}
+
+.detailExam .body .content .medicine .addMedicine .addNameMedicine {
+  position: relative;
+}
+
+.detailExam .body .content .medicine .addMedicine .addNameMedicine .listMedicine {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  border: 1px solid #ccc;
+  background: white;
+  z-index: 10;
+  overflow-y: auto;
+  max-height: 100px;
+}
+
+.detailExam .body .content .medicine .addMedicine .addNameMedicine .listMedicine .cellMedicine {
+  cursor: pointer;
+  background-color: #fff;
+}
+
+.detailExam .body .content .medicine .addMedicine .addNameMedicine .listMedicine .selected {
+  background-color: #ccc;
+}
+
+.detailExam .body .content .medicine .addMedicine .batch {
+  display: flex;
+  padding-right: 20px;
+  align-items: center;
+}
+
+.detailExam .body .content .medicine .addMedicine .batch .title {
+  padding-right: 10px;
+}
+
+.detailExam .body .content .medicine .addMedicine .batch .inputValue {
+  width: 200px;
+  padding: 5px;
+}
+
+.detailExam .body .content .submitExam {
+  display: flex;
+  justify-content: center;
+  padding-top: 3%;
+}
+
+.detailExam .body .content .submitExam .buttonSubmit {
+  padding: 5px;
+  border: 1px solid #ccc;
+  background-color: hsl(94, 53%, 57%);
+  color: #fff;
+}
+
+.detailExam .body .content .submitExam .buttonSubmit:hover {
+  background-color: hsl(94, 40%, 45%);
+  
+}
