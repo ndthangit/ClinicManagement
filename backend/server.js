@@ -8,7 +8,7 @@ var logger = require('morgan');
 
 
 
-const doctorRouter = require('./routes/doctor');
+const doctorRouter = require('./routes/Doctor');
 const appointmentRouter = require('./routes/Appointment'); 
 const userRouter = require('./routes/User');
 const patientRouter = require('./routes/Patient');
