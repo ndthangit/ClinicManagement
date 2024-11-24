@@ -40,13 +40,14 @@ function MedicalExam() {
 
   const showSchedule = () => {
     if (medicalExam.length > 0) {
-      medicalExam.map(([key, value], index) => {
+      return medicalExam.map(([key, value], index) => {
         return (
           <button className='cell' key={index} onClick={() => selectDate(value)}> 
             {key}
           </button>
         )
       })
+      
     }
     else {
       return (

@@ -1,0 +1,117 @@
+.doctor-appointment-dashboard {
+  display: flex;
+  flex-direction: column;
+}
+
+.doctor-appointment-container {
+  display: flex;
+  flex: 1;
+}
+
+.doctor-appointment-container .content {
+  overflow-y: scroll;
+}
+
+.doctor-appointment-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  overflow-y: scroll;
+}
+
+.doctor-appointment-lists {
+  display: flex;
+  flex: 1;
+  gap: 20px; 
+  overflow: hidden; 
+}
+
+.doctor-appointment-list-wrapper {
+  flex: 1; 
+  min-width: 0; 
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden; 
+}
+
+.doctor-appointment-list-title {
+  background-color: #f0f0f0;
+  padding: 10px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  border-bottom: 1px solid #ddd;
+}
+
+.doctor-appointment-list {
+  list-style: none;
+  padding: 10px;
+  margin: 0;
+  flex-grow: 1;
+  overflow-y: auto; 
+  scrollbar-width: thin;
+  scrollbar-color: #86cc51 #f9f9f9;
+}
+
+.doctor-appointment-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.doctor-appointment-list::-webkit-scrollbar-thumb {
+  background-color: #86cc51;
+  border-radius: 4px;
+}
+
+.doctor-appointment-list::-webkit-scrollbar-track {
+  background-color: #f9f9f9;
+}
+
+.doctor-appointment-item {
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column; 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.doctor-appointment-item:hover {
+  transform: scale(1.01);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.doctor-appointment-item.confirmed {
+  background-color: #eaffea;
+  border-color: #86cc51;
+}
+
+.doctor-appointment-item.canceled {
+  background-color: #ffeaea;
+  border-color: #f44336;
+}
+
+.doctor-appointment-item p {
+  margin: 5px 0;
+  font-size: 14px;
+  color: #555;
+}
+
+.doctor-appointment-item strong {
+  color: #333;
+  font-weight: bold;
+}
+
+.doctor-appointment-list-empty {
+  text-align: center;
+  color: #888;
+  font-style: italic;
+}

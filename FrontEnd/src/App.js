@@ -17,6 +17,8 @@ import DoctorAppointment from './Pages/Doctor/Appointment/DoctorAppointment';
 import MedicalExam from './Pages/Doctor/Medical/MedicalExam';
 import DetailExam from './Pages/Doctor/DetailExam/DetailExam';
 import HistoryExam from './Pages/Doctor/HistoryExam/HistoryExam';
+import ApproveAppointments from './Pages/Doctor/ApproveAppointments/ApproveAppointments';
+
 
 import {
     createBrowserRouter,
@@ -84,6 +86,10 @@ const router = createBrowserRouter([
     {
         path: 'doctor/medical/history/:examId',
         element: <DetailHistory/>
+    },
+    {
+        path: 'doctor/approve-appointments/:doctor_id',
+        element: <ApproveAppointments />
     }
     
 ])

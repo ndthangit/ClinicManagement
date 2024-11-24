@@ -376,7 +376,7 @@ function Schedule() {
                                                         onChange={(e) => setEditSchedule({ ...editSchedule, reason: e.target.value })}
                                                     />
                                                     <button onClick={handleSaveEdit}>Lưu thay đổi</button>
-                                                    <button onClick={() => toggleEditForm(null)}>Hủy</button>
+                                                    <button onClick={() => {toggleEditForm(null); setShowEditForms(false);}}>Hủy</button>
                                                 </div>
                                             )}
                                         </div>

@@ -8,7 +8,7 @@ var logger = require('morgan');
 
 
 
-const doctorRouter = require('./routes/Doctor');
+const doctorRouter = require('./routes/doctor');
 const appointmentRouter = require('./routes/Appointment'); 
 const userRouter = require('./routes/User');
 const patientRouter = require('./routes/Patient');
@@ -16,7 +16,7 @@ const scheduleRouter = require('./routes/Schedule');
 const medicalExamRouter = require('./routes/MedExamination');
 const serviceRouter = require('./routes/Services');
 const medicineRouter = require('./routes/Medicine');
-
+const doctorApmRouter = require('./routes/DoctorApm'); 
 
 var server = express();
 var cors = require('cors')
@@ -44,6 +44,8 @@ server.use('/schedule', scheduleRouter);
 server.use('/medExam', medicalExamRouter);
 server.use('/service', serviceRouter);
 server.use('/medicine', medicineRouter);
+server.use('/doctorApm', doctorApmRouter);
+
 
 
 
