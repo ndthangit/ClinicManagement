@@ -18,6 +18,7 @@ const serviceRouter = require('./routes/Services');
 const medicineRouter = require('./routes/Medicine');
 const doctorApmRouter = require('./routes/DoctorApm'); 
 const adminRouter = require('./routes/Admin');
+const ServicePriceRouter=require('./routes/ServicePrice')
 
 
 var server = express();
@@ -48,7 +49,7 @@ server.use('/service', serviceRouter);
 server.use('/medicine', medicineRouter);
 server.use('/doctorApm', doctorApmRouter);
 server.use('/admin', adminRouter);
-
+server.use('/service_price',ServicePriceRouter)
 
 
 
@@ -71,4 +72,4 @@ server.use(function(err, req, res, next) {
   res.render('error');
 });
 
-module.exports = server;
+module.exports = server; 

@@ -10,6 +10,8 @@ import DoctorInfo from './Pages/Patient/DoctorInfo/DoctorInfo';
 import Schedule from './Pages/Patient/Schedule/Schedule';
 import SettingInfo from './Pages/Patient/Setting/SettingInfo';
 import MedicalHistory from './Pages/Patient/MedicalHistory/MedicalHistory';
+import ServicePrice from './Pages/ServicePrice/ServicePrice';
+import Medicine from './Pages/Medicine/Medicine'
 
 // for doctor
 import DoctorLogin from './Pages/Doctor/Login/DoctorLogin';
@@ -20,6 +22,7 @@ import HistoryExam from './Pages/Doctor/HistoryExam/HistoryExam';
 import ApproveAppointments from './Pages/Doctor/ApproveAppointments/ApproveAppointments';
 
 import adminRouter from "./Pages/Admin/AdminRouter";
+
 
 import {
     createBrowserRouter,
@@ -60,6 +63,14 @@ const router = createBrowserRouter([
     {
         path: '/medicalhistory',
         element: <div><MedicalHistory /></div>
+    },
+    {
+        path: '/service_price',
+        element: <div><ServicePrice/></div>
+    },
+    {
+        path:'/medicine',
+        element:<div><Medicine/></div>
     },
 
 

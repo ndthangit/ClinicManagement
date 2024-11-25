@@ -295,7 +295,7 @@ const fakeData = [
 function MedicalHistory() {
     const { user } = useSelector((state) => state.user.patient);
     const [listExam, setListExam] = useState([]);    useEffect(() => {
-        axios.get(`http://localhost:3005/medExam/medicalExam/byCCCD/:id`)
+        axios.get(`http://localhost:3005/medExam/medicalExam/byCCCD/${user.patient_id}`)
         .then((response) => {
             setListExam(response.data)
         })
