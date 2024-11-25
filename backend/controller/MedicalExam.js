@@ -15,10 +15,29 @@ function query(sql, params = []) {
 const getHistMedicalExam = async (req, res) => {
 
     const sql = `select * from datait3170.medical_exam, datait3170.appointments, datait3170.patients 
-        where datait3170.appointments.patient_id = datait3170.patients.patient_id and 
-        datait3170.medical_exam.appointment_id = datait3170.appointments.appointment_id`
+        where 
+        datait3170.medical_exam.appointment_id = datait3170.appointments.appointment_id and
+        datait3170.appointments.patient_id = datait3170.patients.patient_id
+        `
         try {
             const data = await executeQuery(sql, res);
+            res.send(data);
+        } catch (err) {
+            console.error('Failed to retrieve data:', err);
+        }
+}
+
+const getListMedicalExamByCCCD = async (req, res) => {
+
+    const sql = `SELECT * 
+             FROM datait3170.medical_exam M
+             JOIN datait3170.appointments A
+                 ON M.appointment_id = A.appointment_id
+             JOIN datait3170.patients P
+                 ON P.patient_id = A.patient_id
+            WHERE P.cccd = ?`;
+        try {
+            const data = await query(sql, req.params.id );
             res.send(data);
         } catch (err) {
             console.error('Failed to retrieve data:', err);
@@ -123,6 +142,7 @@ const updateMedicalExam = async (req, res) => {
 
 module.exports = {
     getHistMedicalExam: getHistMedicalExam,
+    getListMedicalExamByCCCD: getListMedicalExamByCCCD,
     getHistMedicalExamForDoctor: getHistMedicalExamForDoctor,
     getDetailMedicalExamForDoctor: getDetailMedicalExamForDoctor,
     updateMedicalExam: updateMedicalExam,

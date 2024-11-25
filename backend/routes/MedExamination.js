@@ -6,6 +6,10 @@ router.get('/medicalExam', async (req, res) => {
     await MedicalExam.getHistMedicalExam(req, res);
 });
 
+router.get('/medicalExam/byCCCD/:id', async (req, res) => {
+    await MedicalExam.getListMedicalExamByCCCD(req, res);
+});
+
 router.get('/medicalExam/byDoctor/:id', async (req, res) => {
     await MedicalExam.getHistMedicalExamForDoctor(req, res);
 });

@@ -14,7 +14,7 @@ let loginUser = async (req, res) => {
                 return res.status(404).json({message: 'connection failed'});
             } else {
                 console.log('results', results);
-                return res.status(200).json({message: 'connection success',patient_id: results[0].user_name, patient_name: results[0].patient_name});
+                return res.status(200).json({message: 'connection success',patient_id: results[0].user_name, id: results[0].patient_id, patient_name: results[0].patient_name});
             }
         });
     }
