@@ -19,6 +19,7 @@ import DetailExam from './Pages/Doctor/DetailExam/DetailExam';
 import HistoryExam from './Pages/Doctor/HistoryExam/HistoryExam';
 import ApproveAppointments from './Pages/Doctor/ApproveAppointments/ApproveAppointments';
 
+import adminRouter from "./Pages/Admin/AdminRouter";
 
 import {
     createBrowserRouter,
@@ -90,7 +91,10 @@ const router = createBrowserRouter([
     {
         path: 'doctor/approve-appointments/:doctor_id',
         element: <ApproveAppointments />
-    }
+    },
+
+    // for admin
+    ...adminRouter
     
 ])
 

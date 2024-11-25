@@ -10,7 +10,7 @@ import {AiOutlineSwapRight} from 'react-icons/ai'
 import {useDispatch} from "react-redux";
 import { loginDoctorFailed, loginDoctorStarted, loginDoctorSuccess } from '../../Features/DoctorSlice';
 import {fetchDoctors} from "../../Features/DoctorSlice";
-import {fetchMedicines} from "../../Features/MedicineSlice";
+import {fetchMedicines} from "../../Features/AdminSlice";
 
 const DoctorLogin = () => {
     const state = {content: null}

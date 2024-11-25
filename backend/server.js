@@ -17,6 +17,8 @@ const medicalExamRouter = require('./routes/MedExamination');
 const serviceRouter = require('./routes/Services');
 const medicineRouter = require('./routes/Medicine');
 const doctorApmRouter = require('./routes/DoctorApm'); 
+const adminRouter = require('./routes/Admin');
+
 
 var server = express();
 var cors = require('cors')
@@ -45,6 +47,7 @@ server.use('/medExam', medicalExamRouter);
 server.use('/service', serviceRouter);
 server.use('/medicine', medicineRouter);
 server.use('/doctorApm', doctorApmRouter);
+server.use('/admin', adminRouter);
 
 
 

@@ -138,7 +138,7 @@ const getAvailableTimeSlotsByDoctor = async (req, res) => {
 
     const sql = `
         SELECT a.appointment_date 
-        FROM datait3170.Appointments AS a
+        FROM datait3170.appointments AS a
         WHERE a.doctor_id = ? AND a.status NOT IN ('canceled', 'completed')
         AND DATE(a.appointment_date) = ?
     `;

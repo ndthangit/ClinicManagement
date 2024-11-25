@@ -1,0 +1,72 @@
+/* `AppointmentDetail.css` */
+.appointmentDetail .content {
+    padding: 20px;
+}
+
+.appointmentDetail table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.appointmentDetail th, .appointmentDetail td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.appointmentDetail th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+.appointmentDetail tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.appointmentDetail tr:hover {
+    background-color: #f1f1f1;
+}
+
+.appointmentDetail select {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/*.appointmentDetail .sa {*/
+/*    padding: 5px 10px;*/
+/*    background-color: #4CAF50;*/
+/*    color: white;*/
+/*    border: none;*/
+/*    border-radius: 4px;*/
+/*    cursor: pointer;*/
+/*}*/
+
+/*.appointmentDetail  th button:hover {*/
+/*    background-color: #45a049;*/
+/*}*/
+/* CSS cho nút Save */
+.saveButton {
+    background-color: #45a049; /* Màu xanh dương */
+    color: white; /* Màu chữ */
+    padding: 8px 16px; /* Khoảng cách bên trong */
+    border: none; /* Xóa viền */
+    border-radius: 4px; /* Bo góc */
+    font-size: 14px; /* Kích thước chữ */
+    font-weight: bold; /* In đậm chữ */
+    cursor: pointer; /* Con trỏ chuột */
+    transition: background-color 0.3s ease; /* Hiệu ứng chuyển màu khi hover */
+}
+
+/* Hiệu ứng khi di chuột qua nút */
+.saveButton:hover {
+    background-color: #aaaaaa; /* Màu xanh đậm hơn */
+}
+
+/* Khi nút bị disabled */
+.saveButton:disabled {
+    background-color: #cccccc; /* Màu xám */
+    cursor: not-allowed; /* Biểu tượng chuột không cho phép */
+    opacity: 0.7; /* Giảm độ trong suốt */
+}

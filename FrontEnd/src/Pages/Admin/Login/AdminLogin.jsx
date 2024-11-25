@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import '../../../App.css'
 import {Link, useNavigate} from 'react-router-dom';
 import Axios from 'axios'
 import video from '../../Assets/video.mp4'
@@ -7,11 +8,12 @@ import {FaUserShield} from 'react-icons/fa'
 import {BsFillShieldLockFill} from 'react-icons/bs'
 import {AiOutlineSwapRight} from 'react-icons/ai'
 import {useDispatch} from "react-redux";
-import {loginFailed, loginStarted, loginSuccess} from "../../Features/UserSlice";
-import {fetchDoctors} from "../../Features/DoctorSlice";
-import {fetchMedicines} from "../../Features/AdminSlice";
+import {loginAdminFailed, loginAdminSuccess} from "../../Features/AdminSlice";
+import {fetchPayments} from "../../Features/PaymentSclice";
+import {fetchAppointments} from "../../Features/AppointmentSlice";
 
-const Login = () => {
+
+const AdminLogin = () => {
     const state = {content: null}
     const [username, setUsername] = useState('');
     const [loginPassword, setLoginPassword] = useState('');
@@ -28,22 +30,21 @@ const Login = () => {
             user_name: username,
             password: loginPassword
         };
-        dispatch(loginStarted());
-        Axios.post('http://localhost:3005/users/login', accountInfo).then((res)=>{
+        Axios.post('http://localhost:3005/admin/login', accountInfo).then((res)=>{
+            console.log("rss from backend",res.data.message);
             if( res.data.message === 'connection success'){
-                dispatch(loginSuccess(res.data));
-                navigateTo('/');
+                dispatch(loginAdminSuccess(res.data.user_name))
+                dispatch(fetchPayments())
+                dispatch(fetchAppointments())
+                navigateTo('/admin');
             }
             else {
-                dispatch(loginFailed());
+                dispatch(loginAdminFailed())
                 console.log("res from backend",res.data);
             }
         }).catch((error) => {
             console.error('Error during login request:', error);
         })
-        // Axios.get(`http://localhost:3005/users/account/${accountID}`).then((res) => {
-        //     console.log("res",res.data.message);
-        // });
     };
 
     useEffect(() => {
@@ -67,15 +68,15 @@ const Login = () => {
                 <div className="videoDiv">
                     <video src={video} autoPlay muted loop></video>
 
-                    {/*<div className="textDiv">*/}
-                    {/*    <h2 className="title"></h2>*/}
-                    {/*    <p>Adopt the peace of nature!</p>*/}
-                    {/*</div>*/}
+                    {/* <div className="textDiv">
+                       <h2 className="title"></h2>
+                       <p>Adopt the peace of nature!</p>
+                    </div> */}
 
                     <div className="footerDiv flex">
-                        <span className="text">Don't have an account?</span>
+                        <span className="text">Admin?</span>
                         <Link to={'/signup'}>
-                            <button className="btn">Sign Up</button>
+                            <button className="btn">Login</button>
                         </Link>
                     </div>
                 </div>
@@ -86,16 +87,14 @@ const Login = () => {
                         <h3>Welcome Back!</h3>
                     </div>
 
-                    <form action="" className="form grid" onSubmit={() => {
-                        onSubmit()
-                    }}>
+                    <form action="" className="form grid" onSubmit={() => {onSubmit()}}>
                         <span className={statusHolder}>{loginStatus}</span>
 
                         <div className="inputDiv">
-                            <label htmlFor="CCCD">CCCD</label>
+                            <label htmlFor="Username">Username</label>
                             <div className="input flex">
                                 <FaUserShield className="icon"/>
-                                <input type="text" id='username' placeholder='Enter CCCD'
+                                <input type="text" id='username' placeholder='Enter Username'
                                        onChange={(event) => setUsername(event.target.value)}/>
                             </div>
                         </div>
@@ -109,9 +108,7 @@ const Login = () => {
                             </div>
                         </div>
 
-                        <button type='submit' className='btn flex' onClick={(event) => {
-                            loginUser(event)
-                        }}>
+                        <button type='submit' className='btn flex' onClick={(event) => {loginUser(event)}}>
                             <span>Login</span>
                             <AiOutlineSwapRight className="icon"/>
                         </button>
@@ -120,10 +117,7 @@ const Login = () => {
                             Forgot your password? <Link to="/login">Click Here</Link>
                         </span>
                         <span className="forgotPassword">
-                            Are you a doctor? <Link to="/doctor/login">Click Here</Link>
-                        </span>
-                        <span className="forgotPassword">
-                            Are you an admin? <Link to="/admin/login">Click Here</Link>
+                            Are you not a doctor? <Link to="/login">Click Here</Link>
                         </span>
 
                     </form>
@@ -134,4 +128,4 @@ const Login = () => {
     )
 }
 
-export default Login
+export default AdminLogin
