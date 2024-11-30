@@ -10,6 +10,11 @@ function AdminNavbar() {
     const doctor_name = useSelector((state)=>state.user.doctor);
 
     const handleLogout = () => {
+        // Clear localStorage if needed
+        localStorage.removeItem('state');
+
+        // Dispatch logout action
+        dispatch({ type: 'LOGOUT' });
         navigateTo('/admin/login');
     }
 
