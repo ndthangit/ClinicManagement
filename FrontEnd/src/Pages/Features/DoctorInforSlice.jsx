@@ -21,7 +21,6 @@ const doctorInfoSlice = createSlice({
             state.doctorInfo = [];
             state.isLoading = false;
             state.isError = false;
-
         }
 
     },

@@ -18,10 +18,7 @@ router.post('/login', async (req, res) => {
   await Doctor.loginUser(req, res);
 });
 
-router.post('/signup', async (req, res) => {
-  await Doctor.createUser(req, res);
-});
-
-
+router.post('/signup', Doctor.createUser);
+router.post('/create-doctor', Doctor.createNewDoctor);
 
 module.exports = router

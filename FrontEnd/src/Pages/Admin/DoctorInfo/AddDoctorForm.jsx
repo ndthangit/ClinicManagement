@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import './AddDoctorForm.css';
 import {useDispatch} from "react-redux";
+import Axios from 'axios';
+import {fetchDoctorInfo} from "../../Features/DoctorInforSlice";
 
 const AddDoctorForm = ({ onSave, onCancel }) => {
     const dispatch = useDispatch();
@@ -34,6 +36,28 @@ const AddDoctorForm = ({ onSave, onCancel }) => {
             address: '',
             username: '',
         });
+
+        const values = {
+            doctor_name: doctorData.doctor_name,
+            department_id: doctorData.department_id,
+            type_id: doctorData.type_id,
+            phone: doctorData.phone,
+            email: doctorData.email,
+            address: doctorData.address,
+            username: doctorData.username
+        }
+
+        Axios.post('http://localhost:3005/doctor/create-doctor', values).then((res)=>{
+            console.log("rss from backend",res.data.message);
+            if( res.data.message === 'Doctor created successfully'){
+                dispatch(fetchDoctorInfo())
+            }
+            else {
+                console.log("res from backend",res.data);
+            }
+        }).catch((error) => {
+            console.error('Error during login request:', error);
+        })
     };
 
     return (

@@ -3,6 +3,7 @@ import rootReducer from "./reducers";
 import paymentReducer from "../Pages/Features/PaymentSclice";
 import appointmentReducer from "../Pages/Features/AppointmentSlice";
 import doctorInfoReducer from "../Pages/Features/DoctorInforSlice";
+import patientInfoReducer from "../Pages/Features/PatientInforSlice";
 
 // Load state from localStorage
 const loadState = () => {
@@ -36,6 +37,7 @@ const appReducer = combineReducers({
     payment: paymentReducer,
     appointment: appointmentReducer,
     doctorInfo: doctorInfoReducer,
+    patientInfo: patientInfoReducer,
 });
 
 // Root reducer with reset functionality

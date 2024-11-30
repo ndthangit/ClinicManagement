@@ -81,12 +81,35 @@ const createUser = async (req, res) => {
   res.json(values);
 };
 
+const createNewDoctor = async (req, res) => {
+    console.log(req.body);
+    const sql = 'INSERT INTO `dataIT3170`.doctors (doctor_name, department_id, type_id, phone, email, address, username) VALUES(?, ?, ?, ?, ?, ?, ?);';
+    const values = [req.body.doctor_name, req.body.department_id, req.body.type_id, req.body.phone, req.body.email, req.body.address, req.body.username];
+    try {
+        connection.query(sql, values, (err, results) => {
+            if (err) {
+                console.error('Error executing query:', err);
+                res.status(500).send('Database query error');
+            } else {
+                return res.status(200).json({message: 'Doctor created successfully'});
+            }
+        });
+    }
+    catch (err) {
+        console.error('Failed to add new doctor:', err);
+    }
+
+    res.json(values);
+};
+
+
 
 module.exports = {
   getDoctors: getDoctors,
   getDoctorById: getDoctorById,
   checkDoctorAvailability: checkDoctorAvailability,
   loginUser: loginUser,
-  createUser: createUser
+  createUser: createUser,
+    createNewDoctor: createNewDoctor
 }
 

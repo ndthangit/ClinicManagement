@@ -35,8 +35,9 @@ let confiUpdateStatusAppointment = async (req, res) => {
 };
 
 
+
 module.exports = {
     confiUpdateStatusPayment: confiUpdateStatusPayment,
     getInfoAppointment: getInfoAppointment,
-    confiUpdateStatusAppointment: confiUpdateStatusAppointment
+    confiUpdateStatusAppointment: confiUpdateStatusAppointment,
 }

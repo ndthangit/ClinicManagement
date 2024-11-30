@@ -1,0 +1,29 @@
+.patientInfo .content {
+    padding: 20px;
+    height: 100vh; /* Set the height of the content to the height of the screen */
+    display: flex;
+    flex-direction: column;
+}
+
+.patientInfo table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    flex-grow: 1; /* Allow the table to grow and fill the remaining space */
+    overflow-y: auto; /* Enable vertical scrolling if content overflows */
+}
+
+.patientInfo th, .patientInfo td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+}
+
+.patientInfo th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+.patientInfo tr:nth-child(even) {
+    background-color: #f9f9f9;
+}

@@ -2,37 +2,27 @@ import React, { useEffect, useState } from 'react';
 import AdminNavbar from "../../Components/navbar/AdminNavbar";
 import Leftbar from "../../Components/Appointment/Leftbar";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchAppointments, updateAppointmentStatus, updateUIAppointmentStatus } from "../../Features/AppointmentSlice";
+import { fetchPatientInfo } from "../../Features/PatientInforSlice";
+import './PatientInfo.css';
 
 const PatientInfo = () => {
     const dispatch = useDispatch();
-    const { appointments, isLoading, isError } = useSelector((state) => state.appointment);
-    const [updatedStatus, setUpdatedStatus] = useState({});
+    const { patientInfo, isLoading, isError } = useSelector((state) => state.patientInfo);
     const [searchQueries, setSearchQueries] = useState({
-        appointment_id: '',
+        patient_id: '',
         patient_name: '',
-        doctor_name: '',
-        appointment_date: '',
-        status: ''
+        date_of_birth: '',
+        gender: '',
+        phone: '',
+        email: '',
+        address: '',
+        cccd: '',
+        registration_date: ''
     });
 
     useEffect(() => {
-        dispatch(fetchAppointments());
+        dispatch(fetchPatientInfo());
     }, [dispatch]);
-
-    const handleStatusChange = (appointmentId, status) => {
-        dispatch(updateUIAppointmentStatus({ appointmentId, status }));
-        setUpdatedStatus((prevState) => ({
-            ...prevState,
-            [appointmentId]: status,
-        }));
-    };
-
-    const handleSave = async (appointmentId) => {
-        if (updatedStatus[appointmentId]) {
-            dispatch(updateAppointmentStatus({ appointmentId, status: updatedStatus[appointmentId] }));
-        }
-    };
 
     const handleSearchChange = (e, column) => {
         setSearchQueries({
@@ -41,12 +31,16 @@ const PatientInfo = () => {
         });
     };
 
-    const filteredAppointments = appointments.filter(appointment => {
-        return appointment.appointment_id.toString().includes(searchQueries.appointment_id) &&
-            (appointment.patient_name ? appointment.patient_name.toLowerCase().includes(searchQueries.patient_name.toLowerCase()) : true) &&
-            (appointment.doctor_name ? appointment.doctor_name.toLowerCase().includes(searchQueries.doctor_name.toLowerCase()) : true) &&
-            appointment.appointment_date.includes(searchQueries.appointment_date) &&
-            (appointment.status ? appointment.status.toLowerCase().includes(searchQueries.status.toLowerCase()) : true);
+    const filteredPatients = patientInfo.filter(patient => {
+        return patient.patient_id.toString().includes(searchQueries.patient_id) &&
+            patient.patient_name.toLowerCase().includes(searchQueries.patient_name.toLowerCase()) &&
+            patient.date_of_birth.includes(searchQueries.date_of_birth) &&
+            patient.gender.toLowerCase().includes(searchQueries.gender.toLowerCase()) &&
+            patient.phone.includes(searchQueries.phone) &&
+            patient.email.toLowerCase().includes(searchQueries.email.toLowerCase()) &&
+            patient.address.toLowerCase().includes(searchQueries.address.toLowerCase()) &&
+            patient.cccd.includes(searchQueries.cccd) &&
+            patient.registration_date.includes(searchQueries.registration_date);
     });
 
     if (isLoading) {
@@ -54,87 +48,107 @@ const PatientInfo = () => {
     }
 
     if (isError) {
-        return <div>Error loading appointments</div>;
+        return <div>Error loading patient data</div>;
     }
 
     return (
-        <div className='appointmentDetail dashboard'>
+        <div className='patientInfo dashboard'>
             <AdminNavbar className="header"/>
             <div className="body">
                 <Leftbar className='leftBar'/>
                 <div className="content">
-                    <h2>Appointment Details</h2>
+                    <h2>Patient Information</h2>
                     <table>
                         <thead>
-                        <tr>
-                            <th>
-                                Appointment ID
-                                <input
-                                    type="text"
-                                    value={searchQueries.appointment_id}
-                                    onChange={(e) => handleSearchChange(e, 'appointment_id')}
-                                />
-                            </th>
-                            <th>
-                                Patient Name
-                                <input
-                                    type="text"
-                                    value={searchQueries.patient_name}
-                                    onChange={(e) => handleSearchChange(e, 'patient_name')}
-                                />
-                            </th>
-                            <th>
-                                Doctor Name
-                                <input
-                                    type="text"
-                                    value={searchQueries.doctor_name}
-                                    onChange={(e) => handleSearchChange(e, 'doctor_name')}
-                                />
-                            </th>
-                            <th>
-                                Appointment Date
-                                <input
-                                    type="text"
-                                    value={searchQueries.appointment_date}
-                                    onChange={(e) => handleSearchChange(e, 'appointment_date')}
-                                />
-                            </th>
-                            <th>
-                                Status
-                                <input
-                                    type="text"
-                                    value={searchQueries.status}
-                                    onChange={(e) => handleSearchChange(e, 'status')}
-                                />
-                            </th>
-                            <th>Actions</th>
-                        </tr>
+                            <tr>
+                                <th>
+                                    Patient ID
+                                    <input
+                                        type="text"
+                                        value={searchQueries.patient_id}
+                                        onChange={(e) => handleSearchChange(e, 'patient_id')}
+                                    />
+                                </th>
+                                <th>
+                                    Name
+                                    <input
+                                        type="text"
+                                        value={searchQueries.patient_name}
+                                        onChange={(e) => handleSearchChange(e, 'patient_name')}
+                                    />
+                                </th>
+                                <th>
+                                    Date of Birth
+                                    <input
+                                        type="text"
+                                        value={searchQueries.date_of_birth}
+                                        onChange={(e) => handleSearchChange(e, 'date_of_birth')}
+                                    />
+                                </th>
+                                <th>
+                                    Gender
+                                    <input
+                                        type="text"
+                                        value={searchQueries.gender}
+                                        onChange={(e) => handleSearchChange(e, 'gender')}
+                                    />
+                                </th>
+                                <th>
+                                    Phone
+                                    <input
+                                        type="text"
+                                        value={searchQueries.phone}
+                                        onChange={(e) => handleSearchChange(e, 'phone')}
+                                    />
+                                </th>
+                                <th>
+                                    Email
+                                    <input
+                                        type="text"
+                                        value={searchQueries.email}
+                                        onChange={(e) => handleSearchChange(e, 'email')}
+                                    />
+                                </th>
+                                <th>
+                                    Address
+                                    <input
+                                        type="text"
+                                        value={searchQueries.address}
+                                        onChange={(e) => handleSearchChange(e, 'address')}
+                                    />
+                                </th>
+                                <th>
+                                    CCCD
+                                    <input
+                                        type="text"
+                                        value={searchQueries.cccd}
+                                        onChange={(e) => handleSearchChange(e, 'cccd')}
+                                    />
+                                </th>
+                                <th>
+                                    Registration Date
+                                    <input
+                                        type="text"
+                                        value={searchQueries.registration_date}
+                                        onChange={(e) => handleSearchChange(e, 'registration_date')}
+                                    />
+                                </th>
+                            </tr>
                         </thead>
                         <tbody>
-                        {filteredAppointments.map((appointment) => (
-                            <tr key={appointment.appointment_id}>
-                                <td>{appointment.appointment_id}</td>
-                                <td>{appointment.patient_name || 'N/A'}</td>
-                                <td>{appointment.doctor_name || 'N/A'}</td>
-                                <td>{new Date(appointment.appointment_date).toLocaleDateString()}</td>
-                                <td>
-                                    <select
-                                        value={appointment.status}
-                                        onChange={(e) => handleStatusChange(appointment.appointment_id, e.target.value)}
-                                    >
-                                        <option value="pending">Pending</option>
-                                        <option value="confirmed">Confirmed</option>
-                                        <option value="completed">Completed</option>
-                                        <option value="canceled">Canceled</option>
-                                    </select>
-                                </td>
-                                <td>
-                                    <button className="saveButton" onClick={() => handleSave(appointment.appointment_id)}>
-                                        Save
-                                    </button>
-                                </td>
-                            </tr>
-                        ))}
+                            {filteredPatients.map((patient) => (
+                                <tr key={patient.patient_id}>
+                                    <td>{patient.patient_id}</td>
+                                    <td>{patient.patient_name}</td>
+                                    <td>{new Date(patient.date_of_birth).toLocaleDateString()}</td>
+                                    <td>{patient.gender}</td>
+                                    <td>{patient.phone}</td>
+                                    <td>{patient.email}</td>
+                                    <td>{patient.address}</td>
+                                    <td>{patient.cccd}</td>
+                                    <td>{new Date(patient.registration_date).toLocaleDateString()}</td>
+                                </tr>
+                            ))}
                         </tbody>
                     </table>
                 </div>
