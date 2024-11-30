@@ -62,11 +62,25 @@ const loginUser = async (req, res) => {
 };
 
 const createUser = async (req, res) => {
-  const info = req.body
   const sql = 'INSERT INTO dataIT3170.doctor_account (user_name, password) VALUES (?, ?)';
-  connection.query(sql, [info.user_name, info.password]);
-  res.json(info);
+    const values = [req.body.user_name, req.body.password];
+    try {
+        connection.query(sql, values, (err, results) => {
+            if (err) {
+                console.error('Error executing query:', err);
+                res.status(500).send('Database query error');
+            } else {
+                return res.status(200).json({message: 'User created successfully'});
+            }
+        });
+    }
+    catch (err) {
+        console.error('Failed to add new user:', err);
+    }
+
+  res.json(values);
 };
+
 
 module.exports = {
   getDoctors: getDoctors,

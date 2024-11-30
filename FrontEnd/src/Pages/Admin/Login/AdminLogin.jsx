@@ -11,6 +11,7 @@ import {useDispatch} from "react-redux";
 import {loginAdminFailed, loginAdminSuccess} from "../../Features/AdminSlice";
 import {fetchPayments} from "../../Features/PaymentSclice";
 import {fetchAppointments} from "../../Features/AppointmentSlice";
+import {fetchDoctorInfo} from "../../Features/DoctorInforSlice";
 
 
 const AdminLogin = () => {
@@ -36,6 +37,7 @@ const AdminLogin = () => {
                 dispatch(loginAdminSuccess(res.data.user_name))
                 dispatch(fetchPayments())
                 dispatch(fetchAppointments())
+                dispatch(fetchDoctorInfo())
                 navigateTo('/admin');
             }
             else {

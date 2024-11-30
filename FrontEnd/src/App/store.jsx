@@ -1,8 +1,10 @@
-import {configureStore, createActionCreatorInvariantMiddleware, Tuple} from '@reduxjs/toolkit';
+import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import rootReducer from "./reducers";
-import paymentReducer from "../Pages/Features/PaymentSclice"
-import appointmentReducer from "../Pages/Features/AppointmentSlice"
+import paymentReducer from "../Pages/Features/PaymentSclice";
+import appointmentReducer from "../Pages/Features/AppointmentSlice";
+import doctorInfoReducer from "../Pages/Features/DoctorInforSlice";
 
+// Load state from localStorage
 const loadState = () => {
     try {
         const serializedState = localStorage.getItem('state');
@@ -15,6 +17,7 @@ const loadState = () => {
     }
 };
 
+// Save state to localStorage
 const saveState = (state) => {
     try {
         const serializedState = JSON.stringify(state);
@@ -24,22 +27,34 @@ const saveState = (state) => {
     }
 };
 
+// Preloaded state from localStorage
 const preloadedState = loadState();
 
-const store = configureStore({
-    reducer: {
-        user: rootReducer,
-        payment: paymentReducer,
-        appointment: appointmentReducer,
-
-
-    },
-    preloadedState,
-    // middleware: () => new Tuple(actionCreatorMiddleware),
+// Combine all reducers
+const appReducer = combineReducers({
+    user: rootReducer,
+    payment: paymentReducer,
+    appointment: appointmentReducer,
+    doctorInfo: doctorInfoReducer,
 });
 
+// Root reducer with reset functionality
+const rootReducerWithReset = (state, action) => {
+    if (action.type === 'LOGOUT') {
+        state = undefined; // Reset state to undefined
+    }
+    return appReducer(state, action);
+};
+
+// Configure the store
+const store = configureStore({
+    reducer: rootReducerWithReset,
+    preloadedState,
+});
+
+// Subscribe to save state changes to localStorage
 store.subscribe(() => {
     saveState(store.getState());
 });
-export default store;
 
+export default store;

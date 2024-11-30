@@ -31,7 +31,6 @@ export const userSlice = createSlice({
             localStorage.removeItem('patient');
         },
 
-
     },
 
 });

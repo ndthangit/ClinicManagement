@@ -67,4 +67,8 @@ This section has moved here: [https://facebook.github.io/create-react-server/doc
 
 ### `npm run build` fails to minify
 
-This section has moved here: [https://facebook.github.io/create-react-server/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-server/docs/troubleshooting#npm-run-build-fails-to-minify)
+This section has moved here: [https://facebook.github.io/create-react-server/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-server/docs/troubleshooting#npm-run-build-fails-to-mi
+thong tin ebnh nhan bac si(show tt benh nhan bac si))
+tt buoi kham
+tt thong tin buoi kham(dich vu thuoc va dich vu kham)
+them dich vu
