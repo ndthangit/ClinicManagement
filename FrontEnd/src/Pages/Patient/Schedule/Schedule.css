@@ -182,3 +182,94 @@
     background-color: #45a049;
     transform: scale(1.03);
 }
+
+.filters {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 1rem;
+    border-radius: 8px;
+    width: 100%; 
+    flex-wrap: wrap;
+}
+
+.filters select, .filters input {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 150px;
+}
+
+.filters select:hover {
+    border-color: #5dc853;
+    background-color: #f0f8ff;
+}
+
+.filters select:focus {
+    border-color: #31c938;
+    box-shadow: 0 0 5px rgba(88, 226, 53, 0.5);
+}
+
+.filters button {
+    padding: 0.5rem 1.5rem;
+    font-size: 0.8rem;
+    color: #fff;
+    background-color: #78b841;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.filters button:hover {
+    background-color: #5a9e3a;
+}
+
+.filters button:active {
+    background-color: #86cc51;
+}
+
+.searchDoctorName-input {
+    width: 150px;
+    padding: 5px 10px;
+    font-size: 12px;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+}
+
+.searchDoctorName-button {
+    padding: 6px 12px;
+    font-size: 14px;
+    background-color: white;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.searchDoctorName-button:hover {
+    background-color: #e6eee8;
+}
+
+.filters .searchDoctorName-input,
+.filters .searchDoctorName-button {
+    display: flex;
+    align-items: center;
+}
+
+.filters p {
+    margin-left: auto;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
