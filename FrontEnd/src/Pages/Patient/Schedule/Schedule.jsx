@@ -38,6 +38,8 @@ function Schedule() {
     const [filterDepartment, setFilterDepartment] = useState('all');
     const [filteredSchedules, setFilteredSchedules] = useState(Object.values(scheduleList));
     const [searchTerm, setSearchTerm] = useState('');
+    const [filteredDoctors, setFilteredDoctors] = useState([]); // Danh sách bác sĩ lọc theo tên
+
 
     //lấy danh sách lịch khám dựa trên patientId và danh sách bác sĩ theo id
     useEffect(() => {
@@ -212,9 +214,21 @@ function Schedule() {
         }
     };
 
-    const handleSearchChange = (event) => {
-        setSearchTerm(event.target.value);
+    const handleSearchChange = (e) => {
+        const value = e.target.value;
+        setSearchTerm(value); 
+    
+        if (value.trim() === '') {
+            setFilteredDoctors([]); 
+            applyFilter(); 
+        } else {
+            const filtered = doctors.filter((doctor) => 
+                doctor.doctor_name.toLowerCase().includes(value.toLowerCase())
+            );
+            setFilteredDoctors(filtered); 
+        }
     };
+    
 
     const handleSearch = () => {
         if (searchTerm === '') {
@@ -347,7 +361,14 @@ function Schedule() {
         return true;
     });
 
-    setFilteredSchedules(result);
+    const finalFiltered = result.filter((schedule) => {
+        if (searchTerm.trim() !== '') {
+            return schedule.doctor_name.toLowerCase().includes(searchTerm.toLowerCase());
+        }
+        return true; //nếu searchTerm rỗng, không lọc gì thêm
+    });
+
+    setFilteredSchedules(finalFiltered);
 };
 
     return (
@@ -417,10 +438,33 @@ function Schedule() {
                         <button onClick={applyFilter}>Xác nhận</button>
                         
                         {/* Tìm kiếm */}
-                        <p className="search-container"><input type="text" placeholder="Tìm kiếm bác sĩ" 
-                                value={searchTerm} onChange={handleSearchChange} 
-                                onKeyDown={handleKeyDown} className="searchDoctorName-input"
+                        <p className="search-container">
+                            <input 
+                                type="text" 
+                                placeholder="Tìm kiếm bác sĩ" 
+                                value={searchTerm} 
+                                onChange={handleSearchChange} 
+                                onKeyDown={handleKeyDown} 
+                                className="searchDoctorName-input"
                         />
+                        {filteredDoctors.length > 0 && (
+                            <ul className="doctor-suggestions">
+                                {filteredDoctors.map((schedule) => (
+                                    <li 
+                                        key={schedule.appointment_id} 
+                                        onClick={() => {
+                                            setSearchTerm(schedule.doctor_name); 
+                                            setFilteredDoctors([]);
+                                            
+                                        }}
+                                        className="doctor-suggestion-item"
+                                    >
+                                        {schedule.doctor_name}
+                                    </li>
+                                ))}
+                            </ul>
+                        )}
+
                         <button onClick={handleSearch} className="searchDoctorName-button">Search</button>
                         </p>
                     </div>
