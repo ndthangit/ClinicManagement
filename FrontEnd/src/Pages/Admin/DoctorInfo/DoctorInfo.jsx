@@ -1,64 +1,112 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, {useEffect, useRef, useState} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 import AdminNavbar from "../../Components/navbar/AdminNavbar";
 import Leftbar from "../../Components/Appointment/Leftbar";
 import './DoctorInfo.css';
+import {HotTable, HotColumn} from "@handsontable/react";
+import "handsontable/dist/handsontable.min.css";
+import "pikaday/css/pikaday.css";
+import {registerAllModules} from "handsontable/registry";
+import {deleteDoctor, showFormAddDoctor, updateDoctorUI, updateInfoDoctor} from "../../Features/DoctorInforSlice";
 import AddDoctorForm from "./AddDoctorForm";
+import {IoIosAddCircle} from "react-icons/io";
+import { FaDownload } from "react-icons/fa";
+import ConfirmBox from "./ConfirmBox";
+
+registerAllModules();
+
 const DoctorInfo = () => {
     const dispatch = useDispatch();
-    const { doctorInfo, isLoading, isError } = useSelector((state) => state.doctorInfo);
-    const [updatedStatus, setUpdatedStatus] = useState({});
-    const [showAddForm, setShowAddForm] = useState(false);
-    const [searchQueries, setSearchQueries] = useState({
-        doctor_id: '',
-        doctor_name: '',
-        department_id: '',
-        type_id: '',
-        phone: '',
-        email: '',
-        address: '',
-        username: '',
-    });
+    const hotRef = useRef(null);
+    const {doctorInfo, isLoading, isError, showAddForm} = useSelector((state) => state.doctorInfo);
+    const [editableRows, setEditableRows] = useState({});
+    const [editedData, setEditedData] = useState(() =>
+        JSON.parse(JSON.stringify(doctorInfo)) // Tạo bản sao sâu
+    );
+
+    const [showConfirmBox, setShowConfirmBox] = useState(false);
+    const [rowToDelete, setRowToDelete] = useState(null);
+
+
+    const settings = {
+        licenseKey: 'non-commercial-and-evaluation',
+    };
 
     useEffect(() => {
-        // dispatch(fetchDoctorInfo());
-    }, [dispatch]);
+        setEditedData(JSON.parse(JSON.stringify(doctorInfo))); // Đồng bộ lại với Redux
+    }, [doctorInfo]);
 
-    const handleStatusChange = (doctor_id, status) => {
-        setUpdatedStatus((prevState) => ({
-            ...prevState,
-            [doctor_id]: status,
+
+    const toggleEditRow = (rowIndex) => {
+        setEditableRows((prev) => ({
+            ...prev,
+            [rowIndex]: !prev[rowIndex],
         }));
     };
-    const handleSaveDoctor = (newDoctor) => {
-        console.log('New Doctor:', newDoctor);
-        // TODO: Gửi dữ liệu `newDoctor` đến server hoặc cập nhật Redux
-        setShowAddForm(false);
+
+    const handleSaveRow = (rowIndex) => {
+        const updatedRow = {...editedData[rowIndex]};
+
+        const input = {
+            doctor_id: updatedRow.doctor_id,
+            doctor_name: updatedRow.doctor_name,
+            department_id: updatedRow.department_id,
+            type_id: updatedRow.type_id,
+            phone: updatedRow.phone,
+            email: updatedRow.email,
+            address: updatedRow.address,
+            username: updatedRow.username,
+        }
+        // console.log("input",input);
+        dispatch(updateDoctorUI(input));
+        dispatch(updateInfoDoctor(input));
+
+        // Tắt chế độ chỉnh sửa cho dòng hiện tại
+        toggleEditRow(rowIndex);
     };
 
-    const handleSearchChange = (e, column) => {
-        setSearchQueries({
-            ...searchQueries,
-            [column]: e.target.value
+
+    const handleCancelRow = (rowIndex) => {
+        const updatedData = [...editedData];
+        updatedData[rowIndex] = {...doctorInfo[rowIndex]}; // Khôi phục dữ liệu gốc
+        setEditedData(updatedData);
+        toggleEditRow(rowIndex);
+    };
+
+    const handleDeleteDoctor = () => {
+        if (rowToDelete !== null) {
+            // Thực hiện xóa doctor
+            console.log(`Deleting doctor at row ${rowToDelete}`);
+            const deletedRow = {...editedData[rowToDelete]};
+            dispatch(deleteDoctor({doctor_id:deletedRow.doctor_id}));
+
+            setRowToDelete(null); // Reset row để tránh lỗi
+        }
+        setShowConfirmBox(false);
+    };
+
+    const handleDeleteClick = (rowIndex) => {
+        setRowToDelete(rowIndex);
+        setShowConfirmBox(true); // Hiển thị ConfirmBox
+    };
+
+    const buttonClickCallback = () => {
+        const hot = hotRef.current?.hotInstance;
+        const exportPlugin = hot?.getPlugin('exportFile');
+
+        exportPlugin?.downloadFile('csv', {
+            bom: false,
+            columnDelimiter: ',',
+            columnHeaders: false,
+            exportHiddenColumns: true,
+            exportHiddenRows: true,
+            fileExtension: 'csv',
+            filename: 'Doctors-file_[YYYY]-[MM]-[DD]',
+            mimeType: 'text/csv',
+            rowDelimiter: '\r\n',
+            rowHeaders: true,
         });
     };
-
-    const handleSave = async (doctor_id) => {
-        if (updatedStatus[doctor_id]) {
-            // dispatch(updateAppointmentStatus({ appointmentId, status: updatedStatus[appointmentId] }));
-        }
-    };
-
-    const filteredDoctors = doctorInfo.filter(doctor => {
-        return doctor.doctor_id.toString().includes(searchQueries.doctor_id) &&
-            (doctor.doctor_name ? doctor.doctor_name.toLowerCase().includes(searchQueries.doctor_name.toLowerCase()) : true) &&
-            (doctor.department_id ? doctor.department_id.toString().includes(searchQueries.department_id) : true) &&
-            (doctor.type_id ? doctor.type_id.toString().includes(searchQueries.type_id) : true) &&
-            (doctor.phone ? doctor.phone.includes(searchQueries.phone) : true) &&
-            (doctor.email ? doctor.email.toLowerCase().includes(searchQueries.email.toLowerCase()) : true) &&
-            (doctor.address ? doctor.address.toLowerCase().includes(searchQueries.address.toLowerCase()) : true) &&
-            (doctor.username ? doctor.username.includes(searchQueries.username) : true);
-    });
 
     if (isLoading) {
         return <div>Loading...</div>;
@@ -69,107 +117,116 @@ const DoctorInfo = () => {
     }
 
     return (
-        <div className="doctorInfo dashboard">
-            <AdminNavbar className="header" />
+        <div className="doctorsInfo dashboard">
+            <AdminNavbar className="header"/>
             <div className="body">
                 <Leftbar className='leftBar'/>
                 <div className="content">
                     <h2>Doctor Information</h2>
+                    <div className="extraButton">
+                        <button className="buttonShowAddDoctorForm" onClick={() => dispatch(showFormAddDoctor())}>
+                            <IoIosAddCircle/>Add Doctor
+                        </button>
 
-                    <table>
-                        <thead>
-                        <tr>
-                            <th>
-                                Doctor ID
-                                <input
-                                    type="text"
-                                    value={searchQueries.doctor_id}
-                                    onChange={(e) => handleSearchChange(e, 'doctor_id')}
-                                />
-                            </th>
-                            <th>
-                                Doctor Name
-                                <input
-                                    type="text"
-                                    value={searchQueries.doctor_name}
-                                    onChange={(e) => handleSearchChange(e, 'doctor_name')}
-                                />
-                            </th>
-                            <th>
-                                Department ID
-                                <input
-                                    type="text"
-                                    value={searchQueries.department_id}
-                                    onChange={(e) => handleSearchChange(e, 'department_id')}
-                                />
-                            </th>
-                            <th>
-                                Type ID
-                                <input
-                                    type="text"
-                                    value={searchQueries.type_id}
-                                    onChange={(e) => handleSearchChange(e, 'type_id')}
-                                />
-                            </th>
-                            <th>
-                                Phone
-                                <input
-                                    type="text"
-                                    value={searchQueries.phone}
-                                    onChange={(e) => handleSearchChange(e, 'phone')}
-                                />
-                            </th>
-                            <th>
-                                Email
-                                <input
-                                    type="text"
-                                    value={searchQueries.email}
-                                    onChange={(e) => handleSearchChange(e, 'email')}
-                                />
-                            </th>
-                            <th>
-                                Address
-                                <input
-                                    type="text"
-                                    value={searchQueries.address}
-                                    onChange={(e) => handleSearchChange(e, 'address')}
-                                />
-                            </th>
-                            <th>
-                                username
-                                <input
-                                    type="text"
-                                    value={searchQueries.username}
-                                    onChange={(e) => handleSearchChange(e, 'username')}
-                                />
-                            </th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {filteredDoctors.map((doctor) => (
-                            <tr key={doctor.doctor_id}>
-                                <td>{doctor.doctor_id}</td>
-                                <td>{doctor.doctor_name}</td>
-                                <td>{doctor.department_id}</td>
-                                <td>{doctor.type_id}</td>
-                                <td>{doctor.phone}</td>
-                                <td>{doctor.email}</td>
-                                <td>{doctor.address}</td>
-                                <td>{doctor.username}</td>
-                            </tr>
-                        ))}
-                        </tbody>
-                    </table>
+                        {showAddForm && (
+                            <div className="modal-overlay">
+                                <div className="modal-content">
+                                    <AddDoctorForm/>
+                                </div>
+                            </div>
+                        )}
+
+                        <button id="export-file" className="buttonExportCSV" onClick={() => buttonClickCallback()}>
+                            <FaDownload />
+                            Export CSV
+                        </button>
+                    </div>
+
+
+                    <HotTable
+                        ref={hotRef}
+                        settings={settings}
+                        data={editedData}
+                        height={320}
+                        width="100%"
+                        colWidths={[170, 150, 100, 150, 230, 120, 160]}
+                        colHeaders={[
+                            "doctor_name",
+                            "department_id",
+                            "type_id",
+                            "phone",
+                            "email",
+                            // "address",
+                            "username",
+                            "Actions", // Gộp hai cột thành một
+                        ]}
+                        dropdownMenu={true}
+                        hiddenColumns={{
+                            indicators: true,
+                        }}
+                        contextMenu={true}
+                        rowHeights={25}
+                        multiColumnSorting={true}
+                        filters={true}
+                        rowHeaders={true}
+                        autoWrapCol={true}
+                        autoWrapRow={true}
+                        cells={(row) => ({
+                            readOnly: !editableRows[row],
+                            className: 'htMiddle htCenter',
+                        })}
+
+                        afterChange={(changes, source) => {
+                            if (source === "edit") {
+                                changes.forEach(([row, prop, oldValue, newValue]) => {
+                                    setEditedData((prevData) => {
+                                        const updatedData = [...prevData];
+                                        updatedData[row] = {...updatedData[row], [prop]: newValue};
+                                        return updatedData;
+                                    });
+                                });
+                            }
+                        }}
+                    >
+                        <HotColumn data="doctor_name" className="htCenter"/>
+                        <HotColumn data="department_id" className="htCenter"/>
+                        <HotColumn data="type_id" className="htCenter"/>
+                        <HotColumn data="phone" className="htCenter"/>
+                        <HotColumn data="email" className="htCenter"/>
+                        {/*<HotColumn data="address" className="htCenter"/>*/}
+                        <HotColumn data="username" className="htCenter"/>
+                        <HotColumn
+                            data={() => ""}
+                            renderer={(instance, td, row) => {
+                                // Hiển thị nút dựa trên trạng thái chỉnh sửa
+                                td.className = "actions-column"; // Thêm lớp cho cột actions
+                                td.style.height = "100%";
+                                if (editableRows[row]) {
+                                    td.innerHTML = `
+                                                        <button class="save-btn">Save</button>
+                                                        <button class="cancel-btn">Cancel</button>             
+                                                    `;
+                                    td.querySelector(".save-btn").onclick = () => handleSaveRow(row);
+                                    td.querySelector(".cancel-btn").onclick = () => handleCancelRow(row);
+                                } else {
+                                    td.innerHTML = `
+                                                        <button class="edit-btn">Edit</button>
+                                                        <button class="delete-btn">Delete</button>`;
+                                    td.querySelector(".edit-btn").onclick = () => toggleEditRow(row);
+                                    td.querySelector(".delete-btn").onclick = () => handleDeleteClick(row);
+                                }
+                            }}
+                            readOnly={true}
+                        />
+                    </HotTable>
 
                 </div>
-
-
             </div>
-            <button onClick={() => setShowAddForm(true)}>Add Doctor</button>
-            {showAddForm && (
-                <AddDoctorForm
-                    onSave={handleSaveDoctor}
-                    onCancel={() => setShowAddForm(false)}
+            {showConfirmBox && (
+                <ConfirmBox
+                    message="Are you sure you want to delete this doctor?"
+                    onConfirm={handleDeleteDoctor}
+                    onCancel={() => setShowConfirmBox(false)}
                 />
             )}
         </div>

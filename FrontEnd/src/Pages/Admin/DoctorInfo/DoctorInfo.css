@@ -1,29 +1,116 @@
-.doctorInfo .content {
-    padding: 20px;
-    height: 100vh; /* Set the height of the content to the height of the screen */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
     display: flex;
-    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start; /* Căn phần tử modal lên trên */
+    padding-top: 0; /* Loại bỏ bất kỳ padding mặc định nào */
+    z-index: 1000;
 }
 
-.doctorInfo table {
+.modal-content {
+    background-color: transparent; /* Xóa màu nền trắng */
+    padding: 0; /* Loại bỏ khoảng cách bên trong */
+    border-radius: 8px;
+    box-shadow: none; /* Loại bỏ bóng đổ */
     width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    flex-grow: 1; /* Allow the table to grow and fill the remaining space */
-    overflow-y: auto; /* Enable vertical scrolling if content overflows */
+    max-width: 600px;
+    z-index: 1100;
+    margin-top: 0; /* Đảm bảo không có khoảng cách trên */
 }
 
-.doctorInfo th, .doctorInfo td {
-    border: 1px solid black;
-    padding: 8px;
-    text-align: left;
+
+.modal-content h3 {
+    margin-top: 0;
 }
 
-.doctorInfo th {
-    background-color: #f2f2f2;
-    font-weight: bold;
+.extraButton {
+    display: flex;
+    align-items: center; /* Căn giữa theo chiều dọc */
+    gap: 16px; /* Khoảng cách giữa các nút */
+    margin-bottom: 10px; /* Khoảng cách bên dưới container */
 }
 
-.doctorInfo tr:nth-child(even) {
-    background-color: #f9f9f9;
+.buttonShowAddDoctorForm,
+.buttonExportCSV {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Khoảng cách giữa biểu tượng và chữ */
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 14%;
+    margin-bottom: 10px;
 }
+.buttonShowAddDoctorForm{
+    background-color: #007bff; /* Màu nền */
+    color: #fff; /* Màu chữ */
+}
+.buttonShowAddDoctorForm:hover {
+    background-color: #0056b3; /* Màu khi hover */
+}
+.buttonExportCSV{
+    background-color: #42ab1f; /* Màu nền */
+    color: #fff; /* Màu chữ */
+}
+.buttonExportCSV:hover {
+    background-color: #09690c; /* Màu khi hover */
+}
+
+
+
+
+.buttonShowAddDoctorForm svg,
+.buttonExportCSV svg {
+    font-size: 20px; /* Kích thước biểu tượng */
+}
+
+
+
+
+
+
+.actions-column {
+    display: flex; /* Hiển thị các nút trên cùng một hàng */
+    /*justify-content: center; !* Căn giữa các nút trong cột *!*/
+    align-items: center; /* Căn giữa theo trục dọc */
+    /*gap: 0px; !* Khoảng cách giữa các nút *!*/
+}
+
+.actions-column button {
+    padding: 5px 12px;
+    border: none;
+    border-radius: 4px;
+    font-size: 12px;
+    cursor: pointer;
+    margin: 10px 10px 10px 10px;
+
+}
+
+.actions-column .save-btn {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.actions-column .cancel-btn {
+    background-color: #f0ad4e;
+    color: white;
+}
+
+.actions-column .edit-btn {
+    background-color: #5bc0de;
+    color: white;
+}
+
+.actions-column .delete-btn {
+    background-color: #f44336;
+    color: white;
+}
+
+

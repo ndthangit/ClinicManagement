@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import './AddDoctorForm.css';
 import {useDispatch} from "react-redux";
 import Axios from 'axios';
-import {fetchDoctorInfo} from "../../Features/DoctorInforSlice";
+import {fetchDoctorInfo, showFormAddDoctor} from "../../Features/DoctorInforSlice";
+import { IoIosAddCircle } from "react-icons/io";
 
-const AddDoctorForm = ({ onSave, onCancel }) => {
+const AddDoctorForm = () => {
     const dispatch = useDispatch();
     const [doctorData, setDoctorData] = useState({
         doctor_name: '',
@@ -26,7 +27,6 @@ const AddDoctorForm = ({ onSave, onCancel }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        onSave(doctorData);
         setDoctorData({
             doctor_name: '',
             department_id: '',
@@ -58,12 +58,16 @@ const AddDoctorForm = ({ onSave, onCancel }) => {
         }).catch((error) => {
             console.error('Error during login request:', error);
         })
+
+    };
+    const handleCancel = () => {
+        dispatch(showFormAddDoctor());
     };
 
     return (
         <div className="add-doctor-form">
             <h3>Add New Doctor</h3>
-            <form onSubmit={handleSubmit}>
+            <form >
                 <label>
                     Doctor Name:
                     <input
@@ -135,9 +139,11 @@ const AddDoctorForm = ({ onSave, onCancel }) => {
                     />
                 </label>
                 <div className="form-buttons">
-                    <button type="submit">Save</button>
+                    <button type="submit" onClick={handleSubmit}>
+                        Save
+                    </button>
 
-                    <button type="button" onClick={onCancel}>
+                    <button type="button" onClick={handleCancel}>
                         Cancel
                     </button>
                 </div>

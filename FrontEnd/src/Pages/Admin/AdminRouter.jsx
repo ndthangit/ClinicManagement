@@ -5,6 +5,8 @@ import PaymentDetail from "./Payments/PaymentDetail";
 import AppointmentDetail from "./Appointments/AppointmentDetail";
 import DoctorInfo from "./DoctorInfo/DoctorInfo";
 import PatientInfo from "./PatientInfo/PatientInfo";
+import ExampleComponent from "./ExampleComponent";
+import ErrorBoundary from "./ErrorBoundary";
 
 const adminRoutes = [
     {
@@ -28,9 +30,14 @@ const adminRoutes = [
         element: <PatientInfo />
     },
     {
+        path: 'admin/test',
+        element:<ExampleComponent/>
+    },
+    {
         path: 'admin/payments',
         element: <PaymentDetail/>
     }
+
 
 ];
 
