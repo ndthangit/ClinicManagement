@@ -72,3 +72,5 @@ thong tin ebnh nhan bac si(show tt benh nhan bac si))
 tt buoi kham
 tt thong tin buoi kham(dich vu thuoc va dich vu kham)
 them dich vu
+
+

@@ -44,7 +44,7 @@ const doctorInfoSlice = createSlice({
         deleteDoctor: (state, action) =>{
             console.log("res dele : ",action.payload);
 
-            axios.delete('http://localhost:3005/doctor/delete-doctor', action.payload).then((response) => {
+            axios.delete(`http://localhost:3005/doctor/delete-doctor/${action.payload.doctor_id}`).then((response) => {
                 if (response.status === 200) {
                     console.log("res: ", response.data);
                 }

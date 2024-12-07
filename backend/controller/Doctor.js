@@ -124,25 +124,23 @@ const  updateDoctorInfo = async (req, res) => {
 };
 
 const deleteDoctor = async (req, res) => {
-    console.log(req.body);
+    console.log("delete: ",req.params.id);
 
-    // const sql = 'UPDATE `dataIT3170`.doctors SET doctor_name = ?, department_id = ?, type_id = ?, phone = ?, email = ?, address = ?, username = ? WHERE doctor_id = ?';
-    // const values = [req.body.doctor_name, req.body.department_id, req.body.type_id, req.body.phone, req.body.email, req.body.address, req.body.username, req.body.doctor_id];
-    // try {
-    //     connection.query(sql, values, (err, results) => {
-    //         if (err) {
-    //             console.error('Error executing query:', err);
-    //             res.status(500).send('Database query error');
-    //         } else {
-    //             return res.status(200).json({message: 'Doctor updated successfully'});
-    //         }
-    //     });
-    // }
-    // catch (err) {
-    //     console.error('Failed to update doctor:', err);
-    // }
-
-    res.json(req.body);
+    const sql = 'delete from dataIT3170.doctors where doctor_id = ?;';
+    const values = [req.params.id];
+    try {
+        connection.query(sql, values, (err, results) => {
+            if (err) {
+                console.error('Error executing query:', err);
+                res.status(500).send('Database query error');
+            } else {
+                return res.status(200).json({message: 'Doctor deleted successfully'});
+            }
+        });
+    }
+    catch (err) {
+        console.error('Failed to delete doctor:', err);
+    }
 };
 
 

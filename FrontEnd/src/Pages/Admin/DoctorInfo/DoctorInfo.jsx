@@ -7,7 +7,13 @@ import {HotTable, HotColumn} from "@handsontable/react";
 import "handsontable/dist/handsontable.min.css";
 import "pikaday/css/pikaday.css";
 import {registerAllModules} from "handsontable/registry";
-import {deleteDoctor, showFormAddDoctor, updateDoctorUI, updateInfoDoctor} from "../../Features/DoctorInforSlice";
+import {
+    deleteDoctor,
+    fetchDoctorInfo,
+    showFormAddDoctor,
+    updateDoctorUI,
+    updateInfoDoctor
+} from "../../Features/DoctorInforSlice";
 import AddDoctorForm from "./AddDoctorForm";
 import {IoIosAddCircle} from "react-icons/io";
 import { FaDownload } from "react-icons/fa";
@@ -79,6 +85,7 @@ const DoctorInfo = () => {
             console.log(`Deleting doctor at row ${rowToDelete}`);
             const deletedRow = {...editedData[rowToDelete]};
             dispatch(deleteDoctor({doctor_id:deletedRow.doctor_id}));
+            dispatch(fetchDoctorInfo());
 
             setRowToDelete(null); // Reset row để tránh lỗi
         }
