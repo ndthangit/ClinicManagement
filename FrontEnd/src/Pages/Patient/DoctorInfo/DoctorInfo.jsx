@@ -144,9 +144,9 @@ function DoctorInfo() {
       <Navbar className='header' user={patientInfo}/>
       <div className='body'>
         <Leftbar className='leftBar'/>
-        <div className='content'>
-          <div className='head'>
-            <img src={exampleImage} className='imageDoctor' ></img>
+        <div className='contentInfo'>
+          <div className='headInfo'>
+            <img src={doctorInfo.image_url ? doctorInfo.image_url:exampleImage} className='imageDoctor' ></img>
             <div className='infoDetail'>
               <div className='field'>
                 <p>Bác sĩ:</p>

@@ -1,14 +1,21 @@
 .appointment .body .content .top {
-  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: end;
-  padding: 10px;
+  padding: 5px;
+}
+
+.appointment .body .content .top .search{
+  padding-right: 10px;
+}
+
+.appointment .body .content .top .search .searchInput{
+  padding: 5px;
+
 }
 
 .appointment .body .content .table {
-  height: 100%;
-  padding: 20px 40px 20px 40px;
+  padding: 10px 40px 10px 40px;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(2, 1fr);
@@ -67,3 +74,5 @@
   align-items: end;
   
 }
+
+

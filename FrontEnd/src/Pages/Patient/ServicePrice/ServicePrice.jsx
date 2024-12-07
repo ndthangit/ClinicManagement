@@ -1,9 +1,10 @@
 // ServicePricePage.js
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import Navbar from '../components/navbar/Navbar';
+import Navbar from '../../components/navbar/Navbar';
 import axios from 'axios';
 import './ServicePrice.css'
+import ServiceLeftbar from '../../components/leftbar/ServiceLeftbar';
 function ServicePrice() {
   const [departments, setDepartments] = useState([]);
   const [services, setServices] = useState([]);
@@ -26,15 +27,18 @@ function ServicePrice() {
   };
 
   return (
-    <div>
-      <Navbar />
-      <h1>Danh sách phòng ban và dịch vụ</h1>
-
-      {/* Hiển thị danh sách phòng ban */}
+    <div className='dashboard servicePrice'>
+      <Navbar className='navbar'/>
+      
+      <div className='body'>
+        <ServiceLeftbar className='leftbar' />
+        <div className='content'>
+        <h1>Danh sách phòng ban và dịch vụ</h1>
+          {/* Hiển thị danh sách phòng ban */}
       {!selectedDepartment ? (
         <div>
           <h2>Danh sách phòng ban</h2>
-          <table>
+          <table className='tableService'>
             <thead>
               <tr>
                 <th>Tên phòng ban</th>
@@ -48,7 +52,7 @@ function ServicePrice() {
                   <td>{department.department_name}</td>
                   <td>{department.description}</td>
                   <td>
-                    <button onClick={() => fetchServicesByDepartment(department.department_id)}>
+                    <button className='buttonInfo' onClick={() => fetchServicesByDepartment(department.department_id)}>
                       Xem
                     </button>
                   </td>
@@ -82,6 +86,8 @@ function ServicePrice() {
           </table>
         </div>
       )}
+        </div>
+      </div>
     </div>
   );
 }

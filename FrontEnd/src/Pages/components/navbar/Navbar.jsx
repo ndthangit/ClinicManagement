@@ -34,8 +34,7 @@ function Navbar() {
                 <Link className='button font' to={'/'}>Trang chủ</Link>
                 <Link className='button font' to={'/appointment'}>Lịch khám</Link>
                 <Link className='button font' to={'/medicalhistory'}>Lịch sử khám</Link>
-                <Link className='button font' to={'/service_price'}>Giá dịch vụ</Link>
-                <Link className='button font' to={'/medicine'}>Giá thuốc</Link>
+                <Link className='button font' to={'/service_price'}>Giá thành</Link>
             </div>
             <div className="right">
                 {user ? (

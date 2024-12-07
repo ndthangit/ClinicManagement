@@ -10,8 +10,8 @@ import DoctorInfo from './Pages/Patient/DoctorInfo/DoctorInfo';
 import Schedule from './Pages/Patient/Schedule/Schedule';
 import SettingInfo from './Pages/Patient/Setting/SettingInfo';
 import MedicalHistory from './Pages/Patient/MedicalHistory/MedicalHistory';
-import ServicePrice from './Pages/ServicePrice/ServicePrice';
-import Medicine from './Pages/Medicine/Medicine'
+import ServicePrice from './Pages/Patient/ServicePrice/ServicePrice';
+import Medicine from './Pages/Patient/Medicine/Medicine'
 
 // for doctor
 import DoctorLogin from './Pages/Doctor/Login/DoctorLogin';

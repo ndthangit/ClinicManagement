@@ -38,7 +38,7 @@ function DoctorAppointment() {
   }, []);
 
   return (
-    <div className="dashboard">
+    <div className="doctor-appointment dashboard">
       <DoctorNavbar className="header" />
       <div className="doctor-appointment-container body">
         <DoctorLeftbar />

@@ -1,23 +1,28 @@
 
-.doctorInfo .body .content {
+.doctorInfo .body .contentInfo {
   padding: 20px;
   display: grid;
   width: 100%;
   grid-template-columns: 5fr 2fr;
   grid-template-rows: 1fr;
+  grid-column: 2 / span 5;
+  height: 100%;
+  width: 100%;
+  overflow: scroll;
 }
 
-.doctorInfo .body .content .head {
+.doctorInfo .body .contentInfo .headInfo {
   grid-column: 2;
   grid-row: 1;
   display: flex;
   align-items: center;
   flex-direction: column;
+  border: 1px solid #ccc;
   padding: 20px;
   width: 100%;
 }
 
-.doctorInfo .body .content .head .imageDoctor {
+.doctorInfo .body .contentInfo .headInfo .imageDoctor {
   width: 200px;
   height: 200px;
   border-radius: 100%;
@@ -25,88 +30,88 @@
   border: 1px solid black;
 }
 
-.doctorInfo .body .content .head .infoDetail {
+.doctorInfo .body .contentInfo .headInfo .infoDetail {
   width: 90%;
   display: flex;
   padding-top: 20px;
   flex-direction: column;
 }
 
-.doctorInfo .body .content .head .infoDetail .field {
+.doctorInfo .body .contentInfo .headInfo .infoDetail .field {
   display:flex;
   justify-content: space-between;
   padding-bottom: 10px;
 }
 
-.doctorInfo .body .content .head .infoDetail .importantInfo {
+.doctorInfo .body .contentInfo .headInfo .infoDetail .importantInfo {
   display: flex;
   justify-content: end;
 }
 
-.doctorInfo .body .content .head .changeDoctor {
+.doctorInfo .body .contentInfo .headInfo .changeDoctor {
   padding: 20px;
 }
 
-.doctorInfo .body .content .head .changeDoctor .changeButton {
+.doctorInfo .body .contentInfo .headInfo .changeDoctor .changeButton {
   padding: 10px 20px 10px 20px;
 }
 
-.doctorInfo .body .content .work {
+.doctorInfo .body .contentInfo .work {
   padding: 20px;
   grid-column: 1;
   grid-row: 1;
 }
 
-.doctorInfo .body .content .work .table {
+.doctorInfo .body .contentInfo .work .table {
   height: 100%;
 }
 
-.doctorInfo .body .content .work .table .date {
+.doctorInfo .body .contentInfo .work .table .date {
   padding: 10px;
   display: flex;
 }
-.doctorInfo .body .content .work .table .date .cell {
+.doctorInfo .body .contentInfo .work .table .date .cell {
   padding: 10px 20px 10px 20px;
 }
 
-.doctorInfo .body .content .work .table .tableTime {
+.doctorInfo .body .contentInfo .work .table .tableTime {
   border: 1px solid gray;
   overflow:scroll;
   height: 30vh;
   padding: 20px;
 }
 
-.doctorInfo .body .content .work .table .tableTime .time {
+.doctorInfo .body .contentInfo .work .table .tableTime .time {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
 
 }
 
-.doctorInfo .body .content .work .table .tableTime .time .cell {
+.doctorInfo .body .contentInfo .work .table .tableTime .time .cell {
   padding: 10px 20px 10px 20px;
 }
 
-.doctorInfo .body .content .work .info {
+.doctorInfo .body .contentInfo .work .info {
   display: flex;
   flex-direction: column;
   width: 100%;
 }
 
 
-.doctorInfo .body .content .work .info .timeInfo .detailTime{
+.doctorInfo .body .contentInfo .work .info .timeInfo .detailTime{
   display: grid;
   grid-template-columns: repeat(2, 1fr) 3fr;
   grid-template-rows: repeat(2, 1fr);
   padding: 20px;
 }
 
-.doctorInfo .body .content .work .info .timeInfo .detailTime .changeTime {
+.doctorInfo .body .contentInfo .work .info .timeInfo .detailTime .changeTime {
   grid-column: 3;
   grid-row: 1 /span 2;
   margin: 0px 10px 0px 10px;
 }
 
-.doctorInfo .body .content .work .info .patientInfo .detailInfo{
+.doctorInfo .body .contentInfo .work .info .patientInfo .detailInfo{
   padding: 20px;
   display: grid;
   width: 60%;
@@ -114,35 +119,35 @@
   grid-template-rows: repeat(2, 1fr);
 }
 
-.doctorInfo .body .content .work .info .field {
+.doctorInfo .body .contentInfo .work .info .field {
   display: flex;
   padding: 10px 0px 0px 30px;
 }
 
-.doctorInfo .body .content .work .info .infoValue {
+.doctorInfo .body .contentInfo .work .info .infoValue {
   padding: 10px 0px 0px 00px;
   font-weight: normal;
   font-size: 18px;
 }
 
-.doctorInfo .body .content .work .info .optionalInfo {
+.doctorInfo .body .contentInfo .work .info .optionalInfo {
   display: flex;
   flex-direction: column;
 
 }
 
-.doctorInfo .body .content .work .info .optionalInfo .input {
+.doctorInfo .body .contentInfo .work .info .optionalInfo .input {
   margin: 20px;
   height: 100px;
   font-size: 16px;
 }
 
-.doctorInfo .body .content .work .footer {
+.doctorInfo .body .contentInfo .work .footer {
   display: flex;
   justify-content: center;
   padding-top: 50px;
 }
 
-.doctorInfo .body .content .work .footer .submit {
+.doctorInfo .body .contentInfo .work .footer .submit {
   padding: 15px 20px 15px 20px;
 }

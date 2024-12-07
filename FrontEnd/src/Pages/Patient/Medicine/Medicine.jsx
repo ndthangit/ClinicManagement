@@ -1,7 +1,8 @@
 // ServicePricePage.js
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import Navbar from '../components/navbar/Navbar';
+import Navbar from '../../components/navbar/Navbar';
+import ServiceLeftbar from '../../components/leftbar/ServiceLeftbar';
 
 function Medicine() {
   const [medicines, setMedicines] = useState([]);
@@ -19,9 +20,12 @@ function Medicine() {
 
 
   return (
-    <div>
-      <Navbar />
-      <h1>Danh sách thuốc</h1>
+    <div className='dashboard'>
+      <Navbar className='header'/>
+      <div className='body'>
+        <ServiceLeftbar className='leftbar'/>
+        <div className='content'>
+        <h1>Danh sách thuốc</h1>
         <div>
           <table>
             <thead>
@@ -42,8 +46,9 @@ function Medicine() {
             </tbody>
           </table>
         </div>
-      
-    </div>
+        </div>
+      </div>
+    </div> 
   );
 }
 

@@ -1,5 +1,5 @@
 /* Định dạng cho toàn bộ trang */
-body {
+.servicePrice body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
@@ -26,30 +26,30 @@ body {
   }
   
   /* Định dạng cho bảng */
-  table {
+  .servicePrice table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 10px;
     margin-bottom: 20px;
   }
   
-  table th, table td {
+  .servicePrice table th, table td {
     padding: 10px;
     text-align: left;
     border: 1px solid #ddd;
   }
   
-  table th {
+  .servicePrice table th {
     background-color: #f4f4f4;
     font-weight: bold;
   }
   
-  table tr:hover {
+  .servicePrice table tr:hover {
     background-color: #f1f1f1;
   }
   
   /* Định dạng cho các nút */
-  button {
+  .servicePrice .buttonInfo {
     background-color: #4CAF50; /* Màu xanh lá */
     color: white;
     padding: 8px 16px;
@@ -60,40 +60,12 @@ body {
     transition: background-color 0.3s ease;
   }
   
-  button:hover {
+  .servicePrice .buttonInfo:hover {
     background-color: #45a049;
   }
   
   /* Nút quay lại */
-  .back-button {
+  .servicePrice .back-button {
     margin-bottom: 20px;
     display: inline-block;
   }
-  
-  /* Navbar */
-  .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    
-    padding: 10px 20px;
-    color: white;
-  }
-  
-  .navbar .left, .navbar .right {
-    display: flex;
-    gap: 10px;
-  }
-  
-  .navbar a {
-    color: white;
-    text-decoration: none;
-    padding: 8px 12px;
-    border-radius: 4px;
-    transition: background-color 0.3s;
-  }
-  
-  .navbar a:hover {
-    background-color: #555;
-  }
-  
