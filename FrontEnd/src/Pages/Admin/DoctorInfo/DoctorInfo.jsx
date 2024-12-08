@@ -137,9 +137,10 @@ const DoctorInfo = () => {
 
                         {showAddForm && (
                             <div className="modal-overlay">
-                                <div className="modal-content">
-                                    <AddDoctorForm/>
-                                </div>
+                                <AddDoctorForm/>
+                                {/*<div className="modal-content">*/}
+                                {/*    <AddDoctorForm/>*/}
+                                {/*</div>*/}
                             </div>
                         )}
 

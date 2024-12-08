@@ -1,32 +1,28 @@
-.modal-overlay {
+.extraButton .modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: flex-start; /* Căn phần tử modal lên trên */
-    padding-top: 0; /* Loại bỏ bất kỳ padding mặc định nào */
+    /*display: flex;*/
+    /*justify-content: center;*/
+    align-items: center; /* Đặt modal ở giữa màn hình */
     z-index: 1000;
 }
 
-.modal-content {
-    background-color: transparent; /* Xóa màu nền trắng */
-    padding: 0; /* Loại bỏ khoảng cách bên trong */
-    border-radius: 8px;
-    box-shadow: none; /* Loại bỏ bóng đổ */
-    width: 100%;
-    max-width: 600px;
-    z-index: 1100;
-    margin-top: 0; /* Đảm bảo không có khoảng cách trên */
-}
+/*.extraButton .modal-content {*/
+/*    background-color: #fcfcfc; !* Đặt màu nền trắng *!*/
+/*    !*padding: 20px; !* Thêm padding để nội dung đẹp hơn *!*!*/
+/*    border-radius: 8px;*/
+/*    box-shadow: 0 4px 6px rgba(0, 0, 0, 0);*/
+/*    width: 34%;*/
+/*    !*max-width: 600px;*!*/
+/*}*/
 
-
-.modal-content h3 {
-    margin-top: 0;
-}
+/*.extraButton . modal-content h3 {*/
+/*    margin-top: 0;*/
+/*}*/
 
 .extraButton {
     display: flex;
@@ -41,12 +37,13 @@
     align-items: center;
     gap: 8px; /* Khoảng cách giữa biểu tượng và chữ */
     border: none;
-    padding: 10px 15px;
+    padding: 10px 15px ;
     font-size: 16px;
     border-radius: 5px;
     cursor: pointer;
     width: 14%;
     margin-bottom: 10px;
+    margin-top: 10px;
 }
 .buttonShowAddDoctorForm{
     background-color: #007bff; /* Màu nền */
@@ -64,16 +61,10 @@
 }
 
 
-
-
 .buttonShowAddDoctorForm svg,
 .buttonExportCSV svg {
     font-size: 20px; /* Kích thước biểu tượng */
 }
-
-
-
-
 
 
 .actions-column {
