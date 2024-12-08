@@ -6,6 +6,8 @@ import logo from '../../Assets/logo.png'
 import { FaUserShield } from 'react-icons/fa'
 import { AiOutlineSwapRight } from 'react-icons/ai'
 import { MdMarkEmailRead } from 'react-icons/md'
+import { useDispatch } from 'react-redux';
+import { loginStarted, loginSuccess, loginFailed } from '../../Features/UserSlice';
 
 
 
@@ -15,27 +17,59 @@ const Signup = () => {
     const [rewritePassword, setRewritePassword] = useState('')
     const [errorMessage, setErrorMessage] = useState('')
     const navigateTo = useNavigate();
+    const dispatch = useDispatch();
+
 
     const createUser = (e) => {
-        e.preventDefault()
+        e.preventDefault();
         if (password !== rewritePassword) {
-            setErrorMessage('Password and rewrite password are not the same!')
-            return
-
+            setErrorMessage('*Passwords do not match!');
+            return;
         }
+
+        // Đầu tiên tạo tài khoản người dùng
         Axios.post('http://localhost:3005/users/signup', {
             CCCD: CCCD,
             Password: password,
-        }).then(() => {
-            navigateTo('/login');
-            setCCCD('');
-            setPassword('');
-            setRewritePassword('');
-            setErrorMessage('')
-        }).catch((error) => {
-            console.error('Error during signup request:', error);
         })
+        .then((res) => {
+            const accountInfo = {
+                user_name: CCCD,
+                password: password,
+            };
+            dispatch(loginStarted());
+            Axios.post('http://localhost:3005/users/login', accountInfo)
+                .then((res) => {
+                    if (res.data.message === 'connection success') {
+                        dispatch(loginSuccess(res.data));
+                        navigateTo('/settingInfo'); 
+                    } else {
+                        dispatch(loginFailed());
+                        console.error('Đăng nhập thất bại', res.data);
+                    }
+                })
+                .catch((error) => {
+                    dispatch(loginFailed());
+                    console.error('Lỗi khi đăng nhập:', error);
+                });
 
+                // Xóa dữ liệu trong form
+                setCCCD('');
+                setPassword('');
+                setRewritePassword('');
+                setErrorMessage('');
+            }
+        )
+        .catch((error) => {
+            console.error('Lỗi khi tạo tài khoản:', error);
+            setErrorMessage('*Username already exists.');
+
+        });
+    };
+    const onSubmit = () => {
+        setCCCD('')
+        setPassword('')
+        setRewritePassword('')
     }
 
     return (
@@ -64,8 +98,8 @@ const Signup = () => {
                         <h3>Let Us Know You!</h3>
                     </div>
 
-                    <form action="" className="form grid">
-
+                    <form action="" className="form grid" onSubmit={() => {onSubmit()}}>
+                        
                         <div className="inputDiv">
                             <label htmlFor="CCCD">CCCD</label>
                             <div className="input flex">
@@ -93,7 +127,24 @@ const Signup = () => {
                             </div>
                         </div>
 
-                        <button type='submit' className='btn flex' onClick={createUser}>
+                        {errorMessage && (
+                        <span
+                            style={{
+                                color: 'red',
+                                fontFamily: "'Roboto', sans-serif", 
+                                fontWeight: '600', 
+                                fontSize: '14px',
+                                padding: '5px',              
+                                display: 'inline-block',     
+                                textAlign: 'center',         
+                                maxWidth: '100%',            
+                            }}
+                        >
+                            {errorMessage}
+                        </span>
+                    )}
+
+                        <button type='submit' className='btn flex' onClick={(event) => {createUser(event)}}>
                             <span>Signup</span>
                             <AiOutlineSwapRight className="icon" />
                         </button>

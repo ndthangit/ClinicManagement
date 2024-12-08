@@ -37,9 +37,11 @@ const Login = () => {
             else {
                 dispatch(loginFailed());
                 console.log("res from backend",res.data);
+                
             }
         }).catch((error) => {
             console.error('Error during login request:', error);
+            setLoginStatus('*Incorrect username or password!');
         })
         // Axios.get(`http://localhost:3005/users/account/${accountID}`).then((res) => {
         //     console.log("res",res.data.message);
@@ -87,7 +89,6 @@ const Login = () => {
                     </div>
 
                     <form action="" className="form grid" onSubmit={() => {onSubmit()}}>
-                        <span className={statusHolder}>{loginStatus}</span>
 
                         <div className="inputDiv">
                             <label htmlFor="CCCD">CCCD</label>
@@ -106,6 +107,23 @@ const Login = () => {
                                        onChange={(event) => setLoginPassword(event.target.value)}/>
                             </div>
                         </div>
+
+                        {loginStatus && (
+                            <span
+                                style={{
+                                    color: 'red',
+                                    fontFamily: "'Roboto', sans-serif", 
+                                    fontWeight: '600', 
+                                    fontSize: '14px',
+                                    padding: '5px',              
+                                    display: 'inline-block',     
+                                    textAlign: 'center',         
+                                    maxWidth: '100%',            
+                                }}
+                            >
+                                {loginStatus}
+                            </span>
+                        )}
 
                         <button type='submit' className='btn flex' onClick={(event) => {loginUser(event)}}>
                             <span>Login</span>
