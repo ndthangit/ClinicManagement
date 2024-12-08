@@ -29,19 +29,6 @@ const PaymentDetail = () => {
         licenseKey: 'non-commercial-and-evaluation',
     };
 
-    const handleStatusChange = (paymentId, status) => {
-        dispatch(updateUIPaymentStatus({ paymentId, status: updatedStatus[paymentId] }));
-        setUpdatedStatus((prevState) => ({
-            ...prevState,
-            [paymentId]: status,
-        }));
-    };
-
-    const handleSave = (paymentId) => {
-        if (updatedStatus[paymentId]) {
-            dispatch(updatePaymentStatus({ paymentId, status: updatedStatus[paymentId] }));
-        }
-    };
     const handleSaveRow = (rowIndex) => {
         const updatedRow = { ...editedData[rowIndex] };
 
