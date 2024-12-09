@@ -18,8 +18,32 @@
   align-items: center;
   flex-direction: column;
   border: 1px solid #ccc;
+  border-radius: 20px;
   padding: 20px;
   width: 100%;
+
+}
+
+
+
+.doctorInfo .transition:hover {
+  transition: transform 0.3s, box-shadow 0.3s;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.doctorInfo .buttonSel {
+  background-color: #78b841;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+}
+
+.doctorInfo .buttonSel:hover {
+  background-color: #5a9e3a;
+}
+
+.doctorInfo .buttonSel:active {
+  background-color: #86cc51;
 }
 
 .doctorInfo .body .contentInfo .headInfo .imageDoctor {
@@ -27,7 +51,7 @@
   height: 200px;
   border-radius: 100%;
 
-  border: 1px solid black;
+  border: 1px solid #ccc;
 }
 
 .doctorInfo .body .contentInfo .headInfo .infoDetail {
@@ -53,11 +77,12 @@
 }
 
 .doctorInfo .body .contentInfo .headInfo .changeDoctor .changeButton {
-  padding: 10px 20px 10px 20px;
+  padding: 15px 30px 15px 30px;
 }
 
+
 .doctorInfo .body .contentInfo .work {
-  padding: 20px;
+  padding: 10px;
   grid-column: 1;
   grid-row: 1;
 }
@@ -66,19 +91,58 @@
   height: 100%;
 }
 
-.doctorInfo .body .contentInfo .work .table .date {
+.doctorInfo .body .contentInfo .work .table .title {
   padding: 10px;
+  width: 100%;
   display: flex;
-}
-.doctorInfo .body .contentInfo .work .table .date .cell {
-  padding: 10px 20px 10px 20px;
+  justify-content: center;
+  background-color: #86cc51;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  color: #fff;
 }
 
+.doctorInfo .body .contentInfo .work .table .date {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  display: flex;
+}
+
+.doctorInfo .body .contentInfo .work .table .date .next {
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  display: flex;
+  background-color: #42a4de;
+  color: #fff;
+
+}
+
+.doctorInfo .body .contentInfo .work .table .date .next:hover {
+  background-color: #3687b6;
+}
+
+.doctorInfo .body .contentInfo .work .table .date .next:active {
+  background-color: #4bbdff;
+}
+
+
+.doctorInfo .body .contentInfo .work .table .date .cell {
+  padding: 10px 10px 10px 10px;
+  font-size: 13px;
+  width: 100%;
+  margin: 0px 5px 0px 5px;
+}
+
+
 .doctorInfo .body .contentInfo .work .table .tableTime {
-  border: 1px solid gray;
+  border: 1px solid #ccc;
   overflow:scroll;
   height: 30vh;
   padding: 20px;
+  margin-top: 20px;
+  border-radius: 10px 10px 10px 10px;
 }
 
 .doctorInfo .body .contentInfo .work .table .tableTime .time {
@@ -88,13 +152,31 @@
 }
 
 .doctorInfo .body .contentInfo .work .table .tableTime .time .cell {
-  padding: 10px 20px 10px 20px;
+  padding: 10px 15px 10px 15px;
+  margin: 3px 5px 3px 5px;
 }
 
 .doctorInfo .body .contentInfo .work .info {
   display: flex;
   flex-direction: column;
   width: 100%;
+  /* align-items: center; */
+}
+
+.doctorInfo .body .contentInfo .work .info .title {
+  color: #fff;
+  background-color: #86cc51;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  
+}
+
+.doctorInfo .body .contentInfo .work .info .border {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  margin-bottom: 5px;
 }
 
 
@@ -103,6 +185,7 @@
   grid-template-columns: repeat(2, 1fr) 3fr;
   grid-template-rows: repeat(2, 1fr);
   padding: 20px;
+
 }
 
 .doctorInfo .body .contentInfo .work .info .timeInfo .detailTime .changeTime {
@@ -121,19 +204,18 @@
 
 .doctorInfo .body .contentInfo .work .info .field {
   display: flex;
-  padding: 10px 0px 0px 30px;
+  padding: 5px 0px 5px 30px;
 }
 
 .doctorInfo .body .contentInfo .work .info .infoValue {
-  padding: 10px 0px 0px 00px;
   font-weight: normal;
-  font-size: 18px;
+  padding: 5px 0px 5px 0px;
+
 }
 
 .doctorInfo .body .contentInfo .work .info .optionalInfo {
   display: flex;
   flex-direction: column;
-
 }
 
 .doctorInfo .body .contentInfo .work .info .optionalInfo .input {
@@ -145,9 +227,10 @@
 .doctorInfo .body .contentInfo .work .footer {
   display: flex;
   justify-content: center;
-  padding-top: 50px;
+  padding-top: 25px;
 }
 
 .doctorInfo .body .contentInfo .work .footer .submit {
   padding: 15px 20px 15px 20px;
+
 }

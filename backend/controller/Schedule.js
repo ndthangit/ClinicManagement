@@ -15,12 +15,23 @@ function executeQuery(sql, params = []) {
 const getScheduleByPatientId = async (req, res) => {
     const patientId = req.params.patientId;  // Sử dụng patientId để đồng nhất với frontend
     const sql = `
-        SELECT a.appointment_id, a.reason, a.appointment_date, a.status,
-               a.doctor_id, d.doctor_name AS doctor_name, p.patient_name AS patient_name
-        FROM datait3170.Appointments AS a
-        JOIN datait3170.Doctors AS d ON a.doctor_id = d.doctor_id
-        JOIN datait3170.Patients AS p ON a.patient_id = p.patient_id
-        WHERE a.patient_id = ? AND a.status NOT IN ('canceled', 'completed')
+        SELECT 
+            a.appointment_id, a.reason, a.appointment_date, a.status,
+            a.doctor_id, d.doctor_name AS doctor_name, p.patient_name AS patient_name,
+            dep.department_name AS department_name, td.type_name AS type_name               
+        FROM 
+            datait3170.Appointments AS a
+        JOIN 
+            datait3170.Doctors AS d ON a.doctor_id = d.doctor_id
+        JOIN 
+            datait3170.Patients AS p ON a.patient_id = p.patient_id
+        JOIN 
+            datait3170.department AS dep ON d.department_id = dep.department_id 
+        JOIN 
+            datait3170.type_doctor AS td ON d.type_id = td.type_id              
+        WHERE 
+            a.patient_id = ? 
+            AND a.status NOT IN ('canceled', 'completed')
     `;
     try {
         const result = await executeQuery(sql, [patientId]);

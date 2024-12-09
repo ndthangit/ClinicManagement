@@ -1,3 +1,26 @@
+.detailExam .body .content {
+  padding: 20px;
+}
+
+.detailExam .buttonContent {
+  border: none;
+  background-color: #78b841;
+  color: #fff;
+  padding: 0px 10px 0px 10px;
+  border-radius: 5px;
+  margin-left: 5px;
+}
+
+.detailExam .buttonContent:hover {
+  background-color: #5a9e3a;
+
+}
+
+.detailExam .buttonContent:active {
+  background-color: #86cc51;
+
+}
+
 .detailExam .body .content .top {
   display: grid;
   grid-template-columns: 2fr 3fr;
@@ -88,7 +111,6 @@
   border-radius: 20px;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
 }
 
 .detailExam .body .content .services .examService .titleService {
@@ -178,6 +200,7 @@
   margin-top: 10px;
   padding: 10px;
   border-radius: 10px;
+  align-items: center;
   justify-content: space-between;
 }
 
@@ -247,10 +270,43 @@
   padding: 5px;
 }
 
+.detailExam .body .content .notes {
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  margin-top: 10px;
+}
+
+.detailExam .body .content .notes .title {
+  background-color: hsl(94, 74%, 63%);
+  border-radius: 20px 20px 0px 0px;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  color: #fff;
+}
+
+.detailExam .body .content .notes .value {
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+}
+
+.detailExam .body .content .notes .value .area {
+  max-width: 70vw;
+  min-width: 50vw;
+  padding: 5px;
+  min-height: 50px;
+}
+
+.detailExam .body .content .notes .value .button {
+  height: 50px;
+}
+
 .detailExam .body .content .submitExam {
   display: flex;
   justify-content: center;
-  padding-top: 3%;
+  padding-top: 1%;
 }
 
 .detailExam .body .content .submitExam .buttonSubmit {
@@ -263,4 +319,12 @@
 .detailExam .body .content .submitExam .buttonSubmit:hover {
   background-color: hsl(94, 40%, 45%);
   
+}
+
+.detailExam .body .content .remove {
+  color: #45792d;
+  display: flex;
+  align-items: end;
+  height: 100%;
+
 }

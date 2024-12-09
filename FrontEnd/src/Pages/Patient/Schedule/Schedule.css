@@ -1,19 +1,10 @@
 /* Schedule.css */
 
-.schedule .body {
-    display: flex;
-    flex: 1;
-    overflow: hidden;
-}
-
-.schedule .content {
-    display: flex;    
+.schedule .content {  
     padding: 20px;
     background-color: #ffffff;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    flex-direction: column;
-    overflow: scroll;
 }
 
 .schedule h2 {
@@ -181,4 +172,126 @@
 .editScheduleForm button:hover {
     background-color: #45a049;
     transform: scale(1.03);
+}
+
+.filters {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 1rem;
+    border-radius: 8px;
+    flex-wrap: wrap;
+}
+
+.filters select, .filters input {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 150px;
+}
+
+.filters select:hover {
+    border-color: #5dc853;
+    background-color: #f0f8ff;
+}
+
+.filters select:focus {
+    border-color: #31c938;
+    box-shadow: 0 0 5px rgba(88, 226, 53, 0.5);
+}
+
+.filters button {
+    padding: 0.5rem 1.5rem;
+    font-size: 0.8rem;
+    color: #fff;
+    background-color: #78b841;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.filters button:hover {
+    background-color: #5a9e3a;
+}
+
+.filters button:active {
+    background-color: #86cc51;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    position: relative; /* Để danh sách gợi ý có thể hiển thị phía dưới */
+}
+
+.searchDoctorName-input {
+    width: 150px;
+    padding: 5px 10px;
+    font-size: 12px;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    position: relative; /*Đảm bảo input không bị ảnh hưởng bởi z-index */
+}
+
+.searchDoctorName-button {
+    padding: 6px 12px;
+    font-size: 14px;
+    background-color: white;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.searchDoctorName-button:hover {
+    background-color: #e6eee8;
+}
+
+.filters .searchDoctorName-input,
+.filters .searchDoctorName-button {
+    display: flex;
+    align-items: center;
+}
+
+.filters p {
+    margin-left: auto;
+}
+
+/* Danh sách gợi ý */
+.doctor-suggestions {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-height: 200px;
+    overflow-y: auto; /* Cho phép cuộn khi số lượng gợi ý nhiều */
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    position: absolute; /* Đặt danh sách gợi ý phía dưới thanh tìm kiếm */
+    top: 100%; /* Đảm bảo danh sách gợi ý xuất hiện ngay dưới input */
+    left: 0;
+    right: 0;
+    z-index: 10; /* Đảm bảo danh sách gợi ý luôn hiển thị phía trên các phần tử khác */
+    width: 100%; /* Danh sách gợi ý sẽ rộng như input */
+    margin-top: 5px; /* Khoảng cách giữa ô tìm kiếm và danh sách gợi ý */
+    box-sizing: border-box;
+}
+
+.doctor-suggestion-item {
+    padding: 8px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.doctor-suggestion-item:hover {
+    background-color: #e6f7f4;
 }

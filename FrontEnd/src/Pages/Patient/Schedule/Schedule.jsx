@@ -33,8 +33,14 @@ function Schedule() {
     const [selectTimeOptions, setSelectTimeOptions] = useState([]);
     const [doctorId, setDoctorId] = useState(null);
     const [doctors, setDoctors] = useState([]); //danh sách bác sĩ
+    const [filterDate, setFilterDate] = useState('all');
+    const [filterStatus, setFilterStatus] = useState('all');
+    const [filterDepartment, setFilterDepartment] = useState('all');
+    const [filteredSchedules, setFilteredSchedules] = useState(Object.values(scheduleList));
+    const [searchTerm, setSearchTerm] = useState('');
+    const [filteredDoctors, setFilteredDoctors] = useState([]); // Danh sách bác sĩ lọc theo tên
 
-    
+
     //lấy danh sách lịch khám dựa trên patientId và danh sách bác sĩ theo id
     useEffect(() => {
         if (!patientId) return;
@@ -43,6 +49,7 @@ function Schedule() {
             try {
                 const response = await axios.get(`http://localhost:3005/schedule/${patientId}`);
                 setScheduleList(response.data);
+                setFilteredSchedules(response.data);
                 console.log(response.data);
             } catch (error) {
                 console.error('Lỗi khi lấy dữ liệu lịch khám:', error);
@@ -207,6 +214,37 @@ function Schedule() {
         }
     };
 
+    const handleSearchChange = (e) => {
+        const value = e.target.value;
+        setSearchTerm(value); 
+    
+        if (value.trim() === '') {
+            setFilteredDoctors([]); 
+            applyFilter(); 
+        } else {
+            const filtered = doctors.filter((doctor) => 
+                doctor.doctor_name.toLowerCase().includes(value.toLowerCase())
+            );
+            setFilteredDoctors(filtered); 
+        }
+    };
+    
+
+    const handleSearch = () => {
+        if (searchTerm === '') {
+            setFilteredSchedules(scheduleList);
+        } else {
+            const filtered = scheduleList.filter((schedule) =>
+                schedule.doctor_name.toLowerCase().includes(searchTerm.toLocaleLowerCase()));
+            setFilteredSchedules(filtered);
+        }
+    };
+
+    const handleKeyDown = (event) => {
+        if (event.key === 'Enter') {
+            handleSearch();
+        }
+    };
 
     const toggleScheduleDetails = (scheduleId) => {
         if (selectedSchedule === scheduleId) {
@@ -303,6 +341,36 @@ function Schedule() {
         return times;
     };
 
+    const applyFilter = () => {
+    const result = Object.values(scheduleList).filter((schedule) => {
+        if (filterDate === 'today') {
+            const today = new Date().toISOString().split('T')[0];
+            if (!schedule.appointment_date.startsWith(today)) return false;
+        } else if (filterDate === 'thisWeek') {
+            const now = new Date();
+            const startOfWeek = new Date(now.setDate(now.getDate() - now.getDay() + 1)); 
+            const endOfWeek = new Date(now.setDate(now.getDate() - now.getDay() + 7)); 
+            const appointmentDate = new Date(schedule.appointment_date);
+            if (appointmentDate <= startOfWeek || appointmentDate >= endOfWeek) return false;
+        }
+
+        if (filterStatus !== 'all' && schedule.status !== filterStatus) return false;
+
+        if (filterDepartment !== 'all' && schedule.department_name !== filterDepartment) return false;
+
+        return true;
+    });
+
+    const finalFiltered = result.filter((schedule) => {
+        if (searchTerm.trim() !== '') {
+            return schedule.doctor_name.toLowerCase().includes(searchTerm.toLowerCase());
+        }
+        return true; //nếu searchTerm rỗng, không lọc gì thêm
+    });
+
+    setFilteredSchedules(finalFiltered);
+};
+
     return (
         <div className='schedule dashboard'>
             <Navbar className='header' />
@@ -310,20 +378,77 @@ function Schedule() {
                 <Leftbar className='leftBar' />
                 <div className='content'>
                     <h2>Lịch khám</h2>
+                    <div className="filters">  
+                        <select value={filterDate} onChange={(e) => setFilterDate(e.target.value)}>
+                            <option value="all">Tất cả lịch</option>
+                            <option value="today">Lịch hôm nay</option>
+                            <option value="thisWeek">Lịch trong tuần</option>
+                        </select>
+
+                        <select value={filterStatus} onChange={(e) => setFilterStatus(e.target.value)}>
+                            <option value="all">Tất cả</option>
+                            <option value="pending">Lịch chờ duyệt</option>
+                            <option value="confirmed">Lịch đã duyệt</option>
+                        </select>
+
+                        <select value={filterDepartment} onChange={(e) => setFilterDepartment(e.target.value)}>
+                            <option value="all">Tất cả khoa</option>
+                            {Object.values(scheduleList).map((schedule) => schedule.department_name)
+                                .filter((value, index, self) => self.indexOf(value) === index) // Loại bỏ trùng lặp
+                                .map((department) => (
+                                    <option key={department} value={department}>
+                                        {department}
+                                    </option>
+                                ))}
+                        </select>
+
+                        <button onClick={applyFilter}>Xác nhận</button>
+                        
+                        {/* Tìm kiếm */}
+                        <p className="search-container">
+                            <input 
+                                type="text" 
+                                placeholder="Tìm kiếm bác sĩ" 
+                                value={searchTerm} 
+                                onChange={handleSearchChange} 
+                                onKeyDown={handleKeyDown} 
+                                className="searchDoctorName-input"
+                        />
+                        {filteredDoctors.length > 0 && (
+                            <ul className="doctor-suggestions">
+                                {filteredDoctors.map((schedule) => (
+                                    <li 
+                                        key={schedule.appointment_id} 
+                                        onClick={() => {
+                                            setSearchTerm(schedule.doctor_name); 
+                                            setFilteredDoctors([]);
+                                            
+                                        }}
+                                        className="doctor-suggestion-item"
+                                    >
+                                        {schedule.doctor_name}
+                                    </li>
+                                ))}
+                            </ul>
+                        )}
+
+                        <button onClick={handleSearch} className="searchDoctorName-button">Search</button>
+                        </p>
+                    </div>
+                    
                     {/* danh sách lịch khám */}
                     <div className='scheduleList'>
-                        {Object.keys(scheduleList).map((scheduleId) => {
-                            const schedule = scheduleList[scheduleId];
-                            return (
+                        {filteredSchedules.length > 0 ? (
+                        filteredSchedules.map((schedule) => (
                                 <div key={schedule.appointment_id} className='scheduleItem'>
                                     <div onClick={() => toggleScheduleDetails(schedule.appointment_id)}>
-                                        <p>{schedule.appointment_date} - {schedule.doctor_name}</p>
+                                        <p>{schedule.appointment_date} - Bác sĩ: {schedule.doctor_name} - {schedule.department_name}</p>
                                     </div>
                                     {showScheduleDetails && selectedSchedule === schedule.appointment_id && (
                                         <div className='scheduleDetails'>
                                             <p>Thông tin chi tiết:</p>
                                             <p>Ngày: {schedule.appointment_date}</p>
-                                            <p>Bác sĩ: {schedule.doctor_name}</p>
+                                            <p>Bác sĩ: {schedule.doctor_name} - {schedule.department_name}</p>
                                             <p>Nguyên nhân: {schedule.reason}</p>
                                             <p>Trạng thái: {schedule.status}</p>
 
@@ -382,8 +507,10 @@ function Schedule() {
                                         </div>
                                     )}
                                 </div>
-                            );
-                        })}
+                        ))
+                    ) : (
+                        <p>Không có lịch khám phù hợp.</p>
+                     )}
                     </div>
                 </div>
             </div>

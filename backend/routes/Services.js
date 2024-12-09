@@ -18,4 +18,8 @@ router.post('/serviceUseage/byId/:id', async (req, res) => {
   await Services.postServiceForExamId(req, res);
 });
 
+router.post('/removeService', async (req, res) => {
+  await Services.removeService(req, res);
+});
+
 module.exports = router;

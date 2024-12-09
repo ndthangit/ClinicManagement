@@ -47,6 +47,8 @@ function DetailExam() {
   const listMedicineRef = useRef(null);
   const [isExpandedMedicine, setIsExpandedMedicine] = useState(false);
 
+  const [notes, setNotes] = useState('');
+
   const handleClickOutside = (e) => {
     if (serviceRef.current && !serviceRef.current.contains(e.target)) {
       setIsServiceVisible(false);
@@ -55,6 +57,7 @@ function DetailExam() {
       setIsMedicineVisible(false);
     }
   };
+
 
   useEffect(() => {
     axios.get(`http://localhost:3005/medExam/medicalExam/byId/${examId}`).then((respone) => {
@@ -214,11 +217,28 @@ function DetailExam() {
   };
 
   const removeService = async (index) => {
-    await axios.post('http://localhost:3005/service/serviceUseage', services[index])
+    await axios.post('http://localhost:3005/service/removeService', services[index]);
+    await axios.get(`http://localhost:3005/service/serviceUseage/byId/${examId}`).then((respone) => {
+      setServices(respone.data);
+    });
+
     await axios.get(`http://localhost:3005/service/byId/${examId}`).then((respone) => {
       setListService(respone.data);
       setFilterServices(respone.data);
     });
+  }
+
+  const removeMedicine = async (index) => {
+    await axios.post('http://localhost:3005/medicine/removeMedicine', medicines[index]);
+
+    await axios.get(`http://localhost:3005/medicine/byId/${examId}`).then((respone) => {
+      setListMedicines(respone.data);
+      setFilterMedicines(respone.data);
+    });
+
+    await axios.get(`http://localhost:3005/medicine/invoices/byId/${examId}`).then((respone) => {
+      setMedicines(respone.data);
+    })
   }
 
   const expandService = () => {
@@ -236,7 +256,7 @@ function DetailExam() {
                       <p>{value.service_name}</p>
                       <p>{value.note}</p>
                     </div>
-                    <Tooltip title="Xóa" className='' onClick={() => removeService(index)}>
+                    <Tooltip title="Xóa" className='remove' onClick={() => removeService(index)}>
                       <DeleteIcon />
                     </Tooltip>
                   </div>
@@ -275,7 +295,7 @@ function DetailExam() {
                       <p>Số lượng: {value.quantity.split('.')[0]}</p>
                       <p>Chỉ định: {value.note ? value.note : 'Không có chỉ định'}</p>
                     </div>
-                    <Tooltip title="Xóa" className='' onClick={() => removeService(index)}>
+                    <Tooltip title="Xóa" className='remove' onClick={() => removeMedicine(index)}>
                       <DeleteIcon />
                     </Tooltip>
                   </div>
@@ -301,42 +321,54 @@ function DetailExam() {
 
   const submitService = async() => {
     const serviceInfo = filterServices.find(service => service.service_name === selectedService);
-    console.log(filterServices);
-    await axios.post(`http://localhost:3005/service/serviceUseage/byId/${examId}`, {
-      service_id:serviceInfo.service_id, 
-      note:notedService
-    });
-    setSelectedService('');
-    setNotedService('');
-    await axios.get(`http://localhost:3005/service/serviceUseage/byId/${examId}`).then((respone) => {
-      setServices(respone.data);
-      console.log(services);
-    });
+    if (serviceInfo) {
+      await axios.post(`http://localhost:3005/service/serviceUseage/byId/${examId}`, {
+        service_id:serviceInfo.service_id, 
+        note:notedService
+      });
+      setSelectedService('');
+      setNotedService('');
+      await axios.get(`http://localhost:3005/service/serviceUseage/byId/${examId}`).then((respone) => {
+        setServices(respone.data);
+        console.log(services);
+      });
 
-    await axios.get(`http://localhost:3005/service/byId/${examId}`).then((respone) => {
-      setListService(respone.data);
-      setFilterServices(respone.data);
-    });
+      await axios.get(`http://localhost:3005/service/byId/${examId}`).then((respone) => {
+        setListService(respone.data);
+        setFilterServices(respone.data);
+      });
+    }
   }
 
   const submitMedicine = async() => {
-    const medicineInfo = filterMedicines.find(medicine => medicine.medicine_name === selectedMedicine);
-    await axios.post(`http://localhost:3005/medicine/invoices/byId/${examId}`, {
-      medicine_id:medicineInfo.medicine_id, 
-      note:notedMedicine,
-      quantity: parseInt(numsMedicine)
-    });
-    setSelectedMedicine('');
-    setNotedMedicine('');
-    setNumsMedicine(0);
-    await axios.get(`http://localhost:3005/medicine/byId/${examId}`).then((respone) => {
-      setListMedicines(respone.data);
-      setFilterMedicines(respone.data);
-    });
 
-    await axios.get(`http://localhost:3005/medicine/invoices/byId/${examId}`).then((respone) => {
-      setMedicines(respone.data);
-    })
+    const medicineInfo = filterMedicines.find(medicine => medicine.medicine_name === selectedMedicine);
+    console.log(notedMedicine);
+    if (medicineInfo) {
+      await axios.post(`http://localhost:3005/medicine/invoices/byId/${examId}`, {
+        medicine_id:medicineInfo.medicine_id, 
+        note: notedMedicine,
+        quantity: parseInt(numsMedicine)
+      });
+      setSelectedMedicine('');
+      setNotedMedicine('');
+      setNumsMedicine(0);
+      await axios.get(`http://localhost:3005/medicine/byId/${examId}`).then((respone) => {
+        setListMedicines(respone.data);
+        setFilterMedicines(respone.data);
+      });
+
+      await axios.get(`http://localhost:3005/medicine/invoices/byId/${examId}`).then((respone) => {
+        setMedicines(respone.data);
+      })
+    }
+  }
+
+  const submitNote = async () => {
+    await axios.post(`http://localhost:3005/medExam/medicalExam/byId/${examId}`, {
+      notes: notes,
+      changeInfo: 'notes'
+    });
   }
 
   const submitExam = async () => {
@@ -344,7 +376,6 @@ function DetailExam() {
       status: 'completed',
       changeInfo: 'status'
     });
-    console.log("help");
     navigate('/doctor/medical');
   }
 
@@ -407,7 +438,7 @@ function DetailExam() {
                 <div className='addService'>
                   <div className='batch'>
                     <p className='title'>Tên dịch vụ</p>
-                    <div className='addNameService' ref={serviceRef}>
+                    <div className='addNameService ' ref={serviceRef}>
                       <input className='inputService inputValue' value={selectedService} onChange={(event) => filterService(event.target.value)} onFocus={() => {setIsServiceVisible(true); filterService(selectedService); setHighlightedIndex(-1);}} onKeyDown={(event) => {handleKeyDown(event, 'service', listRef)}} placeholder="Type to search..."/>
                       {isServiceVisible && filterServices.length > 0 && (
                           <div className="listService" ref={listRef}>
@@ -432,7 +463,7 @@ function DetailExam() {
                     <p className='title'>note</p>
                     <input className='noted inputValue' value={notedService} onChange={(event) => setNotedService(event.target.value)}></input>
                   </div>
-                  <button onClick={() => submitService()}>Thêm dịch vụ</button>
+                  <button className='buttonContent' onClick={() => submitService()}>Thêm dịch vụ</button>
                 </div>
                 {
                   expandService()
@@ -479,17 +510,26 @@ function DetailExam() {
                 </div>
                 <div className='batch'>
                   <p className='title'>note</p>
-                  <input className='inputValue' value={notedMedicine} onChange={(e) => setNotedMedicine(e.target.data)}></input>
+                  <input className='inputValue' value={notedMedicine} onChange={(e) => setNotedMedicine(e.target.value)}></input>
                 </div>
 
-                <button className='submitMedicine' onClick={() => submitMedicine()}>Thêm thuốc</button>
+                <button className='submitMedicine buttonContent' onClick={() => submitMedicine()}>Thêm thuốc</button>
               </div>
               {
                 expandMedicine()
               }
             </div>
+            <div className='notes'>
+              <div className='title'>
+                <p>Notes</p>
+              </div>
+              <div className='value'>
+                <textarea className='area' value={notes} onChange={(e) => setNotes(e.target.value)}></textarea>
+                <button className='buttonContent button' onClick={() => {submitNote()}}>Xác nhận</button>
+              </div>
+            </div>
             <div className='submitExam'>
-                <Button className='buttonSubmit' onClick={() => submitExam()}>Hoàn thành</Button>
+                <Button className='buttonSubmit button' onClick={() => submitExam()}>Hoàn thành</Button>
             </div>
           </div>
         </div>

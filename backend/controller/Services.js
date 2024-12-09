@@ -58,9 +58,21 @@ const getServiceById = async (req, res) => {
   }
 }
 
+const removeService  = async (req, res) => {
+  const sql = 'DELETE FROM datait3170.service_usage WHERE exam_id = ? AND service_id = ?';
+  try {
+    console.log(req.body)
+    await executeQuery(sql, [req.body.exam_id, req.body.service_id]);
+    res.status(200).json(req.body)
+  } catch (err) {
+    console.error('Failed to send data:', err);
+  }
+}
+
 module.exports = {
   getServiceByExamId: getServiceByExamId,
   postServiceForExamId: postServiceForExamId,
   getService: getService,
-  getServiceById: getServiceById
+  getServiceById: getServiceById,
+  removeService: removeService
 };

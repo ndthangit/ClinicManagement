@@ -50,7 +50,7 @@ const SettingInfo = () => {
         <div className='settingInfo dashboard'>
             <Navbar className="header"/>
             <div className='body'>
-                <div className='content'>
+                <div className='fullycontent'>
                     <div className="form-container">
                         <form onSubmit={handleSubmit}>
                             <p>Họ tên</p>

@@ -18,4 +18,8 @@ router.get('/byId/:id', async (req, res) => {
   Medicine.getMedicinesById(req, res);
 });
 
+router.post('/removeMedicine', async (req, res) => {
+  Medicine.removeMedicine(req, res);
+})
+
 module.exports = router

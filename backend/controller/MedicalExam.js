@@ -78,12 +78,16 @@ const getHistMedicalExamForDoctor = async (req, res) => {
     const sql = `select M.*, A.*, P.patient_name from datait3170.medical_exam M, datait3170.appointments A, datait3170.patients P
         where A.patient_id = P.patient_id and 
         M.appointment_id = A.appointment_id and
-        A.doctor_id = ? AND A.appointment_date >= ?`;
+        A.doctor_id = ? AND A.appointment_date >= ? AND M.status = 'pending'`;
+    const sql2 = `UPDATE datait3170.medical_exam M SET status = 'failed' WHERE  M.exam_date < ? AND M.status = 'pending'`;
+
     try {
         const today = new Date();
         const midnightToday = new Date(today.getFullYear(), today.getMonth(), today.getDate());
         const data = await query(sql, [req.params.id, midnightToday]);
         const result = await scheduleMedicalExam(data);
+        await query(sql2, [midnightToday]);
+
         res.status(200).send(result);
     } catch (err) {
         console.error('Failed to retrieve data:', err);
@@ -94,7 +98,7 @@ const getHistoryExamForDoctor = async (req, res) => {
     const sql = `select M.*, A.*, P.patient_name from datait3170.medical_exam M, datait3170.appointments A, datait3170.patients P
         where A.patient_id = P.patient_id and 
         M.appointment_id = A.appointment_id and
-        A.doctor_id = ? AND A.appointment_date <= ?`;
+        A.doctor_id = ? AND (A.appointment_date <= ? OR M.status != 'pending')`;
     try {
         const today = new Date();
         const midnightToday = new Date(today.getFullYear(), today.getMonth(), today.getDate());
@@ -130,6 +134,9 @@ const updateMedicalExam = async (req, res) => {
     }
     else if (req.body.changeInfo === 'status') {
         fields.push(`status = '${req.body.status}'`);
+    }
+    else if (req.body.changeInfo === 'notes') {
+        fields.push(`notes = '${req.body.notes}'`);
     }
     const sql = `UPDATE dataIT3170.medical_exam SET ${fields.join(", ")} WHERE exam_id = ?`;
     try {

@@ -59,11 +59,21 @@ const getInvoiceById = async (req, res) => {
   }
 }
   
-
+const removeMedicine = async (req, res) => {
+  const sql = 'DELETE FROM datait3170.invoices WHERE exam_id = ? AND medicine_id = ?';
+  try {
+    console.log(req.body)
+    await executeQuery(sql, [req.body.exam_id, req.body.medicine_id]);
+    res.status(200).json(req.body)
+  } catch (err) {
+    console.error('Failed to send data:', err);
+  }
+}
 
 module.exports = {
   getMedicines: getMedicines,
   getMedicinesById: getMedicinesById,
   postMedicineForExamId: postMedicineForExamId,
-  getInvoiceById: getInvoiceById
+  getInvoiceById: getInvoiceById,
+  removeMedicine: removeMedicine
 }

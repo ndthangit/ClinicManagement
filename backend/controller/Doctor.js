@@ -68,6 +68,7 @@ const getDoctorByUsername = async (req, res) => {
   if (result.length !== 0) {
     res.status(200).send(result[0]);
   }
+  res.status(404);
 }
 
 const createUser = async (req, res) => {
@@ -77,6 +78,25 @@ const createUser = async (req, res) => {
   res.json(info);
 };
 
+const getDoctorTypes = async (req, res) => {
+  const sql = 'SELECT * FROM dataIT3170.type_doctor';
+  const result = await executeQuery(sql);
+  console.log(1);
+  if (result.length !== 0) {
+    res.status(200).send(result);
+  }
+  res.status(404);
+}
+
+const getDepartments = async (req, res) => {
+  const sql = 'SELECT * FROM dataIT3170.department';
+  const result = await executeQuery(sql);
+  if (result.length !== 0) {
+    res.status(200).send(result);
+  }
+  res.status(404);
+}
+
 
 module.exports = {
   getDoctors: getDoctors,
@@ -84,6 +104,8 @@ module.exports = {
   checkDoctorAvailability: checkDoctorAvailability,
   loginUser: loginUser,
   createUser: createUser,
-  getDoctorByUsername: getDoctorByUsername
+  getDoctorByUsername: getDoctorByUsername,
+  getDoctorTypes: getDoctorTypes,
+  getDepartments: getDepartments
 }
 

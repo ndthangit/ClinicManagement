@@ -1,9 +1,428 @@
-.dashboard {
+.healthcareDashboard {
   display: grid;
-  grid-template-rows: repeat(12, 1fr);
-  height: 100vh;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100vh;
+  background-color: #f4f6f8;
+  background-image: url('../../Assets/BackgroundDash.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed; 
+  position: relative; 
+  overflow: hidden;
+}
+/* nền mờ */
+.healthcareDashboard::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.1); 
+  backdrop-filter: blur(2px); /* hiệu ứng làm mờ */
+  z-index: 1;
+  pointer-events: none; 
 }
 
-.dashboard .header {
+.healthcareDashboard img,
+.healthcareDashboard__content {
+  position: relative;
+  z-index: 2; /* hình ảnh, nội dung nằm trên lớp phủ */
+}
+
+/* Hero Banner */
+.healthcareDashboard__heroBanner {
   grid-row: 1;
+  background-color: hsl(94, 74%, 63%); /* mờ 0.8 */
+  color: white;
+  text-align: center;
+  padding: 20px 0;
+  z-index: 1;
+}
+
+.healthcareDashboard__heroBanner h1 {
+  font-size: 36px;
+  font-weight: 600;
+}
+
+.healthcareDashboard__heroBanner p {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+/* Container chính */
+.healthcareDashboard__mainFunctions {
+  display: flex;
+  flex-direction: column; /* bố cục dọc */
+  align-items: center;
+  gap: 40px; /* khoảng cách giữa lảgecard và smallcard */
+  margin-top: 50px;
+  z-index: 1;
+}
+
+/* Large Card */
+.healthcareDashboard__largeCard {
+  width: 60%;
+  height: 350px;
+  background-color: rgba(255, 255, 255, 0.8); /* mờ 0.8 giống largecard */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* đổ bóng */
+  border-radius: 20px;
+  text-align: center;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.healthcareDashboard__largeCard:hover {
+  transform: translateY(-10px); /* đẩy lên 10px khi di chuột vào*/
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+}
+
+.healthcareDashboard__largeCard h3 {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.healthcareDashboard__largeCard p {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.healthcareDashboard__largeCard button {
+  background-color: #00796b;
+  color: white;
+  padding: 12px 30px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.healthcareDashboard__largeCard button:hover {
+  background-color: #004d40;
+}
+
+/* Small Cards Container */
+.healthcareDashboard__smallCards {
+  display: flex;
+  justify-content: center; /* Căn giữa */
+  gap: 30px;
+  width: 80%;
+}
+
+/* Small Cards */
+.healthcareDashboard__functionCard {
+  width: 45%; 
+  height: 300px;
+  background-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  text-align: center;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.healthcareDashboard__functionCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.healthcareDashboard__functionCard h3 {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.healthcareDashboard__functionCard p {
+  font-size: 16px;
+  color: #757575;
+  margin-bottom: 15px;
+}
+
+.healthcareDashboard__functionCard button {
+  background-color: #00796b;
+  color: white;
+  padding: 10px 20px;
+  font-size: 14px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.healthcareDashboard__functionCard button:hover {
+  background-color: #004d40;
+}
+
+
+/* Footer - Thông tin liên hệ */
+.healthcareDashboard__footer {
+  background-color: rgba(38, 50, 56, 0.9); /* nền footer mờ */
+  color: white;
+  text-align: center;
+  padding: 20px 0;
+  font-size: 14px;
+  margin-top: 50px;
+  z-index: 1;
+}
+
+.healthcareDashboard__footer a {
+  color: #64b5f6;
+  font-weight: bold;
+}
+
+.healthcareDashboard__footer a:hover {
+  text-decoration: underline;
+}
+
+.healthcareDashboard__footer p {
+  margin: 5px 0;
+}
+
+/* Login Prompt */
+.healthcareDashboard__loginPrompt {
+  text-align: center;
+  margin-top: 20px;
+  z-index: 1;
+}
+
+.healthcareDashboard__loginLink {
+  color: #00796b;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 1; /*cho đỡ bị nền làm mờ*/
+}
+
+.healthcareDashboard__loginLink:hover {
+  text-decoration: underline;
+}
+
+/* mô tả card "Đặt lịch khám" */
+.healthcareDashboard__largeCardDescription {
+  font-size: 16px;
+  color: #616161;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  text-align: center;
+  padding: 0 20px;
+  line-height: 1.5;
+}
+
+/* Wrapper chính */
+.healthcareDashboard__contentWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f9f9f9;
+  padding: 40px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* bóng nhẹ */
+  margin-top: 40px;
+  width: 100%;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+  z-index: 1;
+}
+
+/* về chúng tôi */
+.healthcareDashboard__about {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.healthcareDashboard__about h2 {
+  font-size: 2rem;
+  color: #00796b;
+  margin-bottom: 20px;
+}
+
+.healthcareDashboard__about p {
+  font-size: 1.1rem;
+  color: #555;
+  line-height: 1.6;
+}
+
+/* các dịch vụ nổi bật */
+.healthcareDashboard__services {
+  width: 100%;
+  margin-bottom: 40px;
+}
+
+.healthcareDashboard__services h2 {
+  text-align: center;
+  font-size: 2rem;
+  color: #00796b;
+  margin-bottom: 20px;
+}
+
+.healthcareDashboard__serviceCards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* tự động điều chỉnh số lượng card */
+  gap: 20px;
+  justify-items: center;
+}
+
+.serviceCard {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.serviceCard:hover {
+  transform: translateY(-10px); /* đi lên 10px */
+}
+
+.serviceCard h4 {
+  font-size: 1.3rem;
+  margin-top: 10px;
+}
+
+.serviceCard p {
+  font-size: 1rem;
+  color: #555;
+}
+
+/* Phản hồi từ khách hàng */
+.healthcareDashboard__testimonials {
+  width: 100%;
+  margin-bottom: 40px;
+}
+
+.healthcareDashboard__testimonials h2 {
+  text-align: center;
+  font-size: 2rem;
+  color: #00796b;
+  margin-bottom: 20px;
+}
+
+.testimonial {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.testimonial p {
+  font-size: 1rem;
+  color: #555;
+  font-style: italic;
+}
+
+.testimonial h4 {
+  font-size: 1.1rem;
+  color: #00796b;
+  margin-top: 10px;
+}
+
+/* tin tức và sự kiện */
+.healthcareDashboard__news {
+  width: 100%;
+  margin-bottom: 40px;
+  background-color: #f4f7fa;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.healthcareDashboard__news h2 {
+  text-align: center;
+  font-size: 2rem;
+  color: #00796b;
+  margin-bottom: 20px;
+}
+
+.newsSlider {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.newsItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+  max-width: 900px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.newsItem:hover {
+  transform: scale(1.03);
+}
+
+.newsImage {
+  width: 100%;
+  max-height: 400px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.newsContent {
+  text-align: center;
+}
+
+.newsItem h4 {
+  font-size: 1.5rem;
+  color: #00796b;
+  margin-bottom: 10px;
+}
+
+.newsItem p {
+  font-size: 1rem;
+  color: #555;
+}
+
+.arrow-icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 3rem;
+  color: #00796b;
+  cursor: pointer;
+  transition: color 0.2s ease-in-out;
+}
+
+.arrow-icon:hover {
+  color: #004d40;
+}
+
+.arrow-icon:first-of-type {
+  left: 10px;
+}
+
+.arrow-icon:last-of-type {
+  right: 10px;
+}
+
+@media screen and (max-width: 768px) {
+  .newsItem {
+    width: 95%;
+  }
+
+  .newsItem h4 {
+    font-size: 1.3rem;
+  }
+
+  .newsItem p {
+    font-size: 0.9rem;
+  }
+
+  .arrow-icon {
+    font-size: 2.5rem;
+  }
 }

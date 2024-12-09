@@ -2,11 +2,13 @@ import React from 'react'
 import DoctorNavbar from '../../components/navbar/DoctorNavbar'
 import MedicalExamLeftbar from '../../components/leftbar/MedicalExamLeftbar'
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import './DetailHistory.css';
 import axios from 'axios';
 
 function DetailHistory() {
   let {examId} = useParams();
+  const navigate = useNavigate()
   const [examInfo, setExamInfo] = useState({});
   const [symptoms, setSymptoms] = useState('');
   const [diagnosis, setDiagnosis] = useState('');
@@ -19,10 +21,19 @@ function DetailHistory() {
       setSymptoms(respone.data.symptoms);
       setDiagnosis(respone.data.diagnosis);
     });
+
+    axios.get(`http://localhost:3005/service/serviceUseage/byId/${examId}`).then((respone) => {
+      setServices(respone.data);
+    });
+
+    axios.get(`http://localhost:3005/medicine/invoices/byId/${examId}`).then((respone) => {
+      setMedicines(respone.data);
+    })
+
   }, [])
 
   return (
-    <div className='doctor dashboard detailExam'>
+    <div className='doctor dashboard detailExam historyExam'>
       <DoctorNavbar className='header'/>
       <div className='body'>
         <MedicalExamLeftbar className='leftBar'/>
@@ -76,7 +87,7 @@ function DetailHistory() {
               </div>
             </div>
             
-            <div className='services'>
+            <div className='services patch'>
               <div className='examService'>
                 <div className='titleService'>
                   <p >Dịch vụ khám</p>
@@ -105,7 +116,7 @@ function DetailHistory() {
               </div>
             </div>
 
-            <div className='medicine'>
+            <div className='medicine patch'>
               <div className='titleMedicine'>
                   <p>Đơn thuốc</p>
               </div>
@@ -128,6 +139,17 @@ function DetailHistory() {
                 </div>
                 )
               }
+            </div>
+            <div className='notes'>
+              <div className='title'>
+                <p>Notes</p>
+              </div>
+              <div className='value'>
+                <p>{examInfo.notes}</p>
+              </div>
+            </div>
+            <div className='bottom'>
+              <button className='buttonContent' onClick={() => {navigate('/doctor/medical/history')}}>Trở về</button>
             </div>
           </div>
         </div>

@@ -65,19 +65,19 @@ function DoctorInfo() {
     if (isChooseTime) {
       return (
         <div className='info'>
-          <div className='timeInfo'>
-            <p>Thời gian:</p>
+          <div className='timeInfo border transition'>
+            <p className='title'>Thời gian</p>
             <div className='detailTime'> 
               <p className='field'>Ngày khám:</p>
               <p className='infoValue'>{Object.keys(schedule).at(daySelected)}</p>
               <p className='field'>Khung giờ:</p>
               <p className='infoValue'>{timeSelected.slice(0, 5)}</p>
 
-              <button className='changeTime' onClick={() => {setIsChooseTime(false)}}>Đặt lại giời gian</button>
+              <button className='changeTime buttonSel' onClick={() => {setIsChooseTime(false)}}>Đặt lại giời gian</button>
             </div>
           </div>
-          <div className='patientInfo'>
-            <p>Thông tin bệnh nhân: </p>
+          <div className='patientInfo border transition'>
+            <p className='title'>Thông tin bệnh nhân</p>
             <div className='detailInfo'>
               <p className='field'>Tên:</p>
               <p className='infoValue'>{patientInfo.patient_name}</p>
@@ -87,12 +87,12 @@ function DoctorInfo() {
               <p className='infoValue'>{patientInfo.gender}</p>
             </div>
           </div>
-          <div className='optionalInfo'>
-            <p>Thông tin bổ sung:</p>
+          <div className='optionalInfo border transition'>
+            <p className='title'>Thông tin bổ sung</p>
             <textarea className='input' placeholder='Triệu chứng, thuốc đang dùng, tiền sử' onChange={(event)=>{setReason(event.target.value)}}></textarea>
           </div>
           <div className='footer'>
-            <button className='submit' onClick={() => {submit(patientInfo.patient_id, id, Object.keys(schedule).at(daySelected)+' '+timeSelected, reason)}}>Đặt lịch</button>
+            <button className='submit buttonSel' onClick={() => {submit(patientInfo.patient_id, id, Object.keys(schedule).at(daySelected)+' '+timeSelected, reason)}}>Đặt lịch</button>
           </div>
         </div>
       )
@@ -100,21 +100,21 @@ function DoctorInfo() {
     else {
       return (
         <div className='table'>
-          <p>Đặt lịch khám</p>
-          <div className='date'>
-            <button onClick={()=>{nextIndex(false)}}>{'<'}</button>
+          <p className='title'>Đặt lịch khám</p>
+          <div className='date transition'>
+            <button onClick={()=>{nextIndex(false)}} className='next'>{'<'}</button>
             {
               Object.keys(schedule).slice(indexDay, indexDay+dayShow).map((key, index) => {
-                return (<button key={index} className='cell' onClick= {() => {selectDay(index)}}> {key.slice(8,10) + '-' + key.slice(5, 7) + ` (${schedule[key].length})`} </button>);
+                return (<button key={index} className='cell buttonSel' onClick= {() => {selectDay(index)}}> {key.slice(8,10) + '-' + key.slice(5, 7)} </button>);
               })
             }
-            <button onClick={()=>{nextIndex(true)}}>{'>'}</button>
+            <button onClick={()=>{nextIndex(true)}} className='next'>{'>'}</button>
           </div>
-          <div className='tableTime'>
+          <div className='tableTime transition'>
             <div className='time'>
               {
                 Object.values(schedule).slice(daySelected, daySelected+1).flat().map((time, index) => {
-                  return (<button key={index} className='cell' onClick={() => {checkCondition(); setIsChooseTime(true); setTimeSelected(time)}}> {time} </button>);
+                  return (<button key={index} className='cell buttonSel' onClick={() => {checkCondition(); setIsChooseTime(true); setTimeSelected(time)}}> {time} </button>);
                 })
               }
             </div>
@@ -124,7 +124,7 @@ function DoctorInfo() {
     }
   }
   useEffect( () => {
-     axios.get(`http://localhost:3005/doctor/${id}`).then((respone) => {
+     axios.get(`http://localhost:3005/doctor/byId/${id}`).then((respone) => {
       setDoctorInfo(respone.data);
     });
 
@@ -145,7 +145,7 @@ function DoctorInfo() {
       <div className='body'>
         <Leftbar className='leftBar'/>
         <div className='contentInfo'>
-          <div className='headInfo'>
+          <div className='headInfo transition'>
             <img src={doctorInfo.image_url ? doctorInfo.image_url:exampleImage} className='imageDoctor' ></img>
             <div className='infoDetail'>
               <div className='field'>
@@ -162,7 +162,7 @@ function DoctorInfo() {
               </div>
             </div>
             <div className='changeDoctor'>
-              <button className='changeButton' onClick={() => {navigate('/appointment')}}>Đổi bác sĩ</button>
+              <button className='changeButton buttonSel' onClick={() => {navigate('/appointment')}}>Đổi bác sĩ</button>
             </div>
           </div>
           <div className='work'>
