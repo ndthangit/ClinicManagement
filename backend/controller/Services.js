@@ -12,7 +12,7 @@ function executeQuery(sql, params = []) {
 }
 
 const getServiceByExamId = async (req, res) => {
-  const sql = `SELECT * FROM datait3170.service_usage SU, datait3170.services S 
+  const sql = `SELECT * FROM dataIT3170.service_usage SU, dataIT3170.services S 
   WHERE SU.service_id = S.service_id AND SU.exam_id = ?`;
   try {
     const result = await executeQuery(sql, [req.params.id]);
@@ -23,7 +23,7 @@ const getServiceByExamId = async (req, res) => {
 };
 
 const postServiceForExamId = async (req, res) => {
-  const sql = `INSERT INTO datait3170.service_usage (exam_id, service_id, note) VALUES (?, ?, ?)`;
+  const sql = `INSERT INTO dataIT3170.service_usage (exam_id, service_id, note) VALUES (?, ?, ?)`;
 
   try {
     await executeQuery(sql, [req.params.id, req.body.service_id, req.body.note]);
@@ -34,7 +34,7 @@ const postServiceForExamId = async (req, res) => {
 };
 
 const getService = async (req, res) => {
-  const sql = `SELECT * FROM datait3170.services`;
+  const sql = `SELECT * FROM dataIT3170.services`;
   try {
     const result = await executeQuery(sql);
     res.status(200).send(result);
@@ -44,8 +44,8 @@ const getService = async (req, res) => {
 }
 
 const getServiceById = async (req, res) => {
-  const sql1 = `SELECT * FROM datait3170.services`;
-  const sql2 = `SELECT * FROM datait3170.service_usage WHERE exam_id = ?`
+  const sql1 = `SELECT * FROM dataIT3170.services`;
+  const sql2 = `SELECT * FROM dataIT3170.service_usage WHERE exam_id = ?`
   try {
     const result = await executeQuery(sql1);
     const listHadUsed = await executeQuery(sql2, [req.params.id]);
@@ -59,7 +59,7 @@ const getServiceById = async (req, res) => {
 }
 
 const removeService  = async (req, res) => {
-  const sql = 'DELETE FROM datait3170.service_usage WHERE exam_id = ? AND service_id = ?';
+  const sql = 'DELETE FROM dataIT3170.service_usage WHERE exam_id = ? AND service_id = ?';
   try {
     console.log(req.body)
     await executeQuery(sql, [req.body.exam_id, req.body.service_id]);

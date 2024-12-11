@@ -12,7 +12,7 @@ function executeQuery(sql, params = []) {
   }
 
 let getAllDepartment=async ()=>{
-    const sql = 'select * from datait3170.department';
+    const sql = 'select * from dataIT3170.department';
     try {
         const results = executeQuery(sql);
         return results;

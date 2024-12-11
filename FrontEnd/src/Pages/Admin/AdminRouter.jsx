@@ -3,7 +3,8 @@ import AdminHome from "./AdminHome";
 import React from "react";
 import PaymentDetail from "./Payments/PaymentDetail";
 import AppointmentDetail from "./Appointments/AppointmentDetail";
-
+import ServicePriceAdmin from './ServicePrice/ServicePrice';
+import MedicineAdmin from './Medicine/Medicine'
 const adminRoutes = [
     {
         path: 'admin/',
@@ -20,6 +21,14 @@ const adminRoutes = [
     {
         path: 'admin/payments',
         element: <PaymentDetail/>
+    },
+    {
+        path:'admin/service_price',
+        element: <ServicePriceAdmin/>
+    },
+    {
+        path:'admin/medicine',
+        element: <MedicineAdmin/>
     }
 
 ];

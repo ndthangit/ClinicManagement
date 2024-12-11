@@ -45,6 +45,9 @@ function Leftbar() {
         <Button className='button font' onClick={() => {
           showSchedule()
         }}>Xem lịch khám</Button>
+        <Button className='button font' onClick={() => {
+          navigate('/admin/service_price') 
+        }}>Giá thành</Button>
       </div>
     )
 )
