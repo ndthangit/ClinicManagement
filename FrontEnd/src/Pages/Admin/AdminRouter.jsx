@@ -3,6 +3,7 @@ import AdminHome from "./AdminHome";
 import React from "react";
 import PaymentDetail from "./Payments/PaymentDetail";
 import AppointmentDetail from "./Appointments/AppointmentDetail";
+import MedicalExamination from './MedicalExamination/MedicalExamination';
 
 const adminRoutes = [
     {
@@ -20,6 +21,10 @@ const adminRoutes = [
     {
         path: 'admin/payments',
         element: <PaymentDetail/>
+    },
+    {
+        path: 'admin/medicalexamination',
+        element: <MedicalExamination/>
     }
 
 ];

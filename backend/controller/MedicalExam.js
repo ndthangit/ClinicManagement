@@ -28,6 +28,7 @@ const getHistMedicalExam = async (req, res) => {
 }
 
 const getListMedicalExamByCCCD = async (req, res) => {
+    console.log(res.params)
 
     const sql = `SELECT * 
              FROM datait3170.medical_exam M
@@ -43,6 +44,78 @@ const getListMedicalExamByCCCD = async (req, res) => {
             console.error('Failed to retrieve data:', err);
         }
 }
+// Lấy dữ liệu cho lịch sử khám phía bệnh nhân ------Begin----
+const getListMedicalExamByIDcustomed = async (req, res) => {
+    const sql = `
+        SELECT A.appointment_id, D.doctor_name, DP.department_name, TD.type_name, 
+               M.exam_date, M.diagnosis, M.notes, M.symptoms, M.exam_id
+        FROM datait3170.medical_exam AS M
+        JOIN datait3170.appointments AS A ON M.appointment_id = A.appointment_id
+        JOIN datait3170.doctors AS D ON D.doctor_id = A.doctor_id
+        JOIN datait3170.department AS DP ON D.department_id = DP.department_id
+        JOIN datait3170.type_doctor AS TD ON D.type_id = TD.type_id
+    `;
+
+    try {
+        const data = await query(sql);
+
+        // Sử dụng Promise.all để xử lý bất đồng bộ trong map
+        const newData = await Promise.all(
+            data.map(async (item) => {
+                try {
+                    const sql_select_services = `
+                        SELECT S.service_name, S.description, S.price, SU.note, SU.usage_date
+                        FROM datait3170.service_usage AS SU
+                        JOIN datait3170.services AS S ON SU.service_id = S.service_id
+                        WHERE SU.exam_id = ?
+                    `;
+
+                    const sql_select_medicines = `select M.medicine_name, I.quantity,  M.description
+                        from datait3170.medicines as M, datait3170.invoices as I
+                        where I.exam_id = ? and I.medicine_id = M.medicine_id`
+                    const services = await query(sql_select_services, [item.exam_id]);
+                    const medicines = await query(sql_select_medicines, [item.exam_id])
+                    
+                    return {
+                        doctor: {
+                            name: item.doctor_name,
+                            type: item.type_name,
+                            department: item.department_name
+                        },
+                        patient: {
+                            examDate: new Date(item.exam_date).toISOString().split('T')[0],
+                            symptoms: item.symptoms,
+                            diagnosis: item.diagnosis,
+                            notes: item.notes
+                        },
+                        services: services.map((item1) => ({
+                            serviceName: item1.service_name,
+                            description: item1.description,
+                            price: item1.price,
+                            usageDate: new Date(item1.usage_date).toISOString().split('T')[0],
+                            note: item1.note
+                        })),
+                        medicine: medicines.map((item2) => ({
+                            name: item2.medicine_name,
+                            quantity: item2.quantity,
+                            note: item2.description
+                        }))
+                    };
+                } catch (err) {
+                    console.error('Error retrieving services:', err);
+                    return { error: 'Failed to retrieve services' };
+                }
+            })
+        );
+
+        res.status(200).send(newData);
+    } catch (err) {
+        console.error('Failed to retrieve data:', err);
+        res.status(500).send({ error: 'Failed to retrieve data' });
+    }
+};
+
+// ------------------------End------------------
 
 const scheduleMedicalExam = async (data) => {
     const sto = {};
@@ -146,5 +219,6 @@ module.exports = {
     getHistMedicalExamForDoctor: getHistMedicalExamForDoctor,
     getDetailMedicalExamForDoctor: getDetailMedicalExamForDoctor,
     updateMedicalExam: updateMedicalExam,
-    getHistoryExamForDoctor: getHistoryExamForDoctor
+    getHistoryExamForDoctor: getHistoryExamForDoctor,
+    getListMedicalExamByIDcustomed: getListMedicalExamByIDcustomed,
 }
