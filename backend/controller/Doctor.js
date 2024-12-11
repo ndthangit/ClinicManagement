@@ -88,8 +88,9 @@ const createUser = async (req, res) => {
 
 const createNewDoctor = async (req, res) => {
     console.log(req.body);
-    const sql = 'INSERT INTO `dataIT3170`.doctors (doctor_name, department_id, type_id, phone, email, address, username) VALUES(?, ?, ?, ?, ?, ?, ?);';
-    const values = [req.body.doctorName, req.body.departmentId, req.body.typeId, req.body.phone, req.body.email, req.body.address, req.body.username];
+    const sql = 'INSERT INTO `dataIT3170`.doctors (doctor_name, department_id, type_id, phone, email, address, username) VALUES(?, ?, ?, ?, ?, ?, ?);'+
+        'INSERT INTO `dataIT3170`.doctor_account (user_name, password) VALUES(?, ?);';
+    const values = [req.body.doctorName, req.body.departmentId, req.body.typeId, req.body.phone, req.body.email, req.body.address, req.body.username,req.body.username, req.body.password];
     try {
         connection.query(sql, values, (err, results) => {
             if (err) {

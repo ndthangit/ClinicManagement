@@ -81,6 +81,7 @@ const DoctorInfo = () => {
             email: updatedRow.email,
             address: updatedRow.address,
             username: updatedRow.username,
+
         }
         // console.log("input",input);
         dispatch(fetchDoctorInfo());

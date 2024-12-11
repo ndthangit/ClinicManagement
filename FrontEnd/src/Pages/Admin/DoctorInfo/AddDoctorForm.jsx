@@ -77,6 +77,7 @@ const AddDoctorForm = () => {
                         email: "",
                         address: "",
                         username: "",
+                        password:"",
                     }}
                     onSubmit={async (values, {resetForm}) => {
                         handleCustomSubmit(values);
@@ -93,6 +94,8 @@ const AddDoctorForm = () => {
                         email: Yup.string().email("Invalid email"),
                         address: Yup.string(),
                         username: Yup.string().required("Username is required"),
+                        password: Yup.string().required("Password is required"),
+
                     })}
                 >
                     {(props) => {
@@ -232,6 +235,20 @@ const AddDoctorForm = () => {
                                 />
                                 {errors.username && touched.username && (
                                     <div className="input-feedback">{errors.username}</div>
+                                )}
+                                <label htmlFor="password">Password</label>
+                                <input
+                                    id="password"
+                                    name="password"
+                                    type="password"
+                                    placeholder="Enter password"
+                                    value={values.password}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    className={errors.password && touched.password ? "error" : ""}
+                                />
+                                {errors.password && touched.password && (
+                                    <div className="input-feedback">{errors.password}</div>
                                 )}
 
 
