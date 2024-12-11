@@ -43,8 +43,19 @@ let confiUpdateStatusAppointment = async (req, res) => {
     }
 };
 
+let getInfoDoctor = async (req, res) => {
+    const sql = `SELECT * FROM dataIT3170.doctors left join dataIT3170.type_doctor td  on doctors.type_id = td.type_id left join dataIT3170.department d on doctors.department_id = d.department_id;`;
+    try {
+        const data = await executeQuery(sql, res);
+        res.send(data);
+    } catch (err) {
+        console.error('Failed to retrieve data:', err);
+    }
+}
+
 module.exports = {
     confiUpdateStatusPayment: confiUpdateStatusPayment,
     getInfoAppointment: getInfoAppointment,
     confiUpdateStatusAppointment: confiUpdateStatusAppointment,
+    getInfoDoctor: getInfoDoctor
 }

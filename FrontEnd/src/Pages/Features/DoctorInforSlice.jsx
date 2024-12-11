@@ -3,7 +3,7 @@ import axios from 'axios';
 
 // Async thunk to fetch doctor information
 export const fetchDoctorInfo = createAsyncThunk('doctorInfo/fetchDoctorInfo', async () => {
-    const response = await axios.get('http://localhost:3005/users/doctors');
+    const response = await axios.get('http://localhost:3005/admin/checkDoctor');
     return response.data;
 });
 
@@ -26,31 +26,9 @@ const doctorInfoSlice = createSlice({
             }
             console.log("Updated doctor info: ", state.doctorInfo[index]);
         },
-        updateInfoDoctor: (state, action) => {
-            // console.log("accepted",action.payload);
-            axios.patch('http://localhost:3005/doctor/update-doctor', action.payload).then((response) => {
-                if (response.status === 200) {
-                    console.log("res: ", response.data);
-                }
 
-            }).catch((error) => {
-                console.log(error);
-            })
-        },
         showFormAddDoctor : (state) => {
             state.showAddForm = !state.showAddForm;
-        },
-
-        deleteDoctor: (state, action) =>{
-            console.log("res dele : ",action.payload);
-
-            axios.delete(`http://localhost:3005/doctor/delete-doctor/${action.payload.doctor_id}`).then((response) => {
-                if (response.status === 200) {
-                    console.log("res: ", response.data);
-                }
-            }).catch((error) => {
-                console.log(error);
-            })
         },
 
     },
@@ -69,6 +47,6 @@ const doctorInfoSlice = createSlice({
             })
     },
 });
-export const {updateInfoDoctor, updateDoctorUI,showFormAddDoctor, deleteDoctor} = doctorInfoSlice.actions;
+export const { updateDoctorUI,showFormAddDoctor} = doctorInfoSlice.actions;
 
 export default doctorInfoSlice.reducer;

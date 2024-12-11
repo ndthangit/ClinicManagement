@@ -8,16 +8,15 @@ import "handsontable/dist/handsontable.min.css";
 import "pikaday/css/pikaday.css";
 import {registerAllModules} from "handsontable/registry";
 import {
-    deleteDoctor,
     fetchDoctorInfo,
     showFormAddDoctor,
-    updateDoctorUI,
-    updateInfoDoctor
 } from "../../Features/DoctorInforSlice";
 import AddDoctorForm from "./AddDoctorForm";
 import {IoIosAddCircle} from "react-icons/io";
 import { FaDownload } from "react-icons/fa";
 import ConfirmBox from "./ConfirmBox";
+import axios from "axios";
+import CustomSnackbar from "./CustomSnackBar";
 
 registerAllModules();
 
@@ -32,7 +31,7 @@ const DoctorInfo = () => {
 
     const [showConfirmBox, setShowConfirmBox] = useState(false);
     const [rowToDelete, setRowToDelete] = useState(null);
-
+    const [snackbar, setSnackbar] = useState({ isVisible: false, message: '', severity: 'success' });
 
     const settings = {
         licenseKey: 'non-commercial-and-evaluation',
@@ -50,7 +49,27 @@ const DoctorInfo = () => {
         }));
     };
 
-    const handleSaveRow = (rowIndex) => {
+    const updateDoctorInfoT = async (doctorInfo) => {
+        try {
+            const response = await axios.patch('http://localhost:3005/doctor/update-doctor', doctorInfo);
+            return response.data;
+        } catch (error) {
+            console.error("Error updating doctor info:", error);
+            throw error; // Để ném lỗi ra ngoài nếu cần
+        }
+    };
+
+    const deleteDoctorInfo = async (doctorID) => {
+        try {
+            const response = await axios.delete(`http://localhost:3005/doctor/delete-doctor/${doctorID}`);
+            return response.data;
+        } catch (error) {
+            console.error("Error deleting doctor info:", error);
+            throw error; // Để ném lỗi ra ngoài nếu c
+        }
+    };
+
+    const handleSaveRow = async (rowIndex) => {
         const updatedRow = {...editedData[rowIndex]};
 
         const input = {
@@ -64,11 +83,24 @@ const DoctorInfo = () => {
             username: updatedRow.username,
         }
         // console.log("input",input);
-        dispatch(updateDoctorUI(input));
-        dispatch(updateInfoDoctor(input));
+        dispatch(fetchDoctorInfo());
 
-        // Tắt chế độ chỉnh sửa cho dòng hiện tại
-        toggleEditRow(rowIndex);
+        try {
+            const output = await updateDoctorInfoT(input);
+            console.log("output", output.message);
+            setSnackbar({
+                isVisible: true,
+                message: output.message ,
+                severity: "success"
+            });
+            toggleEditRow(rowIndex);
+        } catch (error) {
+            setSnackbar({
+                isVisible: true,
+                message: "Failed to update doctor info.",
+                severity: "error"
+            });
+        }
     };
 
 
@@ -84,9 +116,25 @@ const DoctorInfo = () => {
             // Thực hiện xóa doctor
             console.log(`Deleting doctor at row ${rowToDelete}`);
             const deletedRow = {...editedData[rowToDelete]};
-            dispatch(deleteDoctor({doctor_id:deletedRow.doctor_id}));
-            dispatch(fetchDoctorInfo());
+            // dispatch(deleteDoctor({doctor_id:deletedRow.doctor_id}));
 
+            try {
+                const output = deleteDoctorInfo(deletedRow.doctor_id);
+                console.log("output", output.message);
+                setSnackbar({
+                    isVisible: true,
+                    message: "Doctor deleted successfully",
+                    severity: "success"
+                });
+            } catch (error) {
+                setSnackbar({
+                    isVisible: true,
+                    message: "Failed to delete doctor.",
+                    severity: "error"
+                });
+            }
+
+            dispatch(fetchDoctorInfo());
             setRowToDelete(null); // Reset row để tránh lỗi
         }
         setShowConfirmBox(false);
@@ -155,14 +203,14 @@ const DoctorInfo = () => {
                         ref={hotRef}
                         settings={settings}
                         data={editedData}
-                        height={320}
+                        height={540}
                         width="100%"
-                        colWidths={[170, 150, 100, 150, 230, 120, 160]}
+                        colWidths={[150, 170, 150, 120, 230, 110, 160]}
                         colHeaders={[
-                            "doctor_name",
-                            "department_id",
-                            "type_id",
-                            "phone",
+                            "Họ tên",
+                            "Khoa",
+                            "Chức vụ",
+                            "SDT",
                             "email",
                             // "address",
                             "username",
@@ -197,16 +245,15 @@ const DoctorInfo = () => {
                         }}
                     >
                         <HotColumn data="doctor_name" className="htCenter"/>
-                        <HotColumn data="department_id" className="htCenter"/>
-                        <HotColumn data="type_id" className="htCenter"/>
+                        <HotColumn data="department_name" className="htCenter"/>
+                        <HotColumn data="type_name" className="htCenter"/>
+
                         <HotColumn data="phone" className="htCenter"/>
                         <HotColumn data="email" className="htCenter"/>
-                        {/*<HotColumn data="address" className="htCenter"/>*/}
                         <HotColumn data="username" className="htCenter"/>
                         <HotColumn
                             data={() => ""}
                             renderer={(instance, td, row) => {
-                                // Hiển thị nút dựa trên trạng thái chỉnh sửa
                                 td.className = "actions-column"; // Thêm lớp cho cột actions
                                 td.style.height = "100%";
                                 if (editableRows[row]) {
@@ -225,11 +272,19 @@ const DoctorInfo = () => {
                                 }
                             }}
                             readOnly={true}
+                            editor={false}
                         />
                     </HotTable>
 
                 </div>
             </div>
+            <CustomSnackbar
+                isVisible={snackbar.isVisible}
+                message={snackbar.message}
+                severity={snackbar.severity}
+                onClose={() => setSnackbar({ isVisible: false, message: '', severity: 'success' })}
+            />
+
             {showConfirmBox && (
                 <ConfirmBox
                     message="Are you sure you want to delete this doctor?"

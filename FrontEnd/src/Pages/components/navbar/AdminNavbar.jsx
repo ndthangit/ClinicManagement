@@ -2,12 +2,12 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import {useSelector,useDispatch} from "react-redux";
 import { Button } from '@mui/material';
-import './Navbar.css'
+import { NavLink } from "react-router-dom";
+// import './Navbar.css'
 
 function AdminNavbar() {
     const navigateTo = useNavigate();
     const dispatch = useDispatch()
-    const doctor_name = useSelector((state)=>state.user.doctor);
 
     const handleLogout = () => {
         // Clear localStorage if needed

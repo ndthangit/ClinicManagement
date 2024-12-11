@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Leftbar.css';
 import { Button } from '@mui/material';
@@ -43,9 +43,7 @@ function Leftbar() {
           <Button className='button font' onClick={() => {
               navigate('/admin/PatientDetails')
           }}>Thông tin bệnh nhân</Button>
-          <Button className='button font' onClick={() => {
-              navigate('/admin/test')
-          }}>Thông tin test</Button>
+
       </div>
     ) : (
       <div className='Leftbar'>

@@ -16,6 +16,8 @@ import Medical from './Pages/Doctor/Medical/Medical';
 
 import adminRouter from "./Pages/Admin/AdminRouter";
 
+
+
 import {
     createBrowserRouter,
     RouterProvider
@@ -77,7 +79,9 @@ const router = createBrowserRouter([
 function App() {
   return (
       <div>
+
           <RouterProvider router={router}/>
+
       </div>
   );
 }

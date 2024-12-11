@@ -5,24 +5,11 @@
     width: 100vw;
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.5);
-    /*display: flex;*/
-    /*justify-content: center;*/
+    display: flex;
+    justify-content: center;
     align-items: center; /* Đặt modal ở giữa màn hình */
     z-index: 1000;
 }
-
-/*.extraButton .modal-content {*/
-/*    background-color: #fcfcfc; !* Đặt màu nền trắng *!*/
-/*    !*padding: 20px; !* Thêm padding để nội dung đẹp hơn *!*!*/
-/*    border-radius: 8px;*/
-/*    box-shadow: 0 4px 6px rgba(0, 0, 0, 0);*/
-/*    width: 34%;*/
-/*    !*max-width: 600px;*!*/
-/*}*/
-
-/*.extraButton . modal-content h3 {*/
-/*    margin-top: 0;*/
-/*}*/
 
 .extraButton {
     display: flex;
@@ -103,5 +90,4 @@
     background-color: #f44336;
     color: white;
 }
-
 

@@ -89,7 +89,7 @@ const createUser = async (req, res) => {
 const createNewDoctor = async (req, res) => {
     console.log(req.body);
     const sql = 'INSERT INTO `dataIT3170`.doctors (doctor_name, department_id, type_id, phone, email, address, username) VALUES(?, ?, ?, ?, ?, ?, ?);';
-    const values = [req.body.doctor_name, req.body.department_id, req.body.type_id, req.body.phone, req.body.email, req.body.address, req.body.username];
+    const values = [req.body.doctorName, req.body.departmentId, req.body.typeId, req.body.phone, req.body.email, req.body.address, req.body.username];
     try {
         connection.query(sql, values, (err, results) => {
             if (err) {
@@ -131,6 +131,7 @@ const deleteDoctor = async (req, res) => {
 
     const sql = 'delete from dataIT3170.doctors where doctor_id = ?;';
     const values = [req.params.id];
+
     try {
         connection.query(sql, values, (err, results) => {
             if (err) {
