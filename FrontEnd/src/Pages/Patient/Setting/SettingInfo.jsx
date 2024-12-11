@@ -115,9 +115,7 @@ const SettingInfo = () => {
                                 value={formData.email}
                                 onChange={handleChange}
                                 placeholder="Email"
-                                className={error && !formData.email ? 'error' : ''}
                             />
-                            {error && !formData.email && <p className="error">*Vui lòng nhập email hợp lệ.</p>}
 
                             <p>Địa chỉ</p>
                             <input
