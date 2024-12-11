@@ -1,54 +1,70 @@
-import React, { useEffect, useState } from 'react';
 import AdminNavbar from "../../components/navbar/AdminNavbar";
 import Leftbar from "../../components/leftbar/Leftbar";
+import React, {useEffect, useRef, useState} from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { fetchAppointments, updateAppointmentStatus, updateUIAppointmentStatus } from "../../Features/AppointmentSlice";
 import './AppointmentDetail.css';
+import {HotColumn, HotTable} from "@handsontable/react";
+import "handsontable/dist/handsontable.min.css";
+import "pikaday/css/pikaday.css";
+import {registerAllModules} from "handsontable/registry";
+import {FaDownload} from "react-icons/fa";
 
+registerAllModules();
 const AppointmentDetail = () => {
     const dispatch = useDispatch();
+    const hotRef = useRef(null);
     const { appointments, isLoading, isError } = useSelector((state) => state.appointment);
     const [updatedStatus, setUpdatedStatus] = useState({});
-    const [searchQueries, setSearchQueries] = useState({
-        appointment_id: '',
-        patient_name: '',
-        doctor_name: '',
-        appointment_date: '',
-        status: ''
-    });
+    const [editedData, setEditedData] = useState(() =>
+        JSON.parse(JSON.stringify(appointments)) // Tạo bản sao sâu
+    );
 
     useEffect(() => {
         dispatch(fetchAppointments());
     }, [dispatch]);
 
-    const handleStatusChange = (appointmentId, status) => {
-        dispatch(updateUIAppointmentStatus({ appointmentId, status }));
+    const settings = {
+        licenseKey: 'non-commercial-and-evaluation',
+    };
+
+    const handleSaveRow = (rowIndex) => {
+        const updatedRow = { ...editedData[rowIndex] };
+
+        const input = {
+            appointment_id: updatedRow.appointment_id,
+            status: updatedRow.status,
+        };
+        console.log(input);
+
+        // dispatch(updateUIAppointmentStatus(input));
+        dispatch(updateAppointmentStatus(input));
+        dispatch(fetchAppointments());
+
         setUpdatedStatus((prevState) => ({
             ...prevState,
-            [appointmentId]: status,
+            [updatedRow.appointment_id]: updatedRow.status,
         }));
-    };
+    }
+    const buttonClickCallback = () => {
+        const hot = hotRef.current?.hotInstance;
+        const exportPlugin = hot?.getPlugin('exportFile');
 
-    const handleSave = async (appointmentId) => {
-        if (updatedStatus[appointmentId]) {
-            dispatch(updateAppointmentStatus({ appointmentId, status: updatedStatus[appointmentId] }));
-        }
-    };
-
-    const handleSearchChange = (e, column) => {
-        setSearchQueries({
-            ...searchQueries,
-            [column]: e.target.value
+        exportPlugin?.downloadFile('csv', {
+            bom: false,
+            columnDelimiter: ',',
+            columnHeaders: false,
+            exportHiddenColumns: true,
+            exportHiddenRows: true,
+            fileExtension: 'csv',
+            filename: 'Appointment-file_[YYYY]-[MM]-[DD]',
+            mimeType: 'text/csv',
+            rowDelimiter: '\r\n',
+            rowHeaders: true,
         });
     };
 
-    const filteredAppointments = appointments.filter(appointment => {
-        return appointment.appointment_id.toString().includes(searchQueries.appointment_id) &&
-            (appointment.patient_name ? appointment.patient_name.toLowerCase().includes(searchQueries.patient_name.toLowerCase()) : true) &&
-            (appointment.doctor_name ? appointment.doctor_name.toLowerCase().includes(searchQueries.doctor_name.toLowerCase()) : true) &&
-            appointment.appointment_date.includes(searchQueries.appointment_date) &&
-            (appointment.status ? appointment.status.toLowerCase().includes(searchQueries.status.toLowerCase()) : true);
-    });
+
 
     if (isLoading) {
         return <div>Loading...</div>;
@@ -65,79 +81,83 @@ const AppointmentDetail = () => {
                 <Leftbar className='leftBar'/>
                 <div className="content">
                     <h2>Appointment Details</h2>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>
-                                    Appointment ID
-                                    <input
-                                        type="text"
-                                        value={searchQueries.appointment_id}
-                                        onChange={(e) => handleSearchChange(e, 'appointment_id')}
-                                    />
-                                </th>
-                                <th>
-                                    Patient Name
-                                    <input
-                                        type="text"
-                                        value={searchQueries.patient_name}
-                                        onChange={(e) => handleSearchChange(e, 'patient_name')}
-                                    />
-                                </th>
-                                <th>
-                                    Doctor Name
-                                    <input
-                                        type="text"
-                                        value={searchQueries.doctor_name}
-                                        onChange={(e) => handleSearchChange(e, 'doctor_name')}
-                                    />
-                                </th>
-                                <th>
-                                    Appointment Date
-                                    <input
-                                        type="text"
-                                        value={searchQueries.appointment_date}
-                                        onChange={(e) => handleSearchChange(e, 'appointment_date')}
-                                    />
-                                </th>
-                                <th>
-                                    Status
-                                    <input
-                                        type="text"
-                                        value={searchQueries.status}
-                                        onChange={(e) => handleSearchChange(e, 'status')}
-                                    />
-                                </th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {filteredAppointments.map((appointment) => (
-                                <tr key={appointment.appointment_id}>
-                                    <td>{appointment.appointment_id}</td>
-                                    <td>{appointment.patient_name || 'N/A'}</td>
-                                    <td>{appointment.doctor_name || 'N/A'}</td>
-                                    <td>{new Date(appointment.appointment_date).toLocaleDateString()}</td>
-                                    <td>
-                                        <select
-                                            value={appointment.status}
-                                            onChange={(e) => handleStatusChange(appointment.appointment_id, e.target.value)}
-                                        >
-                                            <option value="pending">Pending</option>
-                                            <option value="confirmed">Confirmed</option>
-                                            <option value="completed">Completed</option>
-                                            <option value="canceled">Canceled</option>
-                                        </select>
-                                    </td>
-                                    <td>
-                                        <button className="saveButton" onClick={() => handleSave(appointment.appointment_id)}>
-                                            Save
-                                        </button>
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                    <div className="extraButton">
+                        <button id="export-file" className="buttonExportCSV" onClick={() => buttonClickCallback()}>
+                            <FaDownload/>
+                            Export CSV
+                        </button>
+                    </div>
+                    <HotTable
+                        ref={hotRef}
+                        settings={settings}
+                        data={editedData}
+                        height={320}
+                        width="100%"
+                        colWidths={[170, 150, 200, 150, 100]}
+
+                        colHeaders={[
+                            "Patient Name",
+                            "Doctor Name",
+                            "Appointment Date",
+                            "Status",
+                            "Actions",
+                        ]}
+                        columns={[
+                            {
+                                data: "patient_name",
+                                readOnly: true
+                            },
+                            {
+                                data: "doctor_name",
+                                readOnly: true
+                            },
+                            {
+                                type: 'date',
+                                data: "appointment_date",
+                                readOnly: true
+                            },
+                            {
+                                data: "status",
+                                type: 'dropdown',
+                                source: [
+                                    'completed',
+                                    'confirmed',
+                                    'failed',
+                                ],
+                            },
+                            {
+
+                                data: () => "",
+                                renderer: (instance, td, row) => {
+                                    td.className = "appointment-actions-column";
+                                    td.style.height = "100%";
+                                    td.innerHTML = `<button class="save-btn">Save</button>`;
+                                    td.querySelector(".save-btn").onclick = () => handleSaveRow(row);
+                                },
+                                readOnly: true
+                            }
+                        ]}
+                        dropdownMenu={true}
+                        hiddenColumns={{
+                            indicators: true,
+                        }}
+                        contextMenu={true}
+                        rowHeights={20}
+                        multiColumnSorting={true}
+                        filters={true}
+                        rowHeaders={true}
+                        autoWrapCol={true}
+                        autoWrapRow={true}
+
+                        cells={() => ({
+                            className: 'htMiddle htCenter',
+                        })}
+
+                    >
+
+                    </HotTable>
+
+
                 </div>
             </div>
         </div>

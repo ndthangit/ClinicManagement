@@ -24,6 +24,7 @@ import ApproveAppointments from './Pages/Doctor/ApproveAppointments/ApproveAppoi
 import adminRouter from "./Pages/Admin/AdminRouter";
 
 
+
 import {
     createBrowserRouter,
     RouterProvider
@@ -112,7 +113,9 @@ const router = createBrowserRouter([
 function App() {
   return (
       <div>
+
           <RouterProvider router={router}/>
+
       </div>
   );
 }

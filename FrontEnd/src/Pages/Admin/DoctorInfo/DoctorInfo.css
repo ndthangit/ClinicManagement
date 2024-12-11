@@ -1,0 +1,93 @@
+.extraButton .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Đặt modal ở giữa màn hình */
+    z-index: 1000;
+}
+
+.extraButton {
+    display: flex;
+    align-items: center; /* Căn giữa theo chiều dọc */
+    gap: 16px; /* Khoảng cách giữa các nút */
+    margin-bottom: 10px; /* Khoảng cách bên dưới container */
+}
+
+.buttonShowAddDoctorForm,
+.buttonExportCSV {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Khoảng cách giữa biểu tượng và chữ */
+    border: none;
+    padding: 10px 15px ;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 14%;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+.buttonShowAddDoctorForm{
+    background-color: #007bff; /* Màu nền */
+    color: #fff; /* Màu chữ */
+}
+.buttonShowAddDoctorForm:hover {
+    background-color: #0056b3; /* Màu khi hover */
+}
+.buttonExportCSV{
+    background-color: #42ab1f; /* Màu nền */
+    color: #fff; /* Màu chữ */
+}
+.buttonExportCSV:hover {
+    background-color: #09690c; /* Màu khi hover */
+}
+
+
+.buttonShowAddDoctorForm svg,
+.buttonExportCSV svg {
+    font-size: 20px; /* Kích thước biểu tượng */
+}
+
+
+.actions-column {
+    display: flex; /* Hiển thị các nút trên cùng một hàng */
+    /*justify-content: center; !* Căn giữa các nút trong cột *!*/
+    align-items: center; /* Căn giữa theo trục dọc */
+    /*gap: 0px; !* Khoảng cách giữa các nút *!*/
+}
+
+.actions-column button {
+    padding: 5px 12px;
+    border: none;
+    border-radius: 4px;
+    font-size: 12px;
+    cursor: pointer;
+    margin: 10px 10px 10px 10px;
+
+}
+
+.actions-column .save-btn {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.actions-column .cancel-btn {
+    background-color: #f0ad4e;
+    color: white;
+}
+
+.actions-column .edit-btn {
+    background-color: #5bc0de;
+    color: white;
+}
+
+.actions-column .delete-btn {
+    background-color: #f44336;
+    color: white;
+}
+

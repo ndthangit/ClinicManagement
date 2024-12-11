@@ -1,75 +1,75 @@
-import React, { useEffect, useState } from 'react';
 import AdminNavbar from "../../components/navbar/AdminNavbar";
 import Leftbar from "../../components/leftbar/Leftbar";
 import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect, useRef, useState } from 'react';
+import { fetchPayments, updatePaymentStatus, updateUIPaymentStatus } from "../../Features/PaymentSclice";
 import './PaymentDetail.css';
-import {
-    fetchPayments,
-    updatePaymentStatus,
-    updateUIPaymentStatus
-} from "../../Features/PaymentSclice";
+import { HotTable } from "@handsontable/react";
+import "handsontable/dist/handsontable.min.css";
+import "pikaday/css/pikaday.css";
+import { registerAllModules } from "handsontable/registry";
+import { FaDownload } from "react-icons/fa";
 
-let PaymentDetail = () => {
-    const { payments , isLoading, isError } = useSelector((state) => state.payment);
+registerAllModules();
+
+const PaymentDetail = () => {
+    const hotRef = useRef(null);
+    const { payments, isLoading, isError } = useSelector((state) => state.payment);
     const [updatedStatus, setUpdatedStatus] = useState({});
-    const [searchQueries, setSearchQueries] = useState({
-        payment_id: '',
-        exam_id: '',
-        payment_amount: '',
-        payment_date_start: '',
-        payment_date_end: '',
-        status: '',
-        updated_at: ''
-    });
     const dispatch = useDispatch();
+    const [editedData, setEditedData] = useState(() =>
+        JSON.parse(JSON.stringify(payments))
+    );
 
     useEffect(() => {
         dispatch(fetchPayments());
     }, [dispatch]);
 
-    const handleStatusChange = (paymentId, status) => {
-        // dispatch(updatePaymentStatusBeforeSave({ paymentId, status}));
-        dispatch(updateUIPaymentStatus({ paymentId, status: updatedStatus[paymentId] }));
+    const settings = {
+        licenseKey: 'non-commercial-and-evaluation',
+    };
+
+    const handleSaveRow = (rowIndex) => {
+        const updatedRow = { ...editedData[rowIndex] };
+
+        const input = {
+            payment_id: updatedRow.payment_id,
+            status: updatedRow.status,
+        };
+        console.log(input);
+
+        dispatch(updatePaymentStatus(input));
+        dispatch(fetchPayments());
 
         setUpdatedStatus((prevState) => ({
             ...prevState,
-            [paymentId]: status,
+            [updatedRow.payment_id]: updatedRow.status,
         }));
-    };
+    }
+    const buttonClickCallback = () => {
+        const hot = hotRef.current?.hotInstance;
+        const exportPlugin = hot?.getPlugin('exportFile');
 
-    const handleSave = (paymentId) => {
-        if (updatedStatus[paymentId]) {
-            dispatch(updatePaymentStatus({ paymentId, status: updatedStatus[paymentId] }));
-        }
-    };
-
-    const handleSearchChange = (e, column) => {
-        setSearchQueries({
-            ...searchQueries,
-            [column]: e.target.value
+        exportPlugin?.downloadFile('csv', {
+            bom: false,
+            columnDelimiter: ',',
+            columnHeaders: false,
+            exportHiddenColumns: true,
+            exportHiddenRows: true,
+            fileExtension: 'csv',
+            filename: 'Payment-file_[YYYY]-[MM]-[DD]',
+            mimeType: 'text/csv',
+            rowDelimiter: '\r\n',
+            rowHeaders: true,
         });
     };
-
-    const filteredPayments = payments.filter(payment => {
-        const paymentDate = new Date(payment.payment_date);
-        const startDate = searchQueries.payment_date_start ? new Date(searchQueries.payment_date_start) : null;
-        const endDate = searchQueries.payment_date_end ? new Date(searchQueries.payment_date_end) : null;
-
-        return payment.payment_id.toString().includes(searchQueries.payment_id) &&
-            payment.exam_id.toString().includes(searchQueries.exam_id) &&
-            payment.payment_amount.toString().includes(searchQueries.payment_amount) &&
-            (!startDate || paymentDate >= startDate) &&
-            (!endDate || paymentDate <= endDate) &&
-            (searchQueries.status === '' || payment.status === searchQueries.status) &&
-            payment.updated_at.includes(searchQueries.updated_at);
-    });
 
     if (isLoading) {
         return <div>Loading...</div>;
     }
 
     if (isError) {
-        return <div>Error loading appointments</div>;
+        return <div>Error loading payments</div>;
     }
 
     return (
@@ -79,94 +79,87 @@ let PaymentDetail = () => {
                 <Leftbar className='leftBar'/>
                 <div className="content">
                     <h2>Payment Details</h2>
-                    <table>
-                        <thead>
-                        <tr>
-                            <th>
-                                Payment ID
-                                <input
-                                    type="text"
-                                    value={searchQueries.payment_id}
-                                    onChange={(e) => handleSearchChange(e, 'payment_id')}
-                                />
-                            </th>
-                            <th>
-                                Exam ID
-                                <input
-                                    type="text"
-                                    value={searchQueries.exam_id}
-                                    onChange={(e) => handleSearchChange(e, 'exam_id')}
-                                />
-                            </th>
-                            <th>
-                                Payment Amount
-                                <input
-                                    type="text"
-                                    value={searchQueries.payment_amount}
-                                    onChange={(e) => handleSearchChange(e, 'payment_amount')}
-                                />
-                            </th>
-                            <th>
-                                Payment Date
-                                <input
-                                    type="date"
-                                    value={searchQueries.payment_date_start}
-                                    onChange={(e) => handleSearchChange(e, 'payment_date_start')}
-                                />
-                                <input
-                                    type="date"
-                                    value={searchQueries.payment_date_end}
-                                    onChange={(e) => handleSearchChange(e, 'payment_date_end')}
-                                />
-                            </th>
-                            <th>
-                                Status
-                                <select
-                                    value={searchQueries.status}
-                                    onChange={(e) => handleSearchChange(e, 'status')}
-                                >
-                                    <option value="">All</option>
-                                    <option value="pending">Pending</option>
-                                    <option value="completed">Completed</option>
-                                    <option value="failed">Failed</option>
-                                </select>
-                            </th>
-                            <th>
-                                Updated At
-                                <input
-                                    type="text"
-                                    value={searchQueries.updated_at}
-                                    onChange={(e) => handleSearchChange(e, 'updated_at')}
-                                />
-                            </th>
-                            <th>Actions</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                            {filteredPayments.map((payment) => (
-                                <tr key={payment.payment_id}>
-                                    <td>{payment.payment_id}</td>
-                                    <td>{payment.exam_id}</td>
-                                    <td>{payment.payment_amount}</td>
-                                    <td>{payment.payment_date}</td>
-                                    <td>
-                                        <select
-                                            value={payment.status}
-                                            onChange={(e) => handleStatusChange(payment.payment_id, e.target.value)}
-                                        >
-                                            <option value="pending">Pending</option>
-                                            <option value="completed">Completed</option>
-                                            <option value="failed">Failed</option>
-                                        </select>
-                                    </td>
-                                    <td>{payment.updated_at}</td>
-                                    <td>
-                                        <button className="saveButton" onClick={() => handleSave(payment.payment_id)}>Save</button>
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                    <div className="extraButton">
+                        <button id="export-file" className="buttonExportCSV" onClick={() => buttonClickCallback()}>
+                            <FaDownload/>
+                            Export CSV
+                        </button>
+                    </div>
+                    <HotTable
+                        ref={hotRef}
+                        settings={settings}
+                        data={editedData}
+                        height={320}
+                        width="100%"
+                        colWidths={[120, 100, 150, 200, 100, 200, 100]}
+                        colHeaders={[
+                            "Payment ID",
+                            "Exam ID",
+                            "Payment Amount",
+                            "Payment Date",
+                            "Status",
+                            "Updated At",
+                            "Actions",
+                        ]}
+                        columns={[
+                            {
+                                data: "payment_id",
+                                readOnly: true
+                            },
+                            {
+                                data: "exam_id",
+                                readOnly: true
+                            },
+                            {
+                                data: "payment_amount",
+                                readOnly: true
+                            },
+                            {
+                                type: 'date',
+                                data: "payment_date",
+                                readOnly: true
+                            },
+                            {
+                                data: "status",
+                                type: 'dropdown',
+                                source: [
+                                    'pending',
+                                    'completed',
+                                    'failed',
+                                ],
+                            },
+                            {
+                                type: 'date',
+                                dateFormat: 'YYYY-MM-DD',
+                                data: "updated_at",
+                                readOnly: true
+                            },
+                            {
+                                data: () => "",
+                                renderer: (instance, td, row) => {
+                                    td.className = "payment-actions-column";
+                                    td.style.height = "100%";
+                                    td.innerHTML = `<button class="save-btn">Save</button>`;
+                                    td.querySelector(".save-btn").onclick = () => handleSaveRow(row);
+                                },
+                                readOnly: true
+                            }
+                        ]}
+                        dropdownMenu={true}
+                        hiddenColumns={{
+                            indicators: true,
+                        }}
+                        contextMenu={true}
+                        rowHeights={20}
+                        multiColumnSorting={true}
+                        filters={true}
+                        rowHeaders={true}
+                        autoWrapCol={true}
+                        autoWrapRow={true}
+                        cells={() => ({
+                            className: 'htMiddle htCenter',
+                        })}
+                    />
                 </div>
             </div>
         </div>

@@ -37,5 +37,9 @@ router.get('/getIDbyUser/:user', async (req, res) => {
 
 
 
+router.post('/signup', Doctor.createUser);
+router.post('/create-doctor', Doctor.createNewDoctor);
+router.patch('/update-doctor', Doctor.updateDoctorInfo);
+router.delete(`/delete-doctor/:id`, Doctor.deleteDoctor);
 
 module.exports = router

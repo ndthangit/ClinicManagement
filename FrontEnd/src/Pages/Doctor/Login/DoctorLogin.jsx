@@ -26,7 +26,7 @@ const DoctorLogin = () => {
         e.preventDefault();
 
         const accountInfo ={
-            user_name: username,
+            username: username,
             password: loginPassword
         };
         dispatch(loginDoctorStarted());

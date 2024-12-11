@@ -8,10 +8,12 @@ import { Button } from '@mui/material';
 import {logout} from "../../Features/UserSlice";
 import { useNavigate } from 'react-router-dom';
 
+import './Navbar.css'
+
 
 function Navbar() {
     const {user} = useSelector((state) => state.user.patient);
-    
+
     // const {user} = useSelector((state) => state.user);
     const navigateTo = useNavigate();
     const dispatch = useDispatch();
@@ -59,6 +61,7 @@ function Navbar() {
 
             </div>
         </div>
+
     )
 }
 

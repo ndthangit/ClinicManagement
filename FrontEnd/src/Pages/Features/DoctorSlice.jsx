@@ -4,7 +4,7 @@ import Axios from 'axios'
 export const fetchDoctors = createAsyncThunk(
     'users/fetchByDoctors',
     async (AccDoctorID) => {
-        const response = await Axios.get(`http://localhost:3005/doctors/account/${AccDoctorID}`)
+        const response = await Axios.get(`http://localhost:3005/doctors/account/doctor`)
         return response.data
     },
 )

@@ -7,5 +7,6 @@ router.post('/login', Login.loginAdmin);
 router.patch('/updateStatusPayment', Admin.confiUpdateStatusPayment);
 router.patch('/updateStatusAppointment', Admin.confiUpdateStatusAppointment);
 router.get('/checkAppointment', Admin.getInfoAppointment)
+router.get('/checkDoctor', Admin.getInfoDoctor)
 
 module.exports = router;
