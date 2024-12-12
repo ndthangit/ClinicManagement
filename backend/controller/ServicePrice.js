@@ -150,11 +150,124 @@ const DeleteService = async (req, res) => {
         res.status(500).json({ message: 'Lỗi khi xóa dịch vụ.' });
     }
 };
+const InsertDepartment = async (req, res) => {
+    const { department_name, description, phone_number, location } = req.body;
 
+    if (!department_name || !description || !phone_number || !location) {
+        return res.status(400).json({ message: 'Thiếu thông tin cần thiết để thêm phòng ban.' });
+    }
+
+    try {
+        // Sinh ID tự động
+        const getMaxIdSql = 'SELECT MAX(department_id) AS maxId FROM department';
+        const maxIdResult = await executeQuery(getMaxIdSql);
+        const newDepartmentId = (maxIdResult[0].maxId || 0) + 1;
+
+        const sql = `
+            INSERT INTO department (department_id, department_name, description, phone_number, location) 
+            VALUES (?, ?, ?, ?, ?)
+        `;
+        const result = await executeQuery(sql, [newDepartmentId, department_name, description, phone_number, location]);
+
+        res.status(201).json({ message: 'Thêm phòng ban thành công.', department_id: newDepartmentId });
+    } catch (err) {
+        console.error('Lỗi khi thêm phòng ban:', err);
+        res.status(500).json({ message: 'Lỗi khi thêm phòng ban.' });
+    }
+};
+
+
+// Hàm cập nhật thông tin phòng ban
+const UpdateDepartment = async (req, res) => {
+    const departmentId = req.params.id;
+    const { department_name, description, phone_number, location } = req.body;
+
+    if (!departmentId) {
+        return res.status(400).json({ message: 'Không tìm thấy ID của phòng ban.' });
+    }
+
+    try {
+        const sql = `
+            UPDATE department 
+            SET department_name = ?, description = ?, phone_number = ?, location = ?
+            WHERE department_id = ?
+        `;
+        const result = await executeQuery(sql, [department_name, description, phone_number, location, departmentId]);
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ message: 'Phòng ban không tồn tại.' });
+        }
+
+        res.status(200).json({ message: 'Cập nhật phòng ban thành công.' });
+    } catch (err) {
+        console.error('Lỗi khi cập nhật phòng ban:', err);
+        res.status(500).json({ message: 'Lỗi khi cập nhật phòng ban.' });
+    }
+};
+
+// Hàm thêm mới một dịch vụ
+const InsertService = async (req, res) => {
+    const { service_name, description, price, department_id } = req.body;
+
+    if (!service_name || !description || !price || !department_id) {
+        return res.status(400).json({ message: 'Thiếu thông tin cần thiết để thêm dịch vụ.' });
+    }
+
+    try {
+        // Sinh ID tự động
+        const getMaxIdSql = 'SELECT MAX(service_id) AS maxId FROM services';
+        const maxIdResult = await executeQuery(getMaxIdSql);
+        const newServiceId = (maxIdResult[0].maxId || 0) + 1;
+
+        const sql = `
+            INSERT INTO services (service_id, service_name, description, price, department_id) 
+            VALUES (?, ?, ?, ?, ?)
+        `;
+        const result = await executeQuery(sql, [newServiceId, service_name, description, price, department_id]);
+
+        res.status(201).json({ message: 'Thêm dịch vụ thành công.', service_id: newServiceId });
+    } catch (err) {
+        console.error('Lỗi khi thêm dịch vụ:', err);
+        res.status(500).json({ message: 'Lỗi khi thêm dịch vụ.' });
+    }
+};
+
+
+// Hàm cập nhật thông tin dịch vụ
+const UpdateService = async (req, res) => {
+    const serviceId = req.params.id;
+    const { service_name, description, price, department_id } = req.body;
+
+    if (!serviceId) {
+        return res.status(400).json({ message: 'Không tìm thấy ID của dịch vụ.' });
+    }
+
+    try {
+        const sql = `
+            UPDATE services 
+            SET service_name = ?, description = ?, price = ?, department_id = ?
+            WHERE service_id = ?
+        `;
+        const result = await executeQuery(sql, [service_name, description, price, department_id, serviceId]);
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ message: 'Dịch vụ không tồn tại.' });
+        }
+
+        res.status(200).json({ message: 'Cập nhật dịch vụ thành công.' });
+    } catch (err) {
+        console.error('Lỗi khi cập nhật dịch vụ:', err);
+        res.status(500).json({ message: 'Lỗi khi cập nhật dịch vụ.' });
+    }
+};
 
 module.exports={
     DepartmentList,
     ServiceListByDepartmentId,
     DeleteDepartment,
     DeleteService,
+    InsertDepartment,
+    UpdateDepartment,
+    InsertService,
+    UpdateService,
 }

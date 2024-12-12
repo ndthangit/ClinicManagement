@@ -69,21 +69,22 @@ function Medicine() {
   // Hàm xử lý lưu dữ liệu đã sửa
   const handleUpdate = (id) => {
     fetch(`http://localhost:3005/medicine/editMedicine/${id}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(editFormData),
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(editFormData),
     })
-      .then(response => response.json())
-      .then(updatedMedicine => {
-        setMedicines(medicines.map(medicine => 
-          medicine.medicine_id === id ? updatedMedicine : medicine
-        ));
-        setEditId(null);
-      })
-      .catch(error => console.error('Lỗi khi cập nhật thuốc:', error));
-  };
+        .then(response => response.json())
+        .then(updatedMedicine => {
+            // Cập nhật danh sách thuốc ngay lập tức
+            setMedicines((prevMedicines) => prevMedicines.map(medicine =>
+                medicine.medicine_id === id ? { ...medicine, ...editFormData } : medicine
+            ));
+            setEditId(null); // Đặt lại chế độ chỉnh sửa
+        })
+        .catch(error => console.error('Lỗi khi cập nhật thuốc:', error));
+};
 
   // Hàm xử lý hủy bỏ sửa
   const handleCancel = () => {
