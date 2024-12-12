@@ -21,6 +21,8 @@ const SettingInfo = () => {
         address: '',
         patient_id: patient.user.patient_id,
     });
+    const [error, setError] = useState('');
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({
@@ -30,28 +32,34 @@ const SettingInfo = () => {
     };
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(formData);
+        if (!formData.patient_name || !formData.date_of_birth || !formData.gender || !formData.phone) {
+            setError('Vui lòng điền đầy đủ thông tin các trường bắt buộc.');
+            return;
+        }
+        setError('');
 
-        // Add your update logic here
+
         Axios.post('http://localhost:3005/patient/updatePatientInfo', formData).then((res) => {
             console.log(res.data);
         }).catch((error) => {
-            console.error('Error during login request:', error);
+            console.error('Error during update request:', error);
         });
         const userInfo = {
             patient_id: formData.patient_id,
             patient_name: formData.patient_name
-        }
+        };
         dispatch(loginSuccess(userInfo));
         navigate('/');
     };
 
     return (
         <div className='settingInfo dashboard'>
-            <Navbar className="header"/>
             <div className='body'>
                 <div className='fullycontent'>
                     <div className="form-container">
+                        <h2 style={{ textAlign: 'center', marginBottom: '20px' }}>
+                        Cập nhật thông tin cá nhân
+                        </h2>
                         <form onSubmit={handleSubmit}>
                             <p>Họ tên</p>
                             <input
@@ -60,7 +68,10 @@ const SettingInfo = () => {
                                 value={formData.patient_name}
                                 onChange={handleChange}
                                 placeholder="Patient Name"
+                                className={error && !formData.patient_name ? 'error' : ''}
                             />
+                            {error && !formData.patient_name && <p className="error">*Vui lòng nhập tên.</p>}
+
                             <p>Ngày sinh</p>
                             <input
                                 type="date"
@@ -68,26 +79,35 @@ const SettingInfo = () => {
                                 value={formData.date_of_birth}
                                 onChange={handleChange}
                                 placeholder="Date of Birth"
+                                className={error && !formData.date_of_birth ? 'error' : ''}
                             />
+                            {error && !formData.date_of_birth && <p className="error">*Vui lòng chọn ngày sinh.</p>}
+
                             <p>Giới tính</p>
                             <select
                                 name="gender"
                                 value={formData.gender}
                                 onChange={handleChange}
+                                className={error && !formData.gender ? 'error' : ''}
                             >
                                 <option value="">Select Gender</option>
                                 <option value="male">Male</option>
                                 <option value="female">Female</option>
                                 <option value="other">Other</option>
                             </select>
-                            <p>số điện thoại</p>
+                            {error && !formData.gender && <p className="error">*Vui lòng chọn giới tính.</p>}
+
+                            <p>Số điện thoại</p>
                             <input
                                 type="text"
                                 name="phone"
                                 value={formData.phone}
                                 onChange={handleChange}
                                 placeholder="Phone"
+                                className={error && !formData.phone ? 'error' : ''}
                             />
+                            {error && !formData.phone && <p className="error">*Vui lòng nhập số điện thoại.</p>}
+
                             <p>Email</p>
                             <input
                                 type="email"
@@ -96,6 +116,7 @@ const SettingInfo = () => {
                                 onChange={handleChange}
                                 placeholder="Email"
                             />
+
                             <p>Địa chỉ</p>
                             <input
                                 type="text"
@@ -105,6 +126,7 @@ const SettingInfo = () => {
                                 placeholder="Address"
                                 maxLength={256}
                             />
+                            
                             <Button className='submit' type="submit">Save</Button>
                         </form>
                     </div>
