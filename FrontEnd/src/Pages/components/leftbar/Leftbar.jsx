@@ -44,6 +44,9 @@ function Leftbar() {
               navigate('/admin/PatientDetails')
           }}>Thông tin bệnh nhân</Button>
 
+        <Button className='button font' onClick={() => {
+          navigate('/admin/medicalexamination')
+        }}>Lịch sử khám bệnh</Button>
       </div>
     ) : (
       <div className='Leftbar'>

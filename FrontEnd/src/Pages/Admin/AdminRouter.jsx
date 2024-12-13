@@ -5,6 +5,7 @@ import PaymentDetail from "./Payments/PaymentDetail";
 import AppointmentDetail from "./Appointments/AppointmentDetail";
 import DoctorInfo from "./DoctorInfo/DoctorInfo";
 import PatientInfo from "./PatientInfo/PatientInfo";
+import MedicalExamination from './MedicalExamination/MedicalExamination';
 
 const adminRoutes = [
     {
@@ -31,6 +32,10 @@ const adminRoutes = [
     {
         path: 'admin/payments',
         element: <PaymentDetail/>
+    },
+    {
+        path: 'admin/medicalexamination',
+        element: <MedicalExamination/>
     }
 
 

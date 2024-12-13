@@ -9,6 +9,12 @@ router.get('/medicalExam', async (req, res) => {
 router.get('/medicalExam/byCCCD/:id', async (req, res) => {
     await MedicalExam.getListMedicalExamByCCCD(req, res);
 });
+// Lấy dữ liệu cho lịch sử khám phía bệnh nhân ------Begin----
+router.get('/medicalExam/byIDcustomed', async (req, res) => {
+    await MedicalExam.getListMedicalExamByIDcustomed(req, res);
+});
+
+// ---------------------------End---------------------
 
 router.get('/medicalExam/byDoctor/:id', async (req, res) => {
     await MedicalExam.getHistMedicalExamForDoctor(req, res);

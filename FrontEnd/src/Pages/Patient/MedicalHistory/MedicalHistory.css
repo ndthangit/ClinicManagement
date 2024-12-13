@@ -6,14 +6,13 @@
 
 .left-bar-hist {
     width: 256px;
+    height: 600px !important;
 }
 
 .body-hist {
     display: flex;
     flex-direction: row;
     grid-row: 2 / span 11;
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
 }
 
 .content-hist {
@@ -21,8 +20,9 @@
     grid-column: 2 / span 11;
     display: flex;
     flex-direction: column;
-    height: 100%;
+    height: 100% !important;
     width: 100%;
+    padding: 0  !important;
 }
 
 .top-hist {
@@ -38,12 +38,54 @@
     font-size: 40px;
     font-weight: 600;
 }
+
+.container-hist {
+    display: flex;
+}
+
+.container-hist-search {
+    width: 25%;
+    border-top: 4px solid #514d4d1a;
+    border-bottom: 4px solid #514d4d1a;
+    border-right: 4px solid #514d4d1a;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.searchbar {
+    margin-top: 10px;
+    width: 100%;
+    background-color: #eee;
+    border-radius: 3px;
+    padding: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+input {
+    border: none;
+    outline: none;
+    background: none;
+}
+
+.glass:hover {
+    color: orangered;
+    cursor: pointer;
+}
+
+.searchbar {
+    width: 90%;
+}
 .align-content-hist {
     display: flex;
     flex-direction: column;
     align-items: center;
     height: 517px;
-    width: 100%;
+    width: 75%;
+    right: 0;
     overflow-y: scroll;
     border-top: 4px solid #514d4d1a;
     border-bottom: 4px solid #514d4d1a;

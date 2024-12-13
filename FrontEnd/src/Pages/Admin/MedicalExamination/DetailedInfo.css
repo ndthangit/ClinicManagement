@@ -1,0 +1,104 @@
+.detailedInfo {
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 1s ease-in-out;
+}
+
+.detailedInfo.open {
+    opacity: 1;
+    visibility: visible;
+}
+.detailedInfo.open .detailedInfo-container {
+    transform: translateX(0);
+}
+
+.close-detailedInfo-hist {
+    height: 100%;
+    width: 20%;
+}
+
+.detailedInfo-container {
+    overflow: hidden;
+    top: 0;
+    right: 0;
+    height: 636px;
+    width: 80%;
+    background-color: #fff;
+    transform: translateX(100%);
+    transition: transform .3s ease-in-out;
+    border: 2px solid gray;
+}
+
+.detailedInfo-body {
+    border-top: 3px solid rgba(23, 21, 21, 0.4);
+    box-shadow: 0 15px -15px -5px rgba(0, 0, 0, 0.3);
+    padding-top: 20px;
+    padding-bottom: 200px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: scroll ;
+}
+
+.caption-info-hist {
+    border-bottom: 4px solid #dddddd;
+    background-color: #87cd51;
+    justify-content: center;
+    align-content: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: #fff;
+    width: 100%;
+    height: 60px;
+    display: flex;
+    padding-top: 10px;
+    align-content: center;
+}
+.detailed-table {
+    width: 70%;
+    margin: auto;
+    border-collapse: collapse;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    word-wrap: break-word;
+}
+.detailed-table tr th, .detailed-table tr td {
+    padding: 16px;
+    text-align: left;
+    white-space: normal; 
+    word-wrap: break-word;
+}
+.detailed-table tr th {
+    background-color: #4CAF50;
+    color: white;
+    font-size: 18px;
+    text-transform: uppercase;
+}
+.detailed-table tr td {
+    font-size: 16px;
+    color: #333;
+}
+.detailed-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+.detailed-table tr:hover {
+    background-color: #f1f9f1;
+}
+
+.row-title {
+    width: 30%;
+}
+
+.row-info {
+    width: 70%;
+}
