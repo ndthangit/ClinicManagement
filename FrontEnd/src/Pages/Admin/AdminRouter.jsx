@@ -7,6 +7,8 @@ import DoctorInfo from "./DoctorInfo/DoctorInfo";
 import PatientInfo from "./PatientInfo/PatientInfo";
 import MedicalExamination from './MedicalExamination/MedicalExamination';
 
+import ServicePriceAdmin from './ServicePrice/ServicePrice';
+import MedicineAdmin from './Medicine/Medicine'
 const adminRoutes = [
     {
         path: 'admin/',
@@ -36,6 +38,14 @@ const adminRoutes = [
     {
         path: 'admin/medicalexamination',
         element: <MedicalExamination/>
+    },
+    {
+        path:'admin/service_price',
+        element: <ServicePriceAdmin/>
+    },
+    {
+        path:'admin/medicine',
+        element: <MedicineAdmin/>
     }
 
 
