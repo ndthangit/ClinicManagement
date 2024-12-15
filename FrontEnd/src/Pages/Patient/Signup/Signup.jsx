@@ -20,7 +20,7 @@ const Signup = () => {
     const dispatch = useDispatch();
 
 
-    const createUser = (e) => {
+    const createUser = async (e) => {
         e.preventDefault();
         if (password !== rewritePassword) {
             setErrorMessage('*Passwords do not match!');
@@ -37,6 +37,7 @@ const Signup = () => {
                 user_name: CCCD,
                 password: password,
             };
+            console.log(accountInfo);
             dispatch(loginStarted());
             Axios.post('http://localhost:3005/users/login', accountInfo)
                 .then((res) => {

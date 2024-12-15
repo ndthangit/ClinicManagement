@@ -6,7 +6,7 @@ router.get('/', async (req, res) => {
   await Doctor.getDoctors(req, res);
 });
 
-router.get('/:id', async (req, res) => {
+router.get('/byId/:id', async (req, res) => {
   await Doctor.getDoctorById(req, res);
 });
 

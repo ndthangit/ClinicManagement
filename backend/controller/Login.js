@@ -2,9 +2,9 @@ const { executeQueryID } = require('./Home');
 const connection = require('../DB/database');
 
 let loginUser = async (req, res) => {
-    const sql = `SELECT user_name, patient_name FROM dataIT3170.patient_account join patients on patient_account.user_name = patients.cccd where user_name = ? and password = ?`;
+    const sql = `SELECT user_name, patient_name FROM dataIT3170.patient_account join patients on patient_account.user_name = patients.cccd where patient_account.user_name = ? and patient_account.password = ?`;
     const values = [req.body.user_name, req.body.password];
-    // console.log('values,', values);
+    console.log('values,', values);
     try {
         connection.query(sql,values, (err, results) => {
             if (err) {

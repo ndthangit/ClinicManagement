@@ -13,7 +13,6 @@ router.get('/:table', homeController.getDataFromDB);
 
 router.post('/signup', signup.addNewUser);
 router.post('/login', Login.loginUser);
-// router.get('/login', Login.loginUser);
 router.get('/account/:id', Login.getAccountInfo);
 
 module.exports = router;
