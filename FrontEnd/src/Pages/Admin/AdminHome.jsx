@@ -1,6 +1,6 @@
 import React from "react";
-import AdminNavbar from "../components/navbar/AdminNavbar";
-import Leftbar from "../components/leftbar/Leftbar";
+import AdminNavbar from "../Components/navbar/AdminNavbar";
+import Leftbar from "../Components/leftbar/Leftbar";
 let AdminHome = () => {
   return (
       <div className="payment dashboard">

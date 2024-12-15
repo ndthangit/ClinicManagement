@@ -1,6 +1,6 @@
 import React from 'react'
-import DoctorNavbar from '../../components/navbar/DoctorNavbar'
-import MedicalExamLeftbar from '../../components/leftbar/MedicalExamLeftbar'
+import DoctorNavbar from '../../Components/navbar/DoctorNavbar'
+import MedicalExamLeftbar from '../../Components/leftbar/MedicalExamLeftbar'
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import './DetailHistory.css';

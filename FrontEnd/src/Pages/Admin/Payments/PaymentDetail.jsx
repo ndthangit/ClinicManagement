@@ -1,14 +1,16 @@
-import AdminNavbar from "../../components/navbar/AdminNavbar";
-import Leftbar from "../../components/leftbar/Leftbar";
+import AdminNavbar from "../../Components/navbar/AdminNavbar";
+import Leftbar from "../../Components/leftbar/Leftbar";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useRef, useState } from 'react';
-import { fetchPayments, updatePaymentStatus, updateUIPaymentStatus } from "../../Features/PaymentSclice";
+import { fetchPayments} from "../../Features/PaymentSclice";
 import './PaymentDetail.css';
 import { HotTable } from "@handsontable/react";
 import "handsontable/dist/handsontable.min.css";
 import "pikaday/css/pikaday.css";
 import { registerAllModules } from "handsontable/registry";
 import { FaDownload } from "react-icons/fa";
+import Axios from "axios";
+import CustomSnackbar from "../DoctorInfo/CustomSnackBar";
 
 registerAllModules();
 
@@ -17,6 +19,8 @@ const PaymentDetail = () => {
     const { payments, isLoading, isError } = useSelector((state) => state.payment);
     const [updatedStatus, setUpdatedStatus] = useState({});
     const dispatch = useDispatch();
+    const [snackbar, setSnackbar] = useState({ isVisible: false, message: '', severity: 'success' });
+
     const [editedData, setEditedData] = useState(() =>
         JSON.parse(JSON.stringify(payments))
     );
@@ -29,6 +33,39 @@ const PaymentDetail = () => {
         licenseKey: 'non-commercial-and-evaluation',
     };
 
+    const updatePaymentStatus = (input) => {
+        Axios.patch('http://localhost:3005/admin/updateStatusPayment', input)
+            .then((res) => {
+                // if (res.data.message === 'updated successfully') {
+                //     console.log("Response from backend:", res.data.message);
+                // } else {
+                //     console.log("Response from backend:", res.data);
+                // }
+                // console.log("Update successful");
+                console.log(res.data.message);
+                setSnackbar({ isVisible: true, message: res.data.message, severity: 'success' });
+            })
+            .catch((error) => {
+                console.error('Error during the update request:', error);
+                setSnackbar({ isVisible: true, message: error.message, severity: 'error' });
+            });
+    }
+
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+        const day = String(date.getDate()).padStart(2, '0');
+        const month = String(date.getMonth() + 1).padStart(2, '0'); // Tháng bắt đầu từ 0
+        const year = date.getFullYear();
+        return `${day}/${month}/${year}`;
+    };
+
+    const formattedData = editedData.map(row => ({
+        ...row,
+        payment_date: formatDate(row.payment_date),
+        updated_at: formatDate(row.updated_at),
+    }));
+
+
     const handleSaveRow = (rowIndex) => {
         const updatedRow = { ...editedData[rowIndex] };
 
@@ -38,7 +75,8 @@ const PaymentDetail = () => {
         };
         console.log(input);
 
-        dispatch(updatePaymentStatus(input));
+        // dispatch(updatePaymentStatus(input));
+        updatePaymentStatus(input);
         dispatch(fetchPayments());
 
         setUpdatedStatus((prevState) => ({
@@ -78,7 +116,11 @@ const PaymentDetail = () => {
             <div className="body">
                 <Leftbar className='leftBar'/>
                 <div className="content">
-                    <h2>Payment Details</h2>
+                    <div className="cf-title-02">
+                        <div className="cf-title-alt-two">
+                            <h3>Payment Details</h3>
+                        </div>
+                    </div>
                     <div className="extraButton">
                         <button id="export-file" className="buttonExportCSV" onClick={() => buttonClickCallback()}>
                             <FaDownload/>
@@ -88,17 +130,17 @@ const PaymentDetail = () => {
                     <HotTable
                         ref={hotRef}
                         settings={settings}
-                        data={editedData}
+                        data={formattedData}
                         height={320}
                         width="100%"
-                        colWidths={[120, 100, 150, 200, 100, 200, 100]}
+                        colWidths={[120, 100, 150, 230, 150, 230, 120]}
                         colHeaders={[
-                            "Payment ID",
-                            "Exam ID",
-                            "Payment Amount",
-                            "Payment Date",
+                            "Mã hóa đơn",
+                            "Mã kiểm tra",
+                            "Tổng tiền",
+                            "Ngày xuất hóa đơn",
                             "Status",
-                            "Updated At",
+                            "Ngày cập nhật",
                             "Actions",
                         ]}
                         columns={[
@@ -130,7 +172,6 @@ const PaymentDetail = () => {
                             },
                             {
                                 type: 'date',
-                                dateFormat: 'YYYY-MM-DD',
                                 data: "updated_at",
                                 readOnly: true
                             },
@@ -162,6 +203,12 @@ const PaymentDetail = () => {
                     />
                 </div>
             </div>
+            <CustomSnackbar
+                isVisible={snackbar.isVisible}
+                message={snackbar.message}
+                severity={snackbar.severity}
+                onClose={() => setSnackbar({isVisible: false, message: '', severity: 'success' })}
+            />
         </div>
     );
 };

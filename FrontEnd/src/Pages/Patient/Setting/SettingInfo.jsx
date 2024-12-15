@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './SettingInfo.css'
-import Navbar from "../../components/navbar/Navbar";
+import Navbar from "../../Components/navbar/Navbar";
 import { Button } from '@mui/material';
 import Axios from 'axios';
 import {useSelector, useDispatch} from "react-redux";

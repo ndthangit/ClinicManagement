@@ -1,13 +1,10 @@
 import { useEffect, useState } from "react";
-import Leftbar from "../../components/leftbar/Leftbar";
-import AdminNavbar from "../../components/navbar/AdminNavbar";
+import Leftbar from "../../Components/leftbar/Leftbar";
+import AdminNavbar from "../../Components/navbar/AdminNavbar";
 import './MedicalExamination.css'
 import MedicalExamCell from "./MedicalExamCell";
 import DetailedInfo from "./DetailedInfo";
 import axios from "axios";
-
- 
-  
 
 function MedicalExamination() {
     const [fakeData, setFakeData] = useState([]);

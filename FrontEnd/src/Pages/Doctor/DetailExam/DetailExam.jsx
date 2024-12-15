@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react'
-import DoctorNavbar from '../../components/navbar/DoctorNavbar'
+import DoctorNavbar from '../../Components/navbar/DoctorNavbar'
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import './DetailExam.css';
@@ -8,7 +8,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Tooltip from '@mui/material/Tooltip';
-import MedicalExamLeftbar from '../../components/leftbar/MedicalExamLeftbar';
+import MedicalExamLeftbar from '../../Components/leftbar/MedicalExamLeftbar';
 
 function DetailExam() {
 

@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
-import AdminNavbar from "../../components/navbar/AdminNavbar";
-import Leftbar from "../../components/leftbar/Leftbar";
+import AdminNavbar from "../../Components/navbar/AdminNavbar";
+import Leftbar from "../../Components/leftbar/Leftbar";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchPatientInfo } from "../../Features/PatientInforSlice";
 import './PatientInfo.css';
@@ -54,7 +54,12 @@ const PatientInfo = () => {
             <div className="body">
                 <Leftbar className='leftBar'/>
                 <div className="content">
-                    <h2>Patient Information</h2>
+                    {/*<h2>Patient Information</h2>*/}
+                    <div className="cf-title-02">
+                        <div className="cf-title-alt-two">
+                            <h3>Patient Information</h3>
+                        </div>
+                    </div>
                     <div className="extraButton">
                         <button id="export-file" className="buttonExportCSV" onClick={() => buttonClickCallback()}>
                             <FaDownload/>
@@ -66,13 +71,13 @@ const PatientInfo = () => {
                         settings={settings}
                         data={patientInfo}
                         height={450}
-                        colWidths={[170, 156, 150, 230, 130, 120, 120]}
+                        colWidths={[170, 120, 150, 230, 280, 150]}
                         colHeaders={[
-                            "Name",
-                            "Gender",
-                            "Phone",
+                            "Tên",
+                            "Giới tính",
+                            "SDT",
                             "Email",
-                            "Address",
+                            "Địa chỉ",
                             "CCCD",
                         ]}
 
@@ -86,6 +91,7 @@ const PatientInfo = () => {
                         rowHeaders={true}
                         autoWrapCol={true}
                         autoWrapRow={true}
+                        readOnly={true}
                     >
                         <HotColumn data="patient_name" className="htCenter"/>
                         <HotColumn data="gender" className="htCenter"/>
@@ -93,6 +99,7 @@ const PatientInfo = () => {
                         <HotColumn data="email" className="htCenter"/>
                         <HotColumn data="address" className="htCenter"/>
                         <HotColumn data="cccd" className="htCenter"/>
+
                     </HotTable>
                 </div>
             </div>

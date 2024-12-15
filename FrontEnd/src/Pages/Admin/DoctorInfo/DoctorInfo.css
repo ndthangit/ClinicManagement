@@ -91,3 +91,43 @@
     color: white;
 }
 
+.cf-title-02 h3 {
+    text-transform: capitalize;
+}
+.cf-title-02 h3:before {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 60px;
+    height: 2px;
+    content: "";
+    background-color: #c50000;
+}
+
+.cf-title-02 h3 span {
+    font-size: 13px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    line-height: 3em;
+    padding-left: 0.25em;
+    color: rgba(0, 0, 0, 0.4);
+    padding-bottom: 20px;
+}
+
+.cf-title-02 .cf-title-alt-two h3 {
+    text-align: center;
+    position: relative;
+}
+
+.cf-title-02 .cf-title-alt-two h3:before {
+    content: ""; /* Thêm content */
+    width: 100px; /* Độ rộng cho pseudo-element */
+    height: 2px;
+    background: #111;
+    position: absolute;
+    left: 50%;
+    margin-left: -50px;
+}
+
+

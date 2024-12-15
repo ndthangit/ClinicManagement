@@ -1,7 +1,16 @@
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
 
+}
 .payment-actions-column {
     display: flex; /* Hiển thị các nút trên cùng một hàng */
-    /*justify-content: center; !* Căn giữa các nút trong cột *!*/
+    justify-content: center; /* Căn giữa các nút trong cột */
     align-items: center; /* Căn giữa theo trục dọc */
     /*gap: 0px; !* Khoảng cách giữa các nút *!*/
 }

@@ -115,7 +115,7 @@ const getDepartments = async (req, res) => {
 const createNewDoctor = async (req, res) => {
     console.log(req.body);
     const sql = 'INSERT INTO `dataIT3170`.doctors (doctor_name, department_id, type_id, phone, email, address, username) VALUES(?, ?, ?, ?, ?, ?, ?);'+
-        'INSERT INTO `dataIT3170`.doctor_account (username, password) VALUES(?, ?);';
+        'INSERT INTO `dataIT3170`.doctor_account (user_name, password) VALUES(?, ?);';
     const values = [req.body.doctorName, req.body.departmentId, req.body.typeId, req.body.phone, req.body.email, req.body.address, req.body.username,req.body.username, req.body.password];
     try {
         connection.query(sql, values, (err, results) => {
@@ -135,8 +135,8 @@ const createNewDoctor = async (req, res) => {
 
 const updateDoctorInfo = async (req, res) => {
     console.log(req.body);
-    const sql = 'UPDATE `dataIT3170`.doctors SET doctor_name = ?, department_id = ?, type_id = ?, phone = ?, email = ?, address = ?, username = ? WHERE doctor_id = ?';
-    const values = [req.body.doctor_name, req.body.department_id, req.body.type_id, req.body.phone, req.body.email, req.body.address, req.body.username, req.body.doctor_id];
+    const sql = 'UPDATE `dataIT3170`.doctors SET doctor_name = ?, department_id = ?, type_id = ?, phone = ?, email = ?, address = ?, username = ? WHERE doctor_id = ?;'+'UPDATE `dataIT3170`.doctor_account SET password = ? WHERE user_name = ?';
+    const values = [req.body.doctor_name, req.body.department_id, req.body.type_id, req.body.phone, req.body.email, req.body.address, req.body.username, req.body.doctor_id, req.body.password, req.body.username];
     try {
         connection.query(sql, values, (err, results) => {
             if (err) {
