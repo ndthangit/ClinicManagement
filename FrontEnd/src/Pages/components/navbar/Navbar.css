@@ -36,6 +36,12 @@
     align-items: center;
 }
 
+.navbar .username {
+    display: flex;
+    justify-content: space-between;
+    gap: 5px
+}
+
 .navbar .button:hover {
     background-color: hsl(94, 55%, 30%);
 }

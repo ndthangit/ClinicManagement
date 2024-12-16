@@ -1,5 +1,5 @@
 /* Định dạng cho toàn bộ trang */
-.servicePrice body {
+.servicePriceP body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
@@ -8,10 +8,12 @@
   /* Định dạng chung cho phần ServicePricePage */
   .ServicePricePage {
     padding: 20px;
-    max-width: 1000px;
     margin: auto;
   }
   
+  .servicePriceP .content {
+    padding: 20px;
+  }
   /* Định dạng cho tiêu đề chính */
   .ServicePricePage h1 {
     text-align: center;
@@ -23,33 +25,35 @@
   .ServicePricePage h2 {
     color: #666;
     margin-top: 20px;
+    margin-left: 20px;
   }
   
   /* Định dạng cho bảng */
-  .servicePrice table {
-    width: 100%;
+  .servicePriceP table {
     border-collapse: collapse;
+    width: 100%;
     margin-top: 10px;
     margin-bottom: 20px;
+    margin-right: 20px;
   }
   
-  .servicePrice table th, table td {
+  .servicePriceP table th, table td {
     padding: 10px;
     text-align: left;
     border: 1px solid #ddd;
   }
   
-  .servicePrice table th {
+  .servicePriceP table th {
     background-color: #f4f4f4;
     font-weight: bold;
   }
   
-  .servicePrice table tr:hover {
+  .servicePriceP table tr:hover {
     background-color: #f1f1f1;
   }
   
   /* Định dạng cho các nút */
-  .servicePrice .buttonInfo {
+  .servicePriceP .buttonInfo {
     background-color: #4CAF50; /* Màu xanh lá */
     color: white;
     padding: 8px 16px;
@@ -58,14 +62,43 @@
     cursor: pointer;
     font-size: 14px;
     transition: background-color 0.3s ease;
+
   }
   
-  .servicePrice .buttonInfo:hover {
+  .servicePriceP .buttonInfo:hover {
     background-color: #45a049;
   }
   
   /* Nút quay lại */
-  .servicePrice .back-button {
+  .servicePriceP .back-button {
     margin-bottom: 20px;
     display: inline-block;
+  }
+
+  .servicePriceP .title {
+    color: #fff;
+    margin-bottom: 20px;
+    padding: 5px;
+    background-color: #45a049;
+    display: flex;
+    border-radius: 5px;
+    justify-content: center;
+  }
+
+  .servicePriceP .buttonReturn {
+    padding: 10px;
+    margin-left: 10px;
+    border: None;
+    background-color: hsl(94, 55%, 56%);
+    color: #fff;
+    border-radius: 5px;
+  }
+
+  .servicePriceP .buttonReturn:hover {
+    background-color: hsl(94, 44%, 46%);
+  }
+
+  .servicePriceP .subtitle {
+    display: flex;
+    justify-content: center;
   }

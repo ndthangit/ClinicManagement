@@ -3,10 +3,10 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import Navbar from '../../components/navbar/Navbar';
 import ServiceLeftbar from '../../components/leftbar/ServiceLeftbar';
+import './Medicine.css';
 
 function Medicine() {
   const [medicines, setMedicines] = useState([]);
-
   const navigate = useNavigate();
 
   // Lấy danh sách phòng ban khi component được render lần đầu
@@ -20,14 +20,14 @@ function Medicine() {
 
 
   return (
-    <div className='dashboard'>
+    <div className='dashboard medicineP'>
       <Navbar className='header'/>
       <div className='body'>
         <ServiceLeftbar className='leftbar'/>
         <div className='content'>
-        <h1>Danh sách thuốc</h1>
-        <div>
-          <table>
+        <h1 className='title'>Danh sách thuốc</h1>
+        <div className='tableBounder'>
+          <table className='tableMedicine'>
             <thead>
               <tr>
                 <th>Tên thuốc</th>
@@ -35,7 +35,7 @@ function Medicine() {
                 <th>Giá</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className='bodyTable'>
               {medicines.map(medicine => (
                 <tr key={medicine.medicine_id}>
                   <td>{medicine.medicine_name}</td>

@@ -42,7 +42,7 @@ function Navbar() {
                 {user ? (
                     // Show "Logout" button when logged in
                     <div className="dropdown">
-                        <Button className="button font" >
+                        <Button className="button font username" >
                             {user.patient_name} <i className="fa fa-caret-down"></i>
                         </Button>
                         <div className="dropdown-content">

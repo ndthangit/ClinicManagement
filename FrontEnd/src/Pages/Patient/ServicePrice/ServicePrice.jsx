@@ -27,17 +27,17 @@ function ServicePrice() {
   };
 
   return (
-    <div className='dashboard servicePrice'>
+    <div className='dashboard servicePriceP'>
       <Navbar className='navbar'/>
       
       <div className='body'>
         <ServiceLeftbar className='leftbar' />
         <div className='content'>
-        <h1>Danh sách phòng ban và dịch vụ</h1>
+        <h1 className='title'>Danh sách phòng ban và dịch vụ</h1>
           {/* Hiển thị danh sách phòng ban */}
       {!selectedDepartment ? (
         <div>
-          <h2>Danh sách phòng ban</h2>
+          <h2 className='subtitle'>Danh sách phòng ban</h2>
           <table className='tableService'>
             <thead>
               <tr>
@@ -64,9 +64,9 @@ function ServicePrice() {
       ) : (
         // Hiển thị danh sách dịch vụ theo phòng ban đã chọn
         <div>
-          <h2>Dịch vụ cho phòng ban {selectedDepartment}</h2>
-          <button onClick={() => setSelectedDepartment(null)}>Quay lại danh sách phòng ban</button>
-          <table>
+          <h2 className='subtitle'>Dịch vụ cho phòng ban {selectedDepartment}</h2>
+          <button onClick={() => setSelectedDepartment(null)} className='buttonReturn'>Quay lại phòng ban</button>
+          <table className='tableService'>
             <thead>
               <tr>
                 <th>Tên dịch vụ</th>
