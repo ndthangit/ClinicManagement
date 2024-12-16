@@ -213,9 +213,9 @@ const DoctorInfo = () => {
                         data={editedData}
                         height={540}
                         width="100%"
-                        colWidths={[50, 120, 140, 150, 100, 150, 110, 110, 160]}
+                        colWidths={[60, 120, 140, 150, 100, 150, 110, 100, 170]}
                         colHeaders={[
-                            "img",
+                            "Ảnh",
                             "Họ tên",
                             "Khoa",
                             "Chức vụ",
@@ -225,12 +225,12 @@ const DoctorInfo = () => {
                             "password",
                             "Actions", // Gộp hai cột thành một
                         ]}
-                        dropdownMenu={true}
+
                         hiddenColumns={{
                             indicators: true,
                         }}
-                        contextMenu={true}
-                        rowHeights={25}
+                        // contextMenu={true}
+                        rowHeights={50}
 
                         multiColumnSorting={true}
                         filters={true}
@@ -258,34 +258,42 @@ const DoctorInfo = () => {
                     >
                         <HotColumn
                             data="img"
+                            // className="htCenter"
+
+
                             renderer={(instance, td, row, col, prop, value) => {
+                                td.className = "image-column"
                                 if (editableRows[row]) {
                                     // Hiển thị input để chỉnh sửa URL ảnh khi ở chế độ chỉnh sửa
                                     td.innerHTML = `<input type="text" value="${value || ''}"  />`;
                                 } else {
                                     // Hiển thị ảnh khi không chỉnh sửa
-                                    td.innerHTML = `
-                            <img src="${value}" 
-                                 alt="Bác sĩ" 
-                                 style="width: 30px; height: 30px; border-radius: 50%;" />`;
+
+                                    td.innerHTML = `<div class="image-table-doctor">
+                                        <img class="image-doctor" src="${value}" 
+                                             alt="Bác sĩ" 
+                                              />
+                                                        </div>
+                                        `;
                                             }
                                         }}
                                         readOnly={false}
+
                         />
 
-                        <HotColumn data="doctor_name" className="htCenter"/>
-                        <HotColumn data="department_name" className="htCenter"/>
-                        <HotColumn data="type_name" className="htCenter"/>
+                        <HotColumn data="doctor_name" className="htCenter" dropdownMenu={true}/>
+                        <HotColumn data="department_name" className="htCenter" dropdownMenu={true}/>
+                        <HotColumn data="type_name" className="htCenter" dropdownMenu={true}/>
 
-                        <HotColumn data="phone" className="htCenter"/>
-                        <HotColumn data="email" className="htCenter"/>
-                        <HotColumn data="username" className="htCenter"/>
+                        <HotColumn data="phone" className="htCenter" dropdownMenu={true}/>
+                        <HotColumn data="email" className="htCenter" dropdownMenu={true}/>
+                        <HotColumn data="username" className="htCenter" dropdownMenu={true}/>
                         <HotColumn data="password" className="htCenter"/>
                         <HotColumn
                             data={() => ""}
                             renderer={(instance, td, row) => {
                                 td.className = "actions-column"; // Thêm lớp cho cột actions
-                                td.style.height = "100%";
+                                td.style.height = "80px";
                                 if (editableRows[row]) {
                                     td.innerHTML = `
                     <button class="save-btn">Save</button>
