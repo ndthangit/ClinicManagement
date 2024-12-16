@@ -9,13 +9,34 @@ import AdminLeftbarSchedule from "../../components/leftbar/AdminNavbarSchedule";
 function MedicalExamination() {
     const [fakeData, setFakeData] = useState([]);
 
-
     const [searchingType, setSearchType] = useState('Exam date');
     const [placeHolder, setPlaceHolder] = useState('exam date dd-mm-yyyy...');
+
+    const formatDate= (isoString) =>{
+        // Tạo đối tượng Date từ chuỗi ISO
+        const date = new Date(isoString);
+    
+        // Lấy các thành phần ngày, giờ
+        const day = date.getDate().toString().padStart(2, '0'); // Ngày
+        const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Tháng (0-based)
+        const year = date.getFullYear(); // Năm
+    
+        const hours = date.getHours().toString().padStart(2, '0'); // Giờ
+        const minutes = date.getMinutes().toString().padStart(2, '0'); // Phút
+    
+        // Tạo chuỗi ngày giờ dễ đọc
+        return `${day}/${month}/${year} ${hours}:${minutes}`;
+    }
 
     useEffect(() => {
         axios.get(`http://localhost:3005/users/medical_exam`)
         .then((response) => {
+            let data = response.data;
+            data = data.map((item) => {
+                item.exam_date = formatDate(item.exam_date);
+                return item;
+            })
+
             setFakeData(response.data)
         })
     }, [])
@@ -81,9 +102,7 @@ function MedicalExamination() {
         <div className="body">
             <AdminLeftbarSchedule className='leftBar'/>
             <div className="content customed-content">
-                <div className="top-hist">
-                    <h1>Các buổi thăm khám đã thực hiện</h1>
-                </div>
+                <h1 className="title-content">Các buổi thăm khám đã thực hiện</h1>
                 <div className="main-content">
                     <div className="container-hist-search customed-search">
                         <div class="searchbar">

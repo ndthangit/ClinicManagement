@@ -12,9 +12,11 @@
     color: white;
 }
 .Leftbar .button {
-    padding: 20px 10px 20px 10px;
+    padding: 20px 30px 20px 10px;
     border-bottom: 1px solid #ccc;
     border: 1px solid #ccc;
+    justify-content: center;
+    gap: 20px;
 }
 
 .Leftbar .button:hover {

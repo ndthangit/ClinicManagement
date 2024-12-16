@@ -14,13 +14,13 @@ function MedicalHistoryCell({props, onView}) {
     return(
         <>
             <div className='hist-cell'>
-            <div className='descript'>
-                <p className='date-time-hist'>Appointment date: {props.patient.examDate}</p>
-            </div>
-            <button 
-                className='view-button'
-                onClick={handleViewButton}
-            >View</button>
+                <div className='descript'>
+                    <p className='date-time-hist'>{props.patient.examDate}</p>
+                </div>
+                <button 
+                    className='view-button'
+                    onClick={handleViewButton}
+                >View</button>
             </div> 
         </>
 

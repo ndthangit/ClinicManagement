@@ -1,6 +1,10 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@mui/material';
+import { FaClipboardList } from "react-icons/fa";
+import { GoHistory } from "react-icons/go";
+
+
 
 function AdminLeftbarSchedule() {
     const navigate = useNavigate();
@@ -9,10 +13,16 @@ function AdminLeftbarSchedule() {
         <div className='Leftbar'>
             <Button className='button font' onClick={() => {
                 navigate('/admin/schedule/appointment')
-            }}>Thông tin lịch khám</Button>
+            }}>
+                <FaClipboardList className='icon'/>
+                <p>Thông tin lịch khám</p>
+            </Button>
             <Button className='button font' onClick={() => {
                 navigate('/admin/schedule/medicalexamination')
-            }}>Lịch sử khám bệnh</Button>
+            }}>
+                <GoHistory className='icon'/>
+                <p>Lịch sử khám bệnh</p>
+            </Button>
         </div>
     )
 }

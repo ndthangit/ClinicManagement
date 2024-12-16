@@ -13,36 +13,36 @@ function DetailedInfo({props}) {
                 <div className="detailedInfo-body">
                 <table className='detailed-table'>
                     <thead>
-                    <tr>
-                        <th>Field</th>
-                        <th>Value</th>
-                    </tr>
+                        <tr>
+                            <th>Field</th>
+                            <th>Value</th>
+                        </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td className='row-title'>Exam ID</td>
-                        <td className='row-info'>{props?.exam_id}</td>
-                    </tr>
-                    <tr>
-                        <td className='row-title'>Appointment ID</td>
-                        <td className='row-info'>{props?.appointment_id}</td>
-                    </tr>
-                    <tr>
-                        <td className='row-title'>Exam Date</td>
-                        <td className='row-info'>{props?.exam_date}</td>
-                    </tr>
-                    <tr>
-                        <td className='row-title'>Symptoms</td>
-                        <td className='row-info'>{props?.symptoms}</td>
-                    </tr>
-                    <tr>
-                        <td className='row-title'>Diagnosis</td>
-                        <td className='row-info'>{props?.diagnosis}</td>
-                    </tr>
-                    <tr>
-                        <td className='row-title'>Notes</td>
-                        <td className='row-info'>{props?.notes}</td>
-                    </tr>
+                        <tr>
+                            <td className='row-title'>Exam ID</td>
+                            <td className='row-info'>{props?.exam_id || 'N/A'}</td>
+                        </tr>
+                        <tr>
+                            <td className='row-title'>Appointment ID</td>
+                            <td className='row-info'>{props?.appointment_id || 'N/A'}</td>
+                        </tr>
+                        <tr>
+                            <td className='row-title'>Exam Date</td>
+                            <td className='row-info'>{props?.exam_date || 'N/A'}</td>
+                        </tr>
+                        <tr>
+                            <td className='row-title'>Symptoms</td>
+                            <td className='row-info'>{props?.symptoms || 'N/A'}</td>
+                        </tr>
+                        <tr>
+                            <td className='row-title'>Diagnosis</td>
+                            <td className='row-info'>{props?.diagnosis || 'N/A'}</td>
+                        </tr>
+                        <tr>
+                            <td className='row-title'>Notes</td>
+                            <td className='row-info'>{props?.notes || 'N/A'}</td>
+                        </tr>
                     </tbody>
                 </table>
                 </div>

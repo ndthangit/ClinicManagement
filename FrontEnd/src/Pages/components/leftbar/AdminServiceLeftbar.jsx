@@ -1,6 +1,10 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@mui/material';
+import { IoMdPricetags } from "react-icons/io";
+import { AiOutlineMedicineBox } from "react-icons/ai";
+
+
 
 function AdminServiceLeftbar() {
   const navigate = useNavigate();
@@ -9,10 +13,16 @@ function AdminServiceLeftbar() {
     <div className='Leftbar'>
       <Button className='button font' onClick={() => {
         navigate('/admin/service-price')
-      }}>Giá dịch vụ</Button>
+      }}>
+        <IoMdPricetags className='icon'/>
+        <p>Giá dịch vụ</p>
+        </Button>
       <Button className='button font' onClick={() => {
         navigate('/admin/medicine')
-      }}>Giá thuốc</Button>
+      }}>
+        < AiOutlineMedicineBox className='icon'/>
+        <p>Giá thuốc</p>
+      </Button>
     </div>
   )
 }
