@@ -1,8 +1,11 @@
 import './DetailedInfo.css'
-function DetailedInfo({props}) {
-    const handleClickEvent = () => {
+function DetailedInfo({props, setIsOpen}) {
+    const handleClickEvent = async() => {
         const modal = document.querySelector('.detailedInfo')
-        modal.classList.remove('open');
+        await modal.classList.remove('open');
+        setTimeout(() => {
+            setIsOpen(false)
+        }, 1000);
     }
     console.log(props)
     return ( 

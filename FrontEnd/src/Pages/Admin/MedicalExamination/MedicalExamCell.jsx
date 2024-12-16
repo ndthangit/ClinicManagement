@@ -1,9 +1,11 @@
 import './MedicalExamCell.css'
 function MedicalExamCell({props, onView}) {
-    const handleViewButton = () => {
-        const detailedInfo = document.querySelector('.detailedInfo')
-        onView(props)
-        detailedInfo.classList.add('open')
+    const handleViewButton = async() => {
+        await onView(props)
+        setTimeout(()=>{
+            const detailedInfo = document.querySelector('.detailedInfo')
+            detailedInfo.classList.add('open')
+        },0)
     }
     return (
     <div className="medicalExamCell">

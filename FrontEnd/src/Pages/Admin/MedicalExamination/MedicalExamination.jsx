@@ -66,7 +66,9 @@ function MedicalExamination() {
         })
         setFilteredList(filterData);
     }
-    const handleViewButton = (data) => {
+    const [isOpen, setIsOpen] = useState(false)
+    const handleViewButton = async(data) => {
+        await setIsOpen(true);
         setDetailedInfo(data)
     }
 
@@ -144,7 +146,7 @@ function MedicalExamination() {
                         </div>
                     </div>
                 </div>
-                <DetailedInfo props={detailedInfo}/>
+                {isOpen&&<DetailedInfo props={detailedInfo} setIsOpen={setIsOpen}/>}
             </div>
         </div>
     </div> );
