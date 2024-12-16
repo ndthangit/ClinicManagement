@@ -316,28 +316,29 @@ const addService = async () => {
                             <button onClick={cancelEditing} style={{ marginLeft: '10px' }}>Hủy</button>
                           </>
                         ) : (
-                          <>
+                          <div className='action'>
                             <button
-                              className='buttonInfo'
+                              className='buttonCell'
                               onClick={() => fetchServicesByDepartment(department.department_id)}
                             >
                               Xem
                             </button>
+
                             <button
-                              className='buttonDelete'
-                              onClick={() => deleteDepartment(department.department_id)}
-                              style={{ marginLeft: '10px', color: 'white' }}
-                            >
-                              Xóa
-                            </button>
-                            <button
-                              className='buttonInsert'
+                              className='buttonCell'
                               onClick={() => startEditing(department)}
-                              style={{ marginLeft: '10px', color: 'white' }}
                             >
                               Sửa
                             </button>
-                          </>
+
+                            <button
+                              className='buttonCell'
+                              onClick={() => deleteDepartment(department.department_id)}
+                            >
+                              Xóa
+                            </button>
+                            
+                          </div>
                         )}
                       </td>
                     </tr>

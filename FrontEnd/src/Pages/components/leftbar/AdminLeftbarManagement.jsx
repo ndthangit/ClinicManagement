@@ -12,9 +12,6 @@ function AdminLeftbarManagement() {
     return (
         <div className='Leftbar'>
             <Button className='button font' onClick={() => {
-                navigate('/admin/management/payments')
-            }}>Xác nhận thanh toán</Button>
-            <Button className='button font' onClick={() => {
                 navigate('/admin/management/DoctorDetails')
             }}>
                 <FaUserDoctor className='icon'/>

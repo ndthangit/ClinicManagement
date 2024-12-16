@@ -11,6 +11,10 @@
     max-width: 1000px;
     margin: auto;
   }
+
+.servicePrice .content {
+  padding: 20px;
+}
   
   /* Định dạng cho tiêu đề chính */
   .servicePrice h1 {
@@ -47,6 +51,12 @@
   .servicePrice table tr:hover {
     background-color: #f1f1f1;
   }
+
+  .servicePrice .action {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+  }
   
   /* Định dạng cho các nút */
   .servicePrice .buttonInfo {
@@ -64,48 +74,21 @@
     background-color: #155c83;
   }
   
-  .servicePrice .buttonDelete {
-    background-color: #2e749a; /* Màu xanh lá */
-    color: white;
-    padding: 8px 16px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 14px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .servicePrice .buttonDelete:hover {
-    background-color: #105275;
-  }
-
-  
-  .servicePrice .buttonInsert {
-    background-color: #2e749a; /* Màu xanh lá */
-    color: white;
-    padding: 8px 16px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 14px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .servicePrice .buttonInsert:hover {
-    background-color: #14587c;
+  .servicePrice .buttonCell {
+    margin: 2px;
   }
   /* Nút quay lại */
   .servicePrice .back-button {
     margin-bottom: 20px;
     display: inline-block;
   }
-  .content h2 {
+  .servicePrice .content h2 {
     font-size: 1.5rem;
     margin-bottom: 1rem;
     color: #555;
   }
   
-  .content input {
+  .servicePrice .content input {
     display: block;
     width: 100%;
     margin-bottom: 1rem;
@@ -115,17 +98,17 @@
     border-radius: 4px;
   }
   
-  .content button {
-    padding: 0.5rem 1rem;
-    font-size: 1rem;
-    background-color: #2e749a;
+  .servicePrice .content button {
+    background-color: #2e749a; /* Màu xanh lá */
     color: white;
+    padding: 8px 16px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    margin-right: 0.5rem;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
   }
   
-  .content button:hover {
-    background-color: #2e749a;
+  .servicePrice .content button:hover {
+    background-color: #14587c;
   }

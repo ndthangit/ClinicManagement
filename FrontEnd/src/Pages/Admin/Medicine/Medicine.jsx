@@ -118,7 +118,7 @@ function Medicine() {
   };
 
   return (
-    <div className='dashboard'>
+    <div className='dashboard adminMedicine'>
       <Navbar className='header'/>
       <div className='body'>
         <AdminServiceLeftbar className='leftbar'/>

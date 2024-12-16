@@ -23,6 +23,7 @@
     height: 100% !important;
     width: 100%;
     padding: 0  !important;
+    overflow: hidden;
 }
 
 .top-hist {
@@ -53,6 +54,7 @@
     align-items: center;
     flex-direction: column;
     justify-content: space-between;
+    background-color: #13425b;
 }
 
 .searchbar {

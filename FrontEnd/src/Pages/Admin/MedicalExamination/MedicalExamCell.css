@@ -4,7 +4,7 @@
     display: flex;
     border: 2px solid #fff;
     margin-bottom: 2px;
-    border: 2px solid #87cd51;
+    border: 2px solid #2087d1;
     border-radius: 4px;
 }
 
@@ -29,7 +29,7 @@
     height: 25px;
     font-size: medium;
     cursor: pointer;
-    border: 2px solid #87cd51;
+    border: 2px solid #2087d1;
     border-radius: 4px;
 }
 
@@ -37,3 +37,4 @@
     opacity: 0.8;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
+

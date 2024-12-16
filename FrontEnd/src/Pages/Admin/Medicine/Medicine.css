@@ -1,7 +1,7 @@
 /* Medicine.css */
 
 /* Định dạng chung cho dashboard */
-.dashboard {
+.adminMedicine .dashboard {
     display: flex;
     flex-direction: column;
     height: 100vh;
@@ -9,7 +9,7 @@
   }
   
   /* Định dạng cho header (navbar) */
-  .header {
+.adminMedicine  .header {
     background-color: #007bff;
     color: white;
     padding: 1rem;
@@ -19,13 +19,13 @@
   }
   
   /* Định dạng chung cho phần body */
-  .body {
+.adminMedicine  .body {
     display: flex;
     flex: 1;
   }
   
   /* Định dạng cho leftbar */
-  .leftbar {
+.adminMedicine  .leftbar {
     background-color: #f8f9fa;
     width: 20%;
     padding: 1rem;
@@ -33,27 +33,29 @@
   }
   
   /* Định dạng cho phần content */
-  .content {
+.adminMedicine  .content {
     flex: 1;
     padding: 2rem;
     background-color: #ffffff;
   }
   
   /* Tiêu đề chính */
-  .content h1 {
+.adminMedicine  .content h1 {
     font-size: 2rem;
     margin-bottom: 1rem;
     color: #333;
+    justify-content: center;
+    display: flex;
   }
   
   /* Form thêm thuốc mới */
-  .content h2 {
+.adminMedicine  .content h2 {
     font-size: 1.5rem;
     margin-bottom: 1rem;
     color: #555;
   }
   
-  .content input {
+.adminMedicine  .content input {
     display: block;
     width: 100%;
     margin-bottom: 1rem;
@@ -63,7 +65,7 @@
     border-radius: 4px;
   }
   
-  .content button {
+.adminMedicine  .content button {
     padding: 0.5rem 1rem;
     font-size: 1rem;
     background-color: #2e749a;
@@ -74,37 +76,37 @@
     margin-right: 0.5rem;
   }
   
-  .content button:hover {
+.adminMedicine  .content button:hover {
     background-color: #2e749a;
   }
   
   /* Định dạng bảng danh sách thuốc */
-  table {
+.adminMedicine  table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 2rem;
   }
   
-  table th, table td {
+.adminMedicine  table th, table td {
     border: 1px solid #ddd;
     padding: 0.75rem;
     text-align: left;
   }
   
-  table th {
+.adminMedicine  table th {
     background-color: #f4f4f4;
     font-weight: bold;
   }
   
-  table tr:nth-child(even) {
+.adminMedicine  table tr:nth-child(even) {
     background-color: #f9f9f9;
   }
   
-  table tr:hover {
+.adminMedicine  table tr:hover {
     background-color: #f1f1f1;
   }
   
-  table button {
+.adminMedicine  table button {
     padding: 0.5rem 1rem;
     font-size: 0.875rem;
     background-color: #007bff;
@@ -114,15 +116,15 @@
     cursor: pointer;
   }
   
-  table button:hover {
+.adminMedicine  table button:hover {
     background-color: #0056b3;
   }
   
-  table button:last-child {
+.adminMedicine  table button:last-child {
     background-color: #2e749a;
   }
   
-  table button:last-child:hover {
+.adminMedicine  table button:last-child:hover {
     background-color: #2e749a;
   }
   
