@@ -24,3 +24,9 @@
 .leftbar .text {
     margin-left: 20px;
 }
+
+.customed-icon {
+    margin-right: 10px;
+    font-size: 18px;
+    align-self: first baseline;
+}

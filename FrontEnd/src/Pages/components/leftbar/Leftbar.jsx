@@ -31,12 +31,15 @@ function Leftbar() {
         <Button className='button font' onClick={() => {
           navigate('/appointment')
         }}>  
-        <BiBookAdd className='icon'/>
-        <p className='text'> Đặt lịch khám </p>
+          <i class="fa-solid fa-calendar-day customed-icon"></i>
+          <p className='text'> Đặt lịch khám </p>
         </Button>
         <Button className='button font' onClick={() => {
           showSchedule()
-        }}>Xem lịch khám</Button>
+        }}>
+          <i class="fa-solid fa-calendar-days customed-icon"></i>
+          <p className="text">Xem lịch khám</p>
+          </Button>
         
       </div>
   )
