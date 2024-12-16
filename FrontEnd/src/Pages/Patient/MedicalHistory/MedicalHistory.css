@@ -35,10 +35,9 @@
     border-radius: 10px;
 }
 
-.top-hist h1 {
-    color: white;
-    font-size: 32px;
-    font-weight: 600;
+.container-hist .title-content {
+    width: 90%;
+    padding: 10px 50px 10px 50px;
 }
 
 .container-hist {
