@@ -135,8 +135,8 @@ const createNewDoctor = async (req, res) => {
 
 const updateDoctorInfo = async (req, res) => {
     console.log(req.body);
-    const sql = 'UPDATE `dataIT3170`.doctors SET img = ?, doctor_name = ?, department_id = ?, type_id = ?, phone = ?, email = ?, address = ?, username = ? WHERE doctor_id = ?;'+'UPDATE `dataIT3170`.doctor_account SET password = ? WHERE user_name = ?';
-    const values = [req.body.img,req.body.doctor_name, req.body.department_id, req.body.type_id, req.body.phone, req.body.email, req.body.address, req.body.username, req.body.doctor_id, req.body.password, req.body.username];
+    const sql = 'UPDATE `dataIT3170`.doctors SET image_url = ?, doctor_name = ?, department_id = ?, type_id = ?, phone = ?, email = ?, address = ?, username = ? WHERE doctor_id = ?;'+'UPDATE `dataIT3170`.doctor_account SET password = ? WHERE user_name = ?';
+    const values = [req.body.image_url,req.body.doctor_name, req.body.department_id, req.body.type_id, req.body.phone, req.body.email, req.body.address, req.body.username, req.body.doctor_id, req.body.password, req.body.username];
     try {
         connection.query(sql, values, (err, results) => {
             if (err) {

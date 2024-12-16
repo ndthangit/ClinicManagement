@@ -82,7 +82,7 @@ const DoctorInfo = () => {
             address: updatedRow.address,
             username: updatedRow.username,
             password: updatedRow.password,
-            img : updatedRow.img,
+            image_url : updatedRow.image_url,
 
         }
         // console.log("input",input);
@@ -257,7 +257,7 @@ const DoctorInfo = () => {
                         }}
                     >
                         <HotColumn
-                            data="img"
+                            data="image_url"
                             // className="htCenter"
 
 
