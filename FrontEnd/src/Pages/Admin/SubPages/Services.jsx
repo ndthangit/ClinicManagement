@@ -1,12 +1,12 @@
 import React from "react";
 import AdminNavbar from "../../components/navbar/AdminNavbar";
-import ServiceLeftbar from "../../components/leftbar/ServiceLeftbar";
+import AdminServiceLeftbar from "../../components/leftbar/AdminServiceLeftbar";
 let Services = () => {
     return (
         <div className="payment dashboard">
             <AdminNavbar/>
             <div className="body">
-                <ServiceLeftbar className='leftBar'/>
+                <AdminServiceLeftbar className='leftBar'/>
             </div>
         </div>
     );

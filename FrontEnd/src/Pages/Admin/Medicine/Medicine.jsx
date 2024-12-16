@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import Navbar from '../../components/navbar/AdminNavbar';
-import ServiceLeftbar from '../../components/leftbar/ServiceLeftbar';
+import AdminServiceLeftbar from '../../components/leftbar/AdminServiceLeftbar';
 
 function Medicine() {
   const [medicines, setMedicines] = useState([]);
@@ -121,7 +121,7 @@ function Medicine() {
     <div className='dashboard'>
       <Navbar className='header'/>
       <div className='body'>
-        <ServiceLeftbar className='leftbar'/>
+        <AdminServiceLeftbar className='leftbar'/>
         <div className='content'>
           <h1>Danh sách thuốc</h1>
 

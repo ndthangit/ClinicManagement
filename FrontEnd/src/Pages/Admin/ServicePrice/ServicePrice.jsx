@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Navbar from '../../components/navbar/AdminNavbar';
 import axios from 'axios';
 import './ServicePrice.css';
-import ServiceLeftbar from '../../components/leftbar/ServiceLeftbar';
+import AdminServiceLeftbar from '../../components/leftbar/AdminServiceLeftbar';
 
 function ServicePrice() {
   const [departments, setDepartments] = useState([]);
@@ -218,7 +218,7 @@ const addService = async () => {
       <Navbar className='navbar' />
 
       <div className='body'>
-        <ServiceLeftbar className='leftbar' />
+        <AdminServiceLeftbar className='leftbar' />
         <div className='content'>
           <h1>Danh sách phòng ban và dịch vụ</h1>
 

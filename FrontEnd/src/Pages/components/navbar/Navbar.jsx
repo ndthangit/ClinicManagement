@@ -19,10 +19,7 @@ function Navbar() {
     const dispatch = useDispatch();
 
     const handleLogout = () => {
-        localStorage.removeItem('state');
-
-        // Dispatch logout action
-        dispatch({ type: 'LOGOUT' });
+        dispatch(logout());
         navigateTo('/');
     }
 
