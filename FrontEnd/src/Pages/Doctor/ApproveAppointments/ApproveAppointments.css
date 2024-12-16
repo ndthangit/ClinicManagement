@@ -32,7 +32,7 @@
     max-height: 80vh; 
     overflow-y: auto; 
     scrollbar-width: thin;
-    scrollbar-color: #86cc51 #f9f9f9; 
+    scrollbar-color: #2e749a #f9f9f9; 
 }
 
 .approve-appointment-list::-webkit-scrollbar {
@@ -41,7 +41,7 @@
 }
 
 .approve-appointment-list::-webkit-scrollbar-thumb {
-    background-color: #86cc51;
+    background-color: #2e749a;
     border-radius: 10px;
 }
 

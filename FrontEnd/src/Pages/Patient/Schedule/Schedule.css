@@ -8,7 +8,7 @@
 }
 
 .schedule h2 {
-    background-color:  #86cc51; 
+    background-color:  #2e749a; 
     color: white; 
     border-radius: 5px; 
     padding: 10px 10px; 
@@ -40,15 +40,15 @@
 
 .scheduleForm input:focus, 
 #doctor_id:focus {
-    border-color: #86cc51; 
+    border-color: #2e749a; 
     outline: none; 
-    box-shadow: 0 0 5px rgba(134, 204, 81, 0.5); 
+    box-shadow: 0 0 5px rgba(65, 138, 181, 0.4); 
 }
 
 .addScheduleButton {
     padding: 10px 20px;
     margin-bottom: 20px;
-    background-color:  #86cc51; 
+    background-color:  #2e749a; 
     color: white;
     border: none;
     border-radius: 4px;
@@ -58,7 +58,7 @@
 }
 
 .addScheduleButton:hover {
-    background-color: #78b841;
+    background-color: #1e6286;
 }
 .scheduleList {
     flex-grow: 1;
@@ -98,7 +98,7 @@
     border: none; 
     cursor: pointer; 
     margin: 0 5px; 
-    color: #86cc51; 
+    color: #1b5c7e; 
     font-size: 20px; 
     transition: background 0.3s, color 0.3s; 
     border-radius: 50%; 
@@ -110,8 +110,8 @@
 }
 
 .iconButton:hover {
-    background: rgba(134, 204, 81, 0.2); 
-    color: #5a9e3a;
+    background: rgba(65, 138, 181, 0.4); 
+    color: #1f668d;
 }
 
 .editScheduleForm {
@@ -152,16 +152,17 @@
 .editScheduleForm input[type="date"]:focus,
 .editScheduleForm input[type="time"]:focus,
 .editScheduleForm input[type="text"]:focus {
-    border-color: #4CAF50;
+    border-color: #2e749a;
     outline: none;
-    box-shadow: 0 0 5px rgba(76, 175, 80, 0.4);
+    box-shadow: 0 0 5px rgba(65, 138, 181, 0.4);
 }
 
 .editScheduleForm button {
-    background-color: #4CAF50;
+    background-color: #2e749a;
     color: white;
     padding: 12px 20px;
     margin-top: 10px;
+    margin: 4px;
     border: none;
     border-radius: 6px;
     cursor: pointer;
@@ -170,7 +171,7 @@
 }
 
 .editScheduleForm button:hover {
-    background-color: #45a049;
+    background-color: #226990;
     transform: scale(1.03);
 }
 
@@ -197,20 +198,20 @@
 }
 
 .filters select:hover {
-    border-color: #5dc853;
+    border-color: #1f6185;
     background-color: #f0f8ff;
 }
 
 .filters select:focus {
-    border-color: #31c938;
-    box-shadow: 0 0 5px rgba(88, 226, 53, 0.5);
+    border-color: #2e749a;
+    box-shadow: 0 0 5px rgba(65, 138, 181, 0.4);
 }
 
 .filters button {
     padding: 0.5rem 1.5rem;
     font-size: 0.8rem;
     color: #fff;
-    background-color: #78b841;
+    background-color: #2e749a;
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -218,11 +219,11 @@
 }
 
 .filters button:hover {
-    background-color: #5a9e3a;
+    background-color: #1d6287;
 }
 
 .filters button:active {
-    background-color: #86cc51;
+    background-color: #2e749a;
 }
 
 .search-container {

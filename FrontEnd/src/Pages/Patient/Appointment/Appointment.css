@@ -12,7 +12,7 @@
   padding: 0.5rem;
   font-size: 0.8rem;
   color: #fff;
-  background-color: #78b841;
+  background-color: #2e749a;
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -20,11 +20,11 @@
 }
 
 .appointment .body .content .top .searchInput:hover {
-  background-color: #5a9e3a;
+  background-color: #206184;
 }
 
 .appointment .body .content .top .searchInput:active {
-  background-color: #86cc51;
+  background-color: #195a7d;
 }
 
 .appointment .body .content .table {
@@ -97,7 +97,7 @@
   padding: 5px;
   font-size: 1rem;
   color: #fff;
-  background-color: #78b841;
+  background-color: #2e749a;
 }
 
 .appointment .content .bottom {
@@ -123,13 +123,13 @@
   border-radius: 5px;
   border: none;
   color: #fff;
-  background-color: #78b841;
+  background-color: #2e749a;
 }
 
 .appointment .content .bottom .nextPage:hover {
-  background-color: #5a9e3a;
+  background-color: #206184;
 }
 
 .appointment .content .bottom .nextPage:active {
-  background-color: #86cc51;
+  background-color: #195a7d;
 }

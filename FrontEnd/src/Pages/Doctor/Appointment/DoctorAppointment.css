@@ -56,7 +56,7 @@
   flex-grow: 1;
   overflow-y: auto; 
   scrollbar-width: thin;
-  scrollbar-color: #86cc51 #f9f9f9;
+  scrollbar-color: #2e749a #f9f9f9;
 }
 
 .doctor-appointment-list::-webkit-scrollbar {
@@ -64,7 +64,7 @@
 }
 
 .doctor-appointment-list::-webkit-scrollbar-thumb {
-  background-color: #86cc51;
+  background-color: #2e749a;
   border-radius: 4px;
 }
 
@@ -91,7 +91,7 @@
 
 .doctor-appointment-item.confirmed {
   background-color: #eaffea;
-  border-color: #86cc51;
+  border-color: #2e749a;
 }
 
 .doctor-appointment-item.canceled {

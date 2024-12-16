@@ -32,18 +32,18 @@
 }
 
 .doctorInfo .buttonSel {
-  background-color: #78b841;
+  background-color: #6ba6c6;
   border: none;
   border-radius: 5px;
   color: #fff;
 }
 
 .doctorInfo .buttonSel:hover {
-  background-color: #5a9e3a;
+  background-color: #498aad;
 }
 
 .doctorInfo .buttonSel:active {
-  background-color: #86cc51;
+  background-color: #33779c;
 }
 
 .doctorInfo .body .contentInfo .headInfo .imageDoctor {
@@ -96,7 +96,7 @@
   width: 100%;
   display: flex;
   justify-content: center;
-  background-color: #86cc51;
+  background-color: #2e749a;
   margin-bottom: 20px;
   border-radius: 10px;
   color: #fff;
@@ -114,7 +114,7 @@
   border: none;
   border-radius: 10px;
   display: flex;
-  background-color: #42a4de;
+  background-color: #1f6892;
   color: #fff;
 
 }
@@ -165,7 +165,7 @@
 
 .doctorInfo .body .contentInfo .work .info .title {
   color: #fff;
-  background-color: #86cc51;
+  background-color: #2e749a;
   border-radius: 10px;
   display: flex;
   justify-content: center;

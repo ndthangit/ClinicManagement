@@ -82,7 +82,7 @@ function Dashboard() {
       <div className="healthcareDashboard__mainFunctions">
         { /* Đặt lịch khám */}
         <div className="healthcareDashboard__largeCard">
-          <AccessTime style={{ fontSize: 70, color: '#00796b' }} />
+          <AccessTime style={{ fontSize: 70, color: '#086b92' }} />
           <h3>Đặt lịch khám</h3>
           <p className="healthcareDashboard__largeCardDescription">
             Dễ dàng thực hiện các thao tác đặt lịch khám chỉ với vài bước.
@@ -93,14 +93,14 @@ function Dashboard() {
         {/* Xem lịch khám và giá thành dịch vụ */}
         <div className='healthcareDashboard__smallCards'>
           <div className='healthcareDashboard__functionCard'>
-            <LocalHospital style={{ fontSize: 60, color: '#00796b' }} />
+            <LocalHospital style={{ fontSize: 60, color: '#086b92' }} />
             <h3>Xem lịch khám</h3>
             <p>Kiểm tra lịch khám của bạn và thông tin liên quan.</p>
             <Button className='healthcareDashboard__functionButton' onClick={showSchedule}>Xem ngay</Button>
           </div>
   
           <div className='healthcareDashboard__functionCard'>
-            <Medication style={{ fontSize: 60, color: '#00796b' }} />
+            <Medication style={{ fontSize: 60, color: '#086b92' }} />
             <h3>Giá thành dịch vụ</h3>
             <p>Xem chi tiết giá các dịch vụ khám bệnh tại đây.</p>
             <Button className='healthcareDashboard__functionButton' onClick={showServices}>Xem giá</Button>
@@ -127,22 +127,22 @@ function Dashboard() {
           <h2>Các dịch vụ nổi bật</h2>
           <div className="healthcareDashboard__serviceCards">
             <div className="serviceCard">
-              <HealthAndSafety style={{ fontSize: 40, color: '#00796b' }} />
+              <HealthAndSafety style={{ fontSize: 40, color: '#086b92' }} />
               <h4>Khám tổng quát</h4>
               <p>Kiểm tra sức khỏe định kỳ với đội ngũ bác sĩ chuyên môn cao.</p>
             </div>
             <div className="serviceCard">
-              <Science style={{ fontSize: 40, color: '#00796b' }} />
+              <Science style={{ fontSize: 40, color: '#086b92' }} />
               <h4>Xét nghiệm</h4>
               <p>Dịch vụ xét nghiệm hiện đại và chính xác.</p>
             </div>
             <div className="serviceCard">
-              <SupportAgent style={{ fontSize: 40, color: '#00796b' }} />
+              <SupportAgent style={{ fontSize: 40, color: '#086b92' }} />
               <h4>Tư vấn sức khỏe</h4>
               <p>Nhận lời khuyên hữu ích từ các chuyên gia.</p>
             </div>
             <div className="serviceCard">
-              <CheckCircleOutline style={{ fontSize: 40, color: '#00796b' }} />
+              <CheckCircleOutline style={{ fontSize: 40, color: '#086b92' }} />
               <h4>Chăm sóc hậu phẫu</h4>
               <p>Dịch vụ chăm sóc sau mổ với các bác sĩ và y tá chuyên nghiệp.</p>
             </div>
