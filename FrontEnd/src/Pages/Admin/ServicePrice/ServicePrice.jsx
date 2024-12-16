@@ -439,7 +439,7 @@ const addService = async () => {
                             <button
                               className='buttonDelete'
                               onClick={() => deleteService(service.service_id)}
-                              style={{ backgroundColor: 'red', color: 'white' }}
+                              
                             >
                               Xóa
                             </button>

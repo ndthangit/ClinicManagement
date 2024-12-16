@@ -1,0 +1,128 @@
+/* Medicine.css */
+
+/* Định dạng chung cho dashboard */
+.dashboard {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Định dạng cho header (navbar) */
+  .header {
+    background-color: #007bff;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  /* Định dạng chung cho phần body */
+  .body {
+    display: flex;
+    flex: 1;
+  }
+  
+  /* Định dạng cho leftbar */
+  .leftbar {
+    background-color: #f8f9fa;
+    width: 20%;
+    padding: 1rem;
+    border-right: 1px solid #ddd;
+  }
+  
+  /* Định dạng cho phần content */
+  .content {
+    flex: 1;
+    padding: 2rem;
+    background-color: #ffffff;
+  }
+  
+  /* Tiêu đề chính */
+  .content h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #333;
+  }
+  
+  /* Form thêm thuốc mới */
+  .content h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #555;
+  }
+  
+  .content input {
+    display: block;
+    width: 100%;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  .content button {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    background-color: #2e749a;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 0.5rem;
+  }
+  
+  .content button:hover {
+    background-color: #2e749a;
+  }
+  
+  /* Định dạng bảng danh sách thuốc */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 2rem;
+  }
+  
+  table th, table td {
+    border: 1px solid #ddd;
+    padding: 0.75rem;
+    text-align: left;
+  }
+  
+  table th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+  }
+  
+  table tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  table tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  table button {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  table button:hover {
+    background-color: #0056b3;
+  }
+  
+  table button:last-child {
+    background-color: #2e749a;
+  }
+  
+  table button:last-child:hover {
+    background-color: #2e749a;
+  }
+  

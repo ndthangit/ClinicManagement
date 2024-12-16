@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import Navbar from '../../components/navbar/AdminNavbar';
 import AdminServiceLeftbar from '../../components/leftbar/AdminServiceLeftbar';
-
+import './Medicine.css'
 function Medicine() {
   const [medicines, setMedicines] = useState([]);
   const [editId, setEditId] = useState(null);
@@ -164,7 +164,6 @@ function Medicine() {
             <table>
               <thead>
                 <tr>
-                  <th>Id</th>
                   <th>Tên thuốc</th>
                   <th>Mô tả</th>
                   <th>Giá</th>
