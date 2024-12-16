@@ -1,7 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import AdminNavbar from "../../Components/navbar/AdminNavbar";
-import Leftbar from "../../Components/leftbar/Leftbar";
+import AdminNavbar from "../../components/navbar/AdminNavbar";
 import './DoctorInfo.css';
 import {HotTable, HotColumn} from "@handsontable/react";
 import "handsontable/dist/handsontable.min.css";
@@ -17,6 +16,7 @@ import { FaDownload } from "react-icons/fa";
 import ConfirmBox from "./ConfirmBox";
 import axios from "axios";
 import CustomSnackbar from "./CustomSnackBar";
+import AdminLeftbarManagement from "../../components/leftbar/AdminLeftbarManagement";
 
 registerAllModules();
 
@@ -177,7 +177,7 @@ const DoctorInfo = () => {
         <div className="doctorsInfo dashboard">
             <AdminNavbar className="header"/>
             <div className="body">
-                <Leftbar className='leftBar'/>
+                <AdminLeftbarManagement className='leftBar'/>
                 <div className="content">
 
 

@@ -1,13 +1,12 @@
 import React from "react";
-import AdminNavbar from "../Components/navbar/AdminNavbar";
-import Leftbar from "../Components/leftbar/Leftbar";
+import AdminNavbar from "../components/navbar/AdminNavbar";
 let AdminHome = () => {
   return (
       <div className="payment dashboard">
           <AdminNavbar/>
-          <div className="body">
-              <Leftbar className='leftBar'/>
-          </div>
+          {/*<div className="body">*/}
+          {/*    <Leftbar className='leftBar'/>*/}
+          {/*</div>*/}
       </div>
   );
 };

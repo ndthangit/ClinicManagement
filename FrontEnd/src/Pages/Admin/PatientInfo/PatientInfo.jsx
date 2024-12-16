@@ -1,6 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
-import AdminNavbar from "../../Components/navbar/AdminNavbar";
-import Leftbar from "../../Components/leftbar/Leftbar";
+import AdminNavbar from "../../components/navbar/AdminNavbar";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchPatientInfo } from "../../Features/PatientInforSlice";
 import './PatientInfo.css';
@@ -8,6 +7,7 @@ import { HotTable, HotColumn } from "@handsontable/react";
 import "handsontable/dist/handsontable.min.css";
 import "pikaday/css/pikaday.css";
 import {FaDownload} from "react-icons/fa";
+import AdminLeftbarManagement from "../../components/leftbar/AdminLeftbarManagement";
 
 const PatientInfo = () => {
     const hotRef = useRef(null);
@@ -52,7 +52,7 @@ const PatientInfo = () => {
         <div className='patientInfo dashboard'>
             <AdminNavbar className="header"/>
             <div className="body">
-                <Leftbar className='leftBar'/>
+                <AdminLeftbarManagement className='leftBar'/>
                 <div className="content">
                     {/*<h2>Patient Information</h2>*/}
                     <div className="cf-title-02">

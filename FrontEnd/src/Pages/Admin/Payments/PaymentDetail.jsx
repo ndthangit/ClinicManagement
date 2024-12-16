@@ -1,5 +1,4 @@
-import AdminNavbar from "../../Components/navbar/AdminNavbar";
-import Leftbar from "../../Components/leftbar/Leftbar";
+import AdminNavbar from "../../components/navbar/AdminNavbar";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useRef, useState } from 'react';
 import { fetchPayments} from "../../Features/PaymentSclice";
@@ -11,6 +10,7 @@ import { registerAllModules } from "handsontable/registry";
 import { FaDownload } from "react-icons/fa";
 import Axios from "axios";
 import CustomSnackbar from "../DoctorInfo/CustomSnackBar";
+import AdminLeftbarManagement from "../../components/leftbar/AdminLeftbarManagement";
 
 registerAllModules();
 
@@ -114,7 +114,7 @@ const PaymentDetail = () => {
         <div className='payment dashboard'>
             <AdminNavbar className="header"/>
             <div className="body">
-                <Leftbar className='leftBar'/>
+                <AdminLeftbarManagement className='leftBar'/>
                 <div className="content">
                     <div className="cf-title-02">
                         <div className="cf-title-alt-two">

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Navbar from '../../Components/navbar/AdminNavbar';
+import Navbar from '../../components/navbar/AdminNavbar';
 import axios from 'axios';
 import './ServicePrice.css';
-import ServiceLeftbar from '../../Components/leftbar/ServiceLeftbarAdmin';
+import ServiceLeftbar from '../../components/leftbar/ServiceLeftbar';
 
 function ServicePrice() {
   const [departments, setDepartments] = useState([]);

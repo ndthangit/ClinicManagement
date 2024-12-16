@@ -1,5 +1,4 @@
-import AdminNavbar from "../../Components/navbar/AdminNavbar";
-import Leftbar from "../../Components/leftbar/Leftbar";
+import AdminNavbar from "../../components/navbar/AdminNavbar";
 import React, {useEffect, useRef, useState} from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { fetchAppointments } from "../../Features/AppointmentSlice";
@@ -11,6 +10,7 @@ import {registerAllModules} from "handsontable/registry";
 import {FaDownload} from "react-icons/fa";
 import Axios from "axios";
 import CustomSnackbar from "../DoctorInfo/CustomSnackBar";
+import AdminLeftbarSchedule from "../../components/leftbar/AdminNavbarSchedule";
 
 registerAllModules();
 const AppointmentDetail = () => {
@@ -107,7 +107,7 @@ const AppointmentDetail = () => {
         <div className='appointmentDetail dashboard'>
             <AdminNavbar className="header"/>
             <div className="body">
-                <Leftbar className='leftBar'/>
+                <AdminLeftbarSchedule className='leftBar'/>
                 <div className="content">
 
 

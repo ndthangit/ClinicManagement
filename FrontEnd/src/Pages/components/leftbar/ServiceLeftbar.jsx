@@ -8,10 +8,10 @@ function ServiceLeftbar() {
   return (
     <div className='Leftbar'>
       <Button className='button font' onClick={() => {
-        navigate('/service_price')
+        navigate('/admin/service-price')
       }}>Giá dịch vụ</Button>
       <Button className='button font' onClick={() => {
-        navigate('/medicine')
+        navigate('/admin/medicine')
       }}>Giá thuốc</Button>
     </div>
   )

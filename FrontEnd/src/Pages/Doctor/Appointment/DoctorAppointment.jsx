@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import DoctorNavbar from '../../Components/navbar/DoctorNavbar';
-import DoctorLeftbar from '../../Components/leftbar/DoctorLeftbar';
+import DoctorNavbar from '../../components/navbar/DoctorNavbar';
+import DoctorLeftbar from '../../components/leftbar/DoctorLeftbar';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 import './DoctorAppointment.css';

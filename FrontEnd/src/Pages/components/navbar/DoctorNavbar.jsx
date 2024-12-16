@@ -11,7 +11,10 @@ function DoctorNavbar() {
   const doctor = useSelector((state)=>state.user.doctor);
   console.log(doctor);
   const handleLogout = () => {
-    dispatch(logoutDoctor());
+      localStorage.removeItem('state');
+
+      // Dispatch logout action
+      dispatch({ type: 'LOGOUT' });
     navigateTo('/doctor/login');
   }
 

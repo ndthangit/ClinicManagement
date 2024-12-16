@@ -1,8 +1,8 @@
 // ServicePricePage.js
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import Navbar from '../../Components/navbar/Navbar';
-import ServiceLeftbar from '../../Components/leftbar/ServiceLeftbar';
+import Navbar from '../../components/navbar/Navbar';
+import ServiceLeftbar from '../../components/leftbar/ServiceLeftbar';
 
 function Medicine() {
   const [medicines, setMedicines] = useState([]);

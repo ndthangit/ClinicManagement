@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import Leftbar from "../../Components/leftbar/Leftbar";
-import AdminNavbar from "../../Components/navbar/AdminNavbar";
+import AdminNavbar from "../../components/navbar/AdminNavbar";
 import './MedicalExamination.css'
 import MedicalExamCell from "./MedicalExamCell";
 import DetailedInfo from "./DetailedInfo";
 import axios from "axios";
+import AdminLeftbarSchedule from "../../components/leftbar/AdminNavbarSchedule";
 
 function MedicalExamination() {
     const [fakeData, setFakeData] = useState([]);
@@ -79,7 +79,7 @@ function MedicalExamination() {
     <div className="medicalExamDetail dashboard">
         <AdminNavbar className='header'/>
         <div className="body">
-            <Leftbar className='leftBar'/>
+            <AdminLeftbarSchedule className='leftBar'/>
             <div className="content customed-content">
                 <div className="top-hist">
                     <h1>Các buổi thăm khám đã thực hiện</h1>

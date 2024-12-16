@@ -1,10 +1,10 @@
 // ServicePricePage.js
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import Navbar from '../../Components/navbar/Navbar';
+import Navbar from '../../components/navbar/Navbar';
 import axios from 'axios';
 import './ServicePrice.css'
-import ServiceLeftbar from '../../Components/leftbar/ServiceLeftbar';
+import ServiceLeftbar from '../../components/leftbar/ServiceLeftbar';
 function ServicePrice() {
   const [departments, setDepartments] = useState([]);
   const [services, setServices] = useState([]);

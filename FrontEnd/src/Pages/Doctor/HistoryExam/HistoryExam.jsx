@@ -1,9 +1,9 @@
 import React from 'react'
-import DoctorNavbar from '../../Components/navbar/DoctorNavbar'
+import DoctorNavbar from '../../components/navbar/DoctorNavbar'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-import MedicalExamLeftbar from '../../Components/leftbar/MedicalExamLeftbar';
+import MedicalExamLeftbar from '../../components/leftbar/MedicalExamLeftbar';
 import { useSelector } from 'react-redux';
 
 function HistoryExam() {
