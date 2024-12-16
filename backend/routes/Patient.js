@@ -7,4 +7,4 @@ router.get('/byId/:id', patientController.getPatientByID);
 router.get('/byCCCD/:cccd', patientController.getPatientByCCCD);
 router.post('/updatePatientInfo', patientController.updatePatientInfo);
 
-module.exports = router;
+module.exports = router; 
