@@ -229,15 +229,18 @@ const DoctorInfo = () => {
                         }}
                         contextMenu={true}
                         rowHeights={25}
+
                         multiColumnSorting={true}
                         filters={true}
                         rowHeaders={true}
+
                         autoWrapCol={true}
                         autoWrapRow={true}
                         cells={(row, col) => ({
                             readOnly: col !== 6 ? !editableRows[row] : !editableRows[row] || false, // Cho phép chỉnh sửa mật khẩu khi hàng đang chỉnh sửa
                             className: 'htMiddle htCenter',
                             type: col === 6 && editableRows[row] ? "text" : col === 6 ? "password" : undefined, // Đổi `type` của mật khẩu
+
                         })}
                         afterChange={(changes, source) => {
                             if (source === "edit") {

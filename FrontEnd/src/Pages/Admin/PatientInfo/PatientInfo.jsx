@@ -71,7 +71,7 @@ const PatientInfo = () => {
                         settings={settings}
                         data={patientInfo}
                         height={450}
-                        colWidths={[170, 120, 150, 230, 280, 150]}
+                        colWidths={[150, 120, 120, 170, 420, 120]}
                         colHeaders={[
                             "Tên",
                             "Giới tính",
@@ -92,6 +92,10 @@ const PatientInfo = () => {
                         autoWrapCol={true}
                         autoWrapRow={true}
                         readOnly={true}
+                        rowHeights={30}
+                        cells={(row, col) => ({
+                            className: 'htMiddle htCenter',
+                        })}
                     >
                         <HotColumn data="patient_name" className="htCenter"/>
                         <HotColumn data="gender" className="htCenter"/>
