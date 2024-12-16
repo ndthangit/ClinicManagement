@@ -1,5 +1,5 @@
 .navbar {
-    background-color: hsl(94, 55%, 56%);
+    background-color: hsl(199, 70%, 24%);
     display: flex;
     justify-content: space-between;
     border-bottom: 1px solid white;
@@ -43,7 +43,7 @@
 }
 
 .navbar .button:hover {
-    background-color: hsl(94, 55%, 30%);
+    background-color: rgba(11, 50, 73, 0.4);
 }
 
 .navbar .right .dropdown {

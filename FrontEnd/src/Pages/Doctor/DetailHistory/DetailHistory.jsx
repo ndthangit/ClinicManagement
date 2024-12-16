@@ -18,6 +18,7 @@ function DetailHistory() {
   useEffect(() => {
     axios.get(`http://localhost:3005/medExam/medicalExam/byId/${examId}`).then((respone) => {
       setExamInfo(respone.data);
+      console.log(respone.data);
       setSymptoms(respone.data.symptoms);
       setDiagnosis(respone.data.diagnosis);
     });
@@ -102,7 +103,7 @@ function DetailHistory() {
                           <div className='cell' key={index}>
                             <div className='value'> 
                               <p>{value.service_name}</p>
-                              <p>{value.note}</p>
+                              <p>Ghi chú: {value.note}</p>
                             </div>
                           </div>
                         );
@@ -128,8 +129,9 @@ function DetailHistory() {
                       return (
                         <div className='cell' key={index}>
                           <div className='value'> 
-                            <p>{value.service_name}</p>
-                            <p>{value.note}</p>
+                            <p>{value.medicine_name}</p>
+                            <p>Số lượng: {value.quantity}</p>
+                            <p>Ghi chú: {value.note ? value.note : 'không có'}</p>
                           </div>
                         </div>
                       );
@@ -145,7 +147,7 @@ function DetailHistory() {
                 <p>Notes</p>
               </div>
               <div className='value'>
-                <p>{examInfo.notes}</p>
+                <p className='valueInfo'>{examInfo.notes}</p>
               </div>
             </div>
             <div className='bottom'>

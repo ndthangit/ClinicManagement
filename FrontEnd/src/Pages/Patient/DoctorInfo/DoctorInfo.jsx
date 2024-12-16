@@ -61,6 +61,8 @@ function DoctorInfo() {
     navigate(`/schedule/${patient_id}`);
   }
 
+
+
   const chooseTime = () => {
     if (isChooseTime) {
       return (
@@ -68,9 +70,9 @@ function DoctorInfo() {
           <div className='timeInfo border transition'>
             <p className='title'>Thời gian</p>
             <div className='detailTime'> 
-              <p className='field'>Ngày khám:</p>
-              <p className='infoValue'>{Object.keys(schedule).at(daySelected)}</p>
-              <p className='field'>Khung giờ:</p>
+              <p className='field'>Ngày khám: </p>
+              <p className='infoValue'>{ Object.keys(schedule).at(daySelected).slice(8, 10) + "-" + Object.keys(schedule).at(daySelected).slice(5, 7) + '-' + Object.keys(schedule).at(daySelected).slice(0, 4)}</p>
+              <p className='field'>Khung giờ: </p>
               <p className='infoValue'>{timeSelected.slice(0, 5)}</p>
 
               <button className='changeTime buttonSel' onClick={() => {setIsChooseTime(false)}}>Đặt lại giời gian</button>
@@ -81,8 +83,8 @@ function DoctorInfo() {
             <div className='detailInfo'>
               <p className='field'>Tên:</p>
               <p className='infoValue'>{patientInfo.patient_name}</p>
-              <p className='field'>Ngày sinh:</p>
-              <p className='infoValue'>{patientInfo.date_of_birth.slice(0, 10)}</p>
+              <p className='field'>Ngày sinh: </p>
+              <p className='infoValue'>{patientInfo.date_of_birth.slice(8, 10) + "-" + patientInfo.date_of_birth.slice(5, 7) + '-' + patientInfo.date_of_birth.slice(0, 4)}</p>
               <p className='field'>Giới tính:</p>
               <p className='infoValue'>{patientInfo.gender}</p>
             </div>

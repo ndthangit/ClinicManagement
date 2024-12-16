@@ -44,7 +44,7 @@ function DoctorAppointment() {
         <DoctorLeftbar />
         <div className='content'>
           <div className="doctor-appointment-content">
-            <h2>Danh sách lịch khám</h2>
+            <h2 className='titleContent'>Danh sách lịch khám</h2>
             {loading ? (
               <p>Đang tải dữ liệu...</p>
             ) : (

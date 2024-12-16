@@ -1,3 +1,17 @@
 .historyExam .patch {
   overflow: hidden;
 }
+
+.historyExam .bottom {
+  display: flex;
+  margin-top: 20px;
+  justify-content: center;
+}
+
+.historyExam .bottom .buttonContent {
+  padding: 5px 10px 5px 10px;
+}
+
+.historyExam .valueInfo {
+  padding: 10px;
+}

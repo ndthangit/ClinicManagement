@@ -3,13 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import './Leftbar.css';
 import { Button } from '@mui/material';
 import { useSelector } from 'react-redux';
+import { BiBookAdd } from "react-icons/bi";
+
 import axios from 'axios';
 
 function Leftbar() {
 
   const {user} = useSelector((state) => state.user.patient);
-  const {admin} = useSelector((state) => state.user.admin);
-  console.log(user);
   const navigate = useNavigate();
 
   const showSchedule = () => {
@@ -27,42 +27,19 @@ function Leftbar() {
 
   
   return (
-    admin ? (
-      <div className='Leftbar'>
-        <Button className='button font' onClick={() => {
-          navigate('/admin/payments')
-        }}>xác nhận thanh toán </Button>
-
-        <Button className='button font' onClick={() => {
-          navigate('/admin/appointment')
-        }}>Quản lý lịch khám</Button>
-
-          <Button className='button font' onClick={() => {
-              navigate('/admin/DoctorDetails')
-          }}>Thông tin bác sỹ</Button>
-          <Button className='button font' onClick={() => {
-              navigate('/admin/PatientDetails')
-          }}>Thông tin bệnh nhân</Button>
-
-        <Button className='button font' onClick={() => {
-          navigate('/admin/medicalexamination')
-        }}>Lịch sử khám bệnh</Button>
-        <Button className='button font' onClick={() => {
-          navigate('/admin/service_price') 
-        }}>Giá thành</Button>
-      </div>
-    ) : (
       <div className='Leftbar'>
         <Button className='button font' onClick={() => {
           navigate('/appointment')
-        }}>Đặt lịch khám</Button>
+        }}>  
+        <BiBookAdd className='icon'/>
+        <p className='text'> Đặt lịch khám </p>
+        </Button>
         <Button className='button font' onClick={() => {
           showSchedule()
         }}>Xem lịch khám</Button>
         
       </div>
-    )
-)
+  )
 }
 
 export default Leftbar

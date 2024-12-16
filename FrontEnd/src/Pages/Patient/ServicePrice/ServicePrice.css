@@ -54,7 +54,7 @@
   
   /* Định dạng cho các nút */
   .servicePriceP .buttonInfo {
-    background-color: #4CAF50; /* Màu xanh lá */
+    background-color: #2e749a; /* Màu xanh lá */
     color: white;
     padding: 8px 16px;
     border: none;
@@ -62,11 +62,10 @@
     cursor: pointer;
     font-size: 14px;
     transition: background-color 0.3s ease;
-
   }
   
   .servicePriceP .buttonInfo:hover {
-    background-color: #45a049;
+    background-color: #16628a;
   }
   
   /* Nút quay lại */

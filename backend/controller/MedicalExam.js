@@ -54,10 +54,12 @@ const getListMedicalExamByIDcustomed = async (req, res) => {
         JOIN datait3170.doctors AS D ON D.doctor_id = A.doctor_id
         JOIN datait3170.department AS DP ON D.department_id = DP.department_id
         JOIN datait3170.type_doctor AS TD ON D.type_id = TD.type_id
+        JOIN datait3170.patients AS P ON P.patient_id = A.patient_id
+        WHERE P.cccd = ?
     `;
 
     try {
-        const data = await query(sql);
+        const data = await query(sql, [req.params.id]);
 
         // Sử dụng Promise.all để xử lý bất đồng bộ trong map
         const newData = await Promise.all(

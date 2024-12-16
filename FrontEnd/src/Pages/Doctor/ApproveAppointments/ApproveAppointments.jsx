@@ -87,7 +87,7 @@ function ApproveAppointments() {
         <div className="doctor-approve-container body">
             <DoctorLeftbar />
             <div className="doctor-approve-content content">
-                <h2>Duyệt Lịch Khám</h2>
+                <h2 className='titleContent'>Duyệt Lịch Khám</h2>
                 {loading ? (
                   <p>Đang tải dữ liệu...</p>
                 ) : appointments.length === 0 ? (

@@ -3,7 +3,7 @@
   grid-template-rows: auto 1fr auto;
   min-height: 100vh;
   background-color: #f4f6f8;
-  background-image: url('../../Assets/BackgroundDash.jpg');
+  background-image: url('../../Assets/background.jpg');
   background-size: cover;
   background-position: center;
   background-attachment: fixed; 
@@ -33,7 +33,7 @@
 /* Hero Banner */
 .healthcareDashboard__heroBanner {
   grid-row: 1;
-  background-color: hsl(94, 74%, 63%); /* mờ 0.8 */
+  background-color: hsl(199, 70%, 24%); /* mờ 0.8 */
   color: white;
   text-align: center;
   padding: 20px 0;
@@ -62,7 +62,7 @@
 
 /* Large Card */
 .healthcareDashboard__largeCard {
-  width: 60%;
+  width: 74%;
   height: 350px;
   background-color: rgba(255, 255, 255, 0.8); /* mờ 0.8 giống largecard */
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* đổ bóng */
@@ -93,7 +93,7 @@
 }
 
 .healthcareDashboard__largeCard button {
-  background-color: #00796b;
+  background-color: #086b92;
   color: white;
   padding: 12px 30px;
   font-size: 16px;
@@ -104,7 +104,7 @@
 }
 
 .healthcareDashboard__largeCard button:hover {
-  background-color: #004d40;
+  background-color: #074a65;
 }
 
 /* Small Cards Container */
@@ -149,7 +149,7 @@
 }
 
 .healthcareDashboard__functionCard button {
-  background-color: #00796b;
+  background-color: #086b92;
   color: white;
   padding: 10px 20px;
   font-size: 14px;
@@ -158,7 +158,7 @@
 }
 
 .healthcareDashboard__functionCard button:hover {
-  background-color: #004d40;
+  background-color: #074a65;
 }
 
 
@@ -194,7 +194,7 @@
 }
 
 .healthcareDashboard__loginLink {
-  color: #00796b;
+  color: #086b92;
   font-weight: bold;
   cursor: pointer;
   z-index: 1; /*cho đỡ bị nền làm mờ*/
@@ -240,7 +240,7 @@
 
 .healthcareDashboard__about h2 {
   font-size: 2rem;
-  color: #00796b;
+  color: #086b92;
   margin-bottom: 20px;
 }
 
@@ -259,7 +259,7 @@
 .healthcareDashboard__services h2 {
   text-align: center;
   font-size: 2rem;
-  color: #00796b;
+  color: #086b92;
   margin-bottom: 20px;
 }
 
@@ -302,7 +302,7 @@
 .healthcareDashboard__testimonials h2 {
   text-align: center;
   font-size: 2rem;
-  color: #00796b;
+  color: #086b92;
   margin-bottom: 20px;
 }
 
@@ -319,7 +319,7 @@
 
 .testimonial h4 {
   font-size: 1.1rem;
-  color: #00796b;
+  color: #086b92;
   margin-top: 10px;
 }
 
@@ -335,7 +335,7 @@
 .healthcareDashboard__news h2 {
   text-align: center;
   font-size: 2rem;
-  color: #00796b;
+  color: #086b92;
   margin-bottom: 20px;
 }
 
@@ -378,7 +378,7 @@
 
 .newsItem h4 {
   font-size: 1.5rem;
-  color: #00796b;
+  color: #086b92;
   margin-bottom: 10px;
 }
 
@@ -392,13 +392,13 @@
   top: 50%;
   transform: translateY(-50%);
   font-size: 3rem;
-  color: #00796b;
+  color: #086b92;
   cursor: pointer;
   transition: color 0.2s ease-in-out;
 }
 
 .arrow-icon:hover {
-  color: #004d40;
+  color: #09668b;
 }
 
 .arrow-icon:first-of-type {

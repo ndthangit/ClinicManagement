@@ -107,7 +107,7 @@ function Schedule() {
             text: "Hành động này sẽ không thể hoàn tác!",
             icon: "warning",
             showCancelButton: true,
-            confirmButtonColor: "#86cc51",
+            confirmButtonColor: "#2e749a",
             cancelButtonColor: "#d33",
             confirmButtonText: "Xóa",
             cancelButtonText: "Hủy"
@@ -121,7 +121,7 @@ function Schedule() {
                     title: "Deleted!",
                     text: "Xóa lịch khám thành công",
                     icon: "success",
-                    confirmButtonColor: "#86cc51"
+                    confirmButtonColor: "#2e749a"
                   });
                 
                 //tạo bản sao của `scheduleList` và xóa lịch khám đã chọn
@@ -157,7 +157,7 @@ function Schedule() {
                 title: "Lỗi",
                 text: "ID lịch khám không hợp lệ.",
                 confirmButtonText: "Xác nhận",
-                confirmButtonColor: "#86cc51"
+                confirmButtonColor: "#2e749a"
             });
             return;
         }
@@ -287,7 +287,7 @@ function Schedule() {
                 title: "Completed!",
                 text: "Thêm lịch khám thành công",
                 icon: "success",
-                confirmButtonColor: "#86cc51"
+                confirmButtonColor: "#2e749a"
               });
 
               
@@ -440,7 +440,13 @@ function Schedule() {
                     <div className='scheduleList'>
                         {filteredSchedules.length > 0 ? (
                         filteredSchedules.map((schedule) => (
-                                <div key={schedule.appointment_id} className='scheduleItem'>
+                                <div key={schedule.appointment_id} className='scheduleItem'
+                                style={{
+                                    backgroundColor: 
+                                        schedule.status === 'pending' ? '#FFF9C4' : 
+                                        schedule.status === 'confirmed' ? '#DFF2CF' : 
+                                        'white'
+                                }}>
                                     <div onClick={() => toggleScheduleDetails(schedule.appointment_id)}>
                                         <p>{schedule.appointment_date} - Bác sĩ: {schedule.doctor_name} - {schedule.department_name}</p>
                                     </div>

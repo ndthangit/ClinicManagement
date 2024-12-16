@@ -85,7 +85,7 @@ const DoctorInfo = () => {
 
         }
         // console.log("input",input);
-        dispatch(fetchDoctorInfo());
+        
 
         try {
             const output = await updateDoctorInfoT(input);
@@ -103,6 +103,7 @@ const DoctorInfo = () => {
                 severity: "error"
             });
         }
+        dispatch(fetchDoctorInfo());
     };
 
 
@@ -113,7 +114,7 @@ const DoctorInfo = () => {
         toggleEditRow(rowIndex);
     };
 
-    const handleDeleteDoctor = () => {
+    const handleDeleteDoctor = async () => {
         if (rowToDelete !== null) {
             // Thực hiện xóa doctor
             console.log(`Deleting doctor at row ${rowToDelete}`);
@@ -121,7 +122,7 @@ const DoctorInfo = () => {
             // dispatch(deleteDoctor({doctor_id:deletedRow.doctor_id}));
 
             try {
-                const output = deleteDoctorInfo(deletedRow.doctor_id);
+                const output = await deleteDoctorInfo(deletedRow.doctor_id);
                 console.log("output", output.message);
                 setSnackbar({
                     isVisible: true,
@@ -234,7 +235,7 @@ const DoctorInfo = () => {
                         rowHeaders={true}
                         autoWrapCol={true}
                         autoWrapRow={true}
-                        cells={(row, col) => ({
+                        cells= {(row, col) => ({
                             readOnly: col !== 6 ? !editableRows[row] : !editableRows[row] || false, // Cho phép chỉnh sửa mật khẩu khi hàng đang chỉnh sửa
                             className: 'htMiddle htCenter',
                             type: col === 6 && editableRows[row] ? "text" : col === 6 ? "password" : undefined, // Đổi `type` của mật khẩu

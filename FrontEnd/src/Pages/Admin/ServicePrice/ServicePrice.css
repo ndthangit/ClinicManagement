@@ -50,7 +50,7 @@
   
   /* Định dạng cho các nút */
   .servicePrice .buttonInfo {
-    background-color: #4CAF50; /* Màu xanh lá */
+    background-color: #2e749a; /* Màu xanh lá */
     color: white;
     padding: 8px 16px;
     border: none;
@@ -61,11 +61,11 @@
   }
   
   .servicePrice .buttonInfo:hover {
-    background-color: #45a049;
+    background-color: #155c83;
   }
   
   .servicePrice .buttonDelete {
-    background-color: #4CAF50; /* Màu xanh lá */
+    background-color: #2e749a; /* Màu xanh lá */
     color: white;
     padding: 8px 16px;
     border: none;
@@ -76,12 +76,12 @@
   }
   
   .servicePrice .buttonDelete:hover {
-    background-color: #45a049;
+    background-color: #105275;
   }
 
   
   .servicePrice .buttonInsert {
-    background-color: #4CAF50; /* Màu xanh lá */
+    background-color: #2e749a; /* Màu xanh lá */
     color: white;
     padding: 8px 16px;
     border: none;
@@ -92,7 +92,7 @@
   }
   
   .servicePrice .buttonInsert:hover {
-    background-color: #45a049;
+    background-color: #14587c;
   }
   /* Nút quay lại */
   .servicePrice .back-button {

@@ -26,16 +26,17 @@
 }
 
 .top-hist {
-    height: 120px;
-    display: flex;
+    height: 60px;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    background-color: rgb(236, 232, 232);
+    background-color: #2e749a;
+    border-radius: 10px;
 }
 
 .top-hist h1 {
-    color: #87cd51;
-    font-size: 40px;
+    color: white;
+    font-size: 32px;
     font-weight: 600;
 }
 
@@ -44,7 +45,7 @@
 }
 
 .container-hist-search {
-    width: 25%;
+    width: 22%;
     border-top: 4px solid #514d4d1a;
     border-bottom: 4px solid #514d4d1a;
     border-right: 4px solid #514d4d1a;
@@ -65,14 +66,14 @@
     justify-content: space-around;
 }
 
-input {
+.history input {
     border: none;
     outline: none;
     background: none;
 }
 
 .glass:hover {
-    color: orangered;
+    color: #2e749a;
     cursor: pointer;
 }
 
@@ -83,7 +84,7 @@ input {
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 517px;
+    height: 660px;
     width: 75%;
     right: 0;
     overflow-y: scroll;

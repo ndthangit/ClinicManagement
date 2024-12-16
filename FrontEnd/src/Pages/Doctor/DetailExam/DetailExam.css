@@ -4,7 +4,7 @@
 
 .detailExam .buttonContent {
   border: none;
-  background-color: #78b841;
+  background-color: #2e749a;
   color: #fff;
   padding: 0px 10px 0px 10px;
   border-radius: 5px;
@@ -12,12 +12,12 @@
 }
 
 .detailExam .buttonContent:hover {
-  background-color: #5a9e3a;
+  background-color: #216589;
 
 }
 
 .detailExam .buttonContent:active {
-  background-color: #86cc51;
+  background-color: #125275;
 
 }
 
@@ -81,7 +81,7 @@
 }
 
 .detailExam .body .content .top .optionalInfo .info .reason {
-  padding-top: 20px;
+  padding: 20px;
   border-bottom: 1px solid #ccc;
   height: 100px;
   overflow-y: scroll;

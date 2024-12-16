@@ -1,3 +1,4 @@
+
 .modal {
     position: absolute;
     top: 0;
@@ -28,7 +29,7 @@
     position: absolute;
     top: 0;
     right: 0;
-    height: 636px;
+    height: 720px;
     width: 80%;
     background-color: #fff;
     transform: translateX(100%);
@@ -50,7 +51,7 @@
 
 .caption-info-hist {
     border-bottom: 4px solid #dddddd;
-    background-color: #87cd51;
+    background-color: #2e749a;
     justify-content: center;
     align-content: center;
     font-size: 24px;
@@ -69,7 +70,7 @@
     width: 70%;
     min-height: 60px;
     border-radius: 10px;
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.7);
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
     border: 1px solid rgb(211, 209, 209);
     margin-bottom: 10px;
     overflow: hidden;
@@ -78,12 +79,12 @@
 
 .wrapper:hover {
     cursor: pointer;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
 .wrapper {
     border-radius: 8px;
-    background-color: #82d244;
+    background-color: #2e749a;
 }
 
 .accordion-content header {
@@ -105,7 +106,7 @@
 .accordion-content header .title {
     font-size: 18px;
     font-weight: 500;
-    color: #333;
+    color: #f0f0f0;
 }
 
 .accordion-content .content-table-hist {

@@ -45,8 +45,8 @@
 }
 
 :root {
-  --primaryColor: hsl(94, 55%, 56%);
-  --hoverColor: hsl(93, 75%, 76%);
+  --primaryColor: #2e749a;
+  --hoverColor: #3d86ad;
   --paleGreen: hsl(96, 75%, 89%);
   --whiteColor: hsl(0, 0%, 100%);
   --blackColor: hsl(0, 0%, 18%);

@@ -1,21 +1,19 @@
 import axios from "axios";
 import './MedicalHistory.css';
 import Navbar from "../../components/navbar/Navbar";
-import Leftbar from "../../components/leftbar/Leftbar";
 import MedicalHistoryCell from "./MedicalHistoryCell";
 import { useEffect, useState } from "react";
 import SpecificInfo from './SpecificInfo';
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 function MedicalHistory() {
     const [fakeData, setFakeData] = useState([]);
     const [filteredList, setFilteredList] = useState([]);
 
-    const { user } = useSelector((state) => state.user.patient);
-    const [listExam, setListExam] = useState([]);  
-    const dispatch = useDispatch();  
+    const { user } = useSelector((state) => state.user.patient); 
+    console.log(user);
     useEffect(() => {
-        axios.get(`http://localhost:3005/medExam/medicalExam/byIDcustomed`)
+        axios.get(`http://localhost:3005/medExam/medicalExam/byIDPatient/${user.patient_id}`)
         .then((response) => {
             console.log(response.data)
             setFakeData(response.data)
@@ -49,7 +47,7 @@ function MedicalHistory() {
     
     return ( 
     <>
-        <div className="appointment dashboard ">
+        <div className="appointment dashboard history">
         <Navbar className="header-hist"/>
         <div className="body-hist">
             <div className="content-hist">

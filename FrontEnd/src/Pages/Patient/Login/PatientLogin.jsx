@@ -8,8 +8,6 @@ import {BsFillShieldLockFill} from 'react-icons/bs'
 import {AiOutlineSwapRight} from 'react-icons/ai'
 import {useDispatch} from "react-redux";
 import {loginFailed, loginStarted, loginSuccess} from "../../Features/UserSlice";
-import {fetchDoctors} from "../../Features/DoctorSlice";
-import {fetchMedicines} from "../../Features/AdminSlice";
 
 const Login = () => {
     const state = {content: null}
@@ -130,9 +128,6 @@ const Login = () => {
                             <AiOutlineSwapRight className="icon"/>
                         </button>
 
-                        <span className="forgotPassword">
-                            Forgot your password? <Link to="/login">Click Here</Link>
-                        </span>
                         <span className="forgotPassword">
                             Are you a doctor? <Link to="/doctor/login">Click Here</Link>
                         </span>
