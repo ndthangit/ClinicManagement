@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import Navbar from '../../components/navbar/AdminNavbar';
-import ServiceLeftbar from '../../components/leftbar/ServiceLeftbarAdmin';
+import ServiceLeftbar from '../../components/leftbar/ServiceLeftbar';
 
 function Medicine() {
   const [medicines, setMedicines] = useState([]);

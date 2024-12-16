@@ -19,12 +19,8 @@ const CustomSnackbar = ({ message, isVisible, onClose }) => {
     }, [isVisible,message, onClose]);
 
     // Xác định kiểu thông báo và màu sắc
-    const severity =
-        displayMessage === "Doctor updated successfully" ||
-        displayMessage === "Doctor deleted successfully" ||
-        displayMessage === "Add doctor successfully"
-            ? "success"
-            : "error";
+
+    const severity = displayMessage.includes("successfully") ? "success" : "error";
 
     return (
         <Snackbar

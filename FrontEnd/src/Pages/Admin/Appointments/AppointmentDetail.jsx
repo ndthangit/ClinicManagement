@@ -1,14 +1,16 @@
 import AdminNavbar from "../../components/navbar/AdminNavbar";
-import Leftbar from "../../components/leftbar/Leftbar";
 import React, {useEffect, useRef, useState} from 'react';
 import { useSelector, useDispatch } from "react-redux";
-import { fetchAppointments, updateAppointmentStatus, updateUIAppointmentStatus } from "../../Features/AppointmentSlice";
+import { fetchAppointments } from "../../Features/AppointmentSlice";
 import './AppointmentDetail.css';
-import {HotColumn, HotTable} from "@handsontable/react";
+import { HotTable} from "@handsontable/react";
 import "handsontable/dist/handsontable.min.css";
 import "pikaday/css/pikaday.css";
 import {registerAllModules} from "handsontable/registry";
 import {FaDownload} from "react-icons/fa";
+import Axios from "axios";
+import CustomSnackbar from "../DoctorInfo/CustomSnackBar";
+import AdminLeftbarSchedule from "../../components/leftbar/AdminNavbarSchedule";
 
 registerAllModules();
 const AppointmentDetail = () => {
@@ -16,6 +18,8 @@ const AppointmentDetail = () => {
     const hotRef = useRef(null);
     const { appointments, isLoading, isError } = useSelector((state) => state.appointment);
     const [updatedStatus, setUpdatedStatus] = useState({});
+    const [snackbar, setSnackbar] = useState({ isVisible: false, message: '', severity: 'success' });
+
     const [editedData, setEditedData] = useState(() =>
         JSON.parse(JSON.stringify(appointments)) // Tạo bản sao sâu
     );
@@ -27,6 +31,32 @@ const AppointmentDetail = () => {
     const settings = {
         licenseKey: 'non-commercial-and-evaluation',
     };
+    const updateAppointmentStatus = (input) => {
+        Axios.patch('http://localhost:3005/admin/updateStatusAppointment',input)
+            .then((res) => {
+                console.log(res.data.message);
+                setSnackbar({ isVisible: true, message: res.data.message, severity: 'success' });
+            })
+            .catch((error) => {
+                console.error('Error during the update request:', error);
+                setSnackbar({ isVisible: true, message: error.message, severity: 'error' });
+            });
+    }
+
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+        const day = String(date.getDate()).padStart(2, '0');
+        const month = String(date.getMonth() + 1).padStart(2, '0'); // Tháng bắt đầu từ 0
+        const year = date.getFullYear();
+        return `${day}/${month}/${year}`;
+    };
+
+    const formattedData = editedData.map(row => ({
+        ...row,
+        appointment_date: formatDate(row.appointment_date)
+    }));
+
+
 
     const handleSaveRow = (rowIndex) => {
         const updatedRow = { ...editedData[rowIndex] };
@@ -37,8 +67,7 @@ const AppointmentDetail = () => {
         };
         console.log(input);
 
-        // dispatch(updateUIAppointmentStatus(input));
-        dispatch(updateAppointmentStatus(input));
+        updateAppointmentStatus(input);
         dispatch(fetchAppointments());
 
         setUpdatedStatus((prevState) => ({
@@ -78,9 +107,15 @@ const AppointmentDetail = () => {
         <div className='appointmentDetail dashboard'>
             <AdminNavbar className="header"/>
             <div className="body">
-                <Leftbar className='leftBar'/>
+                <AdminLeftbarSchedule className='leftBar'/>
                 <div className="content">
-                    <h2>Appointment Details</h2>
+
+
+                    <div className="cf-title-02">
+                        <div className="cf-title-alt-two">
+                            <h3>Appointment Details</h3>
+                        </div>
+                    </div>
                     <div className="extraButton">
                         <button id="export-file" className="buttonExportCSV" onClick={() => buttonClickCallback()}>
                             <FaDownload/>
@@ -90,15 +125,15 @@ const AppointmentDetail = () => {
                     <HotTable
                         ref={hotRef}
                         settings={settings}
-                        data={editedData}
+                        data={formattedData}
                         height={320}
                         width="100%"
-                        colWidths={[170, 150, 200, 150, 100]}
+                        colWidths={[230, 250, 250, 200, 170]}
 
                         colHeaders={[
-                            "Patient Name",
-                            "Doctor Name",
-                            "Appointment Date",
+                            "Bệnh nhân",
+                            "Bác sĩ",
+                            "Ngày",
                             "Status",
                             "Actions",
                         ]}
@@ -113,6 +148,8 @@ const AppointmentDetail = () => {
                             },
                             {
                                 type: 'date',
+                                dateFormat: 'MM/DD/YYYY',
+
                                 data: "appointment_date",
                                 readOnly: true
                             },
@@ -160,6 +197,12 @@ const AppointmentDetail = () => {
 
                 </div>
             </div>
+            <CustomSnackbar
+                isVisible={snackbar.isVisible}
+                message={snackbar.message}
+                severity={snackbar.severity}
+                onClose={() => setSnackbar({isVisible: false, message: '', severity: 'success' })}
+            />
         </div>
     );
 };

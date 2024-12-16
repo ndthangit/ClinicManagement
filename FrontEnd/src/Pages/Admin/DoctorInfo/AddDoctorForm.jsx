@@ -34,6 +34,7 @@ const AddDoctorForm = () => {
                     dispatch(fetchDoctorInfo());
                     setSnackbar({isVisible: true, message: 'Add doctor successfully', severity: 'success'});
                 } else {
+                    dispatch(fetchDoctorInfo());
                     setSnackbar({isVisible: true, message: 'Add doctor failed', severity: 'error'});
                 }
 

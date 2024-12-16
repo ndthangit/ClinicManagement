@@ -22,7 +22,9 @@ function AdminNavbar() {
         <div className="navbar">
             <div className="left">
                 <Button className='button font' onClick={() => navigateTo('/admin')}>Home</Button>
-                {/*<Button className='button font' onClick={() => navigateTo('/admin/payments')}>Thanh toán </Button>*/}
+                <Button className='button font' onClick={() => navigateTo('/admin/management')}>Quản lý </Button>
+                <Button className='button font' onClick={() => navigateTo('/admin/schedule')}>Lịch khám</Button>
+                <Button className='button font' onClick={() => navigateTo('/admin/service-medicine')}>Giá thành</Button>
             </div>
             <div className="right">
                 <Button className='button font' onClick={handleLogout}>Logout</Button>

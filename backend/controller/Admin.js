@@ -33,7 +33,7 @@ let confiUpdateStatusAppointment = async (req, res) => {
         connection.query(sql, values, (err, results) => {
             if (err) {
                 console.error('Error executing query:', err);
-                res.status(500).send('Database query error');
+                res.status(404).send('Database query error');
             } else {
                 return res.status(200).json({message: 'status updated successfully'});
             }
@@ -44,7 +44,7 @@ let confiUpdateStatusAppointment = async (req, res) => {
 };
 
 let getInfoDoctor = async (req, res) => {
-    const sql = `SELECT * FROM dataIT3170.doctors left join dataIT3170.type_doctor td  on doctors.type_id = td.type_id left join dataIT3170.department d on doctors.department_id = d.department_id;`;
+    const sql = `SELECT * FROM dataIT3170.doctors left join dataIT3170.type_doctor td  on doctors.type_id = td.type_id left join dataIT3170.department d on doctors.department_id = d.department_id left join dataIT3170.doctor_account da on doctors.username = da.user_name;`;
     try {
         const data = await executeQuery(sql, res);
         res.send(data);

@@ -1,7 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import AdminNavbar from "../../components/navbar/AdminNavbar";
-import Leftbar from "../../components/leftbar/Leftbar";
 import './DoctorInfo.css';
 import {HotTable, HotColumn} from "@handsontable/react";
 import "handsontable/dist/handsontable.min.css";
@@ -17,6 +16,7 @@ import { FaDownload } from "react-icons/fa";
 import ConfirmBox from "./ConfirmBox";
 import axios from "axios";
 import CustomSnackbar from "./CustomSnackBar";
+import AdminLeftbarManagement from "../../components/leftbar/AdminLeftbarManagement";
 
 registerAllModules();
 
@@ -81,6 +81,7 @@ const DoctorInfo = () => {
             email: updatedRow.email,
             address: updatedRow.address,
             username: updatedRow.username,
+            password: updatedRow.password,
 
         }
         // console.log("input",input);
@@ -176,9 +177,17 @@ const DoctorInfo = () => {
         <div className="doctorsInfo dashboard">
             <AdminNavbar className="header"/>
             <div className="body">
-                <Leftbar className='leftBar'/>
+                <AdminLeftbarManagement className='leftBar'/>
                 <div className="content">
-                    <h2>Doctor Information</h2>
+
+
+                    <div className="cf-title-02">
+                        <div className="cf-title-alt-two">
+                            <h3>Doctor Information</h3>
+                        </div>
+                    </div>
+
+
                     <div className="extraButton">
                         <button className="buttonShowAddDoctorForm" onClick={() => dispatch(showFormAddDoctor())}>
                             <IoIosAddCircle/>Add Doctor
@@ -187,14 +196,11 @@ const DoctorInfo = () => {
                         {showAddForm && (
                             <div className="modal-overlay">
                                 <AddDoctorForm/>
-                                {/*<div className="modal-content">*/}
-                                {/*    <AddDoctorForm/>*/}
-                                {/*</div>*/}
                             </div>
                         )}
 
                         <button id="export-file" className="buttonExportCSV" onClick={() => buttonClickCallback()}>
-                            <FaDownload />
+                            <FaDownload/>
                             Export CSV
                         </button>
                     </div>
@@ -206,15 +212,15 @@ const DoctorInfo = () => {
                         data={editedData}
                         height={540}
                         width="100%"
-                        colWidths={[150, 170, 150, 120, 230, 110, 160]}
+                        colWidths={[140, 160, 150, 120, 150, 110, 110, 160]}
                         colHeaders={[
                             "Họ tên",
                             "Khoa",
                             "Chức vụ",
                             "SDT",
                             "email",
-                            // "address",
                             "username",
+                            "password",
                             "Actions", // Gộp hai cột thành một
                         ]}
                         dropdownMenu={true}
@@ -228,30 +234,31 @@ const DoctorInfo = () => {
                         rowHeaders={true}
                         autoWrapCol={true}
                         autoWrapRow={true}
-                        cells={(row) => ({
-                            readOnly: !editableRows[row],
+                        cells={(row, col) => ({
+                            readOnly: col !== 6 ? !editableRows[row] : !editableRows[row] || false, // Cho phép chỉnh sửa mật khẩu khi hàng đang chỉnh sửa
                             className: 'htMiddle htCenter',
+                            type: col === 6 && editableRows[row] ? "text" : col === 6 ? "password" : undefined, // Đổi `type` của mật khẩu
                         })}
-
                         afterChange={(changes, source) => {
                             if (source === "edit") {
                                 changes.forEach(([row, prop, oldValue, newValue]) => {
                                     setEditedData((prevData) => {
                                         const updatedData = [...prevData];
-                                        updatedData[row] = {...updatedData[row], [prop]: newValue};
+                                        updatedData[row] = { ...updatedData[row], [prop]: newValue };
                                         return updatedData;
                                     });
                                 });
                             }
                         }}
                     >
-                        <HotColumn data="doctor_name" className="htCenter"/>
-                        <HotColumn data="department_name" className="htCenter"/>
-                        <HotColumn data="type_name" className="htCenter"/>
+                        <HotColumn data="doctor_name" className="htCenter" />
+                        <HotColumn data="department_name" className="htCenter" />
+                        <HotColumn data="type_name" className="htCenter" />
 
-                        <HotColumn data="phone" className="htCenter"/>
-                        <HotColumn data="email" className="htCenter"/>
-                        <HotColumn data="username" className="htCenter"/>
+                        <HotColumn data="phone" className="htCenter" />
+                        <HotColumn data="email" className="htCenter" />
+                        <HotColumn data="username" className="htCenter" />
+                        <HotColumn data="password" className="htCenter" />
                         <HotColumn
                             data={() => ""}
                             renderer={(instance, td, row) => {
@@ -259,15 +266,14 @@ const DoctorInfo = () => {
                                 td.style.height = "100%";
                                 if (editableRows[row]) {
                                     td.innerHTML = `
-                                                        <button class="save-btn">Save</button>
-                                                        <button class="cancel-btn">Cancel</button>             
-                                                    `;
+                    <button class="save-btn">Save</button>
+                    <button class="cancel-btn">Cancel</button>`;
                                     td.querySelector(".save-btn").onclick = () => handleSaveRow(row);
                                     td.querySelector(".cancel-btn").onclick = () => handleCancelRow(row);
                                 } else {
                                     td.innerHTML = `
-                                                        <button class="edit-btn">Edit</button>
-                                                        <button class="delete-btn">Delete</button>`;
+                    <button class="edit-btn">Edit</button>
+                    <button class="delete-btn">Delete</button>`;
                                     td.querySelector(".edit-btn").onclick = () => toggleEditRow(row);
                                     td.querySelector(".delete-btn").onclick = () => handleDeleteClick(row);
                                 }
@@ -277,13 +283,14 @@ const DoctorInfo = () => {
                         />
                     </HotTable>
 
+
                 </div>
             </div>
             <CustomSnackbar
                 isVisible={snackbar.isVisible}
                 message={snackbar.message}
                 severity={snackbar.severity}
-                onClose={() => setSnackbar({ isVisible: false, message: '', severity: 'success' })}
+                onClose={() => setSnackbar({isVisible: false, message: '', severity: 'success' })}
             />
 
             {showConfirmBox && (
