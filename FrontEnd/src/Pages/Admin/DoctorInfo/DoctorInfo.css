@@ -186,4 +186,8 @@
     background-color: #e7e9ea;
 }
 
+.ht_clone_left .htCore tbody th {
+    text-align: center; /* Căn giữa nội dung theo chiều ngang */
+    vertical-align: middle; /* Căn giữa nội dung theo chiều dọc */
+}
 
