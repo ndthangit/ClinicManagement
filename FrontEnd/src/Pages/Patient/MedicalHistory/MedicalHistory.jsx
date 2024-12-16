@@ -24,7 +24,9 @@ function MedicalHistory() {
         setFilteredList(fakeData)
     }, [fakeData]) // Đồng bộ danh sách lọc với dữ liệu từ API
     const [specificInfoData, setSpecificInfoData] = useState(null);
-    const handleViewButton = (data) => {
+    const [isOpen, setIsOpen] = useState(false)
+    const handleViewButton = async(data) => {
+        await setIsOpen(true);
         setSpecificInfoData(data)
     }
     const displayItem = (items) => {
@@ -63,7 +65,7 @@ function MedicalHistory() {
                         {displayItem(filteredList)}
                     </div>
                 </div>
-                <SpecificInfo props={specificInfoData}/> 
+                {isOpen&&<SpecificInfo props={specificInfoData} setIsOpen={setIsOpen}/>} 
             </div>
         </div> 
         </div>

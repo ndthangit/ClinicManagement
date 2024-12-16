@@ -5,8 +5,8 @@ import './ServiceUsedInfor'
 import ServiceUsedInfor from './ServiceUsedInfor';
 import MedicineInfo from './MedicineInfo';
 
-function SpecificInfo({props}) {
-    const handleClickEvent = (event) => {
+function SpecificInfo({props, setIsOpen}) {
+    const handleClickEvent = async(event) => {
         const accordionContent = document.querySelectorAll('.accordion-content')
         accordionContent.forEach((item, index) => {
             const descriptions = item.querySelectorAll('.content-table-hist')
@@ -24,7 +24,10 @@ function SpecificInfo({props}) {
         })
 
         const modal = document.querySelector('.modal');
-        modal.classList.remove('open');
+        await modal.classList.remove('open');
+        setTimeout(() => {
+            setIsOpen(false)
+        }, 1000);
     }
 
     const headerOnClick = (event) => {

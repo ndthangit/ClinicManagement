@@ -4,11 +4,10 @@ import './MedicalHistoryCell.css'
 
 function MedicalHistoryCell({props, onView}) {
 
-    const handleViewButton = () => {
-        const modal = document.querySelector('.modal')
-        onView(props)
-        modal.classList.add('open')
-
+    const handleViewButton = async() =>{
+        await onView(props);
+        const modal = document.querySelector('.modal');
+        modal.classList.add('open');
     }
     
     return(
