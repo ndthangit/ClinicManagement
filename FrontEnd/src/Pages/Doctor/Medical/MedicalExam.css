@@ -25,7 +25,8 @@
 .medicalExam .body .content .table .cell {
   margin: 20px;
   border: 1px solid black;
-  padding: 20px;
+  padding: 10px 10px 10px 10px;
+
 }
 
 .medicalExam .body .content .table .cell:hover {

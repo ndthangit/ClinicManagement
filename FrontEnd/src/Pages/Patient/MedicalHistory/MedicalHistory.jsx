@@ -48,10 +48,10 @@ function MedicalHistory() {
     return ( 
     <>
         <div className="appointment dashboard history">
-        <Navbar className="header-hist"/>
-        <div className="body-hist">
-            <div className="content-hist">
-                <h1 className="title-content">Lịch sử thăm khám</h1>
+        <Navbar className="navbar"/>
+        <div className="body">
+            <div className="fullycontent">
+                
                 <div className="container-hist">
                     <div className="container-hist-search">
                         <div class="searchbar">
@@ -60,6 +60,7 @@ function MedicalHistory() {
                         </div>
                     </div>
                     <div className="align-content-hist">
+                        <h1 className="title-content">Lịch sử thăm khám</h1>
                         {displayItem(filteredList)}
                     </div>
                 </div>

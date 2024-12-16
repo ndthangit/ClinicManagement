@@ -41,7 +41,7 @@ function HistoryExam() {
       return  medicalExam.map(([key, value], index) => {
         return (
           <button className='cell' key={index} onClick={() => selectDate(value)}> 
-            {key}
+            {key.slice(8,10)+'-'+key.slice(5,7)+'-'+key.slice(0,4)}
           </button>
         )
       })
