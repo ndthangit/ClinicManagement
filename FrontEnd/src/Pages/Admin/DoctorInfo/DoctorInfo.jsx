@@ -12,7 +12,7 @@ import {
 } from "../../Features/DoctorInforSlice";
 import AddDoctorForm from "./AddDoctorForm";
 import {IoIosAddCircle} from "react-icons/io";
-import { FaDownload } from "react-icons/fa";
+import {FaDownload} from "react-icons/fa";
 import ConfirmBox from "./ConfirmBox";
 import axios from "axios";
 import CustomSnackbar from "./CustomSnackBar";
@@ -31,7 +31,7 @@ const DoctorInfo = () => {
 
     const [showConfirmBox, setShowConfirmBox] = useState(false);
     const [rowToDelete, setRowToDelete] = useState(null);
-    const [snackbar, setSnackbar] = useState({ isVisible: false, message: '', severity: 'success' });
+    const [snackbar, setSnackbar] = useState({isVisible: false, message: '', severity: 'success'});
 
     const settings = {
         licenseKey: 'non-commercial-and-evaluation',
@@ -82,17 +82,17 @@ const DoctorInfo = () => {
             address: updatedRow.address,
             username: updatedRow.username,
             password: updatedRow.password,
+            img : updatedRow.img,
 
         }
         // console.log("input",input);
-        dispatch(fetchDoctorInfo());
 
         try {
             const output = await updateDoctorInfoT(input);
             console.log("output", output.message);
             setSnackbar({
                 isVisible: true,
-                message: output.message ,
+                message: output.message,
                 severity: "success"
             });
             toggleEditRow(rowIndex);
@@ -103,6 +103,8 @@ const DoctorInfo = () => {
                 severity: "error"
             });
         }
+        dispatch(fetchDoctorInfo());
+
     };
 
 
@@ -113,7 +115,7 @@ const DoctorInfo = () => {
         toggleEditRow(rowIndex);
     };
 
-    const handleDeleteDoctor = () => {
+    const handleDeleteDoctor = async () => {
         if (rowToDelete !== null) {
             // Thực hiện xóa doctor
             console.log(`Deleting doctor at row ${rowToDelete}`);
@@ -180,7 +182,6 @@ const DoctorInfo = () => {
                 <AdminLeftbarManagement className='leftBar'/>
                 <div className="content">
 
-
                     <div className="cf-title-02">
                         <div className="cf-title-alt-two">
                             <h3>Doctor Information</h3>
@@ -212,8 +213,9 @@ const DoctorInfo = () => {
                         data={editedData}
                         height={540}
                         width="100%"
-                        colWidths={[140, 160, 150, 120, 150, 110, 110, 160]}
+                        colWidths={[50, 120, 140, 150, 100, 150, 110, 110, 160]}
                         colHeaders={[
+                            "img",
                             "Họ tên",
                             "Khoa",
                             "Chức vụ",
@@ -237,9 +239,9 @@ const DoctorInfo = () => {
                         autoWrapCol={true}
                         autoWrapRow={true}
                         cells={(row, col) => ({
-                            readOnly: col !== 6 ? !editableRows[row] : !editableRows[row] || false, // Cho phép chỉnh sửa mật khẩu khi hàng đang chỉnh sửa
+                            readOnly: col !== 7 ? !editableRows[row] : !editableRows[row] || false, // Cho phép chỉnh sửa mật khẩu khi hàng đang chỉnh sửa
                             className: 'htMiddle htCenter',
-                            type: col === 6 && editableRows[row] ? "text" : col === 6 ? "password" : undefined, // Đổi `type` của mật khẩu
+                            type: col === 7 && editableRows[row] ? "text" : col === 7 ? "password" : undefined, // Đổi `type` của mật khẩu
 
                         })}
                         afterChange={(changes, source) => {
@@ -247,21 +249,38 @@ const DoctorInfo = () => {
                                 changes.forEach(([row, prop, oldValue, newValue]) => {
                                     setEditedData((prevData) => {
                                         const updatedData = [...prevData];
-                                        updatedData[row] = { ...updatedData[row], [prop]: newValue };
+                                        updatedData[row] = {...updatedData[row], [prop]: newValue};
                                         return updatedData;
                                     });
                                 });
                             }
                         }}
                     >
-                        <HotColumn data="doctor_name" className="htCenter" />
-                        <HotColumn data="department_name" className="htCenter" />
-                        <HotColumn data="type_name" className="htCenter" />
+                        <HotColumn
+                            data="img"
+                            renderer={(instance, td, row, col, prop, value) => {
+                                if (editableRows[row]) {
+                                    // Hiển thị input để chỉnh sửa URL ảnh khi ở chế độ chỉnh sửa
+                                    td.innerHTML = `<input type="text" value="${value || ''}"  />`;
+                                } else {
+                                    // Hiển thị ảnh khi không chỉnh sửa
+                                    td.innerHTML = `
+                            <img src="${value}" 
+                                 alt="Bác sĩ" 
+                                 style="width: 30px; height: 30px; border-radius: 50%;" />`;
+                                            }
+                                        }}
+                                        readOnly={false}
+                        />
 
-                        <HotColumn data="phone" className="htCenter" />
-                        <HotColumn data="email" className="htCenter" />
-                        <HotColumn data="username" className="htCenter" />
-                        <HotColumn data="password" className="htCenter" />
+                        <HotColumn data="doctor_name" className="htCenter"/>
+                        <HotColumn data="department_name" className="htCenter"/>
+                        <HotColumn data="type_name" className="htCenter"/>
+
+                        <HotColumn data="phone" className="htCenter"/>
+                        <HotColumn data="email" className="htCenter"/>
+                        <HotColumn data="username" className="htCenter"/>
+                        <HotColumn data="password" className="htCenter"/>
                         <HotColumn
                             data={() => ""}
                             renderer={(instance, td, row) => {
@@ -293,7 +312,7 @@ const DoctorInfo = () => {
                 isVisible={snackbar.isVisible}
                 message={snackbar.message}
                 severity={snackbar.severity}
-                onClose={() => setSnackbar({isVisible: false, message: '', severity: 'success' })}
+                onClose={() => setSnackbar({isVisible: false, message: '', severity: 'success'})}
             />
 
             {showConfirmBox && (
