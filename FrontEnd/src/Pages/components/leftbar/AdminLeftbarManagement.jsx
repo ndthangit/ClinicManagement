@@ -1,5 +1,9 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
+import { FaUserDoctor } from "react-icons/fa6";
+import { IoPeople } from "react-icons/io5";
+
+
 import { Button } from '@mui/material';
 
 function AdminLeftbarManagement() {
@@ -12,10 +16,16 @@ function AdminLeftbarManagement() {
             }}>Xác nhận thanh toán</Button>
             <Button className='button font' onClick={() => {
                 navigate('/admin/management/DoctorDetails')
-            }}>Thông tin bác sĩ</Button>
+            }}>
+                <FaUserDoctor className='icon'/>
+                <p>Thông tin bác sĩ</p>
+            </Button>
             <Button className='button font' onClick={() => {
                 navigate('/admin/management/PatientDetails')
-            }}>Thông tin bệnh nhân</Button>
+            }}>
+                <IoPeople className='icon'/>
+                <p>Thông tin bệnh nhân</p>
+            </Button>
         </div>
     )
 }

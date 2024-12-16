@@ -46,6 +46,21 @@ const getListMedicalExamByCCCD = async (req, res) => {
 }
 // Lấy dữ liệu cho lịch sử khám phía bệnh nhân ------Begin----
 const getListMedicalExamByIDcustomed = async (req, res) => {
+    const formatDate= (isoString) =>{
+        // Tạo đối tượng Date từ chuỗi ISO
+        const date = new Date(isoString);
+    
+        // Lấy các thành phần ngày, giờ
+        const day = date.getDate().toString().padStart(2, '0'); // Ngày
+        const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Tháng (0-based)
+        const year = date.getFullYear(); // Năm
+    
+        const hours = date.getHours().toString().padStart(2, '0'); // Giờ
+        const minutes = date.getMinutes().toString().padStart(2, '0'); // Phút
+    
+        // Tạo chuỗi ngày giờ dễ đọc
+        return `${day}/${month}/${year} ${hours}:${minutes}`;
+    }
     const sql = `
         SELECT A.appointment_id, D.doctor_name, DP.department_name, TD.type_name, 
                M.exam_date, M.diagnosis, M.notes, M.symptoms, M.exam_id
@@ -85,7 +100,7 @@ const getListMedicalExamByIDcustomed = async (req, res) => {
                             department: item.department_name
                         },
                         patient: {
-                            examDate: new Date(item.exam_date).toISOString().split('T')[0],
+                            examDate: formatDate(item.exam_date),
                             symptoms: item.symptoms,
                             diagnosis: item.diagnosis,
                             notes: item.notes
@@ -94,7 +109,7 @@ const getListMedicalExamByIDcustomed = async (req, res) => {
                             serviceName: item1.service_name,
                             description: item1.description,
                             price: item1.price,
-                            usageDate: new Date(item1.usage_date).toISOString().split('T')[0],
+                            usageDate: formatDate(item1.usage_date),
                             note: item1.note
                         })),
                         medicine: medicines.map((item2) => ({

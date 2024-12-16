@@ -27,7 +27,7 @@ function Leftbar() {
 
   
   return (
-      <div className='Leftbar'>
+       <div className='Leftbar'>
         <Button className='button font' onClick={() => {
           navigate('/appointment')
         }}>  

@@ -86,3 +86,9 @@
 .navbar .right .dropdown:hover .dropdown-content {
     display: block;
 }
+
+
+.customed-icon {
+    margin-right: 5px;
+    font-size: large;
+}
