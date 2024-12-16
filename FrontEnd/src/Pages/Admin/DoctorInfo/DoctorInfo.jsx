@@ -12,7 +12,7 @@ import {
 } from "../../Features/DoctorInforSlice";
 import AddDoctorForm from "./AddDoctorForm";
 import {IoIosAddCircle} from "react-icons/io";
-import { FaDownload } from "react-icons/fa";
+import {FaDownload} from "react-icons/fa";
 import ConfirmBox from "./ConfirmBox";
 import axios from "axios";
 import CustomSnackbar from "./CustomSnackBar";
@@ -31,7 +31,7 @@ const DoctorInfo = () => {
 
     const [showConfirmBox, setShowConfirmBox] = useState(false);
     const [rowToDelete, setRowToDelete] = useState(null);
-    const [snackbar, setSnackbar] = useState({ isVisible: false, message: '', severity: 'success' });
+    const [snackbar, setSnackbar] = useState({isVisible: false, message: '', severity: 'success'});
 
     const settings = {
         licenseKey: 'non-commercial-and-evaluation',
@@ -82,17 +82,17 @@ const DoctorInfo = () => {
             address: updatedRow.address,
             username: updatedRow.username,
             password: updatedRow.password,
+            img : updatedRow.img,
 
         }
         // console.log("input",input);
-        
 
         try {
             const output = await updateDoctorInfoT(input);
             console.log("output", output.message);
             setSnackbar({
                 isVisible: true,
-                message: output.message ,
+                message: output.message,
                 severity: "success"
             });
             toggleEditRow(rowIndex);
@@ -181,7 +181,6 @@ const DoctorInfo = () => {
                 <AdminLeftbarManagement className='leftBar'/>
                 <div className="content">
 
-
                     <div className="cf-title-02">
                         <div className="cf-title-alt-two">
                             <h3>Doctor Information</h3>
@@ -213,8 +212,9 @@ const DoctorInfo = () => {
                         data={editedData}
                         height={540}
                         width="100%"
-                        colWidths={[140, 160, 150, 120, 150, 110, 110, 160]}
+                        colWidths={[60, 120, 140, 150, 100, 150, 110, 100, 170]}
                         colHeaders={[
+                            "Ảnh",
                             "Họ tên",
                             "Khoa",
                             "Chức vụ",
@@ -224,47 +224,75 @@ const DoctorInfo = () => {
                             "password",
                             "Actions", // Gộp hai cột thành một
                         ]}
-                        dropdownMenu={true}
+
                         hiddenColumns={{
                             indicators: true,
                         }}
-                        contextMenu={true}
-                        rowHeights={25}
+                        // contextMenu={true}
+                        rowHeights={50}
+
                         multiColumnSorting={true}
                         filters={true}
                         rowHeaders={true}
+
                         autoWrapCol={true}
                         autoWrapRow={true}
-                        cells= {(row, col) => ({
-                            readOnly: col !== 6 ? !editableRows[row] : !editableRows[row] || false, // Cho phép chỉnh sửa mật khẩu khi hàng đang chỉnh sửa
+                        cells={(row, col) => ({
+                            readOnly: col !== 7 ? !editableRows[row] : !editableRows[row] || false, // Cho phép chỉnh sửa mật khẩu khi hàng đang chỉnh sửa
                             className: 'htMiddle htCenter',
-                            type: col === 6 && editableRows[row] ? "text" : col === 6 ? "password" : undefined, // Đổi `type` của mật khẩu
+                            type: col === 7 && editableRows[row] ? "text" : col === 7 ? "password" : undefined, // Đổi `type` của mật khẩu
+
                         })}
                         afterChange={(changes, source) => {
                             if (source === "edit") {
                                 changes.forEach(([row, prop, oldValue, newValue]) => {
                                     setEditedData((prevData) => {
                                         const updatedData = [...prevData];
-                                        updatedData[row] = { ...updatedData[row], [prop]: newValue };
+                                        updatedData[row] = {...updatedData[row], [prop]: newValue};
                                         return updatedData;
                                     });
                                 });
                             }
                         }}
                     >
-                        <HotColumn data="doctor_name" className="htCenter" />
-                        <HotColumn data="department_name" className="htCenter" />
-                        <HotColumn data="type_name" className="htCenter" />
+                        <HotColumn
+                            data="img"
+                            // className="htCenter"
 
-                        <HotColumn data="phone" className="htCenter" />
-                        <HotColumn data="email" className="htCenter" />
-                        <HotColumn data="username" className="htCenter" />
-                        <HotColumn data="password" className="htCenter" />
+
+                            renderer={(instance, td, row, col, prop, value) => {
+                                td.className = "image-column"
+                                if (editableRows[row]) {
+                                    // Hiển thị input để chỉnh sửa URL ảnh khi ở chế độ chỉnh sửa
+                                    td.innerHTML = `<input type="text" value="${value || ''}"  />`;
+                                } else {
+                                    // Hiển thị ảnh khi không chỉnh sửa
+
+                                    td.innerHTML = `<div class="image-table-doctor">
+                                        <img class="image-doctor" src="${value}" 
+                                             alt="Bác sĩ" 
+                                              />
+                                                        </div>
+                                        `;
+                                            }
+                                        }}
+                                        readOnly={false}
+
+                        />
+
+                        <HotColumn data="doctor_name" className="htCenter" dropdownMenu={true}/>
+                        <HotColumn data="department_name" className="htCenter" dropdownMenu={true}/>
+                        <HotColumn data="type_name" className="htCenter" dropdownMenu={true}/>
+
+                        <HotColumn data="phone" className="htCenter" dropdownMenu={true}/>
+                        <HotColumn data="email" className="htCenter" dropdownMenu={true}/>
+                        <HotColumn data="username" className="htCenter" dropdownMenu={true}/>
+                        <HotColumn data="password" className="htCenter"/>
                         <HotColumn
                             data={() => ""}
                             renderer={(instance, td, row) => {
                                 td.className = "actions-column"; // Thêm lớp cho cột actions
-                                td.style.height = "100%";
+                                td.style.height = "80px";
                                 if (editableRows[row]) {
                                     td.innerHTML = `
                     <button class="save-btn">Save</button>
@@ -291,7 +319,7 @@ const DoctorInfo = () => {
                 isVisible={snackbar.isVisible}
                 message={snackbar.message}
                 severity={snackbar.severity}
-                onClose={() => setSnackbar({isVisible: false, message: '', severity: 'success' })}
+                onClose={() => setSnackbar({isVisible: false, message: '', severity: 'success'})}
             />
 
             {showConfirmBox && (

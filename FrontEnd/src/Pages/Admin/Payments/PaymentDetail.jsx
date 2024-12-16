@@ -133,7 +133,7 @@ const PaymentDetail = () => {
                         data={formattedData}
                         height={320}
                         width="100%"
-                        colWidths={[120, 100, 150, 230, 150, 230, 120]}
+                        colWidths={[120, 120, 150, 200, 180, 200, 120]}
                         colHeaders={[
                             "Mã hóa đơn",
                             "Mã kiểm tra",

@@ -13,14 +13,14 @@ function executeQuery(sql, params = []) {
 
 const getPatientByID = async (req, res) => {
   const userId = req.params.id;
-  const sql = `SELECT * FROM dataIT3170.Patients P WHERE patient_id = ? `;
+  const sql = `SELECT * FROM dataIT3170.patients P WHERE patient_id = ? `;
   const result = await executeQuery(sql, [userId]);
   res.json(result[0]);
 }
 
 const getPatientByCCCD = async (req, res) => {
   const patientCCCD = req.params.cccd;
-  const sql = `SELECT * FROM dataIT3170.Patients P WHERE cccd = ? `;
+  const sql = `SELECT * FROM dataIT3170.patients P WHERE cccd = ? `;
   const result = await executeQuery(sql, [patientCCCD]);
   res.json(result[0]);
 }

@@ -97,7 +97,7 @@ function Appointment() {
         return (
           <div key={key} className='element' onClick={() => { selectElement(value.doctor_id) }}>
             <div className='header'>
-              <img src={value.image_url ? value.image_url : imageAlt} alt="Example" className="image" ></img>
+              <img src={value.img ? value.img : imageAlt} alt="Example" className="image" ></img>
             </div>
             <div className='body'>
               <p>{value.doctor_name}</p>

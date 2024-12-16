@@ -13,7 +13,7 @@ function executeQuery(sql, params = []) {
 
 
 let getDoctors = async (req, res) => {
-    const sql = 'SELECT D.*, T.type_name, DE.department_name FROM dataIT3170.Doctors D JOIN dataIT3170.type_doctor T ON D.type_id = T.type_id JOIN dataIT3170.department DE ON DE.department_id = D.department_id';
+    const sql = 'SELECT D.*, T.type_name, DE.department_name FROM dataIT3170.doctors D JOIN dataIT3170.type_doctor T ON D.type_id = T.type_id JOIN dataIT3170.department DE ON DE.department_id = D.department_id';
     const result = await executeQuery(sql); // Chờ kết quả truy vấn
     res.json(result);
 };
@@ -21,7 +21,7 @@ let getDoctors = async (req, res) => {
 let getDoctorById = async (req, res) => {
     const doctorId = req.params.id;
     const sql = `SELECT D.*, T.type_name, DE.department_name
-                 FROM dataIT3170.Doctors D
+                 FROM dataIT3170.doctors D
                           JOIN dataIT3170.type_doctor T ON D.type_id = T.type_id
                           JOIN dataIT3170.department DE ON DE.department_id = D.department_id
                  WHERE D.doctor_id = ? `;
@@ -34,7 +34,7 @@ let checkDoctorAvailability = async (req, res) => {
 
     const sql = `
         SELECT COUNT(*) as count
-        FROM datait3170.Appointments
+        FROM dataIT3170.appointments
         WHERE doctor_id = ? AND appointment_date = ?`;
 
     try {
@@ -135,8 +135,8 @@ const createNewDoctor = async (req, res) => {
 
 const updateDoctorInfo = async (req, res) => {
     console.log(req.body);
-    const sql = 'UPDATE `dataIT3170`.doctors SET doctor_name = ?, department_id = ?, type_id = ?, phone = ?, email = ?, address = ?, username = ? WHERE doctor_id = ?;'+'UPDATE `dataIT3170`.doctor_account SET password = ? WHERE username = ?';
-    const values = [req.body.doctor_name, req.body.department_id, req.body.type_id, req.body.phone, req.body.email, req.body.address, req.body.username, req.body.doctor_id, req.body.password, req.body.username];
+    const sql = 'UPDATE `dataIT3170`.doctors SET img = ?, doctor_name = ?, department_id = ?, type_id = ?, phone = ?, email = ?, address = ?, username = ? WHERE doctor_id = ?;'+'UPDATE `dataIT3170`.doctor_account SET password = ? WHERE username = ?';
+    const values = [req.body.img,req.body.doctor_name, req.body.department_id, req.body.type_id, req.body.phone, req.body.email, req.body.address, req.body.username, req.body.doctor_id, req.body.password, req.body.username];
     try {
         connection.query(sql, values, (err, results) => {
             if (err) {

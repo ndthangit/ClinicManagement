@@ -148,7 +148,7 @@ function DoctorInfo() {
         <Leftbar className='leftBar'/>
         <div className='contentInfo'>
           <div className='headInfo transition'>
-            <img src={doctorInfo.image_url ? doctorInfo.image_url:exampleImage} className='imageDoctor' ></img>
+            <img src={doctorInfo.img ? doctorInfo.img:exampleImage} className='imageDoctor' ></img>
             <div className='infoDetail'>
               <div className='field'>
                 <p>Bác sĩ:</p>
