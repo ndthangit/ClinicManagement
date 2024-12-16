@@ -31,25 +31,32 @@ function Leftbar() {
       <div className='Leftbar'>
         <Button className='button font' onClick={() => {
           navigate('/admin/payments')
-        }}>xác nhận thanh toán </Button>
+        }}><i class="fa-solid fa-credit-card"></i>
+            <div>xác nhận thanh toán</div></Button>
 
         <Button className='button font' onClick={() => {
           navigate('/admin/appointment')
-        }}>Quản lý lịch khám</Button>
+        }}><i class="fa-solid fa-calendar-days"></i>
+        Quản lý lịch khám</Button>
 
           <Button className='button font' onClick={() => {
               navigate('/admin/DoctorDetails')
-          }}>Thông tin bác sỹ</Button>
+          }}><i class="fa-solid fa-user-doctor"></i>
+          Thông tin bác sỹ</Button>
           <Button className='button font' onClick={() => {
               navigate('/admin/PatientDetails')
-          }}>Thông tin bệnh nhân</Button>
+          }}><i class="fa-solid fa-hospital-user"></i>
+          Thông tin bệnh nhân</Button>
 
         <Button className='button font' onClick={() => {
           navigate('/admin/medicalexamination')
-        }}>Lịch sử khám bệnh</Button>
+        }}>
+          <i class="fa-solid fa-briefcase-medical"></i>
+          Lịch sử khám bệnh</Button>
         <Button className='button font' onClick={() => {
           navigate('/admin/service_price') 
-        }}>Giá thành</Button>
+        }}><i class="fa-solid fa-money-bill-1-wave"></i>
+        Giá thành</Button>
       </div>
     ) : (
       <div className='Leftbar'>

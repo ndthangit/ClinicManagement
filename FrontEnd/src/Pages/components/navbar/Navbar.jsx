@@ -33,10 +33,22 @@ function Navbar() {
     return (
         <div className="navbar">
             <div className="left">
-                <Link className='button font' to={'/'}>Trang chủ</Link>
-                <Link className='button font' to={'/appointment'}>Lịch khám</Link>
-                <Link className='button font' to={'/medicalhistory'}>Lịch sử khám</Link>
-                <Link className='button font' to={'/service_price'}>Giá thành</Link>
+                <Link className='button font' to={'/'}>
+                    <i class="fa-solid fa-house customed-icon"></i>
+                    <div>Trang chủ</div>
+                </Link>
+                <Link className='button font' to={'/appointment'}>
+                    <i class="fa-solid fa-calendar-days customed-icon"></i>
+                    Lịch khám
+                </Link>
+                <Link className='button font' to={'/medicalhistory'}>
+                    <i class="fa-solid fa-clock-rotate-left customed-icon"></i>
+                    Lịch sử khám
+                </Link>
+                <Link className='button font' to={'/service_price'}>
+                    <i class="fa-solid fa-dollar-sign customed-icon"></i>
+                    Giá thành
+                </Link>
             </div>
             <div className="right">
                 {user ? (

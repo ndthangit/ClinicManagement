@@ -21,7 +21,9 @@ function AdminNavbar() {
     return (
         <div className="navbar">
             <div className="left">
-                <Button className='button font' onClick={() => navigateTo('/admin')}>Home</Button>
+                <Button className='button font' onClick={() => navigateTo('/admin')}>
+                <i class="fa-solid fa-house"></i>
+                Home</Button>
                 {/*<Button className='button font' onClick={() => navigateTo('/admin/payments')}>Thanh toán </Button>*/}
             </div>
             <div className="right">

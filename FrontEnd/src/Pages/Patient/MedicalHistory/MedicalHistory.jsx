@@ -53,9 +53,7 @@ function MedicalHistory() {
         <Navbar className="header-hist"/>
         <div className="body-hist">
             <div className="content-hist">
-                <div className="top-hist">
-                    <h1>Lịch sử thăm khám</h1>
-                </div>
+                <h1 className="title-content">Lịch sử thăm khám</h1>
                 <div className="container-hist">
                     <div className="container-hist-search">
                         <div class="searchbar">
