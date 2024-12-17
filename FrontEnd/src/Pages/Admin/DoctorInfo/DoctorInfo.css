@@ -1,3 +1,14 @@
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+
+}
+
 .extraButton .modal-overlay {
     position: fixed;
     top: 0;
@@ -133,6 +144,21 @@
     position: absolute;
     left: 50%;
     margin-left: -50px;
+}
+
+.content h2 {
+
+        background-color:  #2e749a;
+        color: white;
+        border-radius: 5px;
+        padding: 10px 10px;
+        display: inline-block;
+        font-size: 17px;
+        margin: 0;
+        margin-bottom: 15px;
+        font-weight: normal;
+        text-align: center;
+
 }
 
 .htRowHeaders {

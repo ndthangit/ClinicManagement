@@ -110,12 +110,12 @@ const AppointmentDetail = () => {
                 <AdminLeftbarSchedule className='leftBar'/>
                 <div className="content">
 
-
-                    <div className="cf-title-02">
-                        <div className="cf-title-alt-two">
-                            <h3>Appointment Details</h3>
-                        </div>
-                    </div>
+                    <h2>Appointment Details</h2>
+                    {/*<div className="cf-title-02">*/}
+                    {/*    <div className="cf-title-alt-two">*/}
+                    {/*        <h3>Appointment Details</h3>*/}
+                    {/*    </div>*/}
+                    {/*</div>*/}
                     <div className="extraButton">
                         <button id="export-file" className="buttonExportCSV" onClick={() => buttonClickCallback()}>
                             <FaDownload/>

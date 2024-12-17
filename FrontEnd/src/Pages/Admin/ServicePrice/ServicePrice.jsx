@@ -224,7 +224,7 @@ const addService = async () => {
 
           {!selectedDepartment ? (
             <div>
-              <h2>Danh sách phòng ban</h2>
+              <h3>Danh sách phòng ban</h3>
               <div className="add-form">
                 <input
                   type="text"

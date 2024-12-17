@@ -54,12 +54,12 @@ const PatientInfo = () => {
             <div className="body">
                 <AdminLeftbarManagement className='leftBar'/>
                 <div className="content">
-                    {/*<h2>Patient Information</h2>*/}
-                    <div className="cf-title-02">
-                        <div className="cf-title-alt-two">
-                            <h3>Patient Information</h3>
-                        </div>
-                    </div>
+                    <h2>Patient Information</h2>
+                    {/*<div className="cf-title-02">*/}
+                    {/*    <div className="cf-title-alt-two">*/}
+                    {/*        <h3>Patient Information</h3>*/}
+                    {/*    </div>*/}
+                    {/*</div>*/}
                     <div className="extraButton">
                         <button id="export-file" className="buttonExportCSV" onClick={() => buttonClickCallback()}>
                             <FaDownload/>

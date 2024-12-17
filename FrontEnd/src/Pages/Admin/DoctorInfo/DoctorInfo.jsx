@@ -181,11 +181,13 @@ const DoctorInfo = () => {
                 <AdminLeftbarManagement className='leftBar'/>
                 <div className="content">
 
-                    <div className="cf-title-02">
-                        <div className="cf-title-alt-two">
-                            <h3>Doctor Information</h3>
-                        </div>
-                    </div>
+                    {/*<div className="cf-title-02">*/}
+                    {/*    <div className="cf-title-alt-two">*/}
+                    {/*        <h3>Doctor Information</h3>*/}
+                    {/*    </div>*/}
+                    {/*</div>*/}
+
+                    <h2>Doctor Information</h2>
 
 
                     <div className="extraButton">
@@ -274,9 +276,9 @@ const DoctorInfo = () => {
                                               />
                                                         </div>
                                         `;
-                                            }
-                                        }}
-                                        readOnly={false}
+                                }
+                            }}
+                            readOnly={false}
 
                         />
 

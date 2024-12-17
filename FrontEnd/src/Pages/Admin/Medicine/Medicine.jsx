@@ -127,7 +127,7 @@ function Medicine() {
 
           {/* Form thêm thuốc mới */}
           <div>
-            <h2>Thêm thuốc mới</h2>
+            <h3>Thêm thuốc mới</h3>
             <input 
               type="text" 
               name="medicine_name" 
