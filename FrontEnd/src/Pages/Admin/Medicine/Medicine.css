@@ -40,16 +40,16 @@
   }
   
   /* Tiêu đề chính */
-.adminMedicine  .content h1 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-    color: #333;
-    justify-content: center;
-    display: flex;
-  }
+/*.adminMedicine  .content h1 {*/
+/*    font-size: 2rem;*/
+/*    margin-bottom: 1rem;*/
+/*    color: #333;*/
+/*    justify-content: center;*/
+/*    display: flex;*/
+/*  }*/
   
   /* Form thêm thuốc mới */
-.adminMedicine  .content h2 {
+.adminMedicine  .content h3 {
     font-size: 1.5rem;
     margin-bottom: 1rem;
     color: #555;

@@ -18,13 +18,23 @@
   
   /* Định dạng cho tiêu đề chính */
   .servicePrice h1 {
+    /*text-align: center;*/
+    /*color: #333;*/
+    /*margin-bottom: 20px;*/
+    background-color:  #2e749a;
+    color: white;
+    border-radius: 5px;
+    padding: 10px 10px;
+    display: inline-block;
+    font-size: 17px;
+    margin: 0;
+    margin-bottom: 15px;
+    font-weight: normal;
     text-align: center;
-    color: #333;
-    margin-bottom: 20px;
   }
   
   /* Định dạng cho phần tiêu đề phụ */
-  .ServicePricePage h2 {
+  .ServicePricePage h3 {
     color: #666;
     margin-top: 20px;
   }

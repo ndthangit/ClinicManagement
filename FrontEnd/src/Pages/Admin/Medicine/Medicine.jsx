@@ -123,7 +123,7 @@ function Medicine() {
       <div className='body'>
         <AdminServiceLeftbar className='leftbar'/>
         <div className='content'>
-          <h1>Danh sách thuốc</h1>
+          <h2>Danh sách thuốc</h2>
 
           {/* Form thêm thuốc mới */}
           <div>
